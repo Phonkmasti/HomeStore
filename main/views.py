@@ -5,13 +5,25 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        "title": "Home",
-        "content": "Главная страница магазина - Home",
-        "list": [1, 2, 3, 4, 5],
-        "dict": {"first": 1},
-        "is_authenticated": True,
+        "title": "Home - Главная",
+        'content': "Магазин мебели HOME",
+        
     }
     return render(request, "main/index.html", context)
 
 def about(request):
-    return HttpResponse("About page")
+    context = {
+        "title": "Home - О нас",
+        'content': "О нас",
+        'text_on_page': 'Текст о том что наш товар самый популярный в мире',
+        
+    }
+    return render(request, "main/about.html", context)
+
+def contact(request):
+    context = {
+        "title": "Home - Контактная информация",
+        'content': "Контактная информация о нашем магазине",
+        'text_on_page': 'Наши контактные данные',
+    }
+    return render(request, 'main/contact-information.html', context)

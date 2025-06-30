@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="mt-5 pt-5 bg-white  rounded d-flex flex-column justify-content-center align-items-center">
+    <h2 class="mt-2" class="mt-5 pt-5"><strong>{{ content }}</strong></h2>
+    <p class="mt-2">{{ text_on_page }}</p>
+    <p>Телефон: +7 (495) 123-45-67</p>
+    <p>Электронная почта: info@home.com</p>
+    <p>Адрес: г. Москва, ул. Ленина, д. 1, кв. 2</p>
+    <p>Почтовый индекс: 1234567890</p>
+    <p>Сайт: home.com</p>
+    <p>VK: home.com</p>
+    <br>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
+    </div>
+  </footer>
+{% endblock %}
