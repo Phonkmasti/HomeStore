@@ -13,7 +13,6 @@ body {
 }
 
 .custom-shadow {
-  box-shadow: 5px 5px 25px 19px #000000;
 }
 
 .product_id {
@@ -28,8 +27,7 @@ body {
   z-index: 1;
   padding: 5px 10px;
   border-radius: 3px;
-  font-size: 1rem;
-  box-shadow: 2px 2px 15px 9px #000000;
+  font-size: 0.8rem;
 }
 
 .badge-banner {

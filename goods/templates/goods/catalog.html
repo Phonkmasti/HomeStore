@@ -41,20 +41,26 @@
     {% for product in goods %}
     <div class="col-lg-4 col-md-6 p-4">
         <div class="card ">
-          <img src="{% static product.image %}" class="card-img-top" alt="..." />
+          {% if product.image %}
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" />
+            {% else %}
+            <img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="..." />
+
+          {% endif %}
           <div class="card-body bg-dark">
             <a  href="../goods/product.html"><p class=" card-title text-white ">{{ product.name}}</p></a>
             <p class="card-text text-truncate text-white">{{ product.description }}</p>
-            <p class="product_id">id: 02265</p>
+            <p class="product_id">id: {{ product.display_id }}</p>
             <div class="d-flex justify-content-between">
-              {% comment %} <p>
-                <s>100</s> $
-              </p>
-              <p>
-                <strong>90.00 $</strong>
-              </p>
-              <span class="badge bg-warning text-dark">Скидка 10.00 %</span> {% endcomment %}
+              {% if product.discount %}
+              <p><s class="text-white">{{ product.price }}</s>$</p>
+              <p><strong class="text-white"> {{product.sell_price }} $</strong></p>
+              <span class="bg-dark text-white badge bg-warning text-dark">Скидка {{product.discount}} %</span>
+              {% else %}
                 <p class="text-white"><strong>{{ product.price }} $</strong></p>
+              {% endif %}
+                
+              
               <a href="#" class="btn add-to-cart"><img class="mx-1" src="{% static '/deps/icons/cart-plus.svg' %}" alt="Catalog Icon" width="32" height="32" /></a>
             </div>
           </div>
@@ -69,31 +75,13 @@
 
 
 
-      <div class="card border-primary rounded custom-shadow">
-        <img src="../deps/images/goods/strange table.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <a href="#"><p class="card-title">Прикроватный столик</p></a>
-          <p class="card-text text-truncate">Столик, довольно странный на вид, но подходит для размещения рядом с кроватью.</p>
-          <p class="product_id">id: 02265</p>
-          <div class="d-flex justify-content-between">
-            <p>
-              <s>100</s> $
-            </p>
-            <p>
-              <strong>90.00 $</strong>
-            </p>
-            <span class="badge bg-warning text-dark">Скидка 10.00 %</span>
-            <!-- <p><strong>100.00 $</strong></p> -->
-            <a href="#" class="btn"><img class="mx-1" src="../deps/icons/cart-plus.svg" alt="Catalog Icon" width="32" height="32" /></a>
-          </div>
-        </div>
-      </div>
+      
     </div>
   </div>
   <!-- Пагинация -->
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center my-4">
-      <div class="custom-shadow d-flex">
+      <div class=" d-flex">
         <li class="page-item disabled">
           <a class="page-link">Previous</a>
         </li>
