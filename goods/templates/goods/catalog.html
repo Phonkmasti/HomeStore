@@ -48,7 +48,7 @@
 
           {% endif %}
           <div class="card-body bg-dark">
-            <a  href="../goods/product.html"><p class=" card-title text-white ">{{ product.name}}</p></a>
+            <a  href="{% url "catalog:product" product.slug %}"><p class=" card-title text-white ">{{ product.name}}</p></a>
             <p class="card-text text-truncate text-white">{{ product.description }}</p>
             <p class="product_id">id: {{ product.display_id }}</p>
             <div class="d-flex justify-content-between">
