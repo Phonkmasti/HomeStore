@@ -17,14 +17,6 @@
     },
     {
         "model": "goods.categories",
-        "pk": 3,
-        "fields": {
-            "name": "Все товары",
-            "slug": "all"
-        }
-    },
-    {
-        "model": "goods.categories",
         "pk": 4,
         "fields": {
             "name": "Гостинная",
@@ -53,6 +45,14 @@
         "fields": {
             "name": "Декор",
             "slug": "dekor"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 8,
+        "fields": {
+            "name": "Все товары",
+            "slug": "all"
         }
     }
 ]
