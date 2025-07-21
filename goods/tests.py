@@ -1,3 +1,2 @@
-from django.test import TestCase
-
-# Create your tests here.
+import django.contrib.postgres.search as s
+print(s.__file__)

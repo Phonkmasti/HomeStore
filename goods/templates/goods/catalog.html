@@ -54,6 +54,14 @@
       </form>
     </div>
 
+    {% if request.GET.q %}
+    <h3 class="text-white mt-4"> Результаты поиска по запросу {{request.GET.q}} : </h3>
+    {% if not goods %}
+      <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}" />
+      <h2 class="text-white mt-4"> По запросу ничего не найдено </h2>
+    {% endif %}
+    {% endif %}
+
     {% for product in goods %}
     <div class="col-lg-4 col-md-6 p-4">
         <div class="card ">
@@ -64,7 +72,7 @@
 
           {% endif %}
           <div class="card-body bg-dark">
-            <a  href="{% url "catalog:product" product.slug %}"><p class=" card-title text-white ">{{ product.name}}</p></a>
+            <a  href="{% url "catalog:product" product.slug %}"><p class=" card-title text-white "> {{ product.name}}</p></a>
             <p class="card-text text-truncate text-white">{{ product.description|truncatechars:35 }}</p>
             <p class="product_id">id: {{ product.display_id }}</p>
             <div class="d-flex justify-content-between">
@@ -88,7 +96,8 @@
     </div>
   </div>
   <!-- Пагинация -->
-  <nav aria-label="Page navigation example">
+  {% if goods %}
+    <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center my-4">
       <div class=" d-flex">
         <li class="page-item {% if not goods.has_previous %}disabled{% endif %} ">
@@ -116,5 +125,7 @@
         </li>
       </div>
     </ul>
-  </nav>
+    </nav>
+  {% endif %}
+  
 {% endblock %}
