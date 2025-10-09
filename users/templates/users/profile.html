@@ -10,27 +10,54 @@
         <div class="col-md-5">
           <div class="bg-white p-4 mb-4 mx-2 rounded custom-shadow">
             <h3 class="text-center mb-4">Профиль пользователя</h3>
-            <form>
+            <form action='{% url "users:profile" %}' method="post" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="row">
-                <div class="col-md-12 mb-3 text-center">
-                  <img src="{% static 'deps/images/baseavatar.jpg' %}" alt="Аватар пользователя" class="img-fluid rounded-circle" style="max-width: 150px;" />
-                  <input type="file" class="form-control mt-3" id="avatar" accept="image/*" />
+                <div class="col-md-12 mb-3 text-center" style="display: flex; align-items: center; flex-direction: column;">
+                  <div class="profile-pic-wrapper">
+                    {% if user.image %}
+                      <img src="{{ user.image.url }}" alt="Аватар пользователя" class="profile-pic"/>
+                      {% else %}
+                    </div>
+                  </div>
+                  {% if form.image.errors %}<div class="alert alert-danger alert-dismissible fade show"> {{form.image.errors }} </div>{% endif %}
+                      {% endif %}
+                  
                 </div>
                 <div class="col-md-12 mb-3">
-                  <label for="firstName" class="form-label">Имя*</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Введите ваше имя" value="" required />
+                  <input type="file" class="form-control mt-3" name='image' id="id_image" accept="image/*" style="margin-bottom: 20px;" />
+
+                  <label for="id_first_name" class="form-label">Имя*</label>
+                  <input type="text" class="form-control" id="id_firstName" name='first_name' placeholder="Введите ваше имя" value="{{form.first_name.value}}" required
+                  {% if form.first_name.errors %}
+                <div class=" alert alert-danger alert-dismissible fade show"> {{form.first_name.errors }} </div>
+                {% endif %}
+                  />
                 </div>
                 <div class="col-md-12 mb-3">
-                  <label for="lastName" class="form-label">Фамилия*</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Введите вашу фамилию" value="" required />
+                  <label for="id_last_name" class="form-label">Фамилия*</label>
+                  <input type="text" class="form-control" id="id_lastName" name='last_name' placeholder="Введите вашу фамилию" value="{{form.last_name.value}}" required
+                  {% if form.last_name.errors %}
+                <div class=" alert alert-danger alert-dismissible fade show"> {{form.last_name.errors }} </div>
+                {% endif %}
+                  />
                 </div>
                 <div class="col-md-12 mb-3">
-                  <label for="username" class="form-label">Имя пользователя*</label>
-                  <input type="text" class="form-control" id="username" placeholder="Введите ваше имя пользователя" value="" required />
+                  <label for="id_username" class="form-label">Имя пользователя*</label>
+                  <input type="text" class="form-control" id="id_username" name='username' placeholder="Введите ваше имя пользователя" value="{{form.username.value}}" required
+                  {% if form.email.errors %}
+                <div class=" alert alert-danger alert-dismissible fade show"> {{form.email.errors }} </div>
+                {% endif %}
+                  />
                 </div>
                 <div class="col-md-12 mb-3">
-                  <label for="email" class="form-label">Email*</label>
-                  <input type="email" class="form-control" id="email" placeholder="Введите ваш email *youremail@example.com" value="" required />
+                  <label for="id_email" class="form-label">Email*</label>
+                  <input type="email" class="form-control" id="id_email" name='email' placeholder="Введите ваш email *youremail@example.com" value="{{form.email.value}}" required
+                  
+                  {% if form.email.errors %}
+                <div class=" alert alert-danger alert-dismissible fade show"> {{form.email.errors }} </div>
+                {% endif %}
+                />
                 </div>
               </div>
               <button type="submit" class="btn btn-dark">Сохранить</button>
