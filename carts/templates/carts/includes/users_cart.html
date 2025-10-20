@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block content %}
+{% load carts_tags %}
+{% user_carts request as carts %}
+
 
 <div class="row">
     <div class="container mt-5">
