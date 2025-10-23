@@ -34,7 +34,7 @@ $(document).ready(function () {
                 // Через 7сек убираем сообщение
                 setTimeout(function () {
                     successMessage.fadeOut(400);
-                }, 7000);
+                }, 4000);
 
                 // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
                 cartCount++;
@@ -161,7 +161,7 @@ $(document).ready(function () {
                 // Через 7сек убираем сообщение
                 setTimeout(function () {
                     successMessage.fadeOut(400);
-                }, 7000);
+                }, 4000);
 
                 // Изменяем количество товаров в корзине
                 var goodsInCartCount = $("#goods-in-cart-count");
