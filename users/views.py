@@ -17,7 +17,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                messages.success(request, f'{username} , Вы успешно вошли в аккаунт')
+                messages.success(request, f'{username} , Вы успешно вошли в свой аккаунт!')
 
                 redirect_page = request.POST.get('next', None)
                 if redirect_page and redirect_page != reverse('users:logout'):
