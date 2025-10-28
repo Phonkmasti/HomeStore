@@ -43,7 +43,7 @@ class Order(models.Model):
         default=False, verbose_name="Требуется доставка"
     )
 
-    delivery_adress = models.TextField(
+    delivery_address = models.TextField(
         blank=True, null=True, verbose_name="Адрес доставки"
     )
 
