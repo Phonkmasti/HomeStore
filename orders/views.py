@@ -6,10 +6,14 @@ from django.shortcuts import redirect, render
 from carts.models import Cart
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
+from users.views import login
+
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 
+@login_required
 def create_order(request):
     if request.method == "POST":
         form = CreateOrderForm(data=request.POST)
@@ -56,7 +60,7 @@ def create_order(request):
                         return redirect("user:profile")
             except ValidationError as e:
                 messages.success(request, str(e))
-                return redirect("user:profile")
+                return render(request, 'orders/create_order.html', context)
     else:
         initial = {
             "first_name": request.user.first_name,
@@ -68,5 +72,6 @@ def create_order(request):
     context = {
         "tite": "Home - оформление заказа",
         "form": form,
+        "order": True,
     }
     return render(request, "orders/create_order.html", context=context)
