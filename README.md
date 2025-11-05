@@ -5,7 +5,7 @@ An online store built with Django. Includes product catalog, shopping cart, orde
 ## Stack
 - Python 3.11  
 - Django 5.x  
-- PostgreSQL / SQLite  
+- PostgreSQL
 - HTML, CSS (Django templates)  
 
 ## Main Apps
