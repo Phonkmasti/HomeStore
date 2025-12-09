@@ -2,16 +2,8 @@
 
 {% load static %}
 
-{% block css %}
-  <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}" />
-{% endblock %}
-
-{% block modal_cart %}
-{% include "includes/cart_button.html" %}
-{% endblock modal_cart %}
-
 {% block content %}
-  <h1 class="mt-5 pt-5 text-white"><strong>{{ content }}</strong></h1>
+
 {% endblock %}
 
 {% block footer %}

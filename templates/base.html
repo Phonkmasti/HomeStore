@@ -32,7 +32,7 @@
         <p>60 Fremont Ave. Hamden, CT 06514</p>
         <div class="search-div">
           <div class="dropdown-section">
-            <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search">All Categories <img style='margin: 0 5px 0 5px' width="16px" height="16px" src="{% static 'deps/svg/chevron-down.svg' %}" alt=""><div class="search-partition"></div></button>
+            <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search">All Categories <img src="{% static 'deps/svg/chevron-down.svg' %}" alt=""><div class="search-partition"></div></button>
             <ul id='dropdowncontent' class="dropdown-content">
               {% tag_categories as categories %}
               {% for category in categories %}
@@ -47,55 +47,46 @@
             <input class="search-input-field" type="search" name="q" placeholder="Search product..." aria-label="Search" /><button class="search-submit-button" type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
           </form>
         </div>
-        <p style="gap: 10px;"><img width="24px" height="24px" src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
+        <p style="gap: 1vw;"><img src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
       </div>
       <nav>
-
+        <ul class="home-ul">
+          <li><img src="{% static 'deps/svg/Cabinet.svg' %}" alt=""><a href="{% url 'main:index' %}"><h2>Furniture Store</a></h2></li>
+        </ul>
+        <ul class="navigation-ul">
+          <li><a style="font-weight: bold;" href="{% url 'main:index' %}">Home</a></li>
+          <li><a href="">Shop</a></li>
+          <li><a href="{% url 'main:about' %}">About Us</a></li>
+          <li><a href="{% url 'main:contact' %}">Contact Us</a></li> 
+        </ul>
+        <ul class="user-ul">
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'users:profile' %}"><img src="{% static 'deps/svg/user.svg' %}" alt="User profile icon"></a></li>
+          <li><a href="{% url 'orders:create_order' %}"><img src="{% static 'deps/svg/shopping-cart.svg' %}" alt=""></a></li>
+          <li><a href="{% url 'users:logout' %}"><img src="{% static 'deps/svg/logout.svg' %}" alt=""></a></li>
+          {% else %}
+          <li><a href="{% url 'users:login' %}"><img src="{% static 'deps/svg/login.svg' %}" alt=""></a></li>
+          {% endif %}
+        </ul>
       </nav>
+
     </header>
     <section>
-      <div class="container">
-        <!-- Каталог и корзина с фиксированным расположением на странице -->
-        <div class="row mt-1 position-fixed z-3">
-          <!-- Каталог -->
-          <div class="dropdown mb-2">
-            <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Каталог
-              <img class="mx-1" src="{% static 'deps/icons/grid-fill.svg' %}" alt="Catalog Icon" width="16" height="16" />
-            </button>
-            <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-              {% tag_categories as categories %}
-              {% for category in categories %}
-                <li>
-                  <a class="dropdown-item text-white" href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-          <!-- Значек корзины, вызывает модальное окно -->
-          {% block modal_cart %}{% endblock  %}
-          <!-- Закончилась разметка модального окна -->
-        </div>
-      </div>
-      <!-- Контент -->
-      <div class="container">
-        <div class="row mt-1">
-          <div class="col-lg-2">
-            <!-- Пустой блок на Ваше усмотрение -->
-          </div>
-          <div class="col-lg-10">
-            <!-- Контент на странице -->
-            {% include 'includes/notifications.html' %}
-            {% block content %}
+        <!-- Контент на странице -->
+        {% block content %}
 
-            {% endblock %}
-          </div>
-        </div>
-      </div>
+        {% endblock %}
     </section>
-    {% block footer %}
-
-    {% endblock %}
+    <!-- нижняя часть страницы -->
+    <footer>
+        <div class="footer-grid">
+            <h2 class="newsletter-footer-text">Subscribe to our newsletter<br>Don’t miss latest news & promotions</h2>
+            <form action="" method="post" class="newsletter-footer-form">
+              <input class="newsletter-footer-input" type="email" placeholder="Enter your email"/>
+              <button><a href=""></a></button>
+            </form>
+        </div>
+    </footer>
     <script src="{% static 'deps/js/main.js' %}"></script>
   </body>
 </html>
