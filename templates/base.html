@@ -1,18 +1,19 @@
+{% load sass_tags %}
 {% load static %}
 {% load goods_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=2" />
-    <link rel="stylesheet" href="{% static 'deps/css/bootstrap/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'deps/css/my_css.css' %}" />
-    <!-- Стиль footer-a для главной страницы -->
-    {% block css %}
+    <link rel="stylesheet" href="{% sass_src 'deps/css/base.scss' %}" />
+    <link rel="stylesheet" href="{% static 'deps/css/css-normalize.css' %}" />
 
-    {% endblock %}
     <!-- Favicons for different platforms -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'deps/favicon/apple-touch-icon.png' %}" />
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'deps/favicon/favicon-32x32.png' %}" />
@@ -23,63 +24,33 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
-        <div class="container">
-          <a class="navbar-brand" href="{% url 'main:index' %}">Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Информация</a>
-                <ul class="dropdown-menu">
-                 
-                  <li>
-                    <a class="dropdown-item text-white" href="{% url 'main:contact' %}">Контактная информация</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item text-white" href="{% url 'main:about' %}">Про нас</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="{% url "users:users_cart" %}">Корзина</a>
-              </li>
-
-              {% if not user.is_authenticated %}
-                <a class="nav-link text-white" href="{% url 'users:login' %}">Войти</a>
-              {% else %}
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Мой профиль</a>
-
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item text-white" href="{% url "users:users_cart" %}">Корзина</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item text-white" href="{% url 'users:profile' %}">Личный кабинет</a>
-                    </li>
-                    {% if user.is_admin or user.is_staff %}
-                      <li>
-                        <a class="dropdown-item text-white" href="{% url 'admin:index' %}">Админ панель</a>
-                      </li>
-                    {% endif %}
-                    <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a class="dropdown-item text-white" href="{% url 'users:logout' %}">Выйти</a>
-                    </li>
-                  </ul>
+      <!-- верхняя часть страницы -->
+      <div class="discount-banner">
+        <p>This weekend Sale 20% off on all products</p>        
+      </div>
+      <div class="search-contact-section">
+        <p>60 Fremont Ave. Hamden, CT 06514</p>
+        <div class="search-div">
+          <div class="dropdown-section">
+            <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search">All Categories <img style='margin: 0 5px 0 5px' width="16px" height="16px" src="{% static 'deps/svg/chevron-down.svg' %}" alt=""><div class="search-partition"></div></button>
+            <ul id='dropdowncontent' class="dropdown-content">
+              {% tag_categories as categories %}
+              {% for category in categories %}
+                <li>
+                  <a class="" href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a>
                 </li>
-                <li class="nav-item"></li>
-              {% endif %}
+              {% endfor %}
             </ul>
-            <form class="d-flex" role="search" action="{% url 'catalog:search' %}" method="get">
-              <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-success text-white" type="submit">Поиск</button>
-            </form>
           </div>
+          
+          <form role="search" action="{% url 'catalog:search' %}" method="get">
+            <input class="search-input-field" type="search" name="q" placeholder="Search product..." aria-label="Search" /><button class="search-submit-button" type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
+          </form>
         </div>
+        <p style="gap: 10px;"><img width="24px" height="24px" src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
+      </div>
+      <nav>
+
       </nav>
     </header>
     <section>
@@ -125,8 +96,6 @@
     {% block footer %}
 
     {% endblock %}
-    <script src="{% static 'deps/js/jquery/jquery-3.7.0.min.js' %}"></script>
-    <script src="{% static 'deps/js/jquery-ajax.js' %}"></script>
-    <script src="{% static 'deps/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'deps/js/main.js' %}"></script>
   </body>
 </html>

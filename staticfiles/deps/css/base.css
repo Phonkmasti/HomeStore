@@ -1,0 +1,115 @@
+header {
+  width: 100%;
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.discount-banner {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  height: 2em;
+  font-weight: 300;
+  font-family: "Dm Sans", sans-serif;
+  text-transform: uppercase;
+  background-color: #947458;
+  color: #FFFFFF; }
+
+.search-contact-section {
+  margin-top: 2em;
+  width: 100%;
+  height: 5em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1em;
+  font-weight: 300;
+  font-family: "Dm Sans", sans-serif;
+  color: #000000;
+  background-color: #F6F4F2;
+  padding: 10px 0; }
+  .search-contact-section p {
+    width: 10%;
+    white-space: nowrap;
+    font-weight: 400;
+    margin: 0;
+    display: flex;
+    align-items: center; }
+  .search-contact-section .search-div {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .search-contact-section .search-div .dropdown-section {
+      position: relative;
+      display: inline-block; }
+    .search-contact-section .search-div .drop-down-button-search {
+      background-color: #FFFFFF;
+      border: 1px solid lightgray;
+      border-right: none;
+      color: #000000;
+      padding: 5px 0 5px 10px;
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      cursor: pointer;
+      font-family: "Dm Sans", sans-serif;
+      transition: background-color 0.3s ease; }
+    .search-contact-section .search-div .search-partition {
+      width: 1px;
+      height: 1.5em;
+      background-color: lightgray; }
+    .search-contact-section .search-div .drop-down-button-search:hover, .search-contact-section .search-div .drop-down-button-search:focus {
+      background-color: lightgray; }
+    .search-contact-section .search-div .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #FFFFFF;
+      min-width: 2em;
+      border: 1px solid lightgray;
+      border-top: none;
+      z-index: 1;
+      font-family: "Dm Sans", sans-serif; }
+      .search-contact-section .search-div .dropdown-content a {
+        color: #000000;
+        width: 100%;
+        text-decoration: none;
+        display: block;
+        padding: 5px 0 0 5px;
+        transition: all 0.3s ease; }
+    .search-contact-section .search-div .dropdown-content a:hover {
+      background-color: lightgray; }
+    .search-contact-section .search-div .show {
+      display: block; }
+    .search-contact-section .search-div form {
+      display: flex;
+      align-items: center;
+      height: 100%; }
+      .search-contact-section .search-div form .search-input-field {
+        border: 1px solid lightgray;
+        padding: 5px 40px 5px 10px;
+        font-family: "Dm Sans", sans-serif;
+        color: #000000;
+        border-left: none;
+        outline: none; }
+        .search-contact-section .search-div form .search-input-field::placeholder {
+          font-weight: 400;
+          color: lightgray; }
+      .search-contact-section .search-div form .search-submit-button:hover, .search-contact-section .search-div form .search-input-field:hover button img {
+        transform: scale(1.1); }
+      .search-contact-section .search-div form .search-submit-button {
+        position: relative;
+        right: 35px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0; }
+        .search-contact-section .search-div form .search-submit-button img {
+          width: 20px;
+          height: 20px; }
+
+/*# sourceMappingURL=base.css.map */
