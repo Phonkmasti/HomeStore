@@ -1,7 +1,4 @@
-from tabnanny import verbose
 from django.db import models
-from pygame import ver
-
 from goods.models import Products
 from users.models import User
 
