@@ -15,6 +15,11 @@ function dropDownFunction() {
   element2.classList.toggle("show");
 }
 
+function toggleMobileMenu() {
+    const menu = document.getElementById("mobileMenu");
+    menu.classList.toggle("active");
+}
+
 window.onclick = function(event) {
   if (!event.target.matches('.drop-down-button-search')) {
     const dropdowns = document.getElementsByClassName("dropdown-content");

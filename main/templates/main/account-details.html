@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="page-content">
+  <div class="page-container">
+    <h1>{{ title }}</h1>
+    <div class="page-text">
+      <h2>{{ content }}</h2>
+      <p>{{ text_on_page }}</p>
+      <p>Manage your account information securely. Update your personal details, shipping addresses, and payment methods from your account dashboard.</p>
+      <p>You can view your complete order history, track active shipments, and manage your preferences. For security purposes, you can also change your password and enable two-factor authentication.</p>
+      <p>If you need assistance with your account or have any questions, our support team is available 24/7 to help you.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

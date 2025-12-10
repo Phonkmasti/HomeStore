@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="page-content">
+  <div class="page-container">
+    <h1>{{ title }}</h1>
+    <div class="page-text">
+      <h2>{{ content }}</h2>
+      <p>{{ text_on_page }}</p>
+      
+      <div class="faq-section">
+        <h3>Shipping & Delivery</h3>
+        <p><strong>How long does shipping take?</strong><br>Standard shipping typically takes 5-7 business days. Express shipping is available for 2-3 business day delivery.</p>
+        <p><strong>Do you offer international shipping?</strong><br>Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location.</p>
+      </div>
+
+      <div class="faq-section">
+        <h3>Payment & Security</h3>
+        <p><strong>What payment methods do you accept?</strong><br>We accept all major credit cards, PayPal, and digital wallets. All transactions are secured with SSL encryption.</p>
+        <p><strong>Is my payment information safe?</strong><br>Yes, we use industry-standard security measures to protect your payment information.</p>
+      </div>
+
+      <div class="faq-section">
+        <h3>Products & Orders</h3>
+        <p><strong>Can I modify my order after placing it?</strong><br>Orders can be modified within 1 hour of placement. Contact our support team for assistance.</p>
+        <p><strong>What if my item arrives damaged?</strong><br>Contact us immediately with photos of the damage. We will replace or refund your item at no cost.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
