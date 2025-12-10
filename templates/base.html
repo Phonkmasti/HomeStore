@@ -13,13 +13,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% sass_src 'deps/css/base.scss' %}" />
     <link rel="stylesheet" href="{% static 'deps/css/css-normalize.css' %}" />
+    
+    {% block css %}
+    
+
+    {% endblock %}
 
     <!-- Favicons for different platforms -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'deps/favicon/apple-touch-icon.png' %}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'deps/favicon/favicon-32x32.png' %}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'deps/favicon/favicon-16x16.png' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'deps/favicon/favicon-f.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'deps/favicon/favicon-f.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'deps/favicon/favicon-f.png' %}" />
     <link rel="manifest" href="{% static 'deps/favicon/site.webmanifest' %}" />
-    <title>{{ title }}</title>
+    <title>F Store | Furniture store</title>
   </head>
 
   <body>
@@ -66,6 +71,8 @@
           <li><a href="{% url 'users:logout' %}"><img src="{% static 'deps/svg/logout.svg' %}" alt=""></a></li>
           {% else %}
           <li><a href="{% url 'users:login' %}"><img src="{% static 'deps/svg/login.svg' %}" alt=""></a></li>
+          <li class="placeholder"></li>
+          <li class="placeholder"></li>
           {% endif %}
         </ul>
         <div class="burger" onclick="toggleMobileMenu()">
@@ -88,7 +95,7 @@
           {% endif %}
         </div>
       </nav>
-
+      <div id="navPlaceholder"></div>
     </header>
     <section>
         <!-- Контент на странице -->

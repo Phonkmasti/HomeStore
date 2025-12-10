@@ -31,3 +31,35 @@ window.onclick = function(event) {
     }
   }
 };
+
+const banner = document.querySelector('.discount-banner');
+const nav = document.querySelector('nav');
+const navPlaceholder = document.getElementById('navPlaceholder');
+
+function updateNavSticky() {
+  const navTop = nav ? nav.offsetTop : 0;
+  const scrollPosition = window.scrollY;
+  
+  if (scrollPosition >= navTop) {
+    nav.classList.add('nav-sticky');
+    if (navPlaceholder) {
+      navPlaceholder.style.height = nav.offsetHeight + 'px';
+    }
+  } else {
+    nav.classList.remove('nav-sticky');
+    if (navPlaceholder) {
+      navPlaceholder.style.height = '0';
+    }
+  }
+}
+
+window.addEventListener('scroll', updateNavSticky);
+
+window.addEventListener('load', () => {
+  const nav = document.querySelector('nav');
+  if (nav) {
+    const navTop = nav.offsetTop;
+    const navPadding = parseInt(window.getComputedStyle(nav).paddingTop);
+    window.scrollTo(0, navTop - navPadding);
+  }
+});

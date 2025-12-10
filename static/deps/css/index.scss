@@ -1,0 +1,239 @@
+@import 'variables.scss';
+
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1200px;
+$collage-gap: 10px;
+
+html {
+    font-family: $global-text-family;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    width: 100%;
+
+    .header-main-section {
+        width: 100%;
+        min-height: 100vh;
+        background-image: url('../images/bg-index-image.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: clamp(1rem, 3vw, 3rem);
+        padding: clamp(1rem, 2vw, 3rem);
+
+        .description-header-div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: clamp(300px, 40%, 600px);
+            height: auto;
+            min-height: 400px;
+            color: $global-text-color;
+
+            .description-text {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                .description-span {
+                    letter-spacing: 1px;
+                    font-size: clamp(0.75rem, 1.5vw, 1.2rem);
+                    font-weight: bold;
+                    background-color: $bg-description-span-color;
+                    padding: 0.5rem 1rem;
+                    width: max-content;
+                }
+
+                h1 {
+                    font-size: clamp(1.5rem, 5vw, 4rem);
+                    font-weight: 700;
+                    margin: 0;
+                    line-height: 1.2;
+                }
+
+                p {
+                    font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+                    line-height: 1.6;
+                    margin: 0;
+                    color: rgba(255, 255, 255, 0.95);
+                }
+            }
+
+            .description-buttons {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-top: 1rem;
+
+                button {
+                    font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+                    padding: clamp(0.5rem, 1.5vw, 0.9rem) clamp(1.2rem, 3vw, 2.5rem);
+                    border: none;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    a {
+                        text-decoration: none;
+                        color: inherit;
+                    }
+
+                    &:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                    }
+                }
+
+                .button-shopnow {
+                    background-color: $bg-description-button-color;
+                    color: white;
+                    border: 2px solid $bg-description-button-color;
+
+                    &:hover {
+                        background-color: darken($bg-description-button-color, 10%);
+                    }
+                }
+
+                .button-learnmore {
+                    background-color: transparent;
+                    color: white;
+                    border: 2px solid white;
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.15);
+                    }
+                }
+            }
+        }
+
+        .photocollage-header-div {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: $collage-gap;
+            background-color: $bg-photocollage-header;
+            width: clamp(250px, 35%, 500px);
+            height: clamp(300px, 70vh, 700px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                margin: 0;
+                padding: 0;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.02);
+                }
+            }
+        }
+
+        @media (max-width: $tablet) {
+            flex-direction: column;
+            min-height: auto;
+            justify-content: flex-start;
+            padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem);
+            gap: 2rem;
+
+            .description-header-div {
+                width: 100%;
+                min-height: auto;
+                justify-content: flex-start;
+
+                .description-text {
+                    gap: 1rem;
+
+                    h1 {
+                        font-size: clamp(1.75rem, 4vw, 2.5rem);
+                    }
+
+                    p {
+                        font-size: clamp(0.9rem, 1.1vw, 1rem);
+                    }
+                }
+
+                .description-buttons {
+                    margin-top: 1.5rem;
+
+                    button {
+                        padding: clamp(0.6rem, 1.2vw, 0.8rem) clamp(1.5rem, 2.5vw, 2rem);
+                        font-size: clamp(0.9rem, 1vw, 1rem);
+                    }
+                }
+            }
+
+            .photocollage-header-div {
+                width: 100%;
+                height: clamp(300px, 60vw, 450px);
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: $mobile) {
+            padding: clamp(1rem, 2vw, 1.5rem);
+            gap: 1.5rem;
+
+            .description-header-div {
+                .description-text {
+                    gap: 0.75rem;
+
+                    .description-span {
+                        font-size: 0.75rem;
+                        padding: 0.4rem 0.8rem;
+                    }
+
+                    h1 {
+                        font-size: clamp(1.25rem, 4vw, 1.75rem);
+                        font-weight: 600;
+                    }
+
+                    p {
+                        font-size: clamp(0.8rem, 1.1vw, 0.9rem);
+                        line-height: 1.5;
+                    }
+                }
+
+                .description-buttons {
+                    margin-top: 1rem;
+                    gap: 0.75rem;
+
+                    button {
+                        padding: 0.5rem 1.2rem;
+                        font-size: 0.8rem;
+                        flex: 1;
+                        min-width: 120px;
+
+                        &:hover {
+                            transform: translateY(-2px);
+                        }
+                    }
+                }
+            }
+
+            .photocollage-header-div {
+                width: 100%;
+                height: clamp(250px, 50vw, 350px);
+                gap: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+                img {
+                    &:hover {
+                        transform: scale(1.01);
+                    }
+                }
+            }
+        }
+    }
+}

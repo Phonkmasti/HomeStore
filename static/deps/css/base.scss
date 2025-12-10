@@ -5,7 +5,7 @@ $tablet: 768px;
 $desktop: 1200px;
 
 :root {
-    --banner-height: 4rem;
+    --banner-height: 1.5rem;
 }
 
 * {
@@ -41,7 +41,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(0.875rem, 2vh, 1.25rem);
+    font-size: clamp(0.7rem, 0.9vh, 0.9rem);
     height: var(--banner-height);
     font-weight: 300;
     font-family: $global-text-family;
@@ -49,32 +49,32 @@ header {
     background-color: $header-global-bg-color;
     color: $global-text-color;
     z-index: 100;
-    padding: 0.5rem;
     text-align: center;
+    padding: 0 0.5rem;
     
     p {
         margin: 0;
     }
     
     @media (max-width: $tablet) {
-        font-size: clamp(0.6rem, 1.8vh, 1rem);
+        font-size: clamp(0.6rem, 0.8vh, 0.75rem);
     }
     
     @media (max-width: $mobile) {
-        font-size: clamp(0.85rem, 1.3vh, 0.875rem);
-        padding: 1rem;
+        font-size: clamp(0.6rem, 0.8vh, 0.7rem);
+        padding: 0.25rem 0.5rem;
     }
 }
 
 @media (max-width: $tablet) {
     :root {
-        --banner-height: 3.5rem;
+        --banner-height: 1.5rem;
     }
 }
 
 @media (max-width: $mobile) {
     :root {
-        --banner-height: 1.25rem;
+        --banner-height: 0.9rem;
     }
 }
 
@@ -376,14 +376,23 @@ header {
 }
 
 nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     height: auto;
     align-items: center;
-    justify-content: space-between;
     padding: 1.5rem 3%;
     font-family: $global-text-family;
     gap: 2rem;
     width: 100%;
+    background-color: $header-secondary-bg-color;
+    z-index: 99;
+    
+    &.nav-sticky {
+        position: fixed;
+        top: var(--banner-height);
+        left: 0;
+        right: 0;
+    }
     
     ul {
         display: flex;
@@ -395,7 +404,7 @@ nav {
     }
     
     .home-ul {
-        flex: 0 0 auto;
+        justify-self: start;
         
         li {
             display: flex;
@@ -424,11 +433,10 @@ nav {
     }
     
     .navigation-ul {
-        flex: 1;
-        justify-content: center;
         gap: 2rem;
         font-weight: 300;
         font-size: clamp(0.875rem, 1vw, 1rem);
+        justify-self: center;
         
         li {
             display: flex;
@@ -467,12 +475,11 @@ nav {
     }
     
     .user-ul {
-        flex: 0 0 auto;
-        justify-content: flex-end;
         gap: 1.5rem;
+        justify-self: end;
         
         img {
-            width: clamp(1.25rem, 2.5vw, 2rem);
+            width: clamp(0.83rem, 1.67vw, 1.33rem);
             height: auto;
             cursor: pointer;
             transition: transform $transition-duration $transition-timing;
@@ -480,6 +487,10 @@ nav {
             &:hover {
                 transform: scale(1.1);
             }
+        }
+        
+        li.placeholder {
+            visibility: hidden;
         }            
     }
     
@@ -539,6 +550,7 @@ nav {
     }
     
     @media (max-width: $tablet) {
+        grid-template-columns: 1fr auto;
         padding: 1rem 2%;
         gap: 1rem;
         
@@ -555,8 +567,6 @@ nav {
         }
         
         .home-ul {
-            flex: 1;
-            
             img {
                 width: clamp(1.25rem, 5vw, 1.75rem);
             }
@@ -564,6 +574,7 @@ nav {
     }
     
     @media (max-width: $mobile) {
+        grid-template-columns: 1fr auto;
         padding: 0.75rem 1%;
         
         .home-ul {
@@ -599,6 +610,12 @@ nav {
     }
 }
 
+#navPlaceholder {
+    height: 0;
+    display: block;
+    transition: height $transition-duration $transition-timing;
+}
+
 footer {
     width: 100%;
     background-color: $header-search-bg-color;
@@ -628,27 +645,26 @@ footer {
         .newsletter-footer-form {
             grid-area: 1 / 3 / 2 / 5;
             display: flex;
-            gap: 1rem;
+            gap: 0.2rem;
             align-items: center;
             justify-content: flex-end;
             
             input {
                 flex: 1;
                 min-width: 0;
+                outline: none;
                 padding: 0.75rem 1rem;
                 border: 1px solid $border-color;
-                border-radius: 0.25rem;
                 font-family: $global-text-family;
                 font-size: 0.875rem;
                 transition: border-color $transition-duration $transition-timing;
             }
             
             button {
-                padding: 0.75rem 1.5rem;
+                padding: 0.75rem 2.5rem;
                 background-color: $header-global-bg-color;
                 border: none;
                 cursor: pointer;
-                border-radius: 0.25rem;
                 transition: background-color $transition-duration $transition-timing;
                 
                 &:hover {

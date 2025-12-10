@@ -1,7 +1,32 @@
 {% extends 'base.html' %}
-
+{% load sass_tags %}
 {% load static %}
 
+{% block css %}
+  <link rel="stylesheet" href="{% sass_src 'deps/css/index.scss' %}" />
+{% endblock %}
+
 {% block content %}
+  <main>
+      <div class="header-main-section">
+          <div class="description-header-div">
+            <div class="description-text">
+              <span class="description-span">Furniture</span>
+              <h1>Where Traditional Meets Modern</h1>
+              <p>Discover timeless elegance and contemporary comfort with our exquisite furniture collection. Transform your living spaces into havens of style and functionality.</p>
+            </div>
+            <div class="description-buttons">
+              <button class="button-shopnow"><a href="">Shop now</a></button>
+              <button class="button-learnmore"><a href="">Learn more</a></button>
+            </div>
+          </div>
+          <div class="photocollage-header-div">
+            <img src="{% static 'deps/images/goods/Card.png' %}" alt="Living room with furniture">
+            <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="Modern chair">
+            <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="Wooden table">
+            <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="Contemporary sofa">
+          </div>
+      </div>
+  </main>
 
 {% endblock %}
