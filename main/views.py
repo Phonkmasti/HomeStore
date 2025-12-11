@@ -51,3 +51,12 @@ def faq(request):
         'text_on_page': 'Find answers to common questions',
     }
     return render(request, 'main/faq.html', context)
+
+
+def addresses(request):
+    context = {
+        "title": "Our Locations",
+        'content': "Store Locations & Warehouses",
+        'text_on_page': 'Visit our showrooms and warehouses across the United States',
+    }
+    return render(request, 'main/addresses.html', context)

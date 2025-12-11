@@ -26,4 +26,5 @@ urlpatterns = [
     path("returns/", views.returns, name="returns"),
     path("account-details/", views.account_details, name="account_details"),
     path("faq/", views.faq, name="faq"),
+    path("addresses/", views.addresses, name="addresses"),
 ] 
