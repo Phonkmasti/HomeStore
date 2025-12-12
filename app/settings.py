@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
-from django.conf.global_settings import AUTH_USER_MODEL, STATIC_ROOT
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,13 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
 
-
-
-    "debug_toolbar",
     'sass_processor',
-
-    "main",
-    "goods",
+    
+    'main',
+    'goods',
     'users',
     'carts',
     'orders',
@@ -63,8 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -104,8 +97,6 @@ DATABASES = {
 
 
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -128,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -143,18 +134,16 @@ USE_TZ = True
 
 
 STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "sass_processor.finders.CssFinder",
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
 ]
-
 
 STATIC_URL = '/static/'
 
-
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
-    ]
+    BASE_DIR / 'static',
+]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -164,9 +153,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 
 INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
+    '127.0.0.1',
 ]
 
 # Default primary key field type
@@ -174,4 +161,4 @@ INTERNAL_IPS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
-LOGIN_URL = '/user/login/'
+LOGIN_URL = 'users:login'

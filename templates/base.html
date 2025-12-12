@@ -28,6 +28,7 @@
   </head>
 
   <body>
+    {% csrf_token %}
     <header>
       <!-- верхняя часть страницы -->
       <div class="discount-banner">
@@ -60,7 +61,7 @@
         </ul>
         <ul class="navigation-ul">
           <li><a class="nav-home" href="{% url 'main:index' %}">Home</a></li>
-          <li><a href="">Shop</a></li>
+          <li><a href="{% url 'catalog:index' 'all' %}">Shop</a></li>
           <li><a href="{% url 'main:about' %}">About Us</a></li>
           <li><a href="{% url 'main:contact' %}">Contact Us</a></li> 
         </ul>
@@ -82,7 +83,7 @@
         </div>
         <div id="mobileMenu" class="mobile-menu">
           <a href="{% url 'main:index' %}">Home</a>
-          <a href="">Shop</a>
+          <a href="{% url 'catalog:index' 'all' %}">Shop</a>
           <a href="{% url 'main:about' %}">About Us</a>
           <a href="{% url 'main:contact' %}">Contact Us</a>
       

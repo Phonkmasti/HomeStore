@@ -74,9 +74,9 @@
               {% endif %}
                 
               
-              <a href="{% url "cart:cart_add"%}" class="btn add-to-cart" data-product-id="{{product.id}}">
-                {% csrf_token %}
-                <img class="mx-1" src="{% static 'deps/icons/cart-plus.svg' %}" alt="Catalog Icon" width="32" height="32" /></a>
+              <button type="button" class="btn add-to-cart" data-product-id="{{product.id}}" style="background: none; border: none; padding: 0; cursor: pointer;">
+                <img class="mx-1" src="{% static 'deps/icons/cart-plus.svg' %}" alt="Add to Cart" width="32" height="32" />
+              </button>
             </div>
           </div>
         </div>

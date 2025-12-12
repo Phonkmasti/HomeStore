@@ -1,46 +1,70 @@
 {% load static %}
+{% load sass_tags %}
 
-<div class="card mb-3 text-bg-light shadow-lg">
-  {% for cart in carts %}
-    <div class="card-header">
-      <h5 class="card-title">{{ cart.product.name }}</h5>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <div class="row text-center">
-          <div class="col p-0">
-            <div class="input-group">
-              <span class="input-group-btn"><button type="button" class="btn btn-dark btn-sm decrement" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">{% csrf_token %}-</button></span>
-              <input type="text" class="form-control number" value="{{ cart.quantity }}" readonly />
-              <span class="input-group-btn"><button type="button" class="btn btn-dark btn-sm increment" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">{% csrf_token %}+</button></span>
+<link rel="stylesheet" href="{% sass_src 'deps/css/cart-items.scss' %}" />
+
+<div class="cart-items-container">
+  {% if carts %}
+    <div class="cart-items-list">
+      {% for cart in carts %}
+        <div class="cart-item">
+          <div class="cart-item-product">
+            <h3 class="cart-item-name">{{ cart.product.name }}</h3>
+          </div>
+
+          <div class="cart-item-controls">
+            <div class="quantity-control">
+              <button type="button" class="quantity-btn decrement" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">
+                {% csrf_token %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+              <input type="text" class="quantity-input number" value="{{ cart.quantity }}" readonly />
+              <button type="button" class="quantity-btn increment" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">
+                {% csrf_token %}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
             </div>
-          </div>
-          <div class="col p-0">
-            <p>x {{ cart.product.sell_price }} =</p>
-          </div>
-          <div class="col p-0">
-            <strong>{{ cart.product_price }} $</strong>
-          </div>
-          <div class="col p-0">
-            <a href="{% url 'cart:cart_remove' %}" class="remove-from-cart" data-cart-id="{{ cart.id }}">
+
+            <div class="cart-item-price">
+              <span class="price-label">@ ${{ cart.product.sell_price }}</span>
+              <span class="price-total">${{ cart.product_price }}</span>
+            </div>
+
+            <button class="remove-btn remove-from-cart" data-cart-id="{{ cart.id }}" href="{% url 'cart:cart_remove' %}">
               {% csrf_token %}
-              <img class="mx-1" src="{% static 'deps/icons/trash3-fill.svg' %}" alt="Catalog Icon" width="16" height="16" />
-            </a>
+              <img src="{% static 'deps/icons/trash3-fill.svg' %}" alt="Remove" width="18" height="18" />
+            </button>
           </div>
         </div>
-      </li>
-    </ul>
-  {% endfor %}
-</div>
-<div class="card mb-3 shadow-lg">
-  <div class="card-footer">
-    <p class="float-left">
-      Итого <strong>{{ carts.total_quantity }}</strong> товар(а) на сумму
-    </p>
-    <h4 class="float-left"><strong>{{ carts.total_price }} $</strong></h4>
-  </div>
-</div>
+      {% endfor %}
+    </div>
 
-{% if carts and not order %}
-  <a class="btn btn-dark" href="{% url 'orders:create_order' %}">Оформить заказ</a>
-{% endif %}
+    <div class="cart-summary">
+      <div class="summary-content">
+        <div class="summary-text">
+          <p class="summary-label">Total Items:</p>
+          <p class="summary-quantity"><strong>{{ carts.total_quantity }}</strong></p>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-amount">
+          <p class="summary-label">Total Amount:</p>
+          <p class="summary-price"><strong>${{ carts.total_price }}</strong></p>
+        </div>
+      </div>
+
+      {% if not order %}
+        <a class="checkout-btn" href="{% url 'orders:create_order' %}">Proceed to Checkout</a>
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="empty-cart">
+      <p>Your cart is empty</p>
+      <a href="{% url 'main:index' %}" class="continue-shopping-btn">Continue Shopping</a>
+    </div>
+  {% endif %}
+</div>

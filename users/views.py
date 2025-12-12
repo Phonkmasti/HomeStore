@@ -1,8 +1,6 @@
 from django.contrib import auth, messages
 from django.db.models import Prefetch
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.template import context
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -24,23 +22,22 @@ def login(request):
 
             if user:
                 auth.login(request, user)
-                messages.success(
-                    request, f"{username} , Вы успешно вошли в свой аккаунт!"
-                )
+                messages.success(request, f"{username}, you have successfully logged in!")
 
                 if session_key:
                     Cart.objects.filter(session_key=session_key).update(user=user)
-                redirect_page = request.POST.get("next", None)
-                if redirect_page and redirect_page != reverse("users:logout"):
-                    return HttpResponseRedirect(request.POST.get("next"))
 
-                return HttpResponseRedirect(reverse("main:index"))
+                redirect_page = request.POST.get('next')
+                if redirect_page and redirect_page != reverse('users:logout'):
+                    return redirect(redirect_page)
+
+                return redirect('main:index')
 
     else:
         form = UserLoginForm()
 
-    context = {"title": "Home - Авторизация", "form": form}
-    return render(request, "users/login.html", context)
+    context = {'title': 'Login', 'form': form}
+    return render(request, 'users/login.html', context)
 
 
 def registration(request):
@@ -58,30 +55,28 @@ def registration(request):
             if session_key:
                 Cart.objects.filter(session_key=session_key).update(user=user)
 
-            messages.success(
-                request,
-                f"{user.username} , Вы успешно зарегистрировались и вошли в аккаунт",
-            )
+            messages.success(request, f"{user.username}, you have successfully registered and logged in!")
+            return redirect('main:index')
 
-            return HttpResponseRedirect(reverse("main:index"))
     else:
         form = UserRegistrationForm()
 
-    context = {"title": "Home - Авторизация", "form": form}
-    return render(request, "users/registration.html", context)
+    context = {'title': 'Register', 'form': form}
+    return render(request, 'users/registration.html', context)
 
 
 @login_required
 def profile(request):
+
     if request.method == "POST":
         form = ProfileForm(
             data=request.POST, instance=request.user, files=request.FILES
         )
         if form.is_valid():
             form.save()
-            messages.success(request, "Профиль успешно обновлен")
+            messages.success(request, 'Profile successfully updated!')
+            return redirect('users:profile')
 
-            return HttpResponseRedirect(reverse("user:profile"))
     else:
         form = ProfileForm(instance=request.user)
 
@@ -96,16 +91,18 @@ def profile(request):
         .order_by("-id")
     )
 
-    context = {"title": "Home - Кабинет", "form": form, 'orders': orders}
-    return render(request, "users/profile.html", context)
+    context = {'title': 'My Profile', 'form': form, 'orders': orders}
+    return render(request, 'users/profile.html', context)
 
 
 def users_cart(request):
+
     return render(request, "carts/includes/users_cart.html")
 
 
 @login_required
 def logout(request):
-    messages.success(request, f"{request.user.username}, Вы успешно вышли из аккаунта")
+
+    messages.success(request, f'{request.user.username}, you have successfully logged out!')
     auth.logout(request)
-    return redirect(reverse("main:index"))
+    return redirect('main:index')

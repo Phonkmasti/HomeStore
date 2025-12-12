@@ -41,7 +41,7 @@ def create_order(request):
 
                             if product.quantity < quantity:
                                 raise ValidationError(
-                                    f"Недостаточное количество товара {name} на складе\ В наличии - {product.quantity}"
+                                    f"Insufficient quantity of {name} in stock. Available: {product.quantity}"
                                 )
 
                             OrderItem.objects.create(
@@ -56,10 +56,15 @@ def create_order(request):
 
                         cart_items.delete()
 
-                        messages.success(request, "Заказ успешно оформлен!")
-                        return redirect("user:profile")
+                        messages.success(request, "Order successfully created!")
+                        return redirect("users:profile")
             except ValidationError as e:
-                messages.success(request, str(e))
+                messages.error(request, str(e))
+                context = {
+                    "title": "Checkout",
+                    "form": form,
+                    "order": True,
+                }
                 return render(request, 'orders/create_order.html', context)
     else:
         initial = {
@@ -69,9 +74,13 @@ def create_order(request):
 
         form = CreateOrderForm(initial=initial)
 
+    cart_items = Cart.objects.filter(user=request.user)
+    total_price = cart_items.total_price()
+
     context = {
-        "tite": "Home - оформление заказа",
+        "title": "Checkout",
         "form": form,
         "order": True,
+        "total_price": total_price,
     }
     return render(request, "orders/create_order.html", context=context)

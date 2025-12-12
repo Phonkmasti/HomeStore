@@ -2,24 +2,13 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from users.models import User
 
-class UserLoginForm(AuthenticationForm):
 
+class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
 
 
-
-    # username = forms.CharField(
-    #     label='Имя',
-    #     widget=forms.TextInput(attrs={"autofocus": True, 'class': 'form-control', 'placeholder': 'Введите ваше имя пользователя'})
-    # )
-    
-    # password = forms.CharField(
-    #     widget=forms.PasswordInput(attrs={"autocomplete": "current-password", 'class': 'form-control', 'placeholder': 'Введите ваш пароль'}),
-    #     label='Пароль'
-    # )
-    
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
@@ -31,13 +20,6 @@ class UserRegistrationForm(UserCreationForm):
             'password1',
             'password2',
         )
-
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    username = forms.CharField()
-    email = forms.EmailField()
-    password1 = forms.CharField()
-    password2 = forms.CharField()
 
 
 class ProfileForm(UserChangeForm):
@@ -52,7 +34,4 @@ class ProfileForm(UserChangeForm):
         )
     
     image = forms.ImageField(required=False)
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    username = forms.CharField()
-    email = forms.CharField()
+    email = forms.EmailField()

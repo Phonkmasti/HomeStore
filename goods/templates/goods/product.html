@@ -1,46 +1,92 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load sass_tags %}
 
-{% block modal_cart %}
-{% include "includes/cart_button.html" %}
-{% endblock modal_cart %}
+{% block css %}
+  <link rel="stylesheet" href="{% sass_src 'deps/css/product.scss' %}" />
+{% endblock %}
+
 {% block content %}
-  <div class="container mt-5">
-    <div class="card mb-4 custom-shadow">
-      <div class="row">
-        <!-- Миниатюры -->
-        <div class="col-md-4">
-          <img src="{% static 'deps/images/Not found image.png' %}" class="card-img-top" alt="..." />
+  <main class="product-main">
+    <div class="product-container">
+      <div class="product-header">
+        <h1>{{ product.name }}</h1>
+      </div>
+
+      <div class="product-content">
+        <div class="product-image-section">
+          <div class="product-image-wrapper">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            {% else %}
+              <img src="{% static 'deps/images/Not found image.png' %}" alt="Product Image" class="product-image">
+            {% endif %}
+          </div>
         </div>
-        <div class="col-md-4">
-          <p class="product_id mt-3">id: {{ product.display_id }}</p>
-        </div>
-        <!-- Увеличить изображение в модальном окне -->
-        <div class="modal fade" id="imageModal1" tabindex="-1" aria-labelledby="imageModal1Label" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="imageModal1Label">{{ product.name }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+
+        <div class="product-info-section">
+          <div class="product-card">
+            <div class="product-id">
+              <span class="id-label">Product ID:</span>
+              <span class="id-value">{{ product.display_id }}</span>
+            </div>
+
+            <div class="product-description">
+              <h2 class="description-title">Description</h2>
+              <p class="description-text">{{ product.description }}</p>
+            </div>
+
+            <div class="product-pricing">
+              <div class="price-section">
+                {% if product.discount %}
+                  <div class="price-row">
+                    <span class="price-label">Original Price:</span>
+                    <span class="price-original">${{ product.price }}</span>
+                  </div>
+                  <div class="price-row">
+                    <span class="price-label">Discount:</span>
+                    <span class="discount-badge">{{ product.discount }}%</span>
+                  </div>
+                  <div class="price-row total-price">
+                    <span class="price-label">Your Price:</span>
+                    <span class="price-value">${{ product.sell_price }}</span>
+                  </div>
+                {% else %}
+                  <div class="price-row total-price">
+                    <span class="price-label">Price:</span>
+                    <span class="price-value">${{ product.price }}</span>
+                  </div>
+                {% endif %}
               </div>
-              <div class="modal-body">
-                <img src="" class="img-fluid" alt="Изображение 1" />
+
+              <div class="product-actions">
+                <button type="button" class="add-to-cart-btn add-to-cart" data-product-id="{{ product.id }}">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  Add to Cart
+                </button>
+                <a href="{% url 'main:index' %}" class="continue-shopping-btn">
+                  Continue Shopping
+                </a>
               </div>
             </div>
+
+            {% if product.quantity > 0 %}
+              <div class="stock-status available">
+                <span class="stock-badge">In Stock</span>
+                <span class="stock-count">{{ product.quantity }} available</span>
+              </div>
+            {% else %}
+              <div class="stock-status out-of-stock">
+                <span class="stock-badge">Out of Stock</span>
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
-      <!-- Описание товара -->
-      <div class="card-body">
-        <p class="card-text">
-          Цена: <strong>{{product.sell_price}}</strong>
-        </p>
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{product.description}}</p>
-        <a href="{% url "cart:cart_add" %}" class="btn btn-dark add-to-cart" data-product-id="{{product.id}}" >
-          {% csrf_token %}
-          Добавить в корзину</a>
-      </div>
     </div>
-  </div>
+  </main>
 {% endblock %}
