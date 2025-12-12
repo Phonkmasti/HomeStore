@@ -29,6 +29,7 @@
 
   <body>
     {% csrf_token %}
+    {% include "includes/notifications.html" %}
     <header>
       <!-- верхняя часть страницы -->
       <div class="discount-banner">
@@ -107,12 +108,22 @@
     <!-- нижняя часть страницы -->
     <footer>
         <div class="footer-grid">
-            <h2 class="newsletter-footer-text">Subscribe to our newsletter<br>Don’t miss latest news & promotions</h2>
-            <form action="" method="post" class="newsletter-footer-form">
+          {% if user.is_subscribe == 0 or not request.user.is_authenticated %}
+            <h2 class="newsletter-footer-text">Subscribe to our newsletter<br>Don't miss latest news & promotions</h2>
+            <form action="{% url 'main:subscribe' %}" method="post"  class="newsletter-footer-form" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}">
               {% csrf_token %}
-              <input class="newsletter-footer-input" type="email" placeholder="Enter your email"/>
-              <button><a href="">Subscribe</a></button>
+              <input name='email'class="newsletter-footer-input" type="email" placeholder="Enter your email" required />
+              <button type='submit' name="subscribe" value='1'>Subscribe</button>
             </form>
+          {% else %}
+          <h2 class="newsletter-footer-text">You're subscribed!<br>You will receive our latest news & promotions</h2>
+          <form action="{% url 'main:subscribe' %}" method="post"  class="newsletter-footer-form" data-authenticated="true">
+            {% csrf_token %}
+
+            <button type='submit' name="subscribe" value='2'>Unsubscribe</button>
+          </form>
+          {% endif %}
+
             <ul class="footer-grid-text-1">
               <h3><img src="{% static 'deps/svg/Cabinet.svg' %}" alt="">Furniture Store</h3>
               <li>60 Fremont Ave. Hamden, CT 06514</li>

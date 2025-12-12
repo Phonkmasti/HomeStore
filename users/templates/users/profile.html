@@ -44,7 +44,7 @@
                     <input type="file" id="id_image" name="image" accept="image/*" class="avatar-input">
                   </label>
                   {% if user.image %}
-                    <button type="button" id="removeAvatarBtn" class="avatar-remove-button">Remove Photo</button>
+                    <button type="submit" value='1' id="removeAvatarBtn" name='remove-avatar' class="avatar-remove-button">Remove Photo</button>
                   {% endif %}
                 </div>
                 {% if form.image.errors %}

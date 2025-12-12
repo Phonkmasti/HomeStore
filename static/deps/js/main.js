@@ -65,6 +65,22 @@ window.addEventListener('load', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+  const newsletterForms = document.querySelectorAll('.newsletter-footer-form');
+  newsletterForms.forEach(form => {
+    form.addEventListener('submit', function() {
+      if (this.getAttribute('data-authenticated') === 'true') {
+        sessionStorage.setItem('scrollToFooter', 'true');
+      }
+    });
+  });
+
+  if (sessionStorage.getItem('scrollToFooter')) {
+    sessionStorage.removeItem('scrollToFooter');
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 100);
+  }
+
   document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
@@ -93,5 +109,27 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Error adding to cart');
       });
     });
+  });
+
+  document.querySelectorAll('.notification').forEach(notification => {
+    const closeButton = notification.querySelector('.notification-close');
+    const autoHideDelay = 5000;
+
+    function removeNotification() {
+      notification.classList.remove('show');
+      notification.classList.add('hide');
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 300);
+    }
+
+    if (closeButton) {
+      closeButton.addEventListener('click', removeNotification);
+    }
+
+    if (notification.classList.contains('show')) {
+      setTimeout(removeNotification, autoHideDelay);
+    }
   });
 });

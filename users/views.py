@@ -67,11 +67,17 @@ def registration(request):
 
 @login_required
 def profile(request):
-
+    user = request.user
     if request.method == "POST":
         form = ProfileForm(
             data=request.POST, instance=request.user, files=request.FILES
         )
+        if 'remove-avatar' in request.POST:
+            request.user.image.delete()
+            user.image.delete(save=False)
+            user.image = None
+            user.save()
+            return redirect('users:profile')
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile successfully updated!')

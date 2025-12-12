@@ -1,6 +1,6 @@
 from django.shortcuts import render
-
-
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 def index(request):
 
     return render(request, 'main/index.html')
@@ -64,3 +64,19 @@ def addresses(request):
         'text_on_page': 'Visit our showrooms and warehouses across the United States',
     }
     return render(request, 'main/addresses.html', context)
+@login_required
+def subscribe(request):
+    if request.method == "POST" and request.user.is_authenticated:
+        user = request.user
+        if request.POST.get('subscribe') == '1':
+            user.is_subscribe = True
+            user.save()
+            messages.success(request, f'You have successfully subscribed!')
+            return render(request, 'main/index.html')
+        elif request.POST.get('subscribe') == '2':
+            user.is_subscribe = False
+            user.save()
+            messages.warning(request, f'You have unsubscribed from our newsletter.')
+            return render(request, 'main/index.html')
+    else:
+        return render(request, 'users/login.html')

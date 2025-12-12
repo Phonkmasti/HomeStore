@@ -1,39 +1,65 @@
 {% load static %}
+{% load sass_tags %}
 
-{% if form.non_field_errors %}
-  <div class="container mt-4">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">
-          {{form.non_field_errors}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+<link rel="stylesheet" href="{% sass_src 'deps/css/notifications.scss' %}" />
+
+<div class="notifications-container">
+  {% if form.non_field_errors %}
+    <div class="notification notification-error show">
+      <div class="notification-content">
+        <svg class="notification-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span class="notification-text">{{ form.non_field_errors }}</span>
       </div>
+      <button class="notification-close" aria-label="Close notification">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
-  </div>
-{% endif %}
+  {% endif %}
 
-
-<div class="container mt-4">
-  <div class="row justify-content-center">
-      <div class="col-md-6">
-          {% if messages %}
-              {% for message in messages %}
-                  {% if message.tags == 'success' %}
-                  <div id="notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" role="alert">
-                      {{ message }}
-                  </div>
-                  {% endif %}
-                  {% if message.tags == 'warning' %}
-                  <div id="notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-danger fade show custom-shadow" role="alert">
-                      {{ message }}
-                  </div>
-                  {% endif %}
-              {% endfor %}
-          {% else %}
-          <div id="jq-notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" style="display: none;" role="alert">
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <div id="notification" class="notification notification-success show">
+          <div class="notification-content">
+            <svg class="notification-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="notification-text">{{ message }}</span>
           </div>
-          {% endif %}
-      </div>
-  </div>
+          <button class="notification-close" aria-label="Close notification">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      {% elif message.tags == 'warning' %}
+        <div id="notification" class="notification notification-warning show">
+          <div class="notification-content">
+            <svg class="notification-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span class="notification-text">{{ message }}</span>
+          </div>
+          <button class="notification-close" aria-label="Close notification">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <div id="jq-notification" class="notification" style="display: none;"></div>
+  {% endif %}
 </div>
