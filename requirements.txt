@@ -1,6 +1,6 @@
 Django>=5.0,<6.0
-psycopg2-binary>=2.9
-Pillow
-django-debug-toolbar
-django-sass-processor
-libsass django-compressor django-sass-processor
+psycopg[binary]>=3.1
+Pillow>=10.0
+django-sass-processor>=1.2
+libsass>=0.23.0
+django-compressor>=4.1
