@@ -27,12 +27,12 @@
         <div class="product-info-section">
           <div class="product-card">
             <div class="product-id">
-              <span class="id-label">Product ID:</span>
+              <span class="id-label" data-translate="product_id">Product ID:</span>
               <span class="id-value">{{ product.display_id }}</span>
             </div>
 
             <div class="product-description">
-              <h2 class="description-title">Description</h2>
+              <h2 class="description-title" data-translate="description">Description</h2>
               <p class="description-text">{{ product.description }}</p>
             </div>
 
@@ -40,27 +40,27 @@
               <div class="price-section">
                 {% if product.discount %}
                   <div class="price-row">
-                    <span class="price-label">Original Price:</span>
+                    <span class="price-label" data-translate="original_price">Original Price:</span>
                     <span class="price-original">${{ product.price }}</span>
                   </div>
                   <div class="price-row">
-                    <span class="price-label">Discount:</span>
+                    <span class="price-label" data-translate="discount">Discount:</span>
                     <span class="discount-badge">{{ product.discount }}%</span>
                   </div>
                   <div class="price-row total-price">
-                    <span class="price-label">Your Price:</span>
+                    <span class="price-label" data-translate="your_price">Your Price:</span>
                     <span class="price-value">${{ product.sell_price }}</span>
                   </div>
                 {% else %}
                   <div class="price-row total-price">
-                    <span class="price-label">Price:</span>
+                    <span class="price-label" data-translate="price">Price:</span>
                     <span class="price-value">${{ product.price }}</span>
                   </div>
                 {% endif %}
               </div>
 
               <div class="product-actions">
-                <button type="button" class="add-to-cart-btn add-to-cart" data-product-id="{{ product.id }}">
+                <button type="button" class="add-to-cart-btn add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
@@ -68,7 +68,7 @@
                   </svg>
                   Add to Cart
                 </button>
-                <a href="{% url 'main:index' %}" class="continue-shopping-btn">
+                <a href="{% url 'main:index' %}" class="continue-shopping-btn" data-translate="continue_shopping">
                   Continue Shopping
                 </a>
               </div>
@@ -76,12 +76,12 @@
 
             {% if product.quantity > 0 %}
               <div class="stock-status available">
-                <span class="stock-badge">In Stock</span>
-                <span class="stock-count">{{ product.quantity }} available</span>
+                <span class="stock-badge" data-translate="in_stock">In Stock</span>
+                <span class="stock-count"><span data-translate="available">available</span> {{ product.quantity }}</span>
               </div>
             {% else %}
               <div class="stock-status out-of-stock">
-                <span class="stock-badge">Out of Stock</span>
+                <span class="stock-badge" data-translate="out_of_stock">Out of Stock</span>
               </div>
             {% endif %}
           </div>

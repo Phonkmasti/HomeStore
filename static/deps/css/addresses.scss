@@ -256,3 +256,33 @@ $desktop: 1200px;
         color: $secondary-text-color;
     }
 }
+
+.show-all-btn {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid $bg-description-button-color;
+    background-color: white;
+    color: $bg-description-button-color;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    font-family: $global-text-family;
+    
+    &:hover {
+        background-color: $bg-description-button-color;
+        color: white;
+    }
+    
+    @media (max-width: $tablet) {
+        margin-top: 1rem;
+        padding: 0.875rem;
+        font-size: 0.95rem;
+    }
+    
+    @media (max-width: $mobile) {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}

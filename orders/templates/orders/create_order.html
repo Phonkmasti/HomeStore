@@ -11,14 +11,14 @@
   <main class="checkout-main">
     <div class="checkout-container">
       <div class="checkout-header">
-        <h1>Checkout</h1>
-        <p>Review your order and complete your purchase</p>
+        <h1 data-translate="checkout_title">Checkout</h1>
+        <p data-translate="checkout_subtitle">Review your order and complete your purchase</p>
       </div>
 
       <div class="checkout-content">
         <div class="checkout-card">
           <div class="checkout-title">
-            <h2>Order Summary</h2>
+            <h2 data-translate="order_summary">Order Summary</h2>
           </div>
           
           {% user_carts request as carts %}
@@ -27,18 +27,18 @@
               <div class="order-item">
                 <div class="item-info">
                   <div class="item-name">{{ cart.product.name }}</div>
-                  <div class="item-quantity">Quantity: {{ cart.quantity }}</div>
+                  <div class="item-quantity"><span data-translate="quantity">Quantity:</span> {{ cart.quantity }}</div>
                 </div>
                 <div class="item-total">${{ cart.product.sell_price }}</div>
               </div>
             {% empty %}
-              <p style="color: #999; text-align: center; padding: 2rem;">Your cart is empty</p>
+              <p style="color: #999; text-align: center; padding: 2rem;" data-translate="your_cart_empty">Your cart is empty</p>
             {% endfor %}
           </div>
 
           {% if carts %}
             <div class="order-total">
-              <span class="total-label">Total:</span>
+              <span class="total-label" data-translate="total">Total:</span>
               <span class="total-amount">${{ total_price }}</span>
             </div>
           {% endif %}
@@ -46,18 +46,18 @@
 
         <div class="checkout-card">
           <div class="checkout-title">
-            <h2>Shipping & Payment</h2>
+            <h2 data-translate="shipping_payment">Shipping & Payment</h2>
           </div>
 
           <form action="{% url 'orders:create_order' %}" method="post" class="checkout-form">
             {% csrf_token %}
 
             <div class="form-section">
-              <div class="section-label">Personal Information</div>
+              <div class="section-label" data-translate="personal_info">Personal Information</div>
               
               <div class="form-grid">
                 <div class="form-field">
-                  <label for="id_first_name">First Name*</label>
+                  <label for="id_first_name" data-translate="first_name">First Name*</label>
                   <input 
                     type="text" 
                     id="id_first_name" 
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="form-field">
-                  <label for="id_last_name">Last Name*</label>
+                  <label for="id_last_name" data-translate="last_name">Last Name*</label>
                   <input 
                     type="text" 
                     id="id_last_name" 
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="form-field form-field-full">
-                  <label for="id_phone_number">Phone Number*</label>
+                  <label for="id_phone_number" data-translate="phone_number">Phone Number*</label>
                   <input 
                     type="text" 
                     id="id_phone_number" 
@@ -101,7 +101,7 @@
             </div>
 
             <div class="form-section">
-              <div class="section-label">Delivery Method</div>
+              <div class="section-label" data-translate="delivery_method">Delivery Method</div>
               
               <div class="radio-group">
                 <label class="radio-item">
@@ -111,7 +111,7 @@
                     value="1" 
                     checked
                     onchange="toggleDeliveryAddress()">
-                  <label style="margin: 0;">Delivery to Address</label>
+                  <label style="margin: 0;" data-translate="delivery_address_opt">Delivery to Address</label>
                 </label>
 
                 <label class="radio-item">
@@ -120,12 +120,12 @@
                     name="requires_delivery" 
                     value="0"
                     onchange="toggleDeliveryAddress()">
-                  <label style="margin: 0;">Pickup in Store</label>
+                  <label style="margin: 0;" data-translate="pickup_store">Pickup in Store</label>
                 </label>
               </div>
 
               <div class="form-field form-field-full optional-field" id="deliveryAddressField">
-                <label for="id_delivery_address">Delivery Address*</label>
+                <label for="id_delivery_address" data-translate="delivery_address">Delivery Address*</label>
                 <textarea 
                   id="id_delivery_address" 
                   name="delivery_address" 
@@ -137,7 +137,7 @@
             </div>
 
             <div class="form-section">
-              <div class="section-label">Payment Method</div>
+              <div class="section-label" data-translate="payment_method">Payment Method</div>
               
               <div class="radio-group">
                 <label class="radio-item">
@@ -146,7 +146,7 @@
                     name="payment_on_get" 
                     value="0" 
                     checked>
-                  <label style="margin: 0;">Credit/Debit Card</label>
+                  <label style="margin: 0;" data-translate="credit_card">Credit/Debit Card</label>
                 </label>
 
                 <label class="radio-item">
@@ -154,7 +154,7 @@
                     type="radio" 
                     name="payment_on_get" 
                     value="1">
-                  <label style="margin: 0;">Cash/Card on Delivery</label>
+                  <label style="margin: 0;" data-translate="cash_on_delivery">Cash/Card on Delivery</label>
                 </label>
               </div>
               {% if form.payment_on_get.errors %}
@@ -162,7 +162,7 @@
               {% endif %}
             </div>
 
-            <button type="submit" class="checkout-button">Complete Order</button>
+            <button type="submit" class="checkout-button" data-translate="complete_order">Complete Order</button>
           </form>
         </div>
       </div>

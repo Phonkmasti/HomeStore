@@ -22,7 +22,7 @@ def login(request):
 
             if user:
                 auth.login(request, user)
-                messages.success(request, f"{username}, you have successfully logged in!")
+                messages.success(request, f"msg_login_success")
 
                 if session_key:
                     Cart.objects.filter(session_key=session_key).update(user=user)
@@ -55,7 +55,7 @@ def registration(request):
             if session_key:
                 Cart.objects.filter(session_key=session_key).update(user=user)
 
-            messages.success(request, f"{user.username}, you have successfully registered and logged in!")
+            messages.success(request, f"msg_register_success")
             return redirect('main:index')
 
     else:
@@ -80,7 +80,7 @@ def profile(request):
             return redirect('users:profile')
         if form.is_valid():
             form.save()
-            messages.success(request, 'Profile successfully updated!')
+            messages.success(request, 'msg_profile_updated')
             return redirect('users:profile')
 
     else:
@@ -109,6 +109,6 @@ def users_cart(request):
 @login_required
 def logout(request):
 
-    messages.success(request, f'{request.user.username}, you have successfully logged out!')
+    messages.success(request, f'msg_logout_success')
     auth.logout(request)
     return redirect('main:index')

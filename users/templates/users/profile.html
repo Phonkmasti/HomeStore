@@ -11,8 +11,8 @@
   <main class="profile-main">
     <div class="profile-container">
       <div class="profile-header">
-        <h1>My Profile</h1>
-        <p>Manage your account information and orders</p>
+        <h1 data-translate="profile_title">My Profile</h1>
+        <p data-translate="profile_subtitle">Manage your account information and orders</p>
       </div>
 
       <div class="profile-content">
@@ -20,7 +20,7 @@
         <div class="profile-section">
           <div class="profile-card">
             <div class="section-title">
-              <h2>Account Information</h2>
+              <h2 data-translate="profile_account">Account Information</h2>
             </div>
 
             <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data" class="profile-form">
@@ -40,11 +40,11 @@
                 </div>
                 <div class="avatar-buttons">
                   <label for="id_image" class="avatar-upload-label">
-                    <span>Change Photo</span>
+                    <span data-translate="profile_change_photo">Change Photo</span>
                     <input type="file" id="id_image" name="image" accept="image/*" class="avatar-input">
                   </label>
                   {% if user.image %}
-                    <button type="submit" value='1' id="removeAvatarBtn" name='remove-avatar' class="avatar-remove-button">Remove Photo</button>
+                    <button type="submit" value='1' id="removeAvatarBtn" name='remove-avatar' class="avatar-remove-button" data-translate="profile_remove_photo">Remove Photo</button>
                   {% endif %}
                 </div>
                 {% if form.image.errors %}
@@ -54,7 +54,7 @@
 
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="id_first_name">First Name*</label>
+                  <label for="id_first_name" data-translate="profile_first_name">First Name*</label>
                   <input type="text" id="id_first_name" name="first_name" placeholder="Enter your first name" value="{{ form.first_name.value }}" required>
                   {% if form.first_name.errors %}
                     <div class="error-message">{{ form.first_name.errors }}</div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="id_last_name">Last Name*</label>
+                  <label for="id_last_name" data-translate="profile_last_name">Last Name*</label>
                   <input type="text" id="id_last_name" name="last_name" placeholder="Enter your last name" value="{{ form.last_name.value }}" required>
                   {% if form.last_name.errors %}
                     <div class="error-message">{{ form.last_name.errors }}</div>
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="id_username">Username*</label>
+                  <label for="id_username" data-translate="profile_username">Username*</label>
                   <input type="text" id="id_username" name="username" placeholder="Enter your username" value="{{ form.username.value }}" required>
                   {% if form.username.errors %}
                     <div class="error-message">{{ form.username.errors }}</div>
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="id_email">Email*</label>
+                  <label for="id_email" data-translate="profile_email">Email*</label>
                   <input type="email" id="id_email" name="email" placeholder="your.email@example.com" value="{{ form.email.value }}" required>
                   {% if form.email.errors %}
                     <div class="error-message">{{ form.email.errors }}</div>
@@ -86,7 +86,7 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn-save">Save Changes</button>
+              <button type="submit" class="btn-save" data-translate="profile_save">Save Changes</button>
             </form>
           </div>
         </div>
@@ -96,8 +96,8 @@
         <div class="profile-section">
           <div class="profile-card">
             <div class="section-title">
-              <h2>Shopping Cart</h2>
-              <span class="cart-count">{{ carts.count }} items</span>
+              <h2 data-translate="profile_cart_title">Shopping Cart</h2>
+              <span class="cart-count">{{ carts.count }} <span data-translate="profile_cart_items">items</span></span>
             </div>
 
             <div class="cart-container" id="cart-items-container">
@@ -110,7 +110,7 @@
         <div class="profile-section">
           <div class="profile-card">
             <div class="section-title">
-              <h2>My Orders</h2>
+              <h2 data-translate="profile_my_orders">My Orders</h2>
             </div>
 
             {% if orders %}
@@ -132,10 +132,10 @@
                       <table class="orders-table">
                         <thead>
                           <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Total</th>
+                            <th data-translate="profile_product">Product</th>
+                            <th data-translate="profile_quantity">Quantity</th>
+                            <th data-translate="profile_price">Price</th>
+                            <th data-translate="profile_total">Total</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -159,8 +159,8 @@
               </div>
             {% else %}
               <div class="empty-state">
-                <p>You don't have any orders yet.</p>
-                <a href="{% url 'main:index' %}" class="btn-shop">Start Shopping</a>
+                <p data-translate="profile_no_orders_text">You don't have any orders yet.</p>
+                <a href="{% url 'main:index' %}" class="btn-shop" data-translate="profile_start_shopping">Start Shopping</a>
               </div>
             {% endif %}
           </div>

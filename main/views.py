@@ -71,12 +71,12 @@ def subscribe(request):
         if request.POST.get('subscribe') == '1':
             user.is_subscribe = True
             user.save()
-            messages.success(request, f'You have successfully subscribed!')
+            messages.success(request, f'msg_subscribed')
             return render(request, 'main/index.html')
         elif request.POST.get('subscribe') == '2':
             user.is_subscribe = False
             user.save()
-            messages.warning(request, f'You have unsubscribed from our newsletter.')
+            messages.warning(request, f'msg_unsubscribed')
             return render(request, 'main/index.html')
     else:
         return render(request, 'users/login.html')

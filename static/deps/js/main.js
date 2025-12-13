@@ -30,6 +30,15 @@ window.onclick = function(event) {
       }
     }
   }
+
+  const burger = document.querySelector('.burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  if (burger && mobileMenu && mobileMenu.classList.contains('active')) {
+    if (!burger.contains(event.target) && !mobileMenu.contains(event.target)) {
+      mobileMenu.classList.remove('active');
+    }
+  }
 };
 
 const banner = document.querySelector('.discount-banner');

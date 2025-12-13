@@ -11,81 +11,83 @@
   <main class="addresses-main">
     <div class="addresses-container">
       <div class="addresses-header">
-        <h1>Our Locations</h1>
-        <p>Visit our showrooms and warehouses across the United States</p>
+        <h1 id="addresses-title-h1" data-translate="addresses_title">Our Locations</h1>
+        <p data-translate="addresses_subtitle">Visit our showrooms and warehouses across the United States</p>
       </div>
 
       <div class="addresses-content">
         <div class="addresses-list">
-          <div class="location-card active" data-lat="41.3909" data-lng="-72.7646">
-            <div class="location-type">Main Office</div>
-            <h3>Hamden, Connecticut</h3>
+          <div class="location-card active" data-lat="41.3909" data-lng="-72.7646" id="showrooms" data-location-type="showroom">
+            <div class="location-type" data-translate="location_main_office">Main Office</div>
+            <h3 data-translate="hamden">Hamden, Connecticut</h3>
             <p class="address">60 Fremont Ave. Hamden, CT 06514</p>
             <div class="location-info">
               <div class="info-item">
-                <strong>Phone:</strong> (928) 630-9272
+                <strong data-translate="phone">Phone:</strong> (928) 630-9272
               </div>
               <div class="info-item">
-                <strong>Hours:</strong> Mon - Fri: 9AM - 6PM
+                <strong data-translate="hours">Hours:</strong> <span data-translate="hours_hamden">Mon - Fri: 9AM - 6PM</span>
               </div>
             </div>
           </div>
 
-          <div class="location-card" data-lat="40.7128" data-lng="-74.0060">
-            <div class="location-type">Showroom</div>
-            <h3>New York, New York</h3>
+          <div class="location-card" data-lat="40.7128" data-lng="-74.0060" data-location-type="showroom">
+            <div class="location-type" data-translate="location_showroom">Showroom</div>
+            <h3 data-translate="new_york">New York, New York</h3>
             <p class="address">500 Fifth Avenue, New York, NY 10110</p>
             <div class="location-info">
               <div class="info-item">
-                <strong>Phone:</strong> (212) 555-0123
+                <strong data-translate="phone">Phone:</strong> (212) 555-0123
               </div>
               <div class="info-item">
-                <strong>Hours:</strong> Mon - Sun: 10AM - 7PM
+                <strong data-translate="hours">Hours:</strong> <span data-translate="hours_newyork">Mon - Sun: 10AM - 7PM</span>
               </div>
             </div>
           </div>
 
-          <div class="location-card" data-lat="41.8781" data-lng="-87.6298">
-            <div class="location-type">Warehouse</div>
-            <h3>Chicago, Illinois</h3>
+          <div class="location-card" data-lat="41.8781" data-lng="-87.6298" id="warehouses" data-location-type="warehouse">
+            <div class="location-type" data-translate="location_warehouse">Warehouse</div>
+            <h3 data-translate="chicago">Chicago, Illinois</h3>
             <p class="address">1200 W Madison St, Chicago, IL 60661</p>
             <div class="location-info">
               <div class="info-item">
-                <strong>Phone:</strong> (312) 555-0145
+                <strong data-translate="phone">Phone:</strong> (312) 555-0145
               </div>
               <div class="info-item">
-                <strong>Hours:</strong> Mon - Fri: 8AM - 5PM
+                <strong data-translate="hours">Hours:</strong> <span data-translate="hours_chicago">Mon - Fri: 8AM - 5PM</span>
               </div>
             </div>
           </div>
 
-          <div class="location-card" data-lat="34.0522" data-lng="-118.2437">
-            <div class="location-type">Showroom</div>
-            <h3>Los Angeles, California</h3>
+          <div class="location-card" data-lat="34.0522" data-lng="-118.2437" data-location-type="showroom">
+            <div class="location-type" data-translate="location_showroom">Showroom</div>
+            <h3 data-translate="los_angeles">Los Angeles, California</h3>
             <p class="address">8500 W Olympic Blvd, Los Angeles, CA 90211</p>
             <div class="location-info">
               <div class="info-item">
-                <strong>Phone:</strong> (310) 555-0156
+                <strong data-translate="phone">Phone:</strong> (310) 555-0156
               </div>
               <div class="info-item">
-                <strong>Hours:</strong> Mon - Sun: 10AM - 6PM
+                <strong data-translate="hours">Hours:</strong> <span data-translate="hours_losangeles">Mon - Sun: 10AM - 6PM</span>
               </div>
             </div>
           </div>
 
-          <div class="location-card" data-lat="33.7490" data-lng="-84.3880">
-            <div class="location-type">Warehouse</div>
-            <h3>Atlanta, Georgia</h3>
+          <div class="location-card" data-lat="33.7490" data-lng="-84.3880" data-location-type="warehouse">
+            <div class="location-type" data-translate="location_warehouse">Warehouse</div>
+            <h3 data-translate="atlanta">Atlanta, Georgia</h3>
             <p class="address">3500 Peachtree Industrial Blvd, Atlanta, GA 30331</p>
             <div class="location-info">
               <div class="info-item">
-                <strong>Phone:</strong> (404) 555-0167
+                <strong data-translate="phone">Phone:</strong> (404) 555-0167
               </div>
               <div class="info-item">
-                <strong>Hours:</strong> Mon - Fri: 7AM - 5PM
+                <strong data-translate="hours">Hours:</strong> <span data-translate="hours_atlanta">Mon - Fri: 7AM - 5PM</span>
               </div>
             </div>
           </div>
+          
+          <button id="show-all-btn" class="show-all-btn" data-translate="addresses_show_all">Show all</button>
         </div>
 
         <div class="addresses-map-container">

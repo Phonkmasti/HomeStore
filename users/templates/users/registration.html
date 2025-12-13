@@ -10,55 +10,55 @@
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-9 bg-white p-4 mb-5 mx-2 rounded custom-shadow">
-          <h2 class="text-center mb-4">Регистрация</h2>
+          <h2 class="text-center mb-4" data-translate="reg_title">Регистрация</h2>
           <form action="{% url "users:registration" %}" method="post">
             {% csrf_token %}
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="id_first_name" class="form-label">Имя*</label>
-                <input type="text" name='first_name' class="form-control" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" id="id_first_name" placeholder="Введите ваше имя" required />
+                <label for="id_first_name" class="form-label" data-translate="reg_first_name">Имя*</label>
+                <input type="text" name='first_name' class="form-control" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" id="id_first_name" data-translate="reg_first_name_placeholder" placeholder="Введите ваше имя" required />
 
                 {% if form.first_name.errors %}
                 <div class=" alert alert-danger alert-dismissible fade show"> {{form.first_name.errors }} </div>
                 {% endif %}
               </div>
               <div class="col-md-6 mb-3">
-                <label for="id_last_name" class="form-label">Фамилия*</label>
-                <input type="text" class="form-control" name='last_name' id="id_last_name" value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" placeholder="Введите вашу фамилию" required />
+                <label for="id_last_name" class="form-label" data-translate="reg_last_name">Фамилия*</label>
+                <input type="text" class="form-control" name='last_name' id="id_last_name" value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" data-translate="reg_last_name_placeholder" placeholder="Введите вашу фамилию" required />
                 {% if form.last_name.errors %}
                 <div class=" alert alert-danger alert-dismissible fade show"> {{form.last_name.errors }} </div>
                 {% endif %}
               </div>
               <div class="col-md-6 mb-3">
-                <label for="id_username" class="form-label">Имя пользователя*</label>
-                <input type="text" name='username' class="form-control" id="id_username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}" placeholder="Введите ваше имя пользователя" required />
+                <label for="id_username" class="form-label" data-translate="reg_username">Имя пользователя*</label>
+                <input type="text" name='username' class="form-control" id="id_username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}" data-translate="reg_username_placeholder" placeholder="Введите ваше имя пользователя" required />
                 {% if form.username.errors %}
                 <div class=" alert alert-danger alert-dismissible fade show"> {{form.username.errors }} </div>
                 {% endif %}
               </div>
               <div class="col-md-6 mb-3">
-                <label for="id_email" class="form-label">Email*</label>
-                <input type="email" name='email' class="form-control" id="id_email" value="{% if form.email.value %}{{ form.email.value }}{% endif %}" placeholder="Введите ваш email" required />
+                <label for="id_email" class="form-label" data-translate="reg_email">Email*</label>
+                <input type="email" name='email' class="form-control" id="id_email" value="{% if form.email.value %}{{ form.email.value }}{% endif %}" data-translate="reg_email_placeholder" placeholder="Введите ваш email" required />
                 {% if form.email.errors %}
                 <div class=" alert alert-danger alert-dismissible fade show"> {{form.email.errors }} </div>
                 {% endif %}
               </div>
               <div class="col-md-6 mb-3">
-                <label for="id_password1" class="form-label">Пароль*</label>
-                <input type="password" name="password1" class="form-control" value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}" id="id_password1" placeholder="Введите пароль" required />
+                <label for="id_password1" class="form-label" data-translate="reg_password">Пароль*</label>
+                <input type="password" name="password1" class="form-control" value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}" id="id_password1" data-translate="reg_password_placeholder" placeholder="Введите пароль" required />
                 {% if form.password1.errors %}
                 <div class=" alert alert-danger alert-dismissible fade show"> {{form.password1.errors }} </div>
                 {% endif %}
               </div>
               <div class="col-md-6 mb-3">
-                <label for="id_password2" class="form-label">Подтверждение пароля*</label>
-                <input type="password" name='password2' value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}" class="form-control" id="id_password2" placeholder="Подтвердите пароль" required />
+                <label for="id_password2" class="form-label" data-translate="reg_password_confirm">Подтверждение пароля*</label>
+                <input type="password" name='password2' value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}" class="form-control" id="id_password2" data-translate="reg_password_confirm_placeholder" placeholder="Подтвердите пароль" required />
                 {% if form.password2.errors %}
                 <div class=" alert alert-danger alert-dismissible fade show"> {{form.password2.errors }} </div>
                 {% endif %}
               </div>
             </div>
-            <button type="submit" class="btn btn-dark btn-block">Зарегистрироваться</button>
+            <button type="submit" class="btn btn-dark btn-block" data-translate="reg_button">Зарегистрироваться</button>
           </form>
         </div>
       </div>

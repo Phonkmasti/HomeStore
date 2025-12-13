@@ -12,12 +12,12 @@
           <div class="description-header-div">
             <div class="description-text">
               <span class="description-span">Furniture</span>
-              <h1>Where Traditional Meets Modern</h1>
-              <p>Discover timeless elegance and contemporary comfort with our exquisite furniture collection. Transform your living spaces into havens of style and functionality.</p>
+              <h1 data-translate="index_heading">Where Traditional Meets Modern</h1>
+              <p data-translate="index_description">Discover timeless elegance and contemporary comfort with our exquisite furniture collection. Transform your living spaces into havens of style and functionality.</p>
             </div>
             <div class="description-buttons">
-              <button class="button-shopnow"><a href="">Shop now</a></button>
-              <button class="button-learnmore"><a href="">Learn more</a></button>
+              <button class="button-shopnow"><a href="{% url "catalog:index" 'all' %}" data-translate="index_shop_now">Shop now</a></button>
+              <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn more</a></button>
             </div>
           </div>
           <div class="photocollage-header-div">
