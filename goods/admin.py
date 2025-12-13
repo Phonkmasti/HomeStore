@@ -20,19 +20,22 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ["name", "quantity", "price", "discount"]
+    prepopulated_fields = {"slug": ("name_en",)}
+    list_display = ["name_ru", "quantity", "price", "discount"]
     list_editable = [
         "discount",
     ]
-    search_fields = ["name", "description"]
+    search_fields = ["name_ru", "name_en", "description_ru", "description_en"]
     list_filter = ["discount", "quantity", "category"]
     fields = [
-        "name",
+        "name_ru",
+        "name_en",
+        "description_ru",
+        "description_en",
         "category",
         "slug",
-        "description",
         "image",
+        "image_2",
         ("price", "discount"),
         "quantity",
     ]

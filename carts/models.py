@@ -51,5 +51,5 @@ class Cart(models.Model):
 
     def __str__(self):
         if self.user:
-            return f'{self.user.username} | {self.product.name} | {self.quantity}'
-        return f'Anonymous | {self.product.name} | {self.quantity}'
+            return f'{self.user.username} | {self.product.name_ru} | {self.quantity}'
+        return f'Anonymous | {self.product.name_ru} | {self.quantity}'

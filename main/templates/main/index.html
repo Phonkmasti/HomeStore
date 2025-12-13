@@ -1,33 +1,81 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% load sass_tags %}
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% sass_src 'deps/css/index.scss' %}" />
+<link rel="stylesheet" href="{% sass_src 'deps/css/index.scss' %}" />
 {% endblock %}
 
 {% block content %}
-  <main>
-      <div class="header-main-section">
-          <div class="description-header-div">
-            <div class="description-text">
-              <span class="description-span">Furniture</span>
-              <h1 data-translate="index_heading">Where Traditional Meets Modern</h1>
-              <p data-translate="index_description">Discover timeless elegance and contemporary comfort with our exquisite furniture collection. Transform your living spaces into havens of style and functionality.</p>
-            </div>
-            <div class="description-buttons">
-              <button class="button-shopnow"><a href="{% url "catalog:index" 'all' %}" data-translate="index_shop_now">Shop now</a></button>
-              <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn more</a></button>
-            </div>
-          </div>
-          <div class="photocollage-header-div">
-            <img src="{% static 'deps/images/goods/Card.png' %}" alt="Living room with furniture">
-            <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="Modern chair">
-            <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="Wooden table">
-            <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="Contemporary sofa">
-          </div>
+
+
+<main>
+  <div class="header-main-section">
+    <div class="description-header-div">
+      <div class="description-text">
+        <span class="description-span">Furniture</span>
+        <h1 data-translate="index_heading">Where Traditional Meets Modern</h1>
+        <p data-translate="index_description">Discover timeless elegance and contemporary comfort with our exquisite
+          furniture collection. Transform your living spaces into havens of style and functionality.</p>
       </div>
-      <div class="categories-main-section"></div>
-  </main>
+      <div class="description-buttons">
+        <button class="button-shopnow"><a href="{% url "catalog:index" 'all' %}" data-translate="index_shop_now">Shop
+            now</a></button>
+        <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn
+            more</a></button>
+      </div>
+    </div>
+    <div class="photocollage-header-div">
+      <img src="{% static 'deps/images/goods/Card.png' %}" alt="Living room with furniture">
+      <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="Modern chair">
+      <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="Wooden table">
+      <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="Contemporary sofa">
+    </div>
+  </div>
+  <div class="categories-main-section">
+    <div class="categories-header-wrapper">
+      <h2>Shop by Categories</h2>
+      <button class="view-all-btn">View all</button>
+    </div>
+    <div class="categories-grid">
+      <a href="#" class="category-card">
+        <div class="category-image">
+          <img src="{% static 'deps/images/goods/Tables/Table-SOFIA.webp' %}" alt="Tables">
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Tables</h3>
+          <p class="product-count">24 products</p>
+        </div>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-image">
+          <img src="{% static 'deps/images/goods/Chairs/Chair-DORIS.webp' %}" alt="Chairs">
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Chairs</h3>
+          <p class="product-count">28 products</p>
+        </div>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-image">
+          <img src="{% static 'deps/images/goods/Armchairs/Armchair-GEDVED.jpeg' %}" alt="Armchairs">
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Armchairs</h3>
+          <p class="product-count">16 products</p>
+        </div>
+      </a>
+      <a href="#" class="category-card">
+        <div class="category-image">
+          <img src="{% static 'deps/images/goods/Sofas/Sofa-ERMES.webp' %}" alt="Sofas">
+        </div>
+        <div class="category-info">
+          <h3 class="category-name">Sofas</h3>
+          <p class="product-count">42 products</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
 
 {% endblock %}

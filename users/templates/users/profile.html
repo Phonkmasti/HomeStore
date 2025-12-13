@@ -4,197 +4,204 @@
 {% load carts_tags %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% sass_src 'deps/css/profile.scss' %}" />
+<link rel="stylesheet" href="{% sass_src 'deps/css/profile.scss' %}" />
 {% endblock %}
 
 {% block content %}
-  <main class="profile-main">
-    <div class="profile-container">
-      <div class="profile-header">
-        <h1 data-translate="profile_title">My Profile</h1>
-        <p data-translate="profile_subtitle">Manage your account information and orders</p>
-      </div>
+<main class="profile-main">
+  <div class="profile-container">
+    <div class="profile-header">
+      <h1 data-translate="profile_title">My Profile</h1>
+      <p data-translate="profile_subtitle">Manage your account information and orders</p>
+    </div>
 
-      <div class="profile-content">
-        <!-- Profile Section -->
-        <div class="profile-section">
-          <div class="profile-card">
-            <div class="section-title">
-              <h2 data-translate="profile_account">Account Information</h2>
+    <div class="profile-content">
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <div class="profile-card">
+          <div class="section-title">
+            <h2 data-translate="profile_account">Account Information</h2>
+          </div>
+
+          <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data" class="profile-form">
+            {% csrf_token %}
+
+            <div class="profile-avatar-section">
+              <div class="avatar-wrapper">
+                {% if user.image %}
+                <img src="{{ user.image.url }}" alt="Profile Photo" class="profile-avatar">
+                {% else %}
+                <div class="avatar-placeholder">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                  </svg>
+                </div>
+                {% endif %}
+              </div>
+              <div class="avatar-buttons">
+                <label for="id_image" class="avatar-upload-label">
+                  <span data-translate="profile_change_photo">Change Photo</span>
+                  <input type="file" id="id_image" name="image" accept="image/*" class="avatar-input">
+                </label>
+                {% if user.image %}
+                <button type="submit" value='1' id="removeAvatarBtn" name='remove-avatar' class="avatar-remove-button"
+                  data-translate="profile_remove_photo">Remove Photo</button>
+                {% endif %}
+              </div>
+              {% if form.image.errors %}
+              <div class="error-message">{{ form.image.errors }}</div>
+              {% endif %}
             </div>
 
-            <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data" class="profile-form">
-              {% csrf_token %}
-
-              <div class="profile-avatar-section">
-                <div class="avatar-wrapper">
-                  {% if user.image %}
-                    <img src="{{ user.image.url }}" alt="Profile Photo" class="profile-avatar">
-                  {% else %}
-                    <div class="avatar-placeholder">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                      </svg>
-                    </div>
-                  {% endif %}
-                </div>
-                <div class="avatar-buttons">
-                  <label for="id_image" class="avatar-upload-label">
-                    <span data-translate="profile_change_photo">Change Photo</span>
-                    <input type="file" id="id_image" name="image" accept="image/*" class="avatar-input">
-                  </label>
-                  {% if user.image %}
-                    <button type="submit" value='1' id="removeAvatarBtn" name='remove-avatar' class="avatar-remove-button" data-translate="profile_remove_photo">Remove Photo</button>
-                  {% endif %}
-                </div>
-                {% if form.image.errors %}
-                  <div class="error-message">{{ form.image.errors }}</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="id_first_name" data-translate="profile_first_name">First Name*</label>
+                <input type="text" id="id_first_name" name="first_name" placeholder="Enter your first name"
+                  value="{{ form.first_name.value }}" required>
+                {% if form.first_name.errors %}
+                <div class="error-message">{{ form.first_name.errors }}</div>
                 {% endif %}
               </div>
 
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="id_first_name" data-translate="profile_first_name">First Name*</label>
-                  <input type="text" id="id_first_name" name="first_name" placeholder="Enter your first name" value="{{ form.first_name.value }}" required>
-                  {% if form.first_name.errors %}
-                    <div class="error-message">{{ form.first_name.errors }}</div>
-                  {% endif %}
-                </div>
-
-                <div class="form-group">
-                  <label for="id_last_name" data-translate="profile_last_name">Last Name*</label>
-                  <input type="text" id="id_last_name" name="last_name" placeholder="Enter your last name" value="{{ form.last_name.value }}" required>
-                  {% if form.last_name.errors %}
-                    <div class="error-message">{{ form.last_name.errors }}</div>
-                  {% endif %}
-                </div>
-
-                <div class="form-group">
-                  <label for="id_username" data-translate="profile_username">Username*</label>
-                  <input type="text" id="id_username" name="username" placeholder="Enter your username" value="{{ form.username.value }}" required>
-                  {% if form.username.errors %}
-                    <div class="error-message">{{ form.username.errors }}</div>
-                  {% endif %}
-                </div>
-
-                <div class="form-group">
-                  <label for="id_email" data-translate="profile_email">Email*</label>
-                  <input type="email" id="id_email" name="email" placeholder="your.email@example.com" value="{{ form.email.value }}" required>
-                  {% if form.email.errors %}
-                    <div class="error-message">{{ form.email.errors }}</div>
-                  {% endif %}
-                </div>
+              <div class="form-group">
+                <label for="id_last_name" data-translate="profile_last_name">Last Name*</label>
+                <input type="text" id="id_last_name" name="last_name" placeholder="Enter your last name"
+                  value="{{ form.last_name.value }}" required>
+                {% if form.last_name.errors %}
+                <div class="error-message">{{ form.last_name.errors }}</div>
+                {% endif %}
               </div>
 
-              <button type="submit" class="btn-save" data-translate="profile_save">Save Changes</button>
-            </form>
-          </div>
+              <div class="form-group">
+                <label for="id_username" data-translate="profile_username">Username*</label>
+                <input type="text" id="id_username" name="username" placeholder="Enter your username"
+                  value="{{ form.username.value }}" required>
+                {% if form.username.errors %}
+                <div class="error-message">{{ form.username.errors }}</div>
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                <label for="id_email" data-translate="profile_email">Email*</label>
+                <input type="email" id="id_email" name="email" placeholder="your.email@example.com"
+                  value="{{ form.email.value }}" required>
+                {% if form.email.errors %}
+                <div class="error-message">{{ form.email.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+            <button type="submit" class="btn-save" data-translate="profile_save">Save Changes</button>
+          </form>
         </div>
+      </div>
 
-        <!-- Cart Section -->
-        {% user_carts request as carts %}
-        <div class="profile-section">
-          <div class="profile-card">
-            <div class="section-title">
-              <h2 data-translate="profile_cart_title">Shopping Cart</h2>
-              <span class="cart-count">{{ carts.count }} <span data-translate="profile_cart_items">items</span></span>
-            </div>
-
-            <div class="cart-container" id="cart-items-container">
-              {% include "carts/includes/included_cart.html" %}
-            </div>
+      <!-- Cart Section -->
+      {% user_carts request as carts %}
+      <div class="profile-section">
+        <div class="profile-card">
+          <div class="section-title">
+            <h2 data-translate="profile_cart_title">Shopping Cart</h2>
+            <span class="cart-count">{{ carts.count }} <span data-translate="profile_cart_items">items</span></span>
           </div>
-        </div>
 
-        <!-- Orders Section -->
-        <div class="profile-section">
-          <div class="profile-card">
-            <div class="section-title">
-              <h2 data-translate="profile_my_orders">My Orders</h2>
-            </div>
-
-            {% if orders %}
-              <div class="orders-accordion">
-                {% for order in orders %}
-                  <div class="accordion-item">
-                    <button class="accordion-header" data-toggle="order-{{ order.id }}">
-                      <div class="order-info">
-                        <span class="order-number">Order #{{ order.id }}</span>
-                        <span class="order-date">{{ order.created_timestamp|date:"d M, Y" }}</span>
-                        <span class="order-status" data-status="{{ order.status|lower }}">{{ order.status }}</span>
-                      </div>
-                      <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </button>
-                    
-                    <div class="accordion-body" id="order-{{ order.id }}">
-                      <table class="orders-table">
-                        <thead>
-                          <tr>
-                            <th data-translate="profile_product">Product</th>
-                            <th data-translate="profile_quantity">Quantity</th>
-                            <th data-translate="profile_price">Price</th>
-                            <th data-translate="profile_total">Total</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {% for item in order.orderitem_set.all %}
-                            <tr>
-                              <td>
-                                <a href="{% url 'goods:product' item.product.slug %}" class="product-link">
-                                  {{ item.product.name }}
-                                </a>
-                              </td>
-                              <td class="text-center">{{ item.quantity }}</td>
-                              <td class="text-right">{{ item.price }}</td>
-                              <td class="text-right"><strong>{{ item.products_price }}</strong></td>
-                            </tr>
-                          {% endfor %}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-            {% else %}
-              <div class="empty-state">
-                <p data-translate="profile_no_orders_text">You don't have any orders yet.</p>
-                <a href="{% url 'main:index' %}" class="btn-shop" data-translate="profile_start_shopping">Start Shopping</a>
-              </div>
-            {% endif %}
+          <div class="cart-container" id="cart-items-container">
+            {% include "carts/includes/included_cart.html" %}
           </div>
         </div>
       </div>
+
+      <!-- Orders Section -->
+      <div class="profile-section">
+        <div class="profile-card">
+          <div class="section-title">
+            <h2 data-translate="profile_my_orders">My Orders</h2>
+          </div>
+
+          {% if orders %}
+          <div class="orders-accordion">
+            {% for order in orders %}
+            <div class="accordion-item">
+              <button class="accordion-header" data-toggle="order-{{ order.id }}">
+                <div class="order-info">
+                  <span class="order-number">Order #{{ order.id }}</span>
+                  <span class="order-date">{{ order.created_timestamp|date:"d M, Y" }}</span>
+                  <span class="order-status" data-status="{{ order.status|lower }}">{{ order.status }}</span>
+                </div>
+                <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+
+              <div class="accordion-body" id="order-{{ order.id }}">
+                <table class="orders-table">
+                  <thead>
+                    <tr>
+                      <th data-translate="profile_product">Product</th>
+                      <th data-translate="profile_quantity">Quantity</th>
+                      <th data-translate="profile_price">Price</th>
+                      <th data-translate="profile_total">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in order.orderitem_set.all %}
+                    <tr>
+                      <td>
+                        <a href="{% url 'goods:product' item.product.slug %}" class="product-link">
+                          {{ item.product.name }}
+                        </a>
+                      </td>
+                      <td class="text-center">{{ item.quantity }}</td>
+                      <td class="text-right">{{ item.price }}</td>
+                      <td class="text-right"><strong>{{ item.products_price }}</strong></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="empty-state">
+            <p data-translate="profile_no_orders_text">You don't have any orders yet.</p>
+            <a href="{% url 'main:index' %}" class="btn-shop" data-translate="profile_start_shopping">Start Shopping</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
     </div>
-  </main>
+  </div>
+</main>
 
-  <script>
-    document.querySelectorAll('.accordion-header').forEach(button => {
-      button.addEventListener('click', function() {
-        const toggle = this.getAttribute('data-toggle');
-        const body = document.getElementById(toggle);
-        
-        document.querySelectorAll('.accordion-body').forEach(el => {
-          if (el.id !== toggle) el.classList.remove('active');
-        });
-        
-        body.classList.toggle('active');
+<script>
+  document.querySelectorAll('.accordion-header').forEach(button => {
+    button.addEventListener('click', function () {
+      const toggle = this.getAttribute('data-toggle');
+      const body = document.getElementById(toggle);
+
+      document.querySelectorAll('.accordion-body').forEach(el => {
+        if (el.id !== toggle) el.classList.remove('active');
       });
-    });
 
-    document.getElementById('id_image').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const avatar = document.querySelector('.profile-avatar');
-          if (avatar) {
-            avatar.src = event.target.result;
-          }
-        };
-        reader.readAsDataURL(file);
-      }
+      body.classList.toggle('active');
     });
-  </script>
+  });
+
+  document.getElementById('id_image').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const avatar = document.querySelector('.profile-avatar');
+        if (avatar) {
+          avatar.src = event.target.result;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
 {% endblock %}

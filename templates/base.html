@@ -4,174 +4,193 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% sass_src 'deps/css/base.scss' %}" />
-    <link rel="stylesheet" href="{% static 'deps/css/css-normalize.css' %}" />
-    
-    {% block css %}
-    
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% sass_src 'deps/css/base.scss' %}" />
+  <link rel="stylesheet" href="{% static 'deps/css/css-normalize.css' %}" />
+
+  {% block css %}
+
+
+  {% endblock %}
+
+  <!-- Favicons for different platforms -->
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'deps/favicon/favicon-f.png' %}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'deps/favicon/favicon-f.png' %}" />
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'deps/favicon/favicon-f.png' %}" />
+  <link rel="manifest" href="{% static 'deps/favicon/site.webmanifest' %}" />
+  <title>F Store | Furniture store</title>
+  <script src="{% static 'deps/js/language-switcher.js' %}"></script>
+</head>
+
+<body>
+  {% csrf_token %}
+  {% include "includes/notifications.html" %}
+  <header>
+    <!-- верхняя часть страницы -->
+    <div class="discount-banner">
+      <p data-translate="discount_banner">This weekend Sale 20% off on all products</p>
+    </div>
+    <div class="search-contact-section">
+      <p class="address" data-translate="address">60 Fremont Ave. Hamden, CT 06514</p>
+      <div class="search-div">
+        <div class="dropdown-section">
+          <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search"><span
+              data-translate="all_categories">All Categories</span> <img src="{% static 'deps/svg/chevron-down.svg' %}"
+              alt=""></button>
+          <ul id='dropdowncontent' class="dropdown-content">
+            {% tag_categories as categories %}
+            {% for category in categories %}
+            <li>
+              <a class="" href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <form role="search" action="{% url 'catalog:search' %}" method="get">
+          <input class="search-input-field" type="search" name="q" data-translate="search_placeholder"
+            placeholder="Search product..." aria-label="Search" /><button class="search-submit-button"
+            type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
+        </form>
+      </div>
+      <p class="phone"><img src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
+    </div>
+    <nav>
+      <ul class="home-ul">
+        <li><img src="{% static 'deps/svg/Cabinet.svg' %}" alt=""><a href="{% url 'main:index' %}">
+            <h2>Furniture Store</h2>
+          </a></li>
+      </ul>
+      <ul class="navigation-ul">
+        <li><a class="nav-home" href="{% url 'main:index' %}" data-translate="nav_home">Home</a></li>
+        <li><a href="{% url 'catalog:index' 'all' %}" data-translate="nav_shop">Shop</a></li>
+        <li><a href="{% url 'main:about' %}" data-translate="nav_about">About Us</a></li>
+        <li><a href="{% url 'main:contact' %}" data-translate="nav_contact">Contact Us</a></li>
+      </ul>
+      <ul class="user-ul">
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'users:profile' %}"><img src="{% static 'deps/svg/user.svg' %}" alt="profile"></a></li>
+        <li><a href="{% url 'orders:create_order' %}"><img src="{% static 'deps/svg/shopping-cart.svg' %}"
+              alt="orders"></a></li>
+        <li><a href="{% url 'users:logout' %}"><img src="{% static 'deps/svg/logout.svg' %}" alt="logout"></a></li>
+        {% else %}
+        <li><a href="{% url 'users:login' %}"><img src="{% static 'deps/svg/login.svg' %}" alt="login"></a></li>
+        <li class="placeholder"></li>
+        <li class="placeholder"></li>
+        {% endif %}
+        <li class="language-switcher-container">
+          <button id="language-switcher-btn" onclick="toggleLanguageDropdown()">EN</button>
+          <div id="language-dropdown">
+            <button onclick="setLanguageFromDropdown('en')">English</button>
+            <button onclick="setLanguageFromDropdown('ru')">Русский</button>
+          </div>
+        </li>
+      </ul>
+      <div class="burger" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div id="mobileMenu" class="mobile-menu">
+        <div class="mobile-menu-language-section">
+          <button id="language-switcher-btn-mobile" onclick="toggleLanguageDropdown()">EN</button>
+          <div id="language-dropdown-mobile">
+            <button onclick="setLanguageFromDropdown('en')">English</button>
+            <button onclick="setLanguageFromDropdown('ru')">Русский</button>
+          </div>
+        </div>
+        <a href="{% url 'main:index' %}" data-translate="nav_home">Home</a>
+        <a href="{% url 'catalog:index' 'all' %}" data-translate="nav_shop">Shop</a>
+        <a href="{% url 'main:about' %}" data-translate="nav_about">About Us</a>
+        <a href="{% url 'main:contact' %}" data-translate="nav_contact">Contact Us</a>
+
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'users:profile' %}" data-translate="mobile_profile">Profile</a>
+        <a href="{% url 'orders:create_order' %}" data-translate="mobile_cart">Cart</a>
+        <a href="{% url 'users:logout' %}" data-translate="mobile_logout">Logout</a>
+        {% else %}
+        <a href="{% url 'users:login' %}" data-translate="mobile_login">Login</a>
+        {% endif %}
+      </div>
+    </nav>
+    <div id="navPlaceholder"></div>
+  </header>
+  <section>
+    <!-- Контент на странице -->
+    {% block content %}
 
     {% endblock %}
+  </section>
+  <!-- нижняя часть страницы -->
+  <footer>
+    <div class="footer-grid">
+      {% if user.is_subscribe == 0 or not request.user.is_authenticated %}
+      <h2 class="newsletter-footer-text" data-translate="newsletter_text">Subscribe to our newsletter<br>Don't miss
+        latest news & promotions</h2>
+      <form action="{% url 'main:subscribe' %}" method="post" class="newsletter-footer-form"
+        data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}">
+        {% csrf_token %}
+        <input name='email' class="newsletter-footer-input" type="email" data-translate="newsletter_placeholder"
+          placeholder="Enter your email" required />
+        <button type='submit' name="subscribe" value='1' data-translate="newsletter_subscribe">Subscribe</button>
+      </form>
+      {% else %}
+      <h2 class="newsletter-footer-text" data-translate="newsletter_subscribed">You're subscribed!<br>You will receive
+        our latest news & promotions</h2>
+      <form action="{% url 'main:subscribe' %}" method="post" class="newsletter-footer-form" data-authenticated="true">
+        {% csrf_token %}
+        <button type='submit' name="subscribe" value='2' data-translate="newsletter_unsubscribe">Unsubscribe</button>
+      </form>
+      {% endif %}
 
-    <!-- Favicons for different platforms -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'deps/favicon/favicon-f.png' %}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'deps/favicon/favicon-f.png' %}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'deps/favicon/favicon-f.png' %}" />
-    <link rel="manifest" href="{% static 'deps/favicon/site.webmanifest' %}" />
-    <title>F Store | Furniture store</title>
-    <script src="{% static 'deps/js/language-switcher.js' %}"></script>
-  </head>
-
-  <body>
-    {% csrf_token %}
-    {% include "includes/notifications.html" %}
-    <header>
-      <!-- верхняя часть страницы -->
-      <div class="discount-banner">
-        <p data-translate="discount_banner">This weekend Sale 20% off on all products</p>        
+      <ul class="footer-grid-text-1">
+        <h3><img src="{% static 'deps/svg/Cabinet.svg' %}" alt="">Furniture Store</h3>
+        <li>60 Fremont Ave. Hamden, CT 06514</li>
+        <li><strong>Email:</strong>fStore@email.com</li>
+        <li><strong>Phone:</strong>(928) 630-9272</li>
+        <li class="footer-social-media-icons"><img src="{% static 'deps/svg/facebook.svg' %}" alt=""><img
+            src="{% static 'deps/svg/X.svg' %}" alt=""><img src="{% static 'deps/svg/instagram.svg' %}" alt=""><img
+            src="{% static 'deps/svg/youtube.svg' %}" alt=""></li>
+      </ul>
+      <ul class="footer-grid-text-2">
+        <h3 data-translate="footer_locations">Locations</h3>
+        <li><a href="{% url 'main:addresses' %}#showrooms" data-translate="footer_store_locations">Store Locations</a>
+        </li>
+        <li><a href="{% url 'main:addresses' %}#warehouses" data-translate="footer_warehouses">Warehouses</a></li>
+        <li><a href="{% url 'main:contact' %}" data-translate="footer_find_us">Find Us</a></li>
+        <li><a href="{% url 'main:addresses' %}" data-translate="footer_visit_us">Visit Us</a></li>
+      </ul>
+      <ul class="footer-grid-text-3">
+        <h3 data-translate="footer_service">Customer service</h3>
+        <li><a href="" data-translate="footer_orders">Orders</a></li>
+        <li><a href="" data-translate="footer_addresses">Addresses</a></li>
+        <li><a href="{% url 'main:returns' %}" data-translate="footer_returns">Returns</a></li>
+        <li><a href="{% url 'main:account_details' %}" data-translate="footer_account">Account details</a></li>
+        <li><a href="{% url 'main:faq' %}" data-translate="footer_faq">F.A.Q</a></li>
+      </ul>
+      <ul class="footer-grid-text-4">
+        <h3 data-translate="footer_delivery">Delivery</h3>
+        <li><a href="" data-translate="footer_orders">Orders</a></li>
+        <li><a href="" data-translate="footer_return">Return</a></li>
+        <li><a href="" data-translate="footer_free_delivery">Free Delivery</a></li>
+      </ul>
+      <p class="footer-grid-copyright" data-translate="footer_copyright"> © Copyright f Store 2025. Website crated by
+        Nikita</p>
+      <div class="footer-grid-payment">
+        <img src="{% static 'deps/svg/payment.svg' %}" alt="">
       </div>
-      <div class="search-contact-section">
-        <p class="address" data-translate="address">60 Fremont Ave. Hamden, CT 06514</p>
-        <div class="search-div">
-          <div class="dropdown-section">
-            <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search"><span data-translate="all_categories">All Categories</span> <img src="{% static 'deps/svg/chevron-down.svg' %}" alt=""></button>
-            <ul id='dropdowncontent' class="dropdown-content">
-              {% for category in categories %}
-                <li>
-                  <a class="" href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-          
-          <form role="search" action="{% url 'catalog:search' %}" method="get">
-            <input class="search-input-field" type="search" name="q" data-translate="search_placeholder" placeholder="Search product..." aria-label="Search" /><button class="search-submit-button" type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
-          </form>
-        </div>
-        <p class="phone"><img src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
-      </div>
-      <nav>
-        <ul class="home-ul">
-          <li><img src="{% static 'deps/svg/Cabinet.svg' %}" alt=""><a href="{% url 'main:index' %}"><h2>Furniture Store</h2></a></li>
-        </ul>
-        <ul class="navigation-ul">
-          <li><a class="nav-home" href="{% url 'main:index' %}" data-translate="nav_home">Home</a></li>
-          <li><a href="{% url 'catalog:index' 'all' %}" data-translate="nav_shop">Shop</a></li>
-          <li><a href="{% url 'main:about' %}" data-translate="nav_about">About Us</a></li>
-          <li><a href="{% url 'main:contact' %}" data-translate="nav_contact">Contact Us</a></li> 
-        </ul>
-        <ul class="user-ul">
-          {% if request.user.is_authenticated %}
-          <li><a href="{% url 'users:profile' %}"><img src="{% static 'deps/svg/user.svg' %}" alt="profile"></a></li>
-          <li><a href="{% url 'orders:create_order' %}"><img src="{% static 'deps/svg/shopping-cart.svg' %}" alt="orders"></a></li>
-          <li><a href="{% url 'users:logout' %}"><img src="{% static 'deps/svg/logout.svg' %}" alt="logout"></a></li>
-          {% else %}
-          <li><a href="{% url 'users:login' %}"><img src="{% static 'deps/svg/login.svg' %}" alt="login"></a></li>
-          <li class="placeholder"></li>
-          <li class="placeholder"></li>
-          {% endif %}
-          <li class="language-switcher-container">
-            <button id="language-switcher-btn" onclick="toggleLanguageDropdown()">EN</button>
-            <div id="language-dropdown">
-              <button onclick="setLanguageFromDropdown('en')">English</button>
-              <button onclick="setLanguageFromDropdown('ru')">Русский</button>
-            </div>
-          </li>
-        </ul>
-        <div class="burger" onclick="toggleMobileMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div id="mobileMenu" class="mobile-menu">
-          <div class="mobile-menu-language-section">
-            <button id="language-switcher-btn-mobile" onclick="toggleLanguageDropdown()">EN</button>
-            <div id="language-dropdown-mobile">
-              <button onclick="setLanguageFromDropdown('en')">English</button>
-              <button onclick="setLanguageFromDropdown('ru')">Русский</button>
-            </div>
-          </div>
-          <a href="{% url 'main:index' %}" data-translate="nav_home">Home</a>
-          <a href="{% url 'catalog:index' 'all' %}" data-translate="nav_shop">Shop</a>
-          <a href="{% url 'main:about' %}" data-translate="nav_about">About Us</a>
-          <a href="{% url 'main:contact' %}" data-translate="nav_contact">Contact Us</a>
-      
-          {% if request.user.is_authenticated %}
-          <a href="{% url 'users:profile' %}" data-translate="mobile_profile">Profile</a>
-          <a href="{% url 'orders:create_order' %}" data-translate="mobile_cart">Cart</a>
-          <a href="{% url 'users:logout' %}" data-translate="mobile_logout">Logout</a>
-          {% else %}
-          <a href="{% url 'users:login' %}" data-translate="mobile_login">Login</a>
-          {% endif %}
-        </div>
-      </nav>
-      <div id="navPlaceholder"></div>
-    </header>
-    <section>
-        <!-- Контент на странице -->
-        {% block content %}
+    </div>
+  </footer>
+  <script src="{% static 'deps/js/main.js' %}"></script>
+</body>
 
-        {% endblock %}
-    </section>
-    <!-- нижняя часть страницы -->
-    <footer>
-        <div class="footer-grid">
-          {% if user.is_subscribe == 0 or not request.user.is_authenticated %}
-            <h2 class="newsletter-footer-text" data-translate="newsletter_text">Subscribe to our newsletter<br>Don't miss latest news & promotions</h2>
-            <form action="{% url 'main:subscribe' %}" method="post"  class="newsletter-footer-form" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}">
-              {% csrf_token %}
-              <input name='email'class="newsletter-footer-input" type="email" data-translate="newsletter_placeholder" placeholder="Enter your email" required />
-              <button type='submit' name="subscribe" value='1' data-translate="newsletter_subscribe">Subscribe</button>
-            </form>
-          {% else %}
-          <h2 class="newsletter-footer-text" data-translate="newsletter_subscribed">You're subscribed!<br>You will receive our latest news & promotions</h2>
-          <form action="{% url 'main:subscribe' %}" method="post"  class="newsletter-footer-form" data-authenticated="true">
-            {% csrf_token %}
-
-            <button type='submit' name="subscribe" value='2' data-translate="newsletter_unsubscribe">Unsubscribe</button>
-          </form>
-          {% endif %}
-
-            <ul class="footer-grid-text-1">
-              <h3><img src="{% static 'deps/svg/Cabinet.svg' %}" alt="">Furniture Store</h3>
-              <li>60 Fremont Ave. Hamden, CT 06514</li>
-              <li><strong>Email:</strong>fStore@email.com</li>
-              <li><strong>Phone:</strong>(928) 630-9272</li>
-              <li class="footer-social-media-icons"><img src="{% static 'deps/svg/facebook.svg' %}" alt=""><img src="{% static 'deps/svg/X.svg' %}" alt=""><img src="{% static 'deps/svg/instagram.svg' %}" alt=""><img src="{% static 'deps/svg/youtube.svg' %}" alt=""></li>
-            </ul>
-            <ul class="footer-grid-text-2">
-              <h3 data-translate="footer_locations">Locations</h3>
-              <li><a href="{% url 'main:addresses' %}#showrooms" data-translate="footer_store_locations">Store Locations</a></li>
-              <li><a href="{% url 'main:addresses' %}#warehouses" data-translate="footer_warehouses">Warehouses</a></li>
-              <li><a href="{% url 'main:contact' %}" data-translate="footer_find_us">Find Us</a></li>
-              <li><a href="{% url 'main:addresses' %}" data-translate="footer_visit_us">Visit Us</a></li>
-            </ul>
-            <ul class="footer-grid-text-3">
-              <h3 data-translate="footer_service">Customer service</h3>
-              <li><a href="" data-translate="footer_orders">Orders</a></li>
-              <li><a href="" data-translate="footer_addresses">Addresses</a></li>
-              <li><a href="{% url 'main:returns' %}" data-translate="footer_returns">Returns</a></li>
-              <li><a href="{% url 'main:account_details' %}" data-translate="footer_account">Account details</a></li>
-              <li><a href="{% url 'main:faq' %}" data-translate="footer_faq">F.A.Q</a></li>
-            </ul>
-            <ul class="footer-grid-text-4">
-              <h3 data-translate="footer_delivery">Delivery</h3>
-              <li><a href="" data-translate="footer_orders">Orders</a></li>
-              <li><a href="" data-translate="footer_return">Return</a></li>
-              <li><a href="" data-translate="footer_free_delivery">Free Delivery</a></li>
-            </ul>
-            <p class="footer-grid-copyright" data-translate="footer_copyright"> © Copyright f Store 2025. Website crated by Nikita</p>
-            <div class="footer-grid-payment">
-              <img src="{% static 'deps/svg/payment.svg' %}" alt="">
-            </div>
-        </div>
-    </footer>
-    <script src="{% static 'deps/js/main.js' %}"></script>
-  </body>
 </html>

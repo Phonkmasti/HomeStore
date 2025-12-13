@@ -26,10 +26,27 @@ class Categories(models.Model):
 
 
 class Products(models.Model):
-    name = models.CharField(
+    name_en = models.CharField(
         max_length=150, 
-        unique=True, 
-        verbose_name='Name'
+        unique=True,
+        default='',
+        verbose_name='Engilsh Name'
+    )
+    name_ru = models.CharField(
+        max_length=100,
+        unique=True,
+        default='',
+        verbose_name='Russian Name'
+    )
+    description_en = models.TextField(
+        blank=True, 
+        null=True, 
+        verbose_name='English Description'
+    )
+    description_ru = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='Russian Description'
     )
     slug = models.SlugField(
         max_length=200, 
@@ -38,16 +55,17 @@ class Products(models.Model):
         null=True, 
         verbose_name='URL'
     )
-    description = models.TextField(
-        blank=True, 
-        null=True, 
-        verbose_name='Description'
-    )
     image = models.ImageField(
         upload_to='goods_images', 
         blank=True, 
         null=True, 
-        verbose_name='Image'
+        verbose_name='Image',
+    )
+    image_2 = models.ImageField(
+        upload_to='goods_images', 
+        blank=True, 
+        null=True, 
+        verbose_name='Image',
     )
     price = models.DecimalField(
         default=0.00, 
@@ -78,7 +96,7 @@ class Products(models.Model):
         ordering = ('id',)
 
     def __str__(self):
-        return f'{self.name} (Qty: {self.quantity})'
+        return f'{self.name_en} (Qty: {self.quantity})'
     
     def get_absolute_url(self):
         return reverse('catalog:product', kwargs={'product_slug': self.slug})
