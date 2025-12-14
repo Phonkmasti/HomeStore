@@ -18,6 +18,11 @@
     margin: 0;
     color: #000000;
     line-height: 1.2; }
+  .product-header .product-color {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: #999;
+    margin: 0.5rem 0 0 0;
+    font-weight: 500; }
   @media (max-width: 480px) {
     .product-header {
       margin-bottom: 2rem; } }

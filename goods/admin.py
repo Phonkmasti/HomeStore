@@ -1,11 +1,6 @@
-from calendar import c
 from django.contrib import admin
 
-# Register your models here.
-
-
-from goods.models import Categories
-from goods.models import Products
+from goods.models import Categories, Products, ProductImage
 
 
 # admin.site.register(Categories)
@@ -14,8 +9,16 @@ from goods.models import Products
 
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ['name']
+    prepopulated_fields = {"slug": ("name_en",)}
+    list_display = ['name_ru', 'name_en']
+    fields = ['name_ru', 'name_en', 'slug']
+
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+    fields = ['image', 'is_main', 'order']
+    ordering = ['order']
 
 
 @admin.register(Products)
@@ -30,12 +33,15 @@ class ProductsAdmin(admin.ModelAdmin):
     fields = [
         "name_ru",
         "name_en",
+        "primary_color_en",
+        "primary_color_ru",
         "description_ru",
         "description_en",
+        "details_ru",
+        "details_en",
         "category",
         "slug",
-        "image",
-        "image_2",
         ("price", "discount"),
         "quantity",
     ]
+    inlines = [ProductImageInline]

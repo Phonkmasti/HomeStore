@@ -26,7 +26,7 @@
             {% for cart in carts %}
               <div class="order-item">
                 <div class="item-info">
-                  <div class="item-name">{{ cart.product.name }}</div>
+                  <div class="item-name product-name" data-name-ru="{{ cart.product.name_ru }}" data-name-en="{{ cart.product.name_en }}">{{ cart.product.name_en }}</div>
                   <div class="item-quantity"><span data-translate="quantity">Quantity:</span> {{ cart.quantity }}</div>
                 </div>
                 <div class="item-total">${{ cart.product.sell_price }}</div>

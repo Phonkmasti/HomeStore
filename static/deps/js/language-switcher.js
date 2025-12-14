@@ -21,6 +21,36 @@ function setLanguage(lang) {
       }
     }
   });
+
+  document.querySelectorAll('[data-name-ru]').forEach(element => {
+    element.textContent = lang === 'ru' ? element.dataset.nameRu : element.dataset.nameEn;
+  });
+
+  document.querySelectorAll('.product-description-text').forEach(element => {
+    element.textContent = lang === 'ru' ? element.dataset.descRu : element.dataset.descEn;
+  });
+
+  document.querySelectorAll('[data-color-ru]').forEach(element => {
+    element.textContent = lang === 'ru' ? element.dataset.colorRu : element.dataset.colorEn;
+  });
+
+  document.querySelectorAll('[data-details-ru]').forEach(element => {
+    const detailsText = element.querySelector('.details-text');
+    if (detailsText) {
+      detailsText.textContent = lang === 'ru' ? element.dataset.detailsRu : element.dataset.detailsEn;
+    }
+  });
+
+  document.querySelectorAll('[data-details-title-ru]').forEach(element => {
+    const toggleText = element.querySelector('.toggle-text');
+    if (toggleText) {
+      toggleText.textContent = lang === 'ru' ? element.dataset.detailsTitleRu : element.dataset.detailsTitleEn;
+    }
+  });
+
+  document.querySelectorAll('.product-title').forEach(element => {
+    element.textContent = lang === 'ru' ? element.dataset.nameRu : element.dataset.nameEn;
+  });
   
   const languageBtn = document.getElementById('language-switcher-btn');
   if (languageBtn) {

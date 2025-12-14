@@ -149,8 +149,8 @@
                     {% for item in order.orderitem_set.all %}
                     <tr>
                       <td>
-                        <a href="{% url 'goods:product' item.product.slug %}" class="product-link">
-                          {{ item.product.name }}
+                        <a href="{% url 'goods:product' item.product.slug %}" class="product-link product-name" data-name-ru="{{ item.product.name_ru }}" data-name-en="{{ item.product.name_en }}">
+                          {{ item.product.name_en }}
                         </a>
                       </td>
                       <td class="text-center">{{ item.quantity }}</td>

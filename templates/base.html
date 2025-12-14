@@ -50,7 +50,7 @@
             {% tag_categories as categories %}
             {% for category in categories %}
             <li>
-              <a class="" href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a>
+              <a href="{% url 'catalog:index' category.slug %}" data-name-ru="{{ category.name_ru }}" data-name-en="{{ category.name_en }}"><span class="category-name product-name" data-name-ru="{{ category.name_ru }}" data-name-en="{{ category.name_en }}">{{ category.name_en }}</span></a>
             </li>
             {% endfor %}
           </ul>

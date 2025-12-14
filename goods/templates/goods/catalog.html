@@ -55,14 +55,14 @@
     <div class="col-lg-4 col-md-6 p-4">
         <div class="card ">
           {% if product.image %}
-            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" />
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name_en }}" />
             {% else %}
             <img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="..." />
 
           {% endif %}
           <div class="card-body bg-dark">
-            <a href="{% url "catalog:product" product.slug %}"><p class=" card-title text-white "> {{ product.name}}</p></a>
-            <p class="card-text text-truncate text-white">{{ product.description|truncatechars:35 }}</p>
+            <a href="{% url "catalog:product" product.slug %}"><p class=" card-title text-white product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}"> {{ product.name_en}}</p></a>
+            <p class="card-text text-truncate text-white product-description" data-desc-ru="{{ product.description_ru|truncatechars:35 }}" data-desc-en="{{ product.description_en|truncatechars:35 }}">{{ product.description_en|truncatechars:35 }}</p>
             <p class="product_id">id: {{ product.display_id }}</p>
             <div class="d-flex justify-content-between">
               {% if product.discount %}

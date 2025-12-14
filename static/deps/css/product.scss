@@ -29,6 +29,13 @@ $desktop: 1200px;
         line-height: 1.2;
     }
 
+    .product-color {
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+        color: #999;
+        margin: 0.5rem 0 0 0;
+        font-weight: 500;
+    }
+
     @media (max-width: $mobile) {
         margin-bottom: 2rem;
     }

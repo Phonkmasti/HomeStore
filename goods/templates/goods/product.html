@@ -10,18 +10,31 @@
   <main class="product-main">
     <div class="product-container">
       <div class="product-header">
-        <h1>{{ product.name }}</h1>
+        <h1 class="product-title" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h1>
+        <p class="product-color" data-color-ru="{{ product.primary_color_ru }}" data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
       </div>
 
       <div class="product-content">
         <div class="product-image-section">
-          <div class="product-image-wrapper">
-            {% if product.image %}
-              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
-            {% else %}
-              <img src="{% static 'deps/images/Not found image.png' %}" alt="Product Image" class="product-image">
-            {% endif %}
+          <div class="product-image-wrapper" id="imageWrapper">
+            {% with main_image=product.get_main_image %}
+              {% if main_image %}
+                <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-image main-image" id="mainImage" data-image-id="{{ main_image.id }}">
+              {% else %}
+                <img src="{% static 'deps/images/Not found image.png' %}" alt="Product Image" class="product-image main-image" id="mainImage">
+              {% endif %}
+            {% endwith %}
           </div>
+          
+          {% if product.images.count > 1 %}
+            <div class="image-gallery">
+              {% for image in product.images.all %}
+                <div class="gallery-item {% if image.is_main %}active{% endif %}" data-image-id="{{ image.id }}" data-image-url="{{ image.image.url }}">
+                  <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="gallery-thumbnail">
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
 
         <div class="product-info-section">
@@ -31,10 +44,22 @@
               <span class="id-value">{{ product.display_id }}</span>
             </div>
 
-            <div class="product-description">
+            <div class="product-description" data-desc-ru="{{ product.description_ru }}" data-desc-en="{{ product.description_en }}">
               <h2 class="description-title" data-translate="description">Description</h2>
-              <p class="description-text">{{ product.description }}</p>
+              <p class="description-text product-description-text" data-desc-ru="{{ product.description_ru }}" data-desc-en="{{ product.description_en }}">{{ product.description_en }}</p>
             </div>
+
+            {% if product.details_en or product.details_ru %}
+              <div class="product-details-section">
+                <button class="details-toggle details-toggle-btn" data-details-title-ru="Детали товара" data-details-title-en="Product details">
+                  <span class="toggle-icon">▼</span>
+                  <span class="toggle-text">Product details</span>
+                </button>
+                <div class="details-content" data-details-ru="{{ product.details_ru }}" data-details-en="{{ product.details_en }}">
+                  <div class="details-text">{{ product.details_en }}</div>
+                </div>
+              </div>
+            {% endif %}
 
             <div class="product-pricing">
               <div class="price-section">
@@ -89,4 +114,319 @@
       </div>
     </div>
   </main>
+
+<style>
+  .product-details-section {
+    border-top: 1px solid #e0e0e0;
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+
+  .details-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    text-align: left;
+  }
+
+  .details-toggle:hover {
+    background-color: #efefef;
+    border-color: #ccc;
+  }
+
+  .toggle-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+  }
+
+  .details-toggle.expanded .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .details-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 1rem;
+  }
+
+  .details-content.expanded {
+    max-height: 1000px;
+    padding: 1rem;
+  }
+
+  .details-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #555;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .product-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .main-image {
+    opacity: 1;
+  }
+
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 8px;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+
+  .gallery-item {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+  }
+
+  .gallery-item:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    border-color: #ddd;
+  }
+
+  .gallery-item.active {
+    opacity: 1;
+    border-color: #000;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-thumbnail {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { 
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to { 
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  .modal-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+
+  .modal-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .modal-nav.prev {
+    left: 20px;
+  }
+
+  .modal-nav.next {
+    right: 20px;
+  }
+</style>
+
+<div id="imageModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <img id="modalImage" src="" alt="Product Image" class="modal-image">
+    <button class="modal-nav prev">&lt;</button>
+    <button class="modal-nav next">&gt;</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mainImage = document.getElementById('mainImage');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalClose = document.querySelector('.modal-close');
+    const modalPrev = document.querySelector('.modal-nav.prev');
+    const modalNext = document.querySelector('.modal-nav.next');
+    const imageWrapper = document.getElementById('imageWrapper');
+    let currentImageIndex = 0;
+    let allImages = [];
+
+    if (galleryItems.length > 0) {
+      allImages = Array.from(galleryItems).map(item => ({
+        url: item.dataset.imageUrl,
+        id: item.dataset.imageId,
+        element: item
+      }));
+
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', function(e) {
+          const newImageUrl = this.dataset.imageUrl;
+          const imageId = this.dataset.imageId;
+
+          mainImage.style.opacity = '0';
+          
+          setTimeout(() => {
+            mainImage.src = newImageUrl;
+            mainImage.dataset.imageId = imageId;
+            mainImage.style.opacity = '1';
+          }, 250);
+
+          galleryItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+          currentImageIndex = index;
+        });
+      });
+
+      imageWrapper.addEventListener('click', function(e) {
+        if (e.target === mainImage) {
+          modalImage.src = mainImage.src;
+          currentImageIndex = allImages.findIndex(img => img.url === mainImage.src);
+          modal.classList.add('active');
+        }
+      });
+    }
+
+    modalClose.addEventListener('click', function() {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+
+    function updateModalImage(index) {
+      if (index >= 0 && index < allImages.length) {
+        currentImageIndex = index;
+        modalImage.src = allImages[index].url;
+      }
+    }
+
+    modalPrev.addEventListener('click', function(e) {
+      e.stopPropagation();
+      updateModalImage(currentImageIndex - 1);
+    });
+
+    modalNext.addEventListener('click', function(e) {
+      e.stopPropagation();
+      updateModalImage(currentImageIndex + 1);
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (modal.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') updateModalImage(currentImageIndex - 1);
+        if (e.key === 'ArrowRight') updateModalImage(currentImageIndex + 1);
+        if (e.key === 'Escape') modal.classList.remove('active');
+      }
+    });
+  });
+
+  const detailsToggle = document.querySelector('.details-toggle');
+  const detailsContent = document.querySelector('.details-content');
+
+  if (detailsToggle && detailsContent) {
+    detailsToggle.addEventListener('click', function() {
+      detailsToggle.classList.toggle('expanded');
+      detailsContent.classList.toggle('expanded');
+    });
+  }
+</script>
 {% endblock %}
