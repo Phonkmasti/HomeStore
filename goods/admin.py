@@ -24,7 +24,7 @@ class ProductImageInline(admin.TabularInline):
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name_en",)}
-    list_display = ["name_ru", "quantity", "price", "discount"]
+    list_display = ["name_en", "quantity", "price", "discount"]
     list_editable = [
         "discount",
     ]
