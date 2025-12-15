@@ -39,8 +39,13 @@
     .product-content {
       gap: 1.5rem; } }
 .product-image-section {
-  width: 100%; }
-
+  width: 100%;
+  position: sticky;
+  top: clamp(2rem, 5vw, 3rem);
+  height: fit-content; }
+  @media (max-width: 768px) {
+    .product-image-section {
+      position: static; } }
 .product-image-wrapper {
   width: 100%;
   aspect-ratio: 1;

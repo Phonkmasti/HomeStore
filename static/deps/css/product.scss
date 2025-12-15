@@ -59,6 +59,13 @@ $desktop: 1200px;
 
 .product-image-section {
     width: 100%;
+    position: sticky;
+    top: clamp(2rem, 5vw, 3rem);
+    height: fit-content;
+
+    @media (max-width: $tablet) {
+        position: static;
+    }
 }
 
 .product-image-wrapper {

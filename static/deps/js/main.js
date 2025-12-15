@@ -74,6 +74,48 @@ window.addEventListener('load', () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+  const categoryForm = document.getElementById('categoryForm');
+  if (categoryForm) {
+    const categoryRadios = categoryForm.querySelectorAll('input[name="category"]');
+    categoryRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        const selectedCategory = this.value;
+        const searchQuery = new URLSearchParams(window.location.search).get('q');
+        let url = `/catalog/${selectedCategory}/`;
+        if (searchQuery) {
+          url += `?q=${encodeURIComponent(searchQuery)}`;
+        }
+        window.location.href = url;
+      });
+    });
+  }
+
+  document.querySelectorAll('.product-image').forEach(imageContainer => {
+    const images = imageContainer.querySelectorAll('.product-img');
+    let currentImageIndex = 0;
+
+    if (images.length > 1) {
+      const imageLink = imageContainer.closest('.product-image-link');
+      if (imageLink) {
+        imageLink.style.cursor = 'pointer';
+      }
+      
+      imageContainer.addEventListener('mouseenter', function() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        images.forEach((img, index) => {
+          img.style.opacity = index === currentImageIndex ? '1' : '0';
+        });
+      });
+
+      imageContainer.addEventListener('mouseleave', function() {
+        currentImageIndex = 0;
+        images.forEach((img, index) => {
+          img.style.opacity = index === 0 ? '1' : '0';
+        });
+      });
+    }
+  });
+
   const newsletterForms = document.querySelectorAll('.newsletter-footer-form');
   newsletterForms.forEach(form => {
     form.addEventListener('submit', function() {

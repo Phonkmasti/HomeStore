@@ -331,6 +331,11 @@ main {
                 white-space: nowrap;
                 height: fit-content;
 
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                }
+
                 &:hover {
                     background-color: $bg-description-button-color;
                     color: white;

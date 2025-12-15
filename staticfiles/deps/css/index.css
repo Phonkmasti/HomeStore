@@ -230,6 +230,9 @@ main {
         transition: all 0.3s ease;
         white-space: nowrap;
         height: fit-content; }
+        main .categories-main-section .categories-header-wrapper .view-all-btn a {
+          text-decoration: none;
+          color: inherit; }
         main .categories-main-section .categories-header-wrapper .view-all-btn:hover {
           background-color: #947458;
           color: white;

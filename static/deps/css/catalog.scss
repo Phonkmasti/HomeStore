@@ -1,0 +1,550 @@
+@import 'variables';
+
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1200px;
+
+html {
+  font-family: $global-text-family;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section {
+  padding: clamp(1.5rem, 3vw, 3rem) 3%;
+  background-color: #ffffff;
+  min-height: calc(100vh - 25rem);
+
+  @media (max-width: $tablet) {
+    padding: clamp(1rem, 2vw, 2rem) 3%;
+  }
+
+  @media (max-width: $mobile) {
+    padding: clamp(1rem, 2vw, 1.5rem) 3%;
+  }
+}
+
+.catalog-container {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.catalog-sidebar {
+  width: clamp(220px, 22%, 320px);
+  flex-shrink: 0;
+  background-color: transparent;
+  padding: clamp(1.2rem, 2.5vw, 1.8rem);
+  border-radius: 4px;
+  height: fit-content;
+  position: sticky;
+  top: clamp(2rem, 5vw, 3rem);
+
+  @media (max-width: $tablet) {
+    width: 100%;
+    position: static;
+    top: auto;
+  }
+
+  @media (max-width: $mobile) {
+    padding: clamp(1rem, 2vw, 1.2rem);
+  }
+}
+
+.sidebar-section {
+  margin-bottom: clamp(1.5rem, 2vw, 2rem);
+  padding-bottom: clamp(1.5rem, 2vw, 2rem);
+  border-bottom: 1px solid $divider-color;
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.sidebar-title {
+  margin: 0 0 clamp(0.75rem, 1.5vw, 1rem) 0;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  font-weight: 600;
+  color: $primary-text-color;
+  font-family: $global-text-family;
+}
+
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.category-link {
+  padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.5rem, 1vw, 0.75rem);
+  text-decoration: none;
+  color: $secondary-text-color;
+  transition: all $transition-duration $transition-timing;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-family: $global-text-family;
+  border-left: 3px solid transparent;
+
+  &:hover {
+    background-color: rgba($header-global-bg-color, 0.1);
+    color: $header-global-bg-color;
+    padding-left: clamp(0.75rem, 1.5vw, 1rem);
+  }
+
+  &.active {
+    color: $header-global-bg-color;
+    font-weight: 600;
+    border-left-color: $header-global-bg-color;
+    background-color: rgba($header-global-bg-color, 0.05);
+  }
+}
+
+.filter-form-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  font-family: $global-text-family;
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      cursor: pointer;
+      accent-color: $header-global-bg-color;
+    }
+
+    input[type="radio"]:hover,
+    input[type="checkbox"]:hover {
+      filter: brightness(0.9);
+    }
+
+    label {
+      margin: 0;
+      font-size: clamp(0.85rem, 1.2vw, 1rem);
+      cursor: pointer;
+      color: $primary-text-color;
+      font-weight: 400;
+      transition: color $transition-duration $transition-timing;
+    }
+
+    &:hover label {
+      color: $header-global-bg-color;
+    }
+  }
+
+  .filter-title {
+    margin: clamp(0.75rem, 1.5vw, 1rem) 0 clamp(0.5rem, 1vw, 0.75rem) 0;
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    font-weight: 600;
+    color: $primary-text-color;
+  }
+
+  .filter-submit {
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    background-color: $header-global-bg-color;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: $global-text-family;
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    font-weight: 600;
+    transition: all $transition-duration $transition-timing;
+
+    &:hover {
+      background-color: darken($header-global-bg-color, 10%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.catalog-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-title {
+  color: $primary-text-color;
+  margin: 0 0 clamp(1.5rem, 2.5vw, 2rem) 0;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  font-family: $global-text-family;
+
+  @media (max-width: $tablet) {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+  }
+
+  @media (max-width: $mobile) {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  }
+}
+
+.not-found {
+  color: $primary-text-color;
+  margin: clamp(1.5rem, 2.5vw, 2rem) 0;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 500;
+  font-family: $global-text-family;
+
+  @media (max-width: $mobile) {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  }
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(240px, 30vw, 320px), 1fr));
+  gap: clamp(1.5rem, 2.5vw, 2rem);
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+
+  @media (max-width: $tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  @media (max-width: $mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+  }
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  transition: all $transition-duration $transition-timing;
+  cursor: pointer;
+  height: 100%;
+  overflow: hidden;
+
+  &:hover {
+  }
+
+  .product-body {
+    padding: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  @media (max-width: $mobile) {
+    padding: 0;
+  }
+}
+
+.product-image-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  height: clamp(200px, 30vw, 280px);
+  overflow: hidden;
+  background-color: transparent;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity $transition-duration $transition-timing;
+  }
+
+  img:first-child {
+    position: static;
+    opacity: 1;
+  }
+
+  @media (max-width: $tablet) {
+    height: clamp(180px, 25vw, 240px);
+  }
+
+  @media (max-width: $mobile) {
+    height: clamp(150px, 40vw, 180px);
+  }
+}
+
+.discount-badge {
+  position: absolute;
+  top: clamp(0.5rem, 1.2vw, 0.8rem);
+  right: clamp(0.5rem, 1.2vw, 0.8rem);
+  background-color: $header-global-bg-color;
+  color: white;
+  padding: clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.2vw, 0.9rem);
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+  z-index: 10;
+  font-family: $global-text-family;
+
+  @media (max-width: $mobile) {
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  }
+}
+
+.out-of-stock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  padding: clamp(0.6rem, 1.2vw, 1rem) clamp(1.2rem, 2.5vw, 1.5rem);
+  border-radius: 3px;
+  z-index: 10;
+  color: white;
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  font-family: $global-text-family;
+  text-align: center;
+
+  @media (max-width: $mobile) {
+    padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  }
+}
+
+.product-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover .product-name {
+    color: $header-global-bg-color;
+  }
+}
+
+.product-name {
+  margin: 0 0 clamp(0.4rem, 1vw, 0.7rem) 0;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 400;
+  color: $primary-text-color;
+  font-family: $global-text-family;
+  line-height: 1.35;
+  transition: color $transition-duration $transition-timing;
+
+  @media (max-width: $mobile) {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+  }
+}
+
+.product-color {
+  color: $secondary-text-color;
+  font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+  margin: 0 0 clamp(0.3rem, 0.7vw, 0.4rem) 0;
+  font-family: $global-text-family;
+
+  @media (max-width: $mobile) {
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+  }
+}
+
+.product-description {
+  color: $secondary-text-color;
+  font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+  margin: 0 0 clamp(0.4rem, 1vw, 0.6rem) 0;
+  line-height: 1.45;
+  font-family: $global-text-family;
+  flex-grow: 1;
+
+  @media (max-width: $mobile) {
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+  }
+}
+
+.product-id {
+  color: $secondary-text-color;
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  margin: 0 0 clamp(0.6rem, 1.2vw, 0.9rem) 0;
+  font-family: $global-text-family;
+
+  @media (max-width: $mobile) {
+    font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+  }
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  gap: clamp(0.6rem, 1.2vw, 1rem);
+  padding-top: clamp(0.6rem, 1.2vw, 1rem);
+  border-top: 1px solid $divider-color;
+
+  @media (max-width: $mobile) {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+.product-price {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.15rem, 0.6vw, 0.25rem);
+  min-width: fit-content;
+
+  .price-original {
+    color: $secondary-text-color;
+    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+    text-decoration: line-through;
+    font-family: $global-text-family;
+  }
+
+  .price-sale {
+    color: $header-global-bg-color;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 700;
+    font-family: $global-text-family;
+
+    @media (max-width: $mobile) {
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
+  }
+
+  .price {
+    color: $primary-text-color;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 700;
+    font-family: $global-text-family;
+
+    @media (max-width: $mobile) {
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
+  }
+}
+
+.add-to-cart {
+  padding: clamp(0.5rem, 1.2vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
+  background-color: $header-global-bg-color;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: $global-text-family;
+  font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+  font-weight: 600;
+  transition: all $transition-duration $transition-timing;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    background-color: darken($header-global-bg-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: $mobile) {
+    padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 1.5vw, 1rem);
+    font-size: clamp(0.75rem, 1.1vw, 0.85rem);
+    width: 100%;
+  }
+}
+
+.pagination-nav {
+  margin: clamp(2rem, 3vw, 3rem) auto;
+  padding-top: clamp(1.5rem, 2vw, 2rem);
+  border-top: 1px solid $divider-color;
+  text-align: center;
+  width: 100%;
+}
+
+.pagination-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  padding: 0;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  width: fit-content;
+}
+
+.pagination-item {
+  &.disabled {
+    .pagination-link {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}
+
+.pagination-link {
+  padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.75rem, 1.5vw, 1rem);
+  background-color: #ffffff;
+  color: $primary-text-color;
+  border: 1px solid $divider-color;
+  border-radius: 3px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all $transition-duration $transition-timing;
+  font-family: $global-text-family;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover:not(.disabled) {
+    background-color: $header-search-bg-color;
+    border-color: $header-global-bg-color;
+    color: $header-global-bg-color;
+    transform: translateY(-1px);
+  }
+
+  &.active {
+    background-color: $header-global-bg-color;
+    border-color: $header-global-bg-color;
+    color: white;
+    font-weight: 600;
+  }
+
+  @media (max-width: $mobile) {
+    padding: clamp(0.35rem, 0.8vw, 0.5rem) clamp(0.6rem, 1.2vw, 0.8rem);
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+  }
+}

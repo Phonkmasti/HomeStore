@@ -26,7 +26,15 @@ function setLanguage(lang) {
     element.textContent = lang === 'ru' ? element.dataset.nameRu : element.dataset.nameEn;
   });
 
+  document.querySelectorAll('.category-name[data-name-ru]').forEach(element => {
+    element.textContent = lang === 'ru' ? element.dataset.nameRu : element.dataset.nameEn;
+  });
+
   document.querySelectorAll('.product-description-text').forEach(element => {
+    element.textContent = lang === 'ru' ? element.dataset.descRu : element.dataset.descEn;
+  });
+
+  document.querySelectorAll('.product-description[data-desc-ru]').forEach(element => {
     element.textContent = lang === 'ru' ? element.dataset.descRu : element.dataset.descEn;
   });
 
