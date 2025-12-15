@@ -185,7 +185,8 @@
     "account_content": "Manage Your Account",
     "account_text": "Update your personal information and preferences",
     "faq_content": "Frequently Asked Questions",
-    "faq_text": "Find answers to common questions"
+    "faq_text": "Find answers to common questions",
+    "back_to_catalog": "Back to Catalog"
   },
   "ru": {
     "discount_banner": "Выходной день Распродажа 20% на все товары",
@@ -373,6 +374,7 @@
     "faq_text": "Найдите ответы на частые вопросы",
     "addresses_title_all": "Наши местоположения",
     "addresses_title_showrooms": "Местоположения магазинов",
-    "addresses_title_warehouses": "Местоположения складов"
+    "addresses_title_warehouses": "Местоположения складов",
+    "back_to_catalog": "Вернуться в каталог"
   }
 }

@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'variables.scss';
 
 $mobile: 480px;
 $tablet: 768px;
@@ -7,22 +7,90 @@ $desktop: 1200px;
 .product-main {
     width: 100%;
     min-height: 100vh;
-    padding: 3rem 2%;
+    padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
     background-color: $header-search-bg-color;
     font-family: $global-text-family;
+    position: relative;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    flex-wrap: wrap;
+
+    @media (max-width: $mobile) {
+        gap: 0.75rem;
+    }
+}
+
+.back-to-catalog {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background-color: $header-global-bg-color;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    font-weight: 600;
+    transition: all $transition-duration $transition-timing;
+    box-shadow: 0 4px 12px rgba(148, 116, 88, 0.2);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: clamp(0.5rem, 2vw, 2rem);
+
+    svg {
+        width: clamp(18px, 3vw, 24px);
+        height: clamp(18px, 3vw, 24px);
+    }
+
+    &:hover {
+        background-color: darken($header-global-bg-color, 8%);
+        transform: translateX(-4px);
+        box-shadow: 0 6px 16px rgba(148, 116, 88, 0.3);
+    }
+
+    @media (max-width: $tablet) {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: $mobile) {
+        gap: 0.4rem;
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+
+        span {
+            display: none;
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
 }
 
 .product-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
+    padding: 0 clamp(0.5rem, 2vw, 2rem);
+    width: 100%;
+
+    @media (max-width: $desktop) {
+        max-width: 100%;
+    }
 }
 
 .product-header {
     text-align: left;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 
     h1 {
-        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
         font-weight: 700;
         margin: 0;
         color: $primary-text-color;
@@ -44,27 +112,34 @@ $desktop: 1200px;
 .product-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
     align-items: flex-start;
 
     @media (max-width: $tablet) {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
     @media (max-width: $mobile) {
-        gap: 1.5rem;
+        gap: 1rem;
     }
 }
 
 .product-image-section {
     width: 100%;
-    position: sticky;
-    top: clamp(2rem, 5vw, 3rem);
+    position: static;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+
+    &.is-sticky {
+        position: sticky;
+        top: clamp(2rem, 5vw, 3rem);
+    }
 
     @media (max-width: $tablet) {
-        position: static;
+        position: static !important;
     }
 }
 
@@ -74,16 +149,23 @@ $desktop: 1200px;
     background-color: white;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $tablet) {
+        aspect-ratio: 1;
+    }
 
     @media (max-width: $mobile) {
-        aspect-ratio: 16 / 12;
+        aspect-ratio: 1;
     }
 }
 
 .product-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.3s ease;
 
     &:hover {
@@ -101,31 +183,31 @@ $desktop: 1200px;
 
 .product-card {
     background-color: white;
-    padding: 2.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: clamp(0.8rem, 2vw, 1.5rem);
 
     @media (max-width: $tablet) {
-        padding: 2rem;
-        gap: 1.5rem;
+        padding: clamp(1rem, 2.5vw, 1.5rem);
+        gap: clamp(0.8rem, 1.5vw, 1.2rem);
     }
 
     @media (max-width: $mobile) {
-        padding: 1.5rem;
-        gap: 1rem;
+        padding: clamp(0.75rem, 2vw, 1rem);
+        gap: clamp(0.6rem, 1.2vw, 0.8rem);
     }
 }
 
 .product-id {
     display: flex;
-    gap: 1rem;
-    padding-bottom: 1rem;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+    padding-bottom: clamp(0.75rem, 1.5vw, 1rem);
     border-bottom: 1px solid $divider-color;
 
     .id-label {
-        font-size: 0.9rem;
+        font-size: clamp(0.75rem, 1.2vw, 0.9rem);
         color: $secondary-text-color;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -133,7 +215,7 @@ $desktop: 1200px;
     }
 
     .id-value {
-        font-size: 0.9rem;
+        font-size: clamp(0.75rem, 1.2vw, 0.9rem);
         color: $primary-text-color;
         font-weight: 600;
         font-family: monospace;
@@ -141,74 +223,83 @@ $desktop: 1200px;
 
     @media (max-width: $mobile) {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
 }
 
 .product-description {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
 
     .description-title {
-        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        font-size: clamp(1rem, 2.2vw, 1.4rem);
         font-weight: 600;
         margin: 0;
         color: $primary-text-color;
     }
 
     .description-text {
-        font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-        line-height: 1.8;
+        font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+        line-height: 1.7;
         color: $primary-text-color;
         margin: 0;
+
+        @media (max-width: $mobile) {
+            line-height: 1.6;
+        }
     }
 }
 
 .product-pricing {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding: 1.5rem;
+    gap: clamp(1.5rem, 3vw, 2rem);
+    padding: clamp(1rem, 2.5vw, 1.5rem);
     background-color: #fafafa;
+
+    @media (max-width: $mobile) {
+        gap: clamp(1rem, 2vw, 1.5rem);
+        padding: clamp(0.75rem, 2vw, 1rem);
+    }
 }
 
 .price-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
 .price-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
 
     .price-label {
-        font-size: 0.95rem;
+        font-size: clamp(0.85rem, 1.3vw, 0.95rem);
         color: $secondary-text-color;
         font-weight: 600;
     }
 
     .price-original {
-        font-size: 1rem;
+        font-size: clamp(0.85rem, 1.3vw, 1rem);
         color: $secondary-text-color;
         text-decoration: line-through;
     }
 
     &.total-price {
-        padding-top: 1rem;
+        padding-top: clamp(0.75rem, 1.5vw, 1rem);
         border-top: 2px solid $divider-color;
-        font-size: 1.2rem;
 
         .price-label {
             font-weight: 700;
             color: $primary-text-color;
+            font-size: clamp(0.9rem, 1.4vw, 1.1rem);
         }
 
         .price-value {
-            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-size: clamp(1.3rem, 4vw, 2rem);
             font-weight: 700;
             color: $header-global-bg-color;
         }
@@ -217,6 +308,7 @@ $desktop: 1200px;
     @media (max-width: $mobile) {
         flex-direction: column;
         align-items: flex-start;
+        gap: clamp(0.5rem, 1vw, 0.75rem);
     }
 }
 
@@ -244,20 +336,21 @@ $desktop: 1200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    padding: 1.2rem 2rem;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+    padding: clamp(0.9rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2rem);
     background-color: $header-global-bg-color;
     color: white;
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
     font-weight: 700;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
     transition: all $transition-duration $transition-timing;
     font-family: $global-text-family;
 
     svg {
-        width: 20px;
-        height: 20px;
+        width: clamp(16px, 2vw, 20px);
+        height: clamp(16px, 2vw, 20px);
         stroke-width: 2;
     }
 
@@ -273,19 +366,20 @@ $desktop: 1200px;
     }
 
     @media (max-width: $mobile) {
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
+        padding: clamp(0.8rem, 1.5vw, 1rem) clamp(1.2rem, 2vw, 1.5rem);
+        font-size: clamp(0.85rem, 1.2vw, 1rem);
     }
 }
 
 .continue-shopping-btn {
     display: inline-block;
-    padding: 1.2rem 2rem;
+    padding: clamp(0.9rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2rem);
     background-color: transparent;
     color: $header-global-bg-color;
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
     font-weight: 700;
     border: 2px solid $header-global-bg-color;
+    border-radius: 4px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
@@ -303,29 +397,30 @@ $desktop: 1200px;
     }
 
     @media (max-width: $mobile) {
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
+        padding: clamp(0.8rem, 1.5vw, 1rem) clamp(1.2rem, 2vw, 1.5rem);
+        font-size: clamp(0.85rem, 1.2vw, 1rem);
     }
 }
 
 .stock-status {
-    padding: 1.2rem;
+    padding: clamp(0.9rem, 2vw, 1.2rem);
     text-align: center;
     border: 1px solid $divider-color;
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: clamp(0.4rem, 1vw, 0.5rem);
     align-items: center;
 
     .stock-badge {
         font-weight: 700;
-        font-size: 0.95rem;
+        font-size: clamp(0.8rem, 1.3vw, 0.95rem);
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
     .stock-count {
-        font-size: 0.85rem;
+        font-size: clamp(0.75rem, 1.1vw, 0.85rem);
         color: $secondary-text-color;
     }
 
@@ -348,6 +443,6 @@ $desktop: 1200px;
     }
 
     @media (max-width: $mobile) {
-        padding: 1rem;
+        padding: clamp(0.75rem, 1.5vw, 1rem);
     }
 }

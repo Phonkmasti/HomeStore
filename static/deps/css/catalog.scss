@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'variables.scss';
 
 $mobile: 480px;
 $tablet: 768px;
@@ -43,7 +43,7 @@ section {
 }
 
 .catalog-sidebar {
-  width: clamp(220px, 22%, 320px);
+  width: clamp(220px, 22vw, 320px);
   flex-shrink: 0;
   background-color: transparent;
   padding: clamp(1.2rem, 2.5vw, 1.8rem);
@@ -216,18 +216,24 @@ section {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(240px, 30vw, 320px), 1fr));
-  gap: clamp(1.5rem, 2.5vw, 2rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
   margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  width: 100%;
 
   @media (max-width: $tablet) {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: clamp(1rem, 2vw, 1.5rem);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
   }
 
   @media (max-width: $mobile) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(0.75rem, 1.5vw, 1rem);
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 3vw, 2rem);
   }
 }
 
@@ -242,6 +248,7 @@ section {
   cursor: pointer;
   height: 100%;
   overflow: hidden;
+  width: 100%;
 
   &:hover {
   }
@@ -267,7 +274,7 @@ section {
 .product-image {
   position: relative;
   width: 100%;
-  height: clamp(200px, 30vw, 280px);
+  aspect-ratio: 1;
   overflow: hidden;
   background-color: transparent;
   flex-shrink: 0;
@@ -288,12 +295,9 @@ section {
     opacity: 1;
   }
 
-  @media (max-width: $tablet) {
-    height: clamp(180px, 25vw, 240px);
-  }
-
   @media (max-width: $mobile) {
-    height: clamp(150px, 40vw, 180px);
+    aspect-ratio: auto;
+    height: 200px;
   }
 }
 
@@ -487,10 +491,11 @@ section {
 }
 
 .pagination-nav {
-  margin: clamp(2rem, 3vw, 3rem) auto;
+  display: flex;
+  justify-content: center;
+  margin: clamp(2rem, 3vw, 3rem) 0;
   padding-top: clamp(1.5rem, 2vw, 2rem);
   border-top: 1px solid $divider-color;
-  text-align: center;
   width: 100%;
 }
 
@@ -500,7 +505,7 @@ section {
   justify-content: center;
   gap: clamp(0.5rem, 1vw, 0.75rem);
   padding: 0;
-  margin: 0 auto;
+  margin: 0;
   flex-wrap: wrap;
   width: fit-content;
 }

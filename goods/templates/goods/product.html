@@ -10,7 +10,16 @@
   <main class="product-main">
     <div class="product-container">
       <div class="product-header">
-        <h1 class="product-title" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h1>
+        <div class="header-top">
+          <h1 class="product-title" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h1>
+          <a href="{% url 'catalog:index' 'all' %}" class="back-to-catalog" data-translate="back_to_catalog">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Catalog</span>
+          </a>
+        </div>
         <p class="product-color" data-color-ru="{{ product.primary_color_ru }}" data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
       </div>
 
@@ -51,11 +60,11 @@
 
             {% if product.details_en or product.details_ru %}
               <div class="product-details-section">
-                <button class="details-toggle details-toggle-btn" data-details-title-ru="Детали товара" data-details-title-en="Product details">
+                <button class="details-toggle details-toggle-btn expanded" data-details-title-ru="Детали товара" data-details-title-en="Product details">
                   <span class="toggle-icon">▼</span>
                   <span class="toggle-text">Product details</span>
                 </button>
-                <div class="details-content" data-details-ru="{{ product.details_ru }}" data-details-en="{{ product.details_en }}">
+                <div class="details-content expanded" data-details-ru="{{ product.details_ru }}" data-details-en="{{ product.details_en }}">
                   <div class="details-text">{{ product.details_en }}</div>
                 </div>
               </div>
@@ -196,21 +205,24 @@
 
   .image-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 8px;
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(80px, 18vw, 120px), 1fr));
+    gap: clamp(8px, 1.5vw, 12px);
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
   }
 
   .gallery-item {
     cursor: pointer;
     border: 2px solid transparent;
-    border-radius: 6px;
+    border-radius: 4px;
     overflow: hidden;
     transition: all 0.3s ease;
     opacity: 0.7;
+    aspect-ratio: 1;
   }
 
   .gallery-item:hover {
@@ -221,13 +233,13 @@
 
   .gallery-item.active {
     opacity: 1;
-    border-color: #000;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    border-color: $header-global-bg-color;
+    box-shadow: 0 0 8px rgba(148, 116, 88, 0.3);
   }
 
   .gallery-thumbnail {
     width: 100%;
-    height: 80px;
+    height: 100%;
     object-fit: cover;
     display: block;
   }
@@ -304,13 +316,14 @@
     top: 50%;
     transform: translateY(-50%);
     color: white;
-    font-size: 24px;
+    font-size: clamp(20px, 5vw, 28px);
     cursor: pointer;
     background: rgba(0, 0, 0, 0.5);
     border: none;
-    padding: 10px 15px;
+    padding: clamp(8px, 2vw, 12px) clamp(10px, 3vw, 18px);
     border-radius: 4px;
     transition: background 0.3s ease;
+    z-index: 1001;
   }
 
   .modal-nav:hover {
@@ -318,11 +331,29 @@
   }
 
   .modal-nav.prev {
-    left: 20px;
+    left: clamp(10px, 3vw, 25px);
   }
 
   .modal-nav.next {
-    right: 20px;
+    right: clamp(10px, 3vw, 25px);
+  }
+
+  @media (max-width: 480px) {
+    .modal-content {
+      max-width: 95%;
+      max-height: 85vh;
+    }
+
+    .modal-image {
+      max-height: 85vh;
+    }
+
+    .modal-close {
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      padding: 3px 10px;
+    }
   }
 </style>
 
@@ -427,6 +458,26 @@
       detailsToggle.classList.toggle('expanded');
       detailsContent.classList.toggle('expanded');
     });
+  }
+
+  const imageSection = document.querySelector('.product-image-section');
+  const navBar = document.querySelector('nav');
+
+  if (imageSection && navBar) {
+    function updateImageStickyState() {
+      const navRect = navBar.getBoundingClientRect();
+      const imageSectionRect = imageSection.getBoundingClientRect();
+      
+      if (navRect.bottom >= imageSectionRect.top) {
+        imageSection.classList.add('is-sticky');
+      } else {
+        imageSection.classList.remove('is-sticky');
+      }
+    }
+
+    window.addEventListener('scroll', updateImageStickyState);
+    window.addEventListener('resize', updateImageStickyState);
+    setTimeout(updateImageStickyState, 100);
   }
 </script>
 {% endblock %}
