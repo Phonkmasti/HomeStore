@@ -1,0 +1,74 @@
+[
+    {
+        "model": "goods.categories",
+        "pk": 1,
+        "fields": {
+            "name_en": "All Categories",
+            "name_ru": "Все категории",
+            "slug": "all"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 2,
+        "fields": {
+            "name_en": "Chairs",
+            "name_ru": "Стулья",
+            "slug": "chairs"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 3,
+        "fields": {
+            "name_en": "Beds",
+            "name_ru": "Кровати",
+            "slug": "beds"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 4,
+        "fields": {
+            "name_en": "Cabinets",
+            "name_ru": "Шкафы",
+            "slug": "cabinets"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 5,
+        "fields": {
+            "name_en": "Sofas",
+            "name_ru": "Диваны",
+            "slug": "sofas"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 6,
+        "fields": {
+            "name_en": "Decor",
+            "name_ru": "Декор",
+            "slug": "decor"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 8,
+        "fields": {
+            "name_en": "Armchairs",
+            "name_ru": "Кресла",
+            "slug": "armchairs"
+        }
+    },
+    {
+        "model": "goods.categories",
+        "pk": 10,
+        "fields": {
+            "name_en": "Tables",
+            "name_ru": "Столы",
+            "slug": "tables"
+        }
+    }
+]
