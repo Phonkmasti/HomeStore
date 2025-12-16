@@ -17,9 +17,9 @@ A furniture e-commerce shop built with Django. Started as a learning project, bu
 
 ## ✨ What's Inside
 
-- 🔍 Product catalog with search & filters (still cooking)
+- 🔍 Product catalog with search & filters
 - 🔐 User accounts (register, login, logout)
-- 🛒 Shopping cart & checkout (in progress)
+- 🛒 Shopping cart & checkout
 - 📦 Order management
 - 👤 User dashboard with order history
 - 🌍 English & Russian support
