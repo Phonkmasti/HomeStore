@@ -34,14 +34,18 @@
        {% url "catalog:index" slug_url %}
       {% endif %}" method="get" id="filterForm" class="filter-form-sidebar">
         <div class="filter-group">
-          <input type="checkbox" name="on_sale" id="flexCheckDefault" value="on" {% if request.GET.on_sale == "on" %}checked{% endif %} />
-          
-          {% if request.GET.q %}
-          <input type="hidden" name="q" value="{{ request.GET.q}}" />
-          {% endif %}
-
-          <label for="flexCheckDefault" data-translate="catalog_on_sale">Товары по акции</label>
+          <input type="checkbox" name="on_sale" id="flexCheckSale" value="on" {% if request.GET.on_sale == "on" %}checked{% endif %} />
+          <label for="flexCheckSale" data-translate="catalog_on_sale">Товары по акции</label>
         </div>
+        
+        <div class="filter-group">
+          <input type="checkbox" name="bestseller" id="flexCheckBestseller" value="on" {% if request.GET.bestseller == "on" %}checked{% endif %} />
+          <label for="flexCheckBestseller" data-translate="catalog_bestsellers">Бестселлеры</label>
+        </div>
+
+        {% if request.GET.q %}
+        <input type="hidden" name="q" value="{{ request.GET.q}}" />
+        {% endif %}
         <p class="filter-title" data-translate="catalog_sort">Сортировать:</p>
         <div class="filter-group">
           <input type="radio" name="order_by" id="flexRadioDefault1" value="default"
@@ -87,9 +91,14 @@
               <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
             {% endif %}
           {% endfor %}
-          {% if product.discount %}
-            <span class="discount-badge">-{{ product.discount }}%</span>
-          {% endif %}
+            {% if product.discount %}
+              <span class="discount-badge">-{{ product.discount }}%</span>
+            {% elif product.is_new %}
+              <span class="new-badge">NEW</span>
+            {% endif %}
+            {% if product.bestseller %}
+            <span class="bestseller-badge">BESTSELLER</span>
+            {% endif %}
           {% if product.quantity <= 0 %}
             <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
           {% endif %}

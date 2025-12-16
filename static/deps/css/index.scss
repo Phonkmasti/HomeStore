@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import 'variables';
 
 $mobile: 480px;
 $tablet: 768px;
@@ -25,10 +25,19 @@ main {
         background-repeat: no-repeat;
         background-attachment: fixed;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        gap: clamp(1rem, 3vw, 3rem);
         padding: clamp(1rem, 2vw, 3rem);
+
+        .header-content-wrapper {
+            width: 100%;
+            max-width: 1500px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: clamp(1rem, 3vw, 3rem);
+            padding: 0 clamp(1rem, 2vw, 3rem);
+        }
 
         .description-header-div {
             display: flex;
@@ -145,10 +154,12 @@ main {
     
 
         @media (max-width: 1400px) {
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 4rem;
+            .header-content-wrapper {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 4rem;
+            }
 
             .description-header-div {
                 width: 90%;
@@ -173,13 +184,16 @@ main {
         }
 
         @media (max-width: $tablet) {
-            flex-direction: column;
+            .header-content-wrapper {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 4rem;
+            }
+
             min-height: auto;
             height: auto;
-            justify-content: flex-start;
-            align-items: center;
             padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 2vw, 2rem);
-            gap: 4rem;
 
             .description-header-div {
                 width: 90%;
@@ -236,7 +250,11 @@ main {
 
         @media (max-width: $mobile) {
             padding: clamp(1rem, 2vw, 1.5rem);
-            gap: 1.5rem;
+
+            .header-content-wrapper {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
 
             .description-header-div {
                 .description-text {
@@ -302,14 +320,14 @@ main {
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        max-width: 1500px;
+        margin: 0 auto;
 
         .categories-header-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 1500px;
-            margin: 0 auto;
             gap: 2rem;
 
             h2 {
@@ -350,8 +368,6 @@ main {
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             width: 100%;
-            max-width: 1500px;
-            margin: 0 auto;
             align-items: start;
 
             .category-card {
@@ -514,6 +530,119 @@ main {
                             font-size: 0.75rem;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    .bestseller-section {
+        width: 100%;
+        padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 2vw, 3rem);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 1500px;
+        margin: 0 auto;
+
+        .bestsellers-header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 2rem;
+
+            h2 {
+                font-size: clamp(1.75rem, 4vw, 3rem);
+                font-weight: 700;
+                margin: 0;
+                flex: 1;
+            }
+
+            .view-all-btn {
+                padding: 0.75rem 1.75rem;
+                border: 2px solid $bg-description-button-color;
+                background-color: transparent;
+                color: $categories-primary-color;
+                font-size: clamp(0.9rem, 1.2vw, 1rem);
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+                height: fit-content;
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                }
+
+                &:hover {
+                    background-color: $bg-description-button-color;
+                    color: white;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                    transform: translateY(-2px);
+                }
+            }
+        }
+
+        .bestseller-products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+            width: 100%;
+            align-items: start;
+
+            @media (max-width: $tablet) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+
+            @media (max-width: 640px) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
+            }
+
+            @media (max-width: $mobile) {
+                grid-template-columns: 1fr;
+                gap: clamp(1.5rem, 3vw, 2rem);
+            }
+        }
+
+        @media (max-width: $tablet) {
+            padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2vw, 2rem);
+
+            .bestsellers-header-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+
+                h2 {
+                    font-size: clamp(1.5rem, 3vw, 2rem);
+                }
+
+                .view-all-btn {
+                    width: 100%;
+                    padding: 0.7rem 1.5rem;
+                }
+            }
+        }
+
+        @media (max-width: $mobile) {
+            padding: 1.2rem 1rem;
+            gap: 1.2rem;
+
+            .bestsellers-header-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+
+                h2 {
+                    font-size: clamp(1.3rem, 5vw, 1.75rem);
+                }
+
+                .view-all-btn {
+                    width: 100%;
+                    padding: 0.6rem 1.2rem;
+                    font-size: 0.85rem;
                 }
             }
         }

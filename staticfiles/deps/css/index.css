@@ -15,10 +15,17 @@ main {
     background-repeat: no-repeat;
     background-attachment: fixed;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    gap: clamp(1rem, 3vw, 3rem);
     padding: clamp(1rem, 2vw, 3rem); }
+    main .header-main-section .header-content-wrapper {
+      width: 100%;
+      max-width: 1500px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 3rem);
+      padding: 0 clamp(1rem, 2vw, 3rem); }
     main .header-main-section .description-header-div {
       display: flex;
       flex-direction: column;
@@ -100,32 +107,33 @@ main {
         main .header-main-section .photocollage-header-div img:hover {
           transform: scale(1.02); }
     @media (max-width: 1400px) {
-      main .header-main-section {
+      main .header-main-section .header-content-wrapper {
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         gap: 4rem; }
-        main .header-main-section .description-header-div {
-          width: 90%;
-          max-width: 700px;
-          text-align: center;
-          justify-content: flex-start;
-          min-height: auto; }
-        main .header-main-section .photocollage-header-div {
-          width: clamp(300px, 80%, 600px);
-          height: auto; } }
+      main .header-main-section .description-header-div {
+        width: 90%;
+        max-width: 700px;
+        text-align: center;
+        justify-content: flex-start;
+        min-height: auto; }
+      main .header-main-section .photocollage-header-div {
+        width: clamp(300px, 80%, 600px);
+        height: auto; } }
     @media (min-width: 1401px) {
       main .header-main-section .description-header-div .description-buttons {
         justify-content: flex-start; } }
     @media (max-width: 768px) {
       main .header-main-section {
-        flex-direction: column;
         min-height: auto;
         height: auto;
-        justify-content: flex-start;
-        align-items: center;
-        padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 2vw, 2rem);
-        gap: 4rem; }
+        padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 2vw, 2rem); }
+        main .header-main-section .header-content-wrapper {
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 4rem; }
         main .header-main-section .description-header-div {
           width: 90%;
           max-width: 600px;
@@ -162,8 +170,10 @@ main {
             transform: scale(1.02); } }
     @media (max-width: 480px) {
       main .header-main-section {
-        padding: clamp(1rem, 2vw, 1.5rem);
-        gap: 1.5rem; }
+        padding: clamp(1rem, 2vw, 1.5rem); }
+        main .header-main-section .header-content-wrapper {
+          flex-direction: column;
+          gap: 1.5rem; }
         main .header-main-section .description-header-div .description-text {
           gap: 0.75rem;
           text-align: left;
@@ -205,14 +215,14 @@ main {
     padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 2vw, 3rem);
     display: flex;
     flex-direction: column;
-    gap: 2rem; }
+    gap: 2rem;
+    max-width: 1500px;
+    margin: 0 auto; }
     main .categories-main-section .categories-header-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      max-width: 1500px;
-      margin: 0 auto;
       gap: 2rem; }
       main .categories-main-section .categories-header-wrapper h2 {
         font-size: clamp(1.75rem, 4vw, 3rem);
@@ -243,8 +253,6 @@ main {
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 2rem;
       width: 100%;
-      max-width: 1500px;
-      margin: 0 auto;
       align-items: start; }
       main .categories-main-section .categories-grid .category-card {
         display: flex;
@@ -349,5 +357,87 @@ main {
                 font-weight: 500; }
               main .categories-main-section .categories-grid .category-card .category-info .product-count {
                 font-size: 0.75rem; } }
+  main .bestseller-section {
+    width: 100%;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 2vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1500px;
+    margin: 0 auto; }
+    main .bestseller-section .bestsellers-header-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 2rem; }
+      main .bestseller-section .bestsellers-header-wrapper h2 {
+        font-size: clamp(1.75rem, 4vw, 3rem);
+        font-weight: 700;
+        margin: 0;
+        flex: 1; }
+      main .bestseller-section .bestsellers-header-wrapper .view-all-btn {
+        padding: 0.75rem 1.75rem;
+        border: 2px solid #947458;
+        background-color: transparent;
+        color: #000000;
+        font-size: clamp(0.9rem, 1.2vw, 1rem);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        height: fit-content; }
+        main .bestseller-section .bestsellers-header-wrapper .view-all-btn a {
+          text-decoration: none;
+          color: inherit; }
+        main .bestseller-section .bestsellers-header-wrapper .view-all-btn:hover {
+          background-color: #947458;
+          color: white;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          transform: translateY(-2px); }
+    main .bestseller-section .bestseller-products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4rem;
+      width: 100%;
+      align-items: start; }
+      @media (max-width: 768px) {
+        main .bestseller-section .bestseller-products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 3rem; } }
+      @media (max-width: 640px) {
+        main .bestseller-section .bestseller-products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.5rem; } }
+      @media (max-width: 480px) {
+        main .bestseller-section .bestseller-products-grid {
+          grid-template-columns: 1fr;
+          gap: clamp(1.5rem, 3vw, 2rem); } }
+    @media (max-width: 768px) {
+      main .bestseller-section {
+        padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 2vw, 2rem); }
+        main .bestseller-section .bestsellers-header-wrapper {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 1rem; }
+          main .bestseller-section .bestsellers-header-wrapper h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem); }
+          main .bestseller-section .bestsellers-header-wrapper .view-all-btn {
+            width: 100%;
+            padding: 0.7rem 1.5rem; } }
+    @media (max-width: 480px) {
+      main .bestseller-section {
+        padding: 1.2rem 1rem;
+        gap: 1.2rem; }
+        main .bestseller-section .bestsellers-header-wrapper {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.8rem; }
+          main .bestseller-section .bestsellers-header-wrapper h2 {
+            font-size: clamp(1.3rem, 5vw, 1.75rem); }
+          main .bestseller-section .bestsellers-header-wrapper .view-all-btn {
+            width: 100%;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem; } }
 
 /*# sourceMappingURL=index.css.map */

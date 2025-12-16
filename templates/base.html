@@ -15,6 +15,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{% sass_src 'deps/css/base.scss' %}" />
+  <link rel="stylesheet" href="{% sass_src 'deps/css/notifications.scss' %}" />
   <link rel="stylesheet" href="{% static 'deps/css/css-normalize.css' %}" />
 
   {% block css %}
@@ -124,12 +125,10 @@
     </nav>
     <div id="navPlaceholder"></div>
   </header>
-  <section>
     <!-- Контент на странице -->
-    {% block content %}
+  {% block content %}
 
-    {% endblock %}
-  </section>
+  {% endblock %}
   <!-- нижняя часть страницы -->
   <footer>
     <div class="footer-grid">

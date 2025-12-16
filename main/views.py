@@ -1,9 +1,14 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-def index(request):
 
-    return render(request, 'main/index.html')
+from goods.models import Products
+def index(request):
+    goods = Products.objects.filter(bestseller=True).order_by('random_order')[:8]
+    context = {
+        'goods': goods
+    }
+    return render(request, 'main/index.html', context)
 
 
 def about(request):

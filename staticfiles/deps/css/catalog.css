@@ -4,20 +4,11 @@ html {
 * {
   box-sizing: border-box; }
 
-section {
-  padding: clamp(1.5rem, 3vw, 3rem) 3%;
-  background-color: #ffffff;
-  min-height: calc(100vh - 25rem); }
-  @media (max-width: 768px) {
-    section {
-      padding: clamp(1rem, 2vw, 2rem) 3%; } }
-  @media (max-width: 480px) {
-    section {
-      padding: clamp(1rem, 2vw, 1.5rem) 3%; } }
 .catalog-container {
   display: flex;
   gap: clamp(1.5rem, 3vw, 2.5rem);
-  width: 100%; }
+  width: 100%;
+  padding: clamp(1.5rem, 2vw, 2.5rem) 3%; }
   @media (max-width: 768px) {
     .catalog-container {
       flex-direction: column;
@@ -34,7 +25,7 @@ section {
   border-radius: 4px;
   height: fit-content;
   position: sticky;
-  top: clamp(2rem, 5vw, 3rem); }
+  top: clamp(5.5rem, 10vw, 6.5rem); }
   @media (max-width: 768px) {
     .catalog-sidebar {
       width: 100%;
@@ -223,21 +214,41 @@ section {
     .product-image {
       aspect-ratio: auto;
       height: 200px; } }
-.discount-badge {
+.discount-badge,
+.new-badge,
+.bestseller-badge {
   position: absolute;
-  top: clamp(0.5rem, 1.2vw, 0.8rem);
-  right: clamp(0.5rem, 1.2vw, 0.8rem);
-  background-color: #947458;
+  display: inline-block;
   color: white;
   padding: clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.2vw, 0.9rem);
   border-radius: 3px;
   font-weight: 700;
-  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
-  z-index: 10;
-  font-family: "Dm Sans", sans-serif; }
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  font-family: "Dm Sans", sans-serif;
+  white-space: nowrap;
+  text-align: center;
+  z-index: 10; }
   @media (max-width: 480px) {
-    .discount-badge {
-      font-size: clamp(0.7rem, 1.2vw, 0.85rem); } }
+    .discount-badge,
+    .new-badge,
+    .bestseller-badge {
+      font-size: clamp(0.65rem, 1vw, 0.75rem);
+      padding: clamp(0.3rem, 0.8vw, 0.4rem) clamp(0.5rem, 1vw, 0.7rem); } }
+.discount-badge {
+  background-color: #947458;
+  top: clamp(0.5rem, 1.2vw, 0.8rem);
+  right: clamp(0.5rem, 1.2vw, 0.8rem); }
+
+.new-badge {
+  background-color: #000;
+  top: clamp(0.5rem, 1.2vw, 0.8rem);
+  right: clamp(0.5rem, 1.2vw, 0.8rem); }
+
+.bestseller-badge {
+  background-color: #dc3545;
+  top: clamp(0.5rem, 1.2vw, 0.8rem);
+  left: clamp(0.5rem, 1.2vw, 0.8rem); }
+
 .out-of-stock {
   position: absolute;
   top: 50%;
@@ -347,7 +358,7 @@ section {
   background-color: #947458;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 6px;
   cursor: pointer;
   font-family: "Dm Sans", sans-serif;
   font-size: clamp(0.8rem, 1.3vw, 0.95rem);
@@ -357,9 +368,10 @@ section {
   .add-to-cart:hover:not(:disabled) {
     background-color: #745b45;
     transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18); }
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
   .add-to-cart:active:not(:disabled) {
-    transform: translateY(0); }
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); }
   .add-to-cart:disabled {
     opacity: 0.6;
     cursor: not-allowed; }

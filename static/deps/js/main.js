@@ -132,16 +132,68 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   }
 
+  function displayMessage(messageText, tags = 'success') {
+    const container = document.querySelector('.notifications-container');
+    if (!container) return;
+
+    const notificationClass = `notification notification-${tags}`;
+    const iconSvg = tags === 'success' 
+      ? '<polyline points="20 6 9 17 4 12"></polyline>'
+      : tags === 'error'
+      ? '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>'
+      : '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>';
+
+    const notificationHTML = `
+      <div id="notification" class="${notificationClass} show">
+        <div class="notification-content">
+          <svg class="notification-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            ${iconSvg}
+          </svg>
+          <span class="notification-text">${messageText}</span>
+        </div>
+        <button class="notification-close" aria-label="Close notification">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    `;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = notificationHTML;
+    const notification = tempDiv.firstElementChild;
+    container.appendChild(notification);
+
+    const closeButton = notification.querySelector('.notification-close');
+    const autoHideDelay = 5000;
+
+    function removeNotification() {
+      notification.classList.remove('show');
+      notification.classList.add('hide');
+      setTimeout(() => notification.remove(), 300);
+    }
+
+    if (closeButton) {
+      closeButton.addEventListener('click', removeNotification);
+    }
+    
+    setTimeout(removeNotification, autoHideDelay);
+  }
+
   document.querySelectorAll('.add-to-cart').forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
 
       const productId = this.getAttribute('data-product-id');
-      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
       
       const formData = new FormData();
       formData.append('product_id', productId);
-      formData.append('csrfmiddlewaretoken', csrfToken);
+      if (csrfToken) formData.append('csrfmiddlewaretoken', csrfToken);
+
+      const button = this;
+      button.disabled = true;
 
       fetch('/cart/cart_add/', {
         method: 'POST',
@@ -152,12 +204,23 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(response => response.json())
       .then(data => {
-        alert(data.message);
-        location.reload();
+        if (data.messages && data.messages.length > 0) {
+          data.messages.forEach(msg => {
+            let messageText = msg.text;
+            if (messageText.startsWith('msg_')) {
+              const currentLang = localStorage.getItem('language') || 'en';
+              const translations = window.translations?.[currentLang] || window.translations?.en || {};
+              messageText = translations[msg.text] || msg.text;
+            }
+            displayMessage(messageText, msg.tags || 'success');
+          });
+        }
+        button.disabled = false;
       })
       .catch(error => {
         console.error('Error:', error);
-        alert('Error adding to cart');
+        displayMessage('Error adding product to cart', 'error');
+        button.disabled = false;
       });
     });
   });

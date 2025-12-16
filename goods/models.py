@@ -85,6 +85,10 @@ class Products(models.Model):
         decimal_places=2, 
         verbose_name='Price'
     )
+    bestseller = models.BooleanField(
+        default=False,
+        verbose_name='Bestseller'
+    )
     discount = models.DecimalField(
         default=0.00, 
         max_digits=4, 
@@ -136,6 +140,7 @@ class Products(models.Model):
 
 
 class ProductImage(models.Model):
+
     product = models.ForeignKey(
         to=Products,
         on_delete=models.CASCADE,

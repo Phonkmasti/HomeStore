@@ -4,6 +4,8 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% sass_src 'deps/css/index.scss' %}" />
+<link rel="stylesheet" href="{% sass_src 'deps/css/catalog.scss' %}" />
+
 {% endblock %}
 
 {% block content %}
@@ -11,31 +13,33 @@
 
 <main>
   <div class="header-main-section">
-    <div class="description-header-div">
-      <div class="description-text">
-        <span class="description-span">Furniture</span>
-        <h1 data-translate="index_heading">Where Traditional Meets Modern</h1>
-        <p data-translate="index_description">Discover timeless elegance and contemporary comfort with our exquisite
-          furniture collection. Transform your living spaces into havens of style and functionality.</p>
+    <div class="header-content-wrapper">
+      <div class="description-header-div">
+        <div class="description-text">
+          <span class="description-span">Furniture</span>
+          <h1 data-translate="index_heading">Where Traditional Meets Modern</h1>
+          <p data-translate="index_description">Discover timeless elegance and contemporary comfort with our exquisite
+            furniture collection. Transform your living spaces into havens of style and functionality.</p>
+        </div>
+        <div class="description-buttons">
+          <button class="button-shopnow"><a href="{% url "catalog:index" 'all' %}" data-translate="index_shop_now">Shop
+              now</a></button>
+          <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn
+              more</a></button>
+        </div>
       </div>
-      <div class="description-buttons">
-        <button class="button-shopnow"><a href="{% url "catalog:index" 'all' %}" data-translate="index_shop_now">Shop
-            now</a></button>
-        <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn
-            more</a></button>
+      <div class="photocollage-header-div">
+        <img src="{% static 'deps/images/goods/Card.png' %}" alt="Living room with furniture">
+        <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="Modern chair">
+        <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="Wooden table">
+        <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="Contemporary sofa">
       </div>
-    </div>
-    <div class="photocollage-header-div">
-      <img src="{% static 'deps/images/goods/Card.png' %}" alt="Living room with furniture">
-      <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="Modern chair">
-      <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="Wooden table">
-      <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="Contemporary sofa">
     </div>
   </div>
   <div class="categories-main-section">
     <div class="categories-header-wrapper">
-      <h2>Shop by Categories</h2>
-      <button class="view-all-btn"><a href="{% url "catalog:index" 'all' %}">View all</a></button>
+      <h2 data-translate="categories_heading">Shop by Categories</h2>
+      <button class="view-all-btn"><a href="{% url "catalog:index" 'all' %}" data-translate="view_all">View all</a></button>
     </div>
     <div class="categories-grid">
       <a href="{% url "catalog:index" "tables" %}" class="category-card">
@@ -43,8 +47,8 @@
           <img src="{% static 'deps/images/goods/table-photo.png' %}" alt="Tables">
         </div>
         <div class="category-info">
-          <h3 class="category-name">Tables</h3>
-          <p class="product-count">24 products</p>
+          <h3 class="category-name" data-translate="category_tables">Tables</h3>
+          <p class="product-count"><span>24</span> <span data-translate="products">products</span></p>
         </div>
       </a>
       <a href="{% url "catalog:index" "chairs" %}" class="category-card">
@@ -52,8 +56,8 @@
           <img src="{% static 'deps/images/goods/chair-photo.png' %}" alt="Chairs">
         </div>
         <div class="category-info">
-          <h3 class="category-name">Chairs</h3>
-          <p class="product-count">28 products</p>
+          <h3 class="category-name" data-translate="category_chairs">Chairs</h3>
+          <p class="product-count"><span>28</span> <span data-translate="products">products</span></p>
         </div>
       </a>
       <a href="{% url "catalog:index" "armchairs" %}" class="category-card">
@@ -61,8 +65,8 @@
           <img src="{% static 'deps/images/goods/armchair-photo.png' %}" alt="Armchairs">
         </div>
         <div class="category-info">
-          <h3 class="category-name">Armchairs</h3>
-          <p class="product-count">16 products</p>
+          <h3 class="category-name" data-translate="category_armchairs">Armchairs</h3>
+          <p class="product-count"><span>16</span> <span data-translate="products">products</span></p>
         </div>
       </a>
       <a href="{% url "catalog:index" "sofas" %}" class="category-card">
@@ -70,12 +74,77 @@
           <img src="{% static 'deps/images/goods/sofa-photo.png' %}" alt="Sofas">
         </div>
         <div class="category-info">
-          <h3 class="category-name">Sofas</h3>
-          <p class="product-count">42 products</p>
+          <h3 class="category-name" data-translate="category_sofas">Sofas</h3>
+          <p class="product-count"><span>42</span> <span data-translate="products">products</span></p>
         </div>
       </a>
     </div>
   </div>
-</main>
+  <div class='bestseller-section'>
+    <div class="bestsellers-header-wrapper">
+      <h2 data-translate="bestsellers_heading">Bestsellers</h2>
+      <button class="view-all-btn"><a href="{% url "catalog:index" 'all' %}" data-translate="view_all">View all</a></button>
+    </div>
 
+    <div class="bestseller-products-grid">
+    {% for product in goods %}
+    <div class="product-card">
+      <a href="{% url "catalog:product" product.slug %}" class="product-image-link">
+        <div class="product-image" data-product-id="{{ product.id }}">
+          {% with main_image=product.get_main_image %}
+            {% if main_image %}
+              <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+            {% else %}
+              <img src="{% static "deps/images/Not found image.png" %}" alt="No image" class="product-img" />
+            {% endif %}
+          {% endwith %}
+          {% for image in product.images.all %}
+            {% if not image.is_main %}
+              <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+            {% endif %}
+          {% endfor %}
+            {% if product.discount %}
+              <span class="discount-badge">-{{ product.discount }}%</span>
+            {% elif product.is_new %}
+              <span class="new-badge">NEW</span>
+            {% endif %}
+            {% if product.bestseller %}
+              <span class="bestseller-badge">BESTSELLER</span>
+            {% endif %}
+          {% if product.quantity <= 0 %}
+            <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
+          {% endif %}
+        </div>
+      </a>
+      
+      <div class="product-body">
+        <a href="{% url "catalog:product" product.slug %}" class="product-link">
+          <h5 class="product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h5>
+        </a>
+        
+        <p class="product-color" data-color-ru="{{ product.primary_color_ru }}" data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
+        
+        <p class="product-description" data-desc-ru="{{ product.description_ru|truncatechars:50 }}" data-desc-en="{{ product.description_en|truncatechars:50 }}">{{ product.description_en|truncatechars:50 }}</p>
+
+        <p class="product-id">ID: {{ product.display_id }}</p>
+        
+        <div class="product-footer">
+          <div class="product-price">
+            {% if product.discount %}
+              <span class="price-original">${{ product.price }}</span>
+              <span class="price-sale">${{ product.sell_price }}</span>
+            {% else %}
+              <span class="price">${{ product.price }}</span>
+            {% endif %}
+          </div>
+          
+          <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %}disabled{% endif %}>
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
 {% endblock %}

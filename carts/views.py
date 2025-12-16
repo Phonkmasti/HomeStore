@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.contrib import messages
 
 from carts.models import Cart
 from carts.utils import get_user_carts
@@ -35,13 +36,15 @@ def cart_add(request):
             Cart.objects.create(session_key=request.session.session_key,
                                 product=product, quantity=1)
 
+    messages.success(request, 'msg_product_added')
+
     user_cart = get_user_carts(request)
     cart_items_html = render_to_string(
         "carts/includes/included_cart.html", {"carts": user_cart}, request=request
     )
 
     response_data = {
-        'message': 'Product added to cart',
+        'messages': [{'text': str(m), 'tags': m.tags} for m in messages.get_messages(request)],
         'cart_items_html': cart_items_html,
     }
 
@@ -57,13 +60,15 @@ def cart_change(request):
     cart.quantity = quantity
     cart.save()
 
+    messages.success(request, 'msg_quantity_updated')
+
     cart = get_user_carts(request)
     cart_items_html = render_to_string(
         "carts/includes/included_cart.html", {"carts": cart}, request=request
     )
 
     response_data = {
-        'message': f'Product quantity updated to {quantity}',
+        'messages': [{'text': str(m), 'tags': m.tags} for m in messages.get_messages(request)],
         'cart_items_html': cart_items_html,
         'quantity': quantity,
     }

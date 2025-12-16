@@ -126,5 +126,83 @@
     .notification-close {
       width: 28px;
       height: 28px; } }
+.notification-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10000;
+  animation: slideInUp 0.3s ease;
+  pointer-events: auto;
+  max-width: 400px; }
+  @media (max-width: 768px) {
+    .notification-toast {
+      bottom: 1.5rem;
+      right: 1.5rem;
+      max-width: 90%; } }
+  @media (max-width: 480px) {
+    .notification-toast {
+      bottom: 1rem;
+      right: 1rem;
+      left: 1rem;
+      max-width: none; } }
+  .notification-toast.hide {
+    animation: slideOutDown 0.3s ease forwards; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); }
+  to {
+    opacity: 1;
+    transform: translateY(0); } }
+
+@keyframes slideOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0); }
+  to {
+    opacity: 0;
+    transform: translateY(20px); } }
+
+.notification-toast-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  font-size: 0.95rem;
+  font-weight: 500; }
+
+.notification-toast.notification-success .notification-toast-content {
+  border-left: 4px solid #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  color: #065f46; }
+
+.notification-toast.notification-error .notification-toast-content {
+  border-left: 4px solid #ef4444;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  color: #7f1d1d; }
+
+.notification-toast-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: inherit;
+  transition: all 0.2s ease;
+  flex-shrink: 0; }
+  .notification-toast-close:hover {
+    transform: scale(1.15); }
+  .notification-toast-close:active {
+    transform: scale(0.95); }
 
 /*# sourceMappingURL=notifications.css.map */
