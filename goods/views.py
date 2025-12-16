@@ -13,7 +13,7 @@ def catalog(request, category_slug=None):
     query = request.GET.get("q", None)
 
     if category_slug == "all":
-        goods = Products.objects.all()
+        goods = Products.objects.all().order_by('random_order')
     elif query:
         goods = q_search(query)
     else:

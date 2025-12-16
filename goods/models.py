@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+import random
 
 
 class Categories(models.Model):
@@ -42,12 +43,12 @@ class Products(models.Model):
         verbose_name='Russian Name'
     )
     primary_color_en = models.CharField(
-        max_length=30,
+        max_length=60,
         default='',
         verbose_name='English Primary Color'
     )
     primary_color_ru = models.CharField(
-        max_length=30,
+        max_length=60,
         default='',
         verbose_name='Russian Primary Color'
     )
@@ -99,6 +100,11 @@ class Products(models.Model):
         on_delete=models.CASCADE, 
         verbose_name='Category'
     )
+    random_order = models.FloatField(
+        default=0,
+        verbose_name='Random Order',
+        db_index=True
+    )
     class Meta:
         db_table = 'product'
         verbose_name = 'Product'
@@ -107,6 +113,11 @@ class Products(models.Model):
 
     def __str__(self):
         return f'{self.name_en} (Qty: {self.quantity})'
+    
+    def save(self, *args, **kwargs):
+        if not self.random_order:
+            self.random_order = random.random()
+        super().save(*args, **kwargs)
     
     def get_absolute_url(self):
         return reverse('catalog:product', kwargs={'product_slug': self.slug})
