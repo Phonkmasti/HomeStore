@@ -1,5 +1,6 @@
 @import 'variables.scss';
 
+$small-mobile: 320px;
 $mobile: 480px;
 $tablet: 768px;
 $desktop: 1200px;
@@ -11,6 +12,10 @@ $desktop: 1200px;
     background-color: $header-search-bg-color;
     font-family: $global-text-family;
     position: relative;
+
+    @media (max-width: $small-mobile) {
+        padding: 0.75rem 0.5rem;
+    }
 }
 
 .header-top {
@@ -71,6 +76,12 @@ $desktop: 1200px;
             width: 20px;
             height: 20px;
         }
+    }
+
+    @media (max-width: $small-mobile) {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+        margin-right: 0.5rem;
     }
 }
 
@@ -197,6 +208,11 @@ $desktop: 1200px;
     @media (max-width: $mobile) {
         padding: clamp(0.75rem, 2vw, 1rem);
         gap: clamp(0.6rem, 1.2vw, 0.8rem);
+    }
+
+    @media (max-width: $small-mobile) {
+        padding: 0.6rem;
+        gap: 0.5rem;
     }
 }
 

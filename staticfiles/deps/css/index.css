@@ -210,6 +210,36 @@ main {
             height: auto;
             aspect-ratio: 1 / 1;
             object-fit: cover; } }
+    @media (max-width: 320px) {
+      main .header-main-section {
+        padding: 0.75rem 0.5rem; }
+        main .header-main-section .header-content-wrapper {
+          gap: 1rem; }
+        main .header-main-section .description-header-div {
+          width: 100%; }
+          main .header-main-section .description-header-div .description-text {
+            gap: 0.5rem; }
+            main .header-main-section .description-header-div .description-text .description-span {
+              font-size: 0.8rem;
+              padding: 0.4rem 0.8rem; }
+            main .header-main-section .description-header-div .description-text h1 {
+              font-size: clamp(1.5rem, 4vw, 2rem);
+              font-weight: 600; }
+            main .header-main-section .description-header-div .description-text p {
+              font-size: clamp(0.85rem, 1.8vw, 1rem);
+              line-height: 1.4; }
+          main .header-main-section .description-header-div .description-buttons {
+            margin-top: 0.75rem;
+            gap: 0.5rem; }
+            main .header-main-section .description-header-div .description-buttons button {
+              padding: 0.4rem 0.8rem;
+              font-size: 0.7rem;
+              flex: 1;
+              min-width: 100px; }
+        main .header-main-section .photocollage-header-div {
+          width: 85%;
+          gap: 8px;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); } }
   main .categories-main-section {
     width: 100%;
     padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 2vw, 3rem);

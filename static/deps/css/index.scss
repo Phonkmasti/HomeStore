@@ -1,5 +1,6 @@
 @import 'variables';
 
+$small-mobile: 320px;
 $mobile: 480px;
 $tablet: 768px;
 $desktop: 1200px;
@@ -310,6 +311,55 @@ main {
                     aspect-ratio: 1 / 1;
                     object-fit: cover;
                 }
+            }
+        }
+
+        @media (max-width: $small-mobile) {
+            padding: 0.75rem 0.5rem;
+
+            .header-content-wrapper {
+                gap: 1rem;
+            }
+
+            .description-header-div {
+                width: 100%;
+
+                .description-text {
+                    gap: 0.5rem;
+
+                    .description-span {
+                        font-size: 0.8rem;
+                        padding: 0.4rem 0.8rem;
+                    }
+
+                    h1 {
+                        font-size: clamp(1.5rem, 4vw, 2rem);
+                        font-weight: 600;
+                    }
+
+                    p {
+                        font-size: clamp(0.85rem, 1.8vw, 1rem);
+                        line-height: 1.4;
+                    }
+                }
+
+                .description-buttons {
+                    margin-top: 0.75rem;
+                    gap: 0.5rem;
+
+                    button {
+                        padding: 0.4rem 0.8rem;
+                        font-size: 0.7rem;
+                        flex: 1;
+                        min-width: 100px;
+                    }
+                }
+            }
+
+            .photocollage-header-div {
+                width: 85%;
+                gap: 8px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             }
         }
         
