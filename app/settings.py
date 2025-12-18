@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     'sass_processor',
-    
+    'captcha',
+
     'main',
     'goods',
     'users',

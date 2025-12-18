@@ -33,7 +33,14 @@
               <input type="password" class="form-control" name='password' id="id_password" data-translate="login_password_placeholder" placeholder="Введите ваш пароль" required />
             </div>
 
-            <button type="submit" class="btn btn-dark btn-block" data-translate="login_button">Войти</button>
+            <button type="submit" class="btn btn-dark btn-block" data-translate="login_button">Войти</button><br>
+            <div>
+              <label class="captcha" data-translate="captcha">Please confirm that you are not a robot</label>
+              {% if form.captcha.errors %}
+                <p data-translate="captcha_error">Invalid captcha. Please try again.</p>
+              {% endif %}
+              {{ form.captcha }}
+            </div>
           </form>
           <div class="mt-3">
             <a href="#" data-translate="login_forgot">Забыли пароль?</a> | <a href="{% url 'users:registration' %}" data-translate="login_register">Создать аккаунт</a>

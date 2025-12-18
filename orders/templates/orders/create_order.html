@@ -163,6 +163,13 @@
             </div>
 
             <button type="submit" class="checkout-button" data-translate="complete_order">Complete Order</button>
+            <div>
+              <label class="captcha" data-translate="captcha">Please confirm that you are not a robot</label>
+              {% if form.captcha.errors %}
+                <p data-translate="captcha_error">Invalid captcha. Please try again.</p>
+              {% endif %}
+              {{ form.captcha }}
+            </div>
           </form>
         </div>
       </div>

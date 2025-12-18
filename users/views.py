@@ -78,6 +78,7 @@ def profile(request):
             user.image = None
             user.save()
             return redirect('users:profile')
+        
         if form.is_valid():
             form.save()
             messages.success(request, 'msg_profile_updated')
@@ -99,6 +100,7 @@ def profile(request):
 
     context = {'title': 'My Profile', 'form': form, 'orders': orders}
     return render(request, 'users/profile.html', context)
+
 
 
 def users_cart(request):
