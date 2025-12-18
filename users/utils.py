@@ -1,6 +1,4 @@
-from django.core.mail import send_mail
 from carts.models import Cart
-from app import settings
 
 def get_user_carts(request):
     if request.user.is_authenticated:
