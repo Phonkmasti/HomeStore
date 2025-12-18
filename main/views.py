@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from goods.models import Products
-from main.utils import subscribe_to_newsletter
 def index(request):
     goods = Products.objects.filter(bestseller=True).order_by('random_order')[:8]
     context = {
@@ -77,7 +76,6 @@ def subscribe(request):
         if request.POST.get('subscribe') == '1':
             user.is_subscribe = True
             user.save()
-            subscribe_to_newsletter(user)
             messages.success(request, f'msg_subscribed')
             return render(request, 'main/index.html')
         elif request.POST.get('subscribe') == '2':
