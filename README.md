@@ -24,6 +24,7 @@ A furniture e-commerce shop built with Django. Started as a learning project, bu
 - 👤 User dashboard with order history
 - 🌍 English & Russian support
 - 📱 Mobile-friendly design
+- ✉️ Sending email (partially done)
 
 ---
 
@@ -116,7 +117,6 @@ FurnitureStore/
 
 ## 💡 Development Tips
 
-- Debug toolbar is already included
 - SASS compiles automatically
 - Admin panel at `/admin/`
 - This project is constantly evolving
@@ -126,7 +126,6 @@ FurnitureStore/
 ## 📝 Quick Notes
 
 - Make sure PostgreSQL is actually running before you start
-- For production, set `DEBUG = False` in `settings.py`
 - Collect static files: `python manage.py collectstatic`
 
 ---
@@ -135,7 +134,7 @@ FurnitureStore/
 
 Planned features:
 
-- 📧 **Email Notifications** — Django emails for newsletters & confirmations
+- 📧 **Email Notifications** — Django emails for newsletters & confirmation ( partially done )
 - ☎️ **Phone Verification** — SMS confirmation on signup
 - 🤖 **CAPTCHA** — Protection against bots
 - ⚡ **Redis Caching** — Speed things up
