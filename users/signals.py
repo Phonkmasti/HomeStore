@@ -93,7 +93,7 @@ The Furniture Store Team
                         </div>
                         
                         <div style="text-align: center; margin: 30px 0;">
-                            <a href="http://127.0.0.1:8000" style="display: inline-block; background-color: #947458; color: white; text-decoration: none; padding: 14px 40px; border-radius: 0; font-weight: 600; font-size: 15px; letter-spacing: 0.5px;">
+                            <a href="http://127.0.0.1:8000/catalog/all/" style="display: inline-block; background-color: #947458; color: white; text-decoration: none; padding: 14px 40px; border-radius: 0; font-weight: 600; font-size: 15px; letter-spacing: 0.5px;">
                                 START SHOPPING
                             </a>
                         </div>

@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load sass_tags %}
 {% load static %}
 
@@ -39,112 +39,150 @@
   <div class="categories-main-section">
     <div class="categories-header-wrapper">
       <h2 data-translate="categories_heading">Shop by Categories</h2>
-      <button class="view-all-btn"><a href="{% url "catalog:index" 'all' %}" data-translate="view_all">View all</a></button>
+      <button class="view-all-btn"><a href="{% url "catalog:index" 'all' %}" data-translate="view_all">View
+          all</a></button>
     </div>
     <div class="categories-grid">
-      <a href="{% url "catalog:index" "tables" %}" class="category-card">
-        <div class="category-image">
-          <img src="{% static 'deps/images/goods/table-photo.png' %}" alt="Tables">
-        </div>
-        <div class="category-info">
-          <h3 class="category-name" data-translate="category_tables">Tables</h3>
-          <p class="product-count"><span>24</span> <span data-translate="products">products</span></p>
-        </div>
-      </a>
-      <a href="{% url "catalog:index" "chairs" %}" class="category-card">
-        <div class="category-image">
-          <img src="{% static 'deps/images/goods/chair-photo.png' %}" alt="Chairs">
-        </div>
-        <div class="category-info">
-          <h3 class="category-name" data-translate="category_chairs">Chairs</h3>
-          <p class="product-count"><span>28</span> <span data-translate="products">products</span></p>
-        </div>
-      </a>
-      <a href="{% url "catalog:index" "armchairs" %}" class="category-card">
-        <div class="category-image">
-          <img src="{% static 'deps/images/goods/armchair-photo.png' %}" alt="Armchairs">
-        </div>
-        <div class="category-info">
-          <h3 class="category-name" data-translate="category_armchairs">Armchairs</h3>
-          <p class="product-count"><span>16</span> <span data-translate="products">products</span></p>
-        </div>
-      </a>
-      <a href="{% url "catalog:index" "sofas" %}" class="category-card">
-        <div class="category-image">
-          <img src="{% static 'deps/images/goods/sofa-photo.png' %}" alt="Sofas">
-        </div>
-        <div class="category-info">
-          <h3 class="category-name" data-translate="category_sofas">Sofas</h3>
-          <p class="product-count"><span>42</span> <span data-translate="products">products</span></p>
-        </div>
-      </a>
+      <div>
+        <a href="{% url "catalog:index" "tables" %}" class="category-card">
+          <div class="category-image">
+            <img src="{% static 'deps/images/goods/table-photo.png' %}" alt="Tables">
+          </div>
+          <div class="category-info">
+            <h3 class="category-name" data-translate="category_tables">Tables</h3>
+            <p class="product-count"><span>24</span> <span data-translate="products">products</span></p>
+          </div>
+        </a>
+        <a href="{% url "catalog:index" "chairs" %}" class="category-card">
+          <div class="category-image">
+            <img src="{% static 'deps/images/goods/chair-photo.png' %}" alt="Chairs">
+          </div>
+          <div class="category-info">
+            <h3 class="category-name" data-translate="category_chairs">Chairs</h3>
+            <p class="product-count"><span>28</span> <span data-translate="products">products</span></p>
+          </div>
+        </a>
+      </div>
+      <div>
+        <a href="{% url "catalog:index" "armchairs" %}" class="category-card">
+          <div class="category-image">
+            <img src="{% static 'deps/images/goods/armchair-photo.png' %}" alt="Armchairs">
+          </div>
+          <div class="category-info">
+            <h3 class="category-name" data-translate="category_armchairs">Armchairs</h3>
+            <p class="product-count"><span>16</span> <span data-translate="products">products</span></p>
+          </div>
+        </a>
+        <a href="{% url "catalog:index" "sofas" %}" class="category-card">
+          <div class="category-image">
+            <img src="{% static 'deps/images/goods/sofa-photo.png' %}" alt="Sofas">
+          </div>
+          <div class="category-info">
+            <h3 class="category-name" data-translate="category_sofas">Sofas</h3>
+            <p class="product-count"><span>42</span> <span data-translate="products">products</span></p>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
   <div class='bestseller-section'>
     <div class="bestsellers-header-wrapper">
       <h2 data-translate="bestsellers_heading">Bestsellers</h2>
-      <button class="view-all-btn"><a href="{% url "catalog:index" 'all' %}" data-translate="view_all">View all</a></button>
+      <form action="" >
+        <button name="bestseller" class="view-all-btn"><a href="{% url "catalog:index" 'all' %}" data-translate="view_all">View
+            all</a></button>
+      </form>
     </div>
 
     <div class="bestseller-products-grid">
-    {% for product in goods %}
-    <div class="product-card">
-      <a href="{% url "catalog:product" product.slug %}" class="product-image-link">
-        <div class="product-image" data-product-id="{{ product.id }}">
-          {% with main_image=product.get_main_image %}
+      {% for product in goods %}
+      <div class="product-card">
+        <a href="{% url "catalog:product" product.slug %}" class="product-image-link">
+          <div class="product-image" data-product-id="{{ product.id }}">
+            {% with main_image=product.get_main_image %}
             {% if main_image %}
-              <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+            <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
             {% else %}
-              <img src="{% static "deps/images/Not found image.png" %}" alt="No image" class="product-img" />
+            <img src="{% static "deps/images/Not found image.png" %}" alt="No image" class="product-img" />
             {% endif %}
-          {% endwith %}
-          {% for image in product.images.all %}
+            {% endwith %}
+            {% for image in product.images.all %}
             {% if not image.is_main %}
-              <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+            <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
             {% endif %}
-          {% endfor %}
+            {% endfor %}
             {% if product.discount %}
-              <span class="discount-badge">-{{ product.discount }}%</span>
+            <span class="discount-badge">-{{ product.discount }}%</span>
             {% elif product.is_new %}
-              <span class="new-badge">NEW</span>
+            <span class="new-badge">NEW</span>
             {% endif %}
             {% if product.bestseller %}
-              <span class="bestseller-badge">BESTSELLER</span>
+            <span class="bestseller-badge">BESTSELLER</span>
             {% endif %}
-          {% if product.quantity <= 0 %}
-            <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
+            {% if product.quantity <= 0 %} <div class="out-of-stock" data-translate="out_of_stock">Out of Stock
+          </div>
           {% endif %}
-        </div>
+      </div>
       </a>
-      
+
       <div class="product-body">
         <a href="{% url "catalog:product" product.slug %}" class="product-link">
-          <h5 class="product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h5>
+          <h5 class="product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{
+            product.name_en }}</h5>
         </a>
-        
-        <p class="product-color" data-color-ru="{{ product.primary_color_ru }}" data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
-        
-        <p class="product-description" data-desc-ru="{{ product.description_ru|truncatechars:50 }}" data-desc-en="{{ product.description_en|truncatechars:50 }}">{{ product.description_en|truncatechars:50 }}</p>
+
+        <p class="product-color" data-color-ru="{{ product.primary_color_ru }}"
+          data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
+
+        <p class="product-description" data-desc-ru="{{ product.description_ru|truncatechars:50 }}"
+          data-desc-en="{{ product.description_en|truncatechars:50 }}">{{ product.description_en|truncatechars:50 }}</p>
 
         <p class="product-id">ID: {{ product.display_id }}</p>
-        
+
         <div class="product-footer">
           <div class="product-price">
             {% if product.discount %}
-              <span class="price-original">${{ product.price }}</span>
-              <span class="price-sale">${{ product.sell_price }}</span>
+            <span class="price-original">${{ product.price }}</span>
+            <span class="price-sale">${{ product.sell_price }}</span>
             {% else %}
-              <span class="price">${{ product.price }}</span>
+            <span class="price">${{ product.price }}</span>
             {% endif %}
           </div>
-          
-          <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %}disabled{% endif %}>
+
+          <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %} disabled {% endif %}>
             Add to Cart
           </button>
         </div>
       </div>
     </div>
     {% endfor %}
+  </div>
+  <div class="reviews-section">
+    <div class="reviews-container">
+      <div class="reviews-text">
+        <div class="reviews-content-wrapper">
+          <h2 data-translate="reviews_heading">Customer Reviews</h2>
+          <div class="reviews-rating">
+            <img class="reviews-stars-image" src="{% static 'deps/svg/reviews-stars.svg' %}" alt="5 stars rating">
+          </div>
+          <p class="reviews-text-body">
+            "Absolutely stunning furniture! The quality is exceptional and the pieces transformed my living room completely. 
+            The attention to detail is remarkable, and everything arrived in perfect condition. Customer service was incredibly 
+            helpful throughout the entire process. I couldn't be happier with my purchase and would definitely recommend Furniture 
+            Store to anyone looking for premium, stylish pieces for their home."
+          </p>
+          <div class="reviews-customer-container">
+            <img class="reviews-customer-avatar" src="{% static 'deps/images/baseavatar.jpg' %}" alt="Customer avatar">
+            <div class="reviews-customer-info">
+              <p class="customer-name">Devon Simpson</p>
+              <span class="customer-title">Customer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-image">
+      </div>
+    </div>
   </div>
 </main>
 {% endblock %}
