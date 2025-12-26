@@ -22,17 +22,44 @@
             furniture collection. Transform your living spaces into havens of style and functionality.</p>
         </div>
         <div class="description-buttons">
-          <button class="button-shopnow"><a href="{% url "catalog:index" 'all' %}" data-translate="index_shop_now">Shop
-              now</a></button>
-          <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn
-              more</a></button>
+          <button class="button-shopnow"><a href="{% url "catalog:index" 'all' %}" data-translate="index_shop_now">Shop now</a></button>
+          <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn more</a></button>
         </div>
       </div>
       <div class="photocollage-header-div">
-        <img src="{% static 'deps/images/goods/Card.png' %}" alt="Living room with furniture">
-        <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="Modern chair">
-        <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="Wooden table">
-        <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="Contemporary sofa">
+        {% for product in products %}
+        <div class="product-card">
+          <a href="{% url "catalog:product" product.slug %}" class="product-image-link">
+            <div class="product-image" data-product-id="{{ product.id }}">
+              {% with main_image=product.get_main_image %}
+              {% if main_image %}
+              <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+              {% else %}
+              <img src="{% static " deps/images/Not found image.png" %}" alt="No image" class="product-img" />
+              {% endif %}
+              {% endwith %}
+              {% for image in product.images.all %}
+              {% if not image.is_main %}
+              <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+              {% endif %}
+              {% endfor %}
+              {% if product.discount %}
+              <span class="discount-badge">-{{ product.discount }}%</span>
+              {% elif product.is_new %}
+              <span class="new-badge">NEW</span>
+              {% endif %}
+              {% if product.bestseller %}
+              <span class="bestseller-badge">BESTSELLER</span>
+              {% endif %}
+              {% if product.quantity <= 0 %} <div class="out-of-stock" data-translate="out_of_stock">Out of Stock
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <img src="{% static 'deps/images/goods/Card.png' %}" alt="">
+        <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="">
+        <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="">
+        <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="">
       </div>
     </div>
   </div>
@@ -88,10 +115,8 @@
   <div class='bestseller-section'>
     <div class="bestsellers-header-wrapper">
       <h2 data-translate="bestsellers_heading">Bestsellers</h2>
-      <form action="" >
-        <button name="bestseller" class="view-all-btn"><a href="{% url "catalog:index" 'all' %}" data-translate="view_all">View
-            all</a></button>
-      </form>
+
+      <button name="bestseller" class="view-all-btn"><a href="catalog/all/?bestseller=on&order_by=default" data-translate="view_all">View all</a></button>
     </div>
 
     <div class="bestseller-products-grid">
@@ -149,9 +174,7 @@
             {% endif %}
           </div>
 
-          <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %} disabled {% endif %}>
-            Add to Cart
-          </button>
+          <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %} disabled {% endif %}> Add to Cart </button>
         </div>
       </div>
     </div>
@@ -166,9 +189,12 @@
             <img class="reviews-stars-image" src="{% static 'deps/svg/reviews-stars.svg' %}" alt="5 stars rating">
           </div>
           <p class="reviews-text-body">
-            "Absolutely stunning furniture! The quality is exceptional and the pieces transformed my living room completely. 
-            The attention to detail is remarkable, and everything arrived in perfect condition. Customer service was incredibly 
-            helpful throughout the entire process. I couldn't be happier with my purchase and would definitely recommend Furniture 
+            "Absolutely stunning furniture! The quality is exceptional and the pieces transformed my living room
+            completely.
+            The attention to detail is remarkable, and everything arrived in perfect condition. Customer service was
+            incredibly
+            helpful throughout the entire process. I couldn't be happier with my purchase and would definitely recommend
+            Furniture
             Store to anyone looking for premium, stylish pieces for their home."
           </p>
           <div class="reviews-customer-container">
@@ -182,6 +208,15 @@
       </div>
       <div class="reviews-image">
       </div>
+    </div>
+  </div>
+  <div class="svg-bar">
+    <div class="svg-container">
+      <img src="{% static 'deps/svg/armchair-logo.svg' %}" alt="">
+      <img src="{% static 'deps/svg/chair-logo.svg' %}" alt="">
+      <img src="{% static 'deps/svg/armchair-2-logo.svg' %}" alt="">
+      <img src="{% static 'deps/svg/armchair-3-logo.svg' %}" alt="">
+      <img src="{% static 'deps/svg/sofa-logo.svg' %}" alt="">
     </div>
   </div>
 </main>

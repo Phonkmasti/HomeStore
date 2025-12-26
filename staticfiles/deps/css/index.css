@@ -97,8 +97,6 @@ main {
       aspect-ratio: 1 / 1;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
       main .header-main-section .photocollage-header-div img {
-        width: 100%;
-        height: 100%;
         object-fit: cover;
         display: block;
         margin: 0;
@@ -115,12 +113,10 @@ main {
       main .header-main-section .description-header-div {
         width: 90%;
         max-width: 700px;
-        text-align: center;
         justify-content: flex-start;
         min-height: auto; }
       main .header-main-section .photocollage-header-div {
-        width: clamp(300px, 80%, 600px);
-        height: auto; } }
+        display: none; } }
     @media (min-width: 1401px) {
       main .header-main-section .description-header-div .description-buttons {
         justify-content: flex-start; } }
@@ -154,20 +150,7 @@ main {
               padding: clamp(0.6rem, 1.2vw, 0.8rem) clamp(1.5rem, 2.5vw, 2rem);
               font-size: clamp(0.9rem, 1vw, 1rem); }
         main .header-main-section .photocollage-header-div {
-          width: 70%;
-          margin: 0 auto;
-          height: auto;
-          gap: 12px;
-          display: flex;
-          flex-direction: column; }
-          main .header-main-section .photocollage-header-div img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            transition: transform 0.3s ease; }
-          main .header-main-section .photocollage-header-div img:hover {
-            transform: scale(1.02); } }
+          display: none; } }
     @media (max-width: 480px) {
       main .header-main-section {
         padding: clamp(1rem, 2vw, 1.5rem); }
@@ -198,18 +181,7 @@ main {
             main .header-main-section .description-header-div .description-buttons button:hover {
               transform: translateY(-2px); }
         main .header-main-section .photocollage-header-div {
-          width: 65%;
-          margin: 0 auto;
-          height: auto;
-          gap: 10px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-          display: flex;
-          flex-direction: column; }
-          main .header-main-section .photocollage-header-div img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 1 / 1;
-            object-fit: cover; } }
+          display: none; } }
     @media (max-width: 320px) {
       main .header-main-section {
         padding: 0.75rem 0.5rem; }
@@ -237,9 +209,7 @@ main {
               flex: 1;
               min-width: 100px; }
         main .header-main-section .photocollage-header-div {
-          width: 85%;
-          gap: 8px;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); } }
+          display: none; } }
   main .categories-main-section {
     width: 100%;
     padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 2vw, 3rem);
@@ -389,10 +359,8 @@ main {
                 font-size: 0.75rem; } }
   main .bestseller-section {
     width: 100%;
-    padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 2vw, 3rem);
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     max-width: 1500px;
     margin: 0 auto; }
     main .bestseller-section .bestsellers-header-wrapper {
@@ -400,7 +368,8 @@ main {
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      gap: 2rem; }
+      gap: 2rem;
+      padding-left: 0.5em; }
       main .bestseller-section .bestsellers-header-wrapper h2 {
         font-size: clamp(1.75rem, 4vw, 3rem);
         font-weight: 700;
@@ -416,7 +385,8 @@ main {
         cursor: pointer;
         transition: all 0.3s ease;
         white-space: nowrap;
-        height: fit-content; }
+        height: fit-content;
+        margin-right: 0.5em; }
         main .bestseller-section .bestsellers-header-wrapper .view-all-btn a {
           text-decoration: none;
           color: inherit; }
@@ -494,7 +464,7 @@ main {
           display: flex;
           flex-direction: column;
           gap: clamp(1rem, 2vw, 1.5rem);
-          width: 100%; }
+          width: 70%; }
           main .reviews-section .reviews-container .reviews-text .reviews-content-wrapper h2 {
             font-size: clamp(1.5rem, 3vw, 2.2rem);
             font-weight: 700;
@@ -581,7 +551,7 @@ main {
           main .reviews-section .reviews-container .reviews-image {
             width: 100%;
             max-width: 400px;
-            height: auto;
+            height: 100%;
             aspect-ratio: 1 / 1; } }
     @media (max-width: 480px) {
       main .reviews-section {
@@ -598,7 +568,7 @@ main {
               main .reviews-section .reviews-container .reviews-text .reviews-content-wrapper .reviews-rating .reviews-stars-image {
                 max-width: 120px; }
             main .reviews-section .reviews-container .reviews-text .reviews-content-wrapper .reviews-text-body {
-              font-size: clamp(0.85rem, 1vw, 0.95rem);
+              font-size: clamp(0.85rem, 0.4vw, 0.75rem);
               padding-left: 1rem;
               line-height: 1.6; }
             main .reviews-section .reviews-container .reviews-text .reviews-content-wrapper .reviews-customer-container {
@@ -645,5 +615,19 @@ main {
                 font-size: 0.8rem; }
           main .reviews-section .reviews-container .reviews-image {
             height: 250px; } }
+  main .svg-bar {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    main .svg-bar .svg-container {
+      width: 90%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
+      main .svg-bar .svg-container .img {
+        width: 70px; }
 
 /*# sourceMappingURL=index.css.map */

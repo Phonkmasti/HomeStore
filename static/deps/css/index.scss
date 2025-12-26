@@ -138,8 +138,6 @@ main {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 
             img {
-                width: 100%;
-                height: 100%;
                 object-fit: cover;
                 display: block;
                 margin: 0;
@@ -165,18 +163,17 @@ main {
             .description-header-div {
                 width: 90%;
                 max-width: 700px;
-                text-align: center;
                 justify-content: flex-start;
                 min-height: auto;
             }
 
             .photocollage-header-div {
-                width: clamp(300px, 80%, 600px);
-                height: auto;
+                    display: none;
             }
         }
 
         @media (min-width: 1401px) {
+           
             .description-header-div {
                 .description-buttons {
                     justify-content: flex-start;
@@ -228,24 +225,7 @@ main {
             }
 
             .photocollage-header-div {
-                width: 70%;
-                margin: 0 auto;
-                height: auto;
-                gap: 12px;
-                display: flex;
-                flex-direction: column;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                    aspect-ratio: 1 / 1;
-                    object-fit: cover;
-                    transition: transform 0.3s ease;
-                }
-
-                img:hover {
-                    transform: scale(1.02);
-                }
+                display: none;
             }
         }
 
@@ -297,20 +277,7 @@ main {
             }
 
             .photocollage-header-div {
-                width: 65%;
-                margin: 0 auto;
-                height: auto;
-                gap: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                display: flex;
-                flex-direction: column;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                    aspect-ratio: 1 / 1;
-                    object-fit: cover;
-                }
+                display: none;
             }
         }
 
@@ -357,9 +324,7 @@ main {
             }
 
             .photocollage-header-div {
-                width: 85%;
-                gap: 8px;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+                display: none;
             }
         }
 
@@ -588,10 +553,8 @@ main {
 
     .bestseller-section {
         width: 100%;
-        padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 2vw, 3rem);
         display: flex;
         flex-direction: column;
-        gap: 2rem;
         max-width: 1500px;
         margin: 0 auto;
 
@@ -601,6 +564,7 @@ main {
             align-items: center;
             width: 100%;
             gap: 2rem;
+            padding-left: 0.5em;
 
             h2 {
                 font-size: clamp(1.75rem, 4vw, 3rem);
@@ -620,6 +584,7 @@ main {
                 transition: all 0.3s ease;
                 white-space: nowrap;
                 height: fit-content;
+                margin-right: 0.5em;
 
                 a {
                     text-decoration: none;
@@ -727,7 +692,7 @@ main {
                     display: flex;
                     flex-direction: column;
                     gap: clamp(1rem, 2vw, 1.5rem);
-                    width: 100%;
+                    width: 70%;
 
                     h2 {
                         font-size: clamp(1.5rem, 3vw, 2.2rem);
@@ -857,7 +822,7 @@ main {
                 .reviews-image {
                     width: 100%;
                     max-width: 400px;
-                    height: auto;
+                    height: 100%;
                     aspect-ratio: 1 / 1;
                 }
             }
@@ -870,6 +835,7 @@ main {
                 gap: 1.5rem;
 
                 .reviews-text {
+
                     .reviews-content-wrapper {
                         gap: clamp(0.8rem, 2vw, 1.25rem);
                         text-align: center;
@@ -887,7 +853,7 @@ main {
                         }
 
                         .reviews-text-body {
-                            font-size: clamp(0.85rem, 1vw, 0.95rem);
+                            font-size: clamp(0.85rem, 0.4vw, 0.75rem);
                             padding-left: 1rem;
                             line-height: 1.6;
                         }
@@ -977,6 +943,24 @@ main {
                     height: 250px;
                 }
             }
+        }
+    }
+    .svg-bar {
+        width: 100%;
+        height: 20vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .svg-container {
+            width: 90%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .img {
+                width: 70px;
+            }            
         }
     }
 }
