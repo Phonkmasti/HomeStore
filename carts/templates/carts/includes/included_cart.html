@@ -37,7 +37,7 @@
 
             <button class="remove-btn remove-from-cart" data-cart-id="{{ cart.id }}" href="{% url 'cart:cart_remove' %}">
               {% csrf_token %}
-              <img src="{% static 'deps/icons/trash3-fill.svg' %}" alt="Remove" width="18" height="18" />
+              <img src="{% static 'deps/svg/delete.svg' %}" alt="Remove" width="18" height="18" />
             </button>
           </div>
         </div>

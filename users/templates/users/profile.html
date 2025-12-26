@@ -97,7 +97,6 @@
         </div>
       </div>
 
-      <!-- Cart Section -->
       {% user_carts request as carts %}
       <div class="profile-section">
         <div class="profile-card">
@@ -112,7 +111,6 @@
         </div>
       </div>
 
-      <!-- Orders Section -->
       <div class="profile-section">
         <div class="profile-card">
           <div class="section-title">
@@ -129,10 +127,7 @@
                   <span class="order-date">{{ order.created_timestamp|date:"d M, Y" }}</span>
                   <span class="order-status" data-status="{{ order.status|lower }}">{{ order.status }}</span>
                 </div>
-                <svg class="accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+              
               </button>
 
               <div class="accordion-body" id="order-{{ order.id }}">

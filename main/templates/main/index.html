@@ -54,12 +54,8 @@
               {% if product.quantity <= 0 %} <div class="out-of-stock" data-translate="out_of_stock">Out of Stock
             </div>
             {% endif %}
-            {% endfor %}
         </div>
-        <img src="{% static 'deps/images/goods/Card.png' %}" alt="">
-        <img src="{% static 'deps/images/goods/Card-1.png' %}" alt="">
-        <img src="{% static 'deps/images/goods/Card-2.png' %}" alt="">
-        <img src="{% static 'deps/images/goods/Card-3.png' %}" alt="">
+        {% endfor %}
       </div>
     </div>
   </div>

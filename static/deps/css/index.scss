@@ -137,10 +137,11 @@ main {
             aspect-ratio: 1 / 1;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 
-            img {
+            .product-card {
                 object-fit: cover;
                 display: block;
                 margin: 0;
+                border: none;
                 padding: 0;
                 transition: transform 0.3s ease;
 

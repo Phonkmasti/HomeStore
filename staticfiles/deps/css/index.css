@@ -96,13 +96,14 @@ main {
       height: auto;
       aspect-ratio: 1 / 1;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
-      main .header-main-section .photocollage-header-div img {
+      main .header-main-section .photocollage-header-div .product-card {
         object-fit: cover;
         display: block;
         margin: 0;
+        border: none;
         padding: 0;
         transition: transform 0.3s ease; }
-        main .header-main-section .photocollage-header-div img:hover {
+        main .header-main-section .photocollage-header-div .product-card:hover {
           transform: scale(1.02); }
     @media (max-width: 1400px) {
       main .header-main-section .header-content-wrapper {
