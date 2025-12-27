@@ -20,14 +20,14 @@ $desktop: 1200px;
 .checkout-header {
     text-align: center;
     margin-bottom: 3rem;
-    
+
     h1 {
         font-size: clamp(2rem, 5vw, 3.5rem);
         font-weight: 700;
         margin: 0 0 1rem 0;
         color: $primary-text-color;
     }
-    
+
     p {
         font-size: clamp(1rem, 2vw, 1.25rem);
         color: $secondary-text-color;
@@ -40,12 +40,12 @@ $desktop: 1200px;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
     gap: 2rem;
-    
+
     @media (max-width: $tablet) {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     @media (max-width: $mobile) {
         gap: 1rem;
     }
@@ -55,11 +55,11 @@ $desktop: 1200px;
     background-color: white;
     padding: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-    
+
     @media (max-width: $tablet) {
         padding: 1.5rem;
     }
-    
+
     @media (max-width: $mobile) {
         padding: 1rem;
     }
@@ -72,14 +72,14 @@ $desktop: 1200px;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid $divider-color;
-    
+
     h2 {
         font-size: clamp(1.3rem, 3vw, 1.8rem);
         font-weight: 600;
         margin: 0;
         color: $primary-text-color;
     }
-    
+
     @media (max-width: $mobile) {
         margin-bottom: 1.5rem;
         padding-bottom: 0.75rem;
@@ -99,7 +99,7 @@ $desktop: 1200px;
     padding: 1rem;
     background-color: #fafafa;
     border-bottom: 1px solid $divider-color;
-    
+
     @media (max-width: $mobile) {
         padding: 0.75rem;
     }
@@ -110,13 +110,13 @@ $desktop: 1200px;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
+
     .item-name {
         font-weight: 600;
         color: $primary-text-color;
         font-size: 0.95rem;
     }
-    
+
     .item-quantity {
         font-size: 0.85rem;
         color: $secondary-text-color;
@@ -137,20 +137,29 @@ $desktop: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     @media (max-width: $mobile) {
         padding: 1rem;
         flex-direction: column;
         gap: 0.5rem;
         align-items: flex-start;
     }
-    
+
     .total-label {
         font-weight: 600;
         color: $primary-text-color;
         font-size: 1.1rem;
     }
-    
+
+    .whats-wrong {
+        font-size: 0.85rem;
+        color: $secondary-text-color;
+
+        a {
+            color: $bg-description-button-color;
+        }
+    }
+
     .total-amount {
         font-weight: 700;
         color: $bg-description-button-color;
@@ -162,6 +171,49 @@ $desktop: 1200px;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    .captcha-field {
+        display: flex;
+        flex-direction: column;
+
+        .captcha-wrapper {
+            width: 100%;
+            height: 10vh;
+            display: flex;
+
+
+            .captcha-container {
+
+                width: 30%;
+
+                img {
+                    text-align: center;
+                    width: 100%;
+                }
+
+                label {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    color: $primary-text-color;
+                    padding-bottom: 0.75rem;
+                    border-bottom: 1px solid $divider-color;
+                }
+
+                input {
+                    flex: 1;
+                    min-width: 0;
+                    border-left: none;
+                    outline: none;
+                    padding: 0.75rem 1rem;
+                    border: 1px solid $border-color;
+                    font-family: $global-text-family;
+                    font-size: 0.875rem;
+                    transition: border-color $transition-duration $transition-timing;
+
+                }
+            }
+        }
+    }
 }
 
 .form-section {
@@ -182,7 +234,7 @@ $desktop: 1200px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    
+
     @media (max-width: $tablet) {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -193,13 +245,13 @@ $desktop: 1200px;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
+
     label {
         font-size: 0.95rem;
         font-weight: 600;
         color: $primary-text-color;
     }
-    
+
     input,
     textarea {
         padding: 0.75rem 1rem;
@@ -210,18 +262,18 @@ $desktop: 1200px;
         color: $primary-text-color;
         transition: border-color 0.3s ease;
         border-radius: 0;
-        
+
         &::placeholder {
             color: $search-bar-placeholder-color;
         }
-        
+
         &:focus {
             outline: none;
             border-color: $bg-description-button-color;
             box-shadow: 0 0 0 3px rgba($bg-description-button-color, 0.1);
         }
     }
-    
+
     textarea {
         resize: vertical;
         min-height: 100px;
@@ -246,18 +298,18 @@ $desktop: 1200px;
     padding: 0.75rem;
     border-radius: 0;
     transition: background-color 0.3s ease;
-    
+
     &:hover {
         background-color: #f9f9f9;
     }
-    
+
     input[type="radio"] {
         cursor: pointer;
         width: 18px;
         height: 18px;
         accent-color: $bg-description-button-color;
     }
-    
+
     label {
         margin: 0;
         cursor: pointer;
@@ -271,7 +323,7 @@ $desktop: 1200px;
     overflow: hidden;
     transition: max-height 0.3s ease, opacity 0.3s ease;
     opacity: 1;
-    
+
     &.hidden {
         max-height: 0;
         opacity: 0;
@@ -299,13 +351,13 @@ $desktop: 1200px;
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 0;
-    
+
     &:hover {
         background-color: darken($bg-description-button-color, 10%);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-    
+
     @media (max-width: $mobile) {
         width: 100%;
         align-self: stretch;
@@ -315,7 +367,7 @@ $desktop: 1200px;
 .checkout-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    
+
     &:hover {
         background-color: $bg-description-button-color;
         transform: none;
@@ -327,11 +379,11 @@ $desktop: 1200px;
     .checkout-content {
         flex-direction: column;
     }
-    
+
     .order-items {
         order: 2;
     }
-    
+
     .checkout-form {
         order: 1;
     }
@@ -341,12 +393,12 @@ $desktop: 1200px;
     .radio-item {
         padding: 0.5rem;
     }
-    
+
     .order-item {
         flex-direction: column;
         gap: 0.5rem;
     }
-    
+
     .item-total {
         text-align: left;
     }

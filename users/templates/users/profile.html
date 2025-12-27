@@ -162,7 +162,7 @@
           {% else %}
           <div class="empty-state">
             <p data-translate="profile_no_orders_text">You don't have any orders yet.</p>
-            <a href="{% url 'main:index' %}" class="btn-shop" data-translate="profile_start_shopping">Start Shopping</a>
+            <a href="{% url 'orders:create_order' %}" class="btn-shop" data-translate="profile_start_shopping">Create Order</a>
           </div>
           {% endif %}
         </div>

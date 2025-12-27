@@ -35,10 +35,10 @@
               <p style="color: #999; text-align: center; padding: 2rem;" data-translate="your_cart_empty">Your cart is empty</p>
             {% endfor %}
           </div>
-
           {% if carts %}
             <div class="order-total">
               <span class="total-label" data-translate="total">Total:</span>
+              <span class="whats-wrong">What's wrong? <a href="{% url 'users:profile' %}" data-translate="change_it_here">You can change it here</span></a>
               <span class="total-amount">${{ total_price }}</span>
             </div>
           {% endif %}
@@ -162,14 +162,20 @@
               {% endif %}
             </div>
 
-            <button type="submit" class="checkout-button" data-translate="complete_order">Complete Order</button>
-            <div>
-              <label class="captcha" data-translate="captcha">Please confirm that you are not a robot</label>
-              {% if form.captcha.errors %}
-                <p data-translate="captcha_error">Invalid captcha. Please try again.</p>
-              {% endif %}
-              {{ form.captcha }}
+            <div class="captcha-field">
+              <label class="captcha" data-translate="captcha">Please confirm that you are not a robot</label><br>
+              <div class="captcha-wrapper">
+                <div class="captcha-container">
+                  {% if form.captcha.errors %}
+                  <p data-translate="captcha_error">Invalid captcha. Please try again.</p>
+                  {% endif %}
+                  {{ form.captcha }}
+                </div>
+              </div>
             </div>
+            <br>
+            <br>
+            <button type="submit" class="checkout-button" data-translate="complete_order">Complete Order</button>
           </form>
         </div>
       </div>

@@ -20,14 +20,14 @@ $desktop: 1200px;
 .profile-header {
     text-align: center;
     margin-bottom: 3rem;
-    
+
     h1 {
         font-size: clamp(2rem, 5vw, 3.5rem);
         font-weight: 700;
         margin: 0 0 1rem 0;
         color: $primary-text-color;
     }
-    
+
     p {
         font-size: clamp(1rem, 2vw, 1.25rem);
         color: $secondary-text-color;
@@ -40,7 +40,7 @@ $desktop: 1200px;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    
+
     @media (max-width: $tablet) {
         gap: 1.5rem;
     }
@@ -54,11 +54,11 @@ $desktop: 1200px;
     background-color: white;
     padding: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-    
+
     @media (max-width: $tablet) {
         padding: 1.5rem;
     }
-    
+
     @media (max-width: $mobile) {
         padding: 1rem;
     }
@@ -71,14 +71,14 @@ $desktop: 1200px;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid $divider-color;
-    
+
     h2 {
         font-size: clamp(1.3rem, 3vw, 1.8rem);
         font-weight: 600;
         margin: 0;
         color: $primary-text-color;
     }
-    
+
     @media (max-width: $mobile) {
         margin-bottom: 1.5rem;
         padding-bottom: 0.75rem;
@@ -104,7 +104,7 @@ $desktop: 1200px;
     padding: 2rem;
     background-color: #f9f9f9;
     border-radius: 0;
-    
+
     @media (max-width: $mobile) {
         padding: 1.5rem;
         margin-bottom: 1.5rem;
@@ -115,7 +115,7 @@ $desktop: 1200px;
     position: relative;
     width: 120px;
     height: 120px;
-    
+
     .profile-avatar {
         width: 100%;
         height: 100%;
@@ -124,7 +124,7 @@ $desktop: 1200px;
         border: 4px solid white;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    
+
     .avatar-placeholder {
         width: 100%;
         height: 100%;
@@ -135,7 +135,7 @@ $desktop: 1200px;
         align-items: center;
         justify-content: center;
         color: $secondary-text-color;
-        
+
         svg {
             width: 60%;
             height: 60%;
@@ -158,13 +158,13 @@ $desktop: 1200px;
     transition: all 0.3s ease;
     border: none;
     border-radius: 0;
-    
+
     &:hover {
         background-color: darken($bg-description-button-color, 10%);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-    
+
     span {
         display: block;
     }
@@ -180,7 +180,7 @@ $desktop: 1200px;
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 0;
-    
+
     &:hover {
         background-color: darken(#d32f2f, 10%);
         transform: translateY(-2px);
@@ -203,7 +203,7 @@ $desktop: 1200px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    
+
     @media (max-width: $tablet) {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -214,13 +214,13 @@ $desktop: 1200px;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
+
     label {
         font-size: 0.95rem;
         font-weight: 600;
         color: $primary-text-color;
     }
-    
+
     input {
         padding: 0.75rem 1rem;
         border: 1px solid $search-bar-border-color;
@@ -229,11 +229,11 @@ $desktop: 1200px;
         font-size: 0.95rem;
         color: $primary-text-color;
         transition: border-color 0.3s ease;
-        
+
         &::placeholder {
             color: $search-bar-placeholder-color;
         }
-        
+
         &:focus {
             outline: none;
             border-color: $bg-description-button-color;
@@ -259,13 +259,13 @@ $desktop: 1200px;
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 0;
-    
+
     &:hover {
         background-color: darken($bg-description-button-color, 10%);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-    
+
     @media (max-width: $mobile) {
         width: 100%;
         align-self: stretch;
@@ -302,56 +302,56 @@ $desktop: 1200px;
     align-items: center;
     transition: background-color 0.3s ease;
     font-family: $global-text-family;
-    
+
     &:hover {
         background-color: #f0f0f0;
     }
-    
+
     .order-info {
         display: flex;
         align-items: center;
         gap: 1.5rem;
         flex: 1;
     }
-    
+
     .order-number {
         font-weight: 600;
         color: $primary-text-color;
         min-width: 90px;
     }
-    
+
     .order-date {
         color: $secondary-text-color;
         font-size: 0.9rem;
         min-width: 100px;
     }
-    
+
     .order-status {
         padding: 0.4rem 0.8rem;
         border-radius: 0;
         font-size: 0.8rem;
         font-weight: 600;
         text-transform: uppercase;
-        
+
         &[data-status="pending"] {
             background-color: #fff3cd;
             color: #856404;
             border-radius: 0;
         }
-        
+
         &[data-status="completed"] {
             background-color: #d4edda;
             color: #155724;
             border-radius: 0;
         }
-        
+
         &[data-status="cancelled"] {
             background-color: #f8d7da;
             color: #721c24;
             border-radius: 0;
         }
     }
-    
+
     .accordion-icon {
         width: 20px;
         height: 20px;
@@ -364,7 +364,7 @@ $desktop: 1200px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    
+
     &.active {
         max-height: 1000px;
         overflow: visible;
@@ -374,10 +374,10 @@ $desktop: 1200px;
 .orders-table {
     width: 100%;
     border-collapse: collapse;
-    
+
     thead {
         background-color: #f5f5f5;
-        
+
         th {
             padding: 1rem;
             text-align: left;
@@ -387,16 +387,16 @@ $desktop: 1200px;
             font-size: 0.9rem;
         }
     }
-    
+
     tbody {
         tr {
             border-bottom: 1px solid $divider-color;
-            
+
             &:hover {
                 background-color: #fafafa;
             }
         }
-        
+
         td {
             padding: 1rem;
             color: $primary-text-color;
@@ -418,7 +418,7 @@ $desktop: 1200px;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
-    
+
     &:hover {
         text-decoration: underline;
     }
@@ -428,7 +428,7 @@ $desktop: 1200px;
 .empty-state {
     text-align: center;
     padding: 3rem 1rem;
-    
+
     p {
         font-size: 1.1rem;
         color: $secondary-text-color;
@@ -438,7 +438,7 @@ $desktop: 1200px;
 
 .btn-shop {
     display: inline-block;
-    padding: 0.75rem 2rem;
+    padding: 1rem 3.5rem;
     background-color: $bg-description-button-color;
     color: white;
     text-decoration: none;
@@ -446,7 +446,7 @@ $desktop: 1200px;
     font-size: 0.95rem;
     transition: all 0.3s ease;
     border-radius: 0;
-    
+
     &:hover {
         background-color: darken($bg-description-button-color, 10%);
         transform: translateY(-2px);
@@ -460,29 +460,33 @@ $desktop: 1200px;
         flex-direction: column;
         align-items: flex-start;
         gap: 0.75rem;
-        
+
         .order-info {
             flex-direction: column;
             gap: 0.5rem;
             width: 100%;
         }
-        
-        .order-number, .order-date {
+
+        .order-number,
+        .order-date {
             font-size: 0.85rem;
             min-width: auto;
         }
-        
+
         .accordion-icon {
             align-self: flex-end;
             margin-top: -1.5rem;
         }
     }
-    
+
     .orders-table {
         font-size: 0.8rem;
-        
-        thead, tbody {
-            th, td {
+
+        thead,
+        tbody {
+
+            th,
+            td {
                 padding: 0.5rem;
             }
         }
