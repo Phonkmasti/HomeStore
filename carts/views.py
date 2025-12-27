@@ -54,7 +54,10 @@ def cart_add(request):
 def cart_change(request):
 
     cart_id = request.POST.get("cart_id")
-    quantity = request.POST.get("quantity")
+    quantity = int(request.POST.get("quantity", 1))
+
+    if quantity < 1:
+        quantity = 1
 
     cart = Cart.objects.get(id=cart_id)
     cart.quantity = quantity
@@ -62,9 +65,9 @@ def cart_change(request):
 
     messages.success(request, 'msg_quantity_updated')
 
-    cart = get_user_carts(request)
+    user_cart = get_user_carts(request)
     cart_items_html = render_to_string(
-        "carts/includes/included_cart.html", {"carts": cart}, request=request
+        "carts/includes/included_cart.html", {"carts": user_cart}, request=request
     )
 
     response_data = {

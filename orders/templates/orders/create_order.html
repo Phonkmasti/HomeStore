@@ -181,23 +181,4 @@
       </div>
     </div>
   </main>
-
-  <script>
-    function toggleDeliveryAddress() {
-      const requiresDelivery = document.querySelector('input[name="requires_delivery"]:checked').value;
-      const deliveryField = document.getElementById('deliveryAddressField');
-      
-      if (requiresDelivery === '1') {
-        deliveryField.classList.remove('hidden');
-        document.getElementById('id_delivery_address').required = true;
-      } else {
-        deliveryField.classList.add('hidden');
-        document.getElementById('id_delivery_address').required = false;
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      toggleDeliveryAddress();
-    });
-  </script>
 {% endblock %}

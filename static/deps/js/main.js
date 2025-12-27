@@ -246,4 +246,113 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(removeNotification, autoHideDelay);
     }
   });
+
+  document.querySelectorAll('.accordion-header').forEach(button => {
+    button.addEventListener('click', function () {
+      const toggle = this.getAttribute('data-toggle');
+      const body = document.getElementById(toggle);
+
+      document.querySelectorAll('.accordion-body').forEach(el => {
+        if (el.id !== toggle) el.classList.remove('active');
+      });
+
+      body.classList.toggle('active');
+    });
+  });
+
+  const imageInputElement = document.getElementById('id_image');
+  if (imageInputElement) {
+    imageInputElement.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const avatar = document.querySelector('.profile-avatar');
+          if (avatar) {
+            avatar.src = event.target.result;
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  function toggleDeliveryAddress() {
+    const requiresDelivery = document.querySelector('input[name="requires_delivery"]:checked');
+    if (requiresDelivery) {
+      const deliveryField = document.getElementById('deliveryAddressField');
+      
+      if (requiresDelivery.value === '1') {
+        deliveryField.classList.remove('hidden');
+        document.getElementById('id_delivery_address').required = true;
+      } else {
+        deliveryField.classList.add('hidden');
+        document.getElementById('id_delivery_address').required = false;
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    toggleDeliveryAddress();
+  });
+
+  const deliveryRadios = document.querySelectorAll('input[name="requires_delivery"]');
+  deliveryRadios.forEach(radio => {
+    radio.addEventListener('change', toggleDeliveryAddress);
+  });
+
+  document.querySelectorAll('.quantity-btn.increment, .quantity-btn.decrement').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const cartId = this.getAttribute('data-cart-id');
+      const changeUrl = this.getAttribute('data-cart-change-url');
+      const quantityInput = this.closest('.quantity-control').querySelector('.quantity-input');
+      let quantity = parseInt(quantityInput.value) || 1;
+      
+      if (this.classList.contains('increment')) {
+        quantity += 1;
+      } else if (this.classList.contains('decrement') && quantity > 1) {
+        quantity -= 1;
+      }
+      
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
+      const formData = new FormData();
+      formData.append('cart_id', cartId);
+      formData.append('quantity', quantity);
+      formData.append('csrfmiddlewaretoken', csrfToken);
+      
+      fetch(changeUrl, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-CSRFToken': csrfToken,
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        const cartContainer = document.getElementById('cart-items-container');
+        if (cartContainer) {
+          cartContainer.innerHTML = data.cart_items_html;
+          window.dispatchEvent(new Event('cartUpdated'));
+        }
+        
+        if (data.messages && data.messages.length > 0) {
+          data.messages.forEach(msg => {
+            let messageText = msg.text;
+            if (messageText.startsWith('msg_')) {
+              const currentLang = localStorage.getItem('language') || 'en';
+              const translations = window.translations?.[currentLang] || window.translations?.en || {};
+              messageText = translations[msg.text] || msg.text;
+            }
+            displayMessage(messageText, msg.tags || 'success');
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        displayMessage('Error updating cart', 'error');
+      });
+    });
+  });
 });

@@ -170,33 +170,4 @@
     </div>
   </div>
 </main>
-
-<script>
-  document.querySelectorAll('.accordion-header').forEach(button => {
-    button.addEventListener('click', function () {
-      const toggle = this.getAttribute('data-toggle');
-      const body = document.getElementById(toggle);
-
-      document.querySelectorAll('.accordion-body').forEach(el => {
-        if (el.id !== toggle) el.classList.remove('active');
-      });
-
-      body.classList.toggle('active');
-    });
-  });
-
-  document.getElementById('id_image').addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const avatar = document.querySelector('.profile-avatar');
-        if (avatar) {
-          avatar.src = event.target.result;
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-</script>
 {% endblock %}

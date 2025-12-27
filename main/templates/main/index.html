@@ -28,33 +28,33 @@
       </div>
       <div class="photocollage-header-div">
         {% for product in products %}
-        <div class="product-card">
-          <a href="{% url "catalog:product" product.slug %}" class="product-image-link">
-            <div class="product-image" data-product-id="{{ product.id }}">
-              {% with main_image=product.get_main_image %}
-              {% if main_image %}
-              <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
-              {% else %}
-              <img src="{% static " deps/images/Not found image.png" %}" alt="No image" class="product-img" />
-              {% endif %}
-              {% endwith %}
-              {% for image in product.images.all %}
-              {% if not image.is_main %}
-              <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
-              {% endif %}
-              {% endfor %}
-              {% if product.discount %}
-              <span class="discount-badge">-{{ product.discount }}%</span>
-              {% elif product.is_new %}
-              <span class="new-badge">NEW</span>
-              {% endif %}
-              {% if product.bestseller %}
-              <span class="bestseller-badge">BESTSELLER</span>
-              {% endif %}
-              {% if product.quantity <= 0 %} <div class="out-of-stock" data-translate="out_of_stock">Out of Stock
-            </div>
+        <a href="{% url "catalog:product" product.slug %}" class="product-card product-image-link">
+          <div class="product-image" data-product-id="{{ product.id }}">
+            {% with main_image=product.get_main_image %}
+            {% if main_image %}
+            <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+            {% else %}
+            <img src="{% static 'deps/images/Not found image.png' %}" alt="No image" class="product-img" />
             {% endif %}
-        </div>
+            {% endwith %}
+            {% for image in product.images.all %}
+            {% if not image.is_main %}
+            <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+            {% endif %}
+            {% endfor %}
+            {% if product.discount %}
+            <span class="discount-badge">-{{ product.discount }}%</span>
+            {% elif product.is_new %}
+            <span class="new-badge">NEW</span>
+            {% endif %}
+            {% if product.bestseller %}
+            <span class="bestseller-badge">BESTSELLER</span>
+            {% endif %}
+            {% if product.quantity <= 0 %}
+            <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
+            {% endif %}
+          </div>
+        </a>
         {% endfor %}
       </div>
     </div>
@@ -124,7 +124,7 @@
             {% if main_image %}
             <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
             {% else %}
-            <img src="{% static "deps/images/Not found image.png" %}" alt="No image" class="product-img" />
+            <img src="{% static 'deps/images/Not found image.png' %}" alt="No image" class="product-img" />
             {% endif %}
             {% endwith %}
             {% for image in product.images.all %}
@@ -140,41 +140,38 @@
             {% if product.bestseller %}
             <span class="bestseller-badge">BESTSELLER</span>
             {% endif %}
-            {% if product.quantity <= 0 %} <div class="out-of-stock" data-translate="out_of_stock">Out of Stock
-          </div>
-          {% endif %}
-      </div>
-      </a>
-
-      <div class="product-body">
-        <a href="{% url "catalog:product" product.slug %}" class="product-link">
-          <h5 class="product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{
-            product.name_en }}</h5>
-        </a>
-
-        <p class="product-color" data-color-ru="{{ product.primary_color_ru }}"
-          data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
-
-        <p class="product-description" data-desc-ru="{{ product.description_ru|truncatechars:50 }}"
-          data-desc-en="{{ product.description_en|truncatechars:50 }}">{{ product.description_en|truncatechars:50 }}</p>
-
-        <p class="product-id">ID: {{ product.display_id }}</p>
-
-        <div class="product-footer">
-          <div class="product-price">
-            {% if product.discount %}
-            <span class="price-original">${{ product.price }}</span>
-            <span class="price-sale">${{ product.sell_price }}</span>
-            {% else %}
-            <span class="price">${{ product.price }}</span>
+            {% if product.quantity <= 0 %}
+            <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
             {% endif %}
           </div>
+        </a>
 
-          <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %} disabled {% endif %}> Add to Cart </button>
+        <div class="product-body">
+          <a href="{% url "catalog:product" product.slug %}" class="product-link">
+            <h5 class="product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h5>
+          </a>
+
+          <p class="product-color" data-color-ru="{{ product.primary_color_ru }}" data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
+
+          <p class="product-description" data-desc-ru="{{ product.description_ru|truncatechars:50 }}" data-desc-en="{{ product.description_en|truncatechars:50 }}">{{ product.description_en|truncatechars:50 }}</p>
+
+          <p class="product-id">ID: {{ product.display_id }}</p>
+
+          <div class="product-footer">
+            <div class="product-price">
+              {% if product.discount %}
+              <span class="price-original">${{ product.price }}</span>
+              <span class="price-sale">${{ product.sell_price }}</span>
+              {% else %}
+              <span class="price">${{ product.price }}</span>
+              {% endif %}
+            </div>
+
+            <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %}disabled{% endif %}>Add to Cart</button>
+          </div>
         </div>
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
   </div>
   <div class="reviews-section">
     <div class="reviews-container">
