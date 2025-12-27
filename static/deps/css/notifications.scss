@@ -52,7 +52,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
-  background-color: white;
+  background-color: $color-white;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   animation: slideInDown 0.3s ease;
   pointer-events: auto;
@@ -101,41 +101,41 @@
 }
 
 .notification-success {
-  border-left: 4px solid #10b981;
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-left: 4px solid $status-success-accent;
+  background: linear-gradient(135deg, $status-success-bg-light 0%, $status-success-bg-lighter 100%);
 
   .notification-icon {
-    color: #10b981;
+    color: $status-success-accent;
   }
 
   .notification-text {
-    color: #065f46;
+    color: $status-success-text-dark;
   }
 }
 
 .notification-error {
-  border-left: 4px solid #ef4444;
-  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-left: 4px solid $status-error-accent;
+  background: linear-gradient(135deg, $status-error-bg-light 0%, $status-error-bg-lighter 100%);
 
   .notification-icon {
-    color: #ef4444;
+    color: $status-error-accent;
   }
 
   .notification-text {
-    color: #7f1d1d;
+    color: $status-error-text-dark;
   }
 }
 
 .notification-warning {
-  border-left: 4px solid #f59e0b;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-left: 4px solid $status-warning-accent;
+  background: linear-gradient(135deg, $status-warning-bg-lighter 0%, $status-warning-bg-even-lighter 100%);
 
   .notification-icon {
-    color: #f59e0b;
+    color: $status-warning-accent;
   }
 
   .notification-text {
-    color: #78350f;
+    color: $status-warning-text-dark;
   }
 }
 
@@ -229,7 +229,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background-color: white;
+  background-color: $color-white;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   font-size: 0.95rem;
@@ -238,17 +238,17 @@
 
 .notification-toast.notification-success {
   .notification-toast-content {
-    border-left: 4px solid #10b981;
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    color: #065f46;
+    border-left: 4px solid $status-success-accent;
+    background: linear-gradient(135deg, $status-success-bg-light 0%, $status-success-bg-lighter 100%);
+    color: $status-success-text-dark;
   }
 }
 
 .notification-toast.notification-error {
   .notification-toast-content {
-    border-left: 4px solid #ef4444;
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-    color: #7f1d1d;
+    border-left: 4px solid $status-error-accent;
+    background: linear-gradient(135deg, $status-error-bg-light 0%, $status-error-bg-lighter 100%);
+    color: $status-error-text-dark;
   }
 }
 

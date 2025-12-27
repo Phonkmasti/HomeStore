@@ -19,7 +19,7 @@ $desktop: 1200px;
             gap: 1.5rem;
             align-items: center;
             padding: 1.5rem;
-            background-color: white;
+            background-color: $color-white;
             border: 1px solid $divider-color;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             transition: box-shadow $transition-duration $transition-timing;
@@ -77,7 +77,7 @@ $desktop: 1200px;
                     align-items: center;
                     gap: 0.5rem;
                     border: 1px solid $divider-color;
-                    background-color: #fafafa;
+                    background-color: $bg-neutral-100;
 
                     .quantity-btn {
                         display: flex;
@@ -182,8 +182,8 @@ $desktop: 1200px;
                     width: 40px;
                     height: 40px;
                     padding: 0;
-                    background-color: #fff3f0;
-                    border: 1px solid #ffe0d6;
+                    background-color: $action-remove-bg;
+                    border: 1px solid $action-remove-border;
                     cursor: pointer;
                     transition: all $transition-duration $transition-timing;
 
@@ -194,8 +194,8 @@ $desktop: 1200px;
                     }
 
                     &:hover {
-                        background-color: #ffd6c2;
-                        border-color: #ffb399;
+                        background-color: $action-remove-bg-hover;
+                        border-color: $action-remove-border-hover;
 
                         img {
                             opacity: 1;
@@ -225,7 +225,7 @@ $desktop: 1200px;
     }
 
     .cart-summary {
-        background-color: white;
+        background-color: $color-white;
         border: 1px solid $divider-color;
         padding: 2rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -345,7 +345,7 @@ $desktop: 1200px;
     .empty-cart {
         text-align: center;
         padding: 3rem 2rem;
-        background-color: white;
+        background-color: $color-white;
         border: 1px dashed $divider-color;
 
         p {

@@ -34,7 +34,7 @@ $desktop: 1200px;
             gap: 0.5rem;
             padding: 0.75rem 1.25rem;
             background-color: $header-global-bg-color;
-            color: white;
+            color: $color-white;
             text-decoration: none;
             border-radius: 6px;
             font-size: clamp(0.9rem, 1.5vw, 1rem);
@@ -108,7 +108,7 @@ $desktop: 1200px;
 
             .product-color {
                 font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-                color: #999;
+                color: $color-text-muted;
                 margin: 0.5rem 0 0 0;
                 font-weight: 500;
             }
@@ -153,7 +153,7 @@ $desktop: 1200px;
                 .product-image-wrapper {
                     width: 100%;
                     aspect-ratio: 1;
-                    background-color: white;
+                    background-color: $color-white;
                     overflow: hidden;
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
                     display: flex;
@@ -189,7 +189,7 @@ $desktop: 1200px;
                 }
 
                 .product-card {
-                    background-color: white;
+                    background-color: $color-white;
                     padding: clamp(1rem, 3vw, 1.5rem);
                     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
                     display: flex;
@@ -267,7 +267,7 @@ $desktop: 1200px;
                         flex-direction: column;
                         gap: clamp(1.5rem, 3vw, 2rem);
                         padding: clamp(1rem, 2.5vw, 1.5rem);
-                        background-color: #fafafa;
+                        background-color: $bg-neutral-100;
 
                         @media (max-width: $mobile) {
                             gap: clamp(1rem, 2vw, 1.5rem);
@@ -325,11 +325,11 @@ $desktop: 1200px;
                         .discount-badge {
                             display: inline-block;
                             padding: 0.4rem 0.8rem;
-                            background-color: #fff3f0;
-                            color: #d97706;
+                            background-color: $status-alert-bg-light;
+                            color: $status-alert-text;
                             font-weight: 700;
                             font-size: 0.9rem;
-                            border: 1px solid #fde68a;
+                            border: 1px solid $status-alert-border;
                         }
                     }
 
@@ -349,7 +349,7 @@ $desktop: 1200px;
                             gap: clamp(0.5rem, 1vw, 0.75rem);
                             padding: clamp(0.9rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2rem);
                             background-color: $header-global-bg-color;
-                            color: white;
+                            color: $color-white;
                             font-size: clamp(0.9rem, 1.5vw, 1.1rem);
                             font-weight: 700;
                             border: none;

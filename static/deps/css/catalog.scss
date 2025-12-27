@@ -32,7 +32,7 @@ html {
   .catalog-sidebar {
     width: clamp(220px, 22vw, 320px);
     flex-shrink: 0;
-    background-color: transparent;
+    background-color: $color-white;
     padding: clamp(1.2rem, 2.5vw, 1.8rem);
     border-radius: 4px;
     height: fit-content;

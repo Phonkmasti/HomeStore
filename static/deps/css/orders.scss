@@ -49,7 +49,7 @@ $desktop: 1200px;
             }
 
             .checkout-card {
-                background-color: white;
+                background-color: $color-white;
                 padding: 2rem;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 
@@ -92,7 +92,7 @@ $desktop: 1200px;
                         justify-content: space-between;
                         align-items: flex-start;
                         padding: 1rem;
-                        background-color: #fafafa;
+                        background-color: $bg-neutral-100;
                         border-bottom: 1px solid $divider-color;
 
                         @media (max-width: $mobile) {
@@ -128,7 +128,7 @@ $desktop: 1200px;
 
                 .order-total {
                     padding: 1.5rem;
-                    background-color: #f5f5f5;
+                    background-color: $bg-neutral-200;
                     border-top: 2px solid $divider-color;
                     display: flex;
                     justify-content: space-between;
@@ -206,7 +206,7 @@ $desktop: 1200px;
                                 textarea {
                                     padding: 0.75rem 1rem;
                                     border: 1px solid $search-bar-border-color;
-                                    background-color: white;
+                                    background-color: $color-white;
                                     font-family: $global-text-family;
                                     font-size: 0.95rem;
                                     color: $primary-text-color;
@@ -250,7 +250,7 @@ $desktop: 1200px;
                                 transition: background-color 0.3s ease;
 
                                 &:hover {
-                                    background-color: #f9f9f9;
+                                    background-color: $bg-neutral-50;
                                 }
 
                                 input[type="radio"] {
@@ -288,11 +288,11 @@ $desktop: 1200px;
 
                         .field-error {
                             font-size: 0.85rem;
-                            color: #d32f2f;
+                            color: $status-error-red;
                             margin-top: 0.25rem;
                             padding: 0.5rem;
-                            background-color: #ffebee;
-                            border-left: 3px solid #d32f2f;
+                            background-color: $status-error-bg-alt;
+                            border-left: 3px solid $status-error-red;
                         }
 
                         .captcha-field {
@@ -340,7 +340,7 @@ $desktop: 1200px;
                         align-self: flex-start;
                         padding: 0.75rem 2rem;
                         background-color: $bg-description-button-color;
-                        color: white;
+                        color: $color-white;
                         border: 2px solid $bg-description-button-color;
                         font-weight: 600;
                         font-size: 0.95rem;

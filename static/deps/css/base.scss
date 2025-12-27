@@ -129,7 +129,7 @@ header {
             }
 
             .drop-down-button-search {
-                background-color: $header-secondary-bg-color;
+                background-color: $color-white;
                 border: 1px solid $search-bar-border-color;
                 height: 2.8rem;
                 border-right: none;
@@ -160,7 +160,7 @@ header {
             .dropdown-content {
                 display: none;
                 position: absolute;
-                background-color: $header-secondary-bg-color;
+                background-color: $color-white;
                 border: 1px solid $search-bar-border-color;
                 border-top: none;
                 z-index: 100;
@@ -211,6 +211,7 @@ header {
                     min-width: 12rem;
                     max-width: 30rem;
                     transition: border-color $transition-duration $transition-timing;
+                    background-color: $color-white;
                     
                     &::placeholder {
                         color: $search-bar-placeholder-color;

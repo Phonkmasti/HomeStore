@@ -1,3 +1,4 @@
+// base.html
 $header-global-bg-color: #947458;
 $header-secondary-bg-color: #FFFFFF;
 $global-text-color: #FFFFFF;
@@ -14,12 +15,75 @@ $divider-color: #e0e0e0;
 $border-color: #ccc;
 $transition-duration: 0.3s;
 $transition-timing: ease;
+// end base.html
 
+// index.html, catalog.html
 $bg-description-span-color: #282725;
 $bg-description-button-color: #947458;
 $bg-photocollage-header: #FFFFFF;
 $categories-primary-color: #000000;
 $reviews-bg-color: #F6F4F2;
 $categories-secondary-color: #999999;
+// end index.html, catalog.html
 
+// addresses.html
 $bg-light-color: #F6F4F2;
+// end addresses.html
+
+// profile.html, product.html, orders.html, notifications.html
+$color-white: #FFFFFF;
+$color-text-muted: #999;
+$color-text-muted-alt: #999999;
+// end profile.html, product.html, orders.html, notifications.html
+
+// profile.html, product.html, orders.html, cart-items.scss
+$bg-neutral-50: #f9f9f9;
+$bg-neutral-100: #fafafa;
+$bg-neutral-200: #f5f5f5;
+$bg-neutral-300: #f0f0f0;
+// end profile.html, product.html, orders.html, cart-items.scss
+
+// notifications.html, product.html, profile.html
+$status-success-bg-light: #f0fdf4;
+$status-success-bg-lighter: #dcfce7;
+$status-success-border: #86efac;
+$status-success-text: #16a34a;
+$status-success-text-dark: #065f46;
+$status-success-text-darker: #155724;
+$status-success-accent: #10b981;
+// end notifications.html, product.html, profile.html
+
+// notifications.html, product.html, orders.html, profile.html
+$status-error-bg-light: #fef2f2;
+$status-error-bg-lighter: #fee2e2;
+$status-error-border: #fca5a5;
+$status-error-text: #dc2626;
+$status-error-text-dark: #7f1d1d;
+$status-error-text-darker: #721c24;
+$status-error-accent: #ef4444;
+$status-error-red: #d32f2f;
+$status-error-bg-alt: #ffebee;
+// end notifications.html, product.html, orders.html, profile.html
+
+// notifications.html, profile.html, product.html
+$status-warning-bg-light: #fff3cd;
+$status-warning-bg-lighter: #fffbeb;
+$status-warning-bg-even-lighter: #fef3c7;
+$status-warning-text: #856404;
+$status-warning-text-dark: #78350f;
+$status-warning-accent: #f59e0b;
+$status-warning-orange: #d97706;
+// end notifications.html, profile.html, product.html
+
+// product.html
+$status-alert-bg-light: #fff3f0;
+$status-alert-border: #fde68a;
+$status-alert-text: #d97706;
+// end product.html
+
+// cart-items.scss
+$action-remove-bg: #fff3f0;
+$action-remove-border: #ffe0d6;
+$action-remove-bg-hover: #ffd6c2;
+$action-remove-border-hover: #ffb399;
+// end cart-items.scss
