@@ -38,7 +38,7 @@
           {% if carts %}
             <div class="order-total">
               <span class="total-label" data-translate="total">Total:</span>
-              <span class="whats-wrong">What's wrong? <a href="{% url 'users:profile' %}" data-translate="change_it_here">You can change it here</span></a>
+              <span class="whats-wrong"><span data-translate="whats_wrong">What's wrong?</span> <a href="{% url 'users:profile' %}" data-translate="change_it_here">You can change it here</a></span>
               <span class="total-amount">${{ total_price }}</span>
             </div>
           {% endif %}

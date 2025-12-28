@@ -20,9 +20,16 @@ def cart_add(request):
             if cart:
                 cart.quantity += 1
                 cart.save()
-        else:
-            Cart.objects.create(user=request.user, product=product, quantity=1)
+                messages.success(request, 'msg_product_added')
 
+        else:
+            if product.quantity > 0:
+                Cart.objects.create(user=request.user, product=product, quantity=1)
+                messages.success(request, 'msg_product_added')
+            
+            else:
+
+                messages.error(request, 'msg_out_of_stock')
     else:
 
         carts = Cart.objects.filter(
@@ -36,7 +43,6 @@ def cart_add(request):
             Cart.objects.create(session_key=request.session.session_key,
                                 product=product, quantity=1)
 
-    messages.success(request, 'msg_product_added')
 
     user_cart = get_user_carts(request)
     cart_items_html = render_to_string(
@@ -86,6 +92,8 @@ def cart_remove(request):
     quantity = cart.quantity
     cart.delete()
 
+    messages.success(request, 'msg_product_removed')
+
     user_cart = get_user_carts(request)
     cart_items_html = render_to_string(
         "carts/includes/included_cart.html", {"carts": user_cart}, request=request
@@ -93,6 +101,7 @@ def cart_remove(request):
 
     response_data = {
         'message': 'Product removed from cart',
+        'messages': [{'text': str(m), 'tags': m.tags} for m in messages.get_messages(request)],
         'cart_items_html': cart_items_html,
         'quantity_deleted': quantity,
     }

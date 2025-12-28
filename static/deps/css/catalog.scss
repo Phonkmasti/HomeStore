@@ -322,7 +322,7 @@ html {
             }
 
             .bestseller-badge {
-              background-color: #dc3545;
+              background-color: $header-global-bg-color;
               top: clamp(0.5rem, 1.2vw, 0.8rem);
               left: clamp(0.5rem, 1.2vw, 0.8rem);
             }

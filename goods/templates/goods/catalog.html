@@ -94,10 +94,10 @@
             {% if product.discount %}
               <span class="discount-badge">-{{ product.discount }}%</span>
             {% elif product.is_new %}
-              <span class="new-badge">NEW</span>
+              <span class="new-badge" data-translate="badge_new">NEW</span>
             {% endif %}
             {% if product.bestseller %}
-            <span class="bestseller-badge">BESTSELLER</span>
+            <span class="bestseller-badge" data-translate="badge_bestseller">BESTSELLER</span>
             {% endif %}
           {% if product.quantity <= 0 %}
             <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>

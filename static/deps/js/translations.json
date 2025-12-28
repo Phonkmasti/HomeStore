@@ -152,6 +152,9 @@
     "msg_profile_updated": "Profile successfully updated!",
     "msg_logout_success": "You have successfully logged out!",
     "msg_product_added": "Product added to cart!",
+    "msg_out_of_stock": "The product is out of stock!",
+    "msg_quantity_updated": "Quantity updated!",
+    "msg_product_removed": "Product removed from cart!",
     "contact_phone": "Phone: +7 (495) 123-45-67",
     "contact_email": "Email: info@home.com",
     "contact_address": "Address: Moscow, Lenin St., Building 1, Apt. 2",
@@ -196,7 +199,15 @@
     "category_chairs": "Chairs",
     "category_armchairs": "Armchairs",
     "category_sofas": "Sofas",
-    "products": "products"
+    "products": "products",
+    "badge_new": "NEW",
+    "badge_bestseller": "BESTSELLER",
+    "reviews_heading": "Customer Reviews",
+    "product_details": "Product details",
+    "whats_wrong": "What's wrong?",
+    "change_it_here": "You can change it here",
+    "captcha": "Please confirm that you are not a robot",
+    "captcha_error": "Invalid captcha. Please try again."
   },
   "ru": {
     "discount_banner": "Выходной день Распродажа 20% на все товары",
@@ -348,6 +359,8 @@
     "msg_profile_updated": "Профиль успешно обновлен!",
     "msg_logout_success": "Вы успешно вышли!",
     "msg_product_added": "Товар добавлен в корзину!",
+    "msg_quantity_updated": "Количество обновлено!",
+    "msg_product_removed": "Товар удален из корзины!",
     "contact_phone": "Телефон: +7 (495) 123-45-67",
     "contact_email": "Электронная почта: info@home.com",
     "contact_address": "Адрес: г. Москва, ул. Ленина, д. 1, кв. 2",
@@ -395,6 +408,15 @@
     "category_chairs": "Стулья",
     "category_armchairs": "Кресла",
     "category_sofas": "Диваны",
-    "products": "товаров"
+    "products": "товаров",
+    "badge_new": "НОВОЕ",
+    "badge_bestseller": "БЕСТСЕЛЛЕР",
+    "reviews_heading": "Отзывы клиентов",
+    "product_details": "Детали товара",
+    "whats_wrong": "Что-то не так?",
+    "change_it_here": "Вы можете изменить это здесь",
+    "captcha": "Пожалуйста, подтвердите, что вы не робот",
+    "captcha_error": "Неверная капча. Пожалуйста, попробуйте еще раз.",
+    "msg_out_of_stock": "Товара нет в наличии!"
   }
 }

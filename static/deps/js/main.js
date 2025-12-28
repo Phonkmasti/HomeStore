@@ -143,13 +143,18 @@ document.addEventListener('DOMContentLoaded', function() {
       ? '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>'
       : '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>';
 
+    let dataAttr = '';
+    if (messageText.startsWith('msg_')) {
+      dataAttr = ` data-translate-message="${messageText}"`;
+    }
+
     const notificationHTML = `
       <div id="notification" class="${notificationClass} show">
-        <div class="notification-content">
+        <div class="notification-content"${messageText.startsWith('msg_') ? ` data-message-key="${messageText}"` : ''}>
           <svg class="notification-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             ${iconSvg}
           </svg>
-          <span class="notification-text">${messageText}</span>
+          <span class="notification-text"${dataAttr}>${messageText}</span>
         </div>
         <button class="notification-close" aria-label="Close notification">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -301,58 +306,116 @@ document.addEventListener('DOMContentLoaded', function() {
     radio.addEventListener('change', toggleDeliveryAddress);
   });
 
-  document.querySelectorAll('.quantity-btn.increment, .quantity-btn.decrement').forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const cartId = this.getAttribute('data-cart-id');
-      const changeUrl = this.getAttribute('data-cart-change-url');
-      const quantityInput = this.closest('.quantity-control').querySelector('.quantity-input');
-      let quantity = parseInt(quantityInput.value) || 1;
-      
-      if (this.classList.contains('increment')) {
-        quantity += 1;
-      } else if (this.classList.contains('decrement') && quantity > 1) {
-        quantity -= 1;
-      }
-      
-      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
-      const formData = new FormData();
-      formData.append('cart_id', cartId);
-      formData.append('quantity', quantity);
-      formData.append('csrfmiddlewaretoken', csrfToken);
-      
-      fetch(changeUrl, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-CSRFToken': csrfToken,
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        const cartContainer = document.getElementById('cart-items-container');
-        if (cartContainer) {
-          cartContainer.innerHTML = data.cart_items_html;
-          window.dispatchEvent(new Event('cartUpdated'));
+  function attachCartEventListeners() {
+    document.querySelectorAll('.quantity-btn.increment, .quantity-btn.decrement').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const cartId = this.getAttribute('data-cart-id');
+        const changeUrl = this.getAttribute('data-cart-change-url');
+        const quantityInput = this.closest('.quantity-control').querySelector('.quantity-input');
+        let quantity = parseInt(quantityInput.value) || 1;
+        
+        if (this.classList.contains('increment')) {
+          quantity += 1;
+        } else if (this.classList.contains('decrement') && quantity > 1) {
+          quantity -= 1;
         }
         
-        if (data.messages && data.messages.length > 0) {
-          data.messages.forEach(msg => {
-            let messageText = msg.text;
-            if (messageText.startsWith('msg_')) {
-              const currentLang = localStorage.getItem('language') || 'en';
-              const translations = window.translations?.[currentLang] || window.translations?.en || {};
-              messageText = translations[msg.text] || msg.text;
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
+        const formData = new FormData();
+        formData.append('cart_id', cartId);
+        formData.append('quantity', quantity);
+        formData.append('csrfmiddlewaretoken', csrfToken);
+        
+        fetch(changeUrl, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRFToken': csrfToken,
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          const cartContainer = document.getElementById('cart-items-container');
+          if (cartContainer) {
+            cartContainer.innerHTML = data.cart_items_html;
+            attachCartEventListeners();
+          }
+          
+          if (data.messages && data.messages.length > 0) {
+            data.messages.forEach(msg => {
+              let messageText = msg.text;
+              if (messageText.startsWith('msg_')) {
+                const currentLang = localStorage.getItem('language') || 'en';
+                const translations = window.translations?.[currentLang] || window.translations?.en || {};
+                messageText = translations[msg.text] || msg.text;
+              }
+              displayMessage(messageText, msg.tags || 'success');
+            });
+            if (typeof translateMessages === 'function') {
+              setTimeout(() => translateMessages(localStorage.getItem('language') || 'en'), 50);
             }
-            displayMessage(messageText, msg.tags || 'success');
-          });
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        displayMessage('Error updating cart', 'error');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          displayMessage('Error updating cart', 'error');
+        });
       });
     });
-  });
+
+    document.querySelectorAll('.remove-from-cart').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const cartId = this.getAttribute('data-cart-id');
+        const removeUrl = this.closest('form').getAttribute('action');
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
+        
+        const formData = new FormData();
+        formData.append('cart_id', cartId);
+        formData.append('csrfmiddlewaretoken', csrfToken);
+        
+        fetch(removeUrl, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRFToken': csrfToken,
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          const cartContainer = document.getElementById('cart-items-container');
+          if (cartContainer && data.cart_items_html) {
+            cartContainer.innerHTML = data.cart_items_html;
+            attachCartEventListeners();
+          }
+          
+          if (data.messages && data.messages.length > 0) {
+            data.messages.forEach(msg => {
+              let messageText = msg.text;
+              if (messageText.startsWith('msg_')) {
+                const currentLang = localStorage.getItem('language') || 'en';
+                const translations = window.translations?.[currentLang] || window.translations?.en || {};
+                messageText = translations[msg.text] || msg.text;
+              }
+              displayMessage(messageText, msg.tags || 'success');
+            });
+            if (typeof translateMessages === 'function') {
+              setTimeout(() => translateMessages(localStorage.getItem('language') || 'en'), 50);
+            }
+          } else if (data.message) {
+            displayMessage(data.message, 'success');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          displayMessage('Error removing item from cart', 'error');
+        });
+      });
+    });
+  }
+
+  attachCartEventListeners();
 });

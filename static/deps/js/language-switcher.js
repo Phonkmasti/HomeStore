@@ -124,11 +124,11 @@ document.addEventListener('click', function(event) {
 });
 
 function translateMessages(lang) {
-  const notifications = document.querySelectorAll('.notification-text');
+  const notifications = document.querySelectorAll('.notification-text[data-translate-message]');
   notifications.forEach(notification => {
-    const messageText = notification.textContent.trim();
-    if (messageText.startsWith('msg_') && window.translations && window.translations[lang] && window.translations[lang][messageText]) {
-      notification.textContent = window.translations[lang][messageText];
+    const messageKey = notification.getAttribute('data-translate-message');
+    if (messageKey && messageKey !== 'default' && window.translations && window.translations[lang] && window.translations[lang][messageKey]) {
+      notification.textContent = window.translations[lang][messageKey];
     }
   });
 }

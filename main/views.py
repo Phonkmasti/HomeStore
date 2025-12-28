@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from goods.models import Products
 def index(request):
     goods = Products.objects.filter(bestseller=True).order_by('random_order')[:8]
-    products = Products.objects.filter(bestseller=True).order_by('random_order')[:4]
+    products = Products.objects.order_by('random_order')[:4]
 
     context = {
         'goods': goods,
