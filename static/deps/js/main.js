@@ -190,6 +190,13 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', function(e) {
       e.preventDefault();
 
+      const isAuthenticated = this.getAttribute('data-authenticated') === 'true';
+      
+      if (!isAuthenticated) {
+        window.location.href = '/users/login/?next=' + encodeURIComponent(window.location.pathname);
+        return;
+      }
+
       const productId = this.getAttribute('data-product-id');
       const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
       

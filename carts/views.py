@@ -6,7 +6,9 @@ from carts.models import Cart
 from carts.utils import get_user_carts
 from goods.models import Products
 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def cart_add(request):
 
     product_id = request.POST.get("product_id")

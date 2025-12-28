@@ -132,7 +132,6 @@ main {
             grid-template-rows: repeat(2, 1fr);
             gap: $collage-gap;
             background-color: $header-global-bg-color;
-            padding: clamp(1.5rem, 2vw, 2.5rem);
             width: clamp(350px, 40%, 900px);
             height: auto;
             aspect-ratio: 1 / 1;

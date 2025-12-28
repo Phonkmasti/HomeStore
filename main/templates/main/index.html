@@ -163,7 +163,7 @@
               {% endif %}
             </div>
 
-            <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-translate="add_to_cart" {% if product.quantity <= 0 %}disabled{% endif %}>Add to Cart</button>
+            <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}" data-translate="add_to_cart" {% if product.quantity <= 0 %}disabled{% endif %}>Add to Cart</button>
           </div>
         </div>
       </div>
