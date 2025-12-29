@@ -2,10 +2,9 @@
 venv/
 
 .pylintrc
-__pycache__
+__pycache__/
+
 staticfiles/
 
 .vscode
-
-
 .env

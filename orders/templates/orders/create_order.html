@@ -109,8 +109,7 @@
                     type="radio" 
                     name="requires_delivery" 
                     value="1" 
-                    checked
-                    onchange="toggleDeliveryAddress()">
+                    checked>
                   <label style="margin: 0;" data-translate="delivery_address_opt">Delivery to Address</label>
                 </label>
 
@@ -118,8 +117,7 @@
                   <input 
                     type="radio" 
                     name="requires_delivery" 
-                    value="0"
-                    onchange="toggleDeliveryAddress()">
+                    value="0">
                   <label style="margin: 0;" data-translate="pickup_store">Pickup in Store</label>
                 </label>
               </div>
@@ -129,10 +127,38 @@
                 <textarea 
                   id="id_delivery_address" 
                   name="delivery_address" 
-                  placeholder="Street address, city, state, ZIP code">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
+                  placeholder="Street address, city, state">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
                 {% if form.delivery_address.errors %}
                   <div class="field-error">{{ form.delivery_address.errors.0 }}</div>
                 {% endif %}
+              </div>
+
+              <div class="form-grid optional-field" id="zipCodeField">
+                <div class="form-field">
+                  <label for="id_zip_code" data-translate="zip_code">Zip Code*</label>
+                  <input 
+                    type="text" 
+                    id="id_zip_code" 
+                    name="zip_code" 
+                    placeholder="12345"
+                    value="{% if form.zip_code.value %}{{ form.zip_code.value }}{% endif %}">
+                  {% if form.zip_code.errors %}
+                    <div class="field-error">{{ form.zip_code.errors.0 }}</div>
+                  {% endif %}
+                </div>
+
+                <div class="form-field">
+                  <label for="id_house_number" data-translate="house_number">House Number/Apt*</label>
+                  <input 
+                    type="text" 
+                    id="id_house_number" 
+                    name="house_number" 
+                    placeholder="Apt 101, Suite A"
+                    value="{% if form.house_number.value %}{{ form.house_number.value }}{% endif %}">
+                  {% if form.house_number.errors %}
+                    <div class="field-error">{{ form.house_number.errors.0 }}</div>
+                  {% endif %}
+                </div>
               </div>
             </div>
 
@@ -161,20 +187,6 @@
                 <div class="field-error">{{ form.payment_on_get.errors.0 }}</div>
               {% endif %}
             </div>
-
-            <div class="captcha-field">
-              <label class="captcha" data-translate="captcha">Please confirm that you are not a robot</label><br>
-              <div class="captcha-wrapper">
-                <div class="captcha-container">
-                  {% if form.captcha.errors %}
-                  <p data-translate="captcha_error">Invalid captcha. Please try again.</p>
-                  {% endif %}
-                  {{ form.captcha }}
-                </div>
-              </div>
-            </div>
-            <br>
-            <br>
             <button type="submit" class="checkout-button" data-translate="complete_order">Complete Order</button>
           </form>
         </div>

@@ -36,17 +36,18 @@
   {% csrf_token %}
   {% include "includes/notifications.html" %}
   <header>
-    <!-- верхняя часть страницы -->
     <div class="discount-banner">
       <p data-translate="discount_banner">This weekend Sale 20% off on all products</p>
     </div>
     <div class="search-contact-section">
       <p class="address" data-translate="address">60 Fremont Ave. Hamden, CT 06514</p>
       <div class="search-div">
+        
         <div class="dropdown-section">
-          <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search"><span
-              data-translate="all_categories">All Categories</span> <img src="{% static 'deps/svg/chevron-down.svg' %}"
-              alt=""></button>
+          <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search">
+            <span data-translate="all_categories">All Categories</span> 
+            <img src="{% static 'deps/svg/chevron-down.svg' %}" alt="">
+          </button>
           <ul id='dropdowncontent' class="dropdown-content">
             {% tag_categories as categories %}
             {% for category in categories %}
@@ -57,11 +58,11 @@
           </ul>
         </div>
 
-        <form role="search" action="{% url 'catalog:search' %}" method="get">
-          <input class="search-input-field" type="search" name="q" data-translate="search_placeholder"
-            placeholder="Search product..." aria-label="Search" /><button class="search-submit-button"
-            type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
-        </form>
+          <form role="search" action="{% url 'catalog:search' %}">
+            <input class="search-input-field" type="search" name="q" data-translate="search_placeholder"
+              placeholder="Search product..." aria-label="Search" /><button class="search-submit-button"
+              type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
+          </form>
       </div>
       <p class="phone"><img src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
     </div>
@@ -125,11 +126,9 @@
     </nav>
     <div id="navPlaceholder"></div>
   </header>
-    <!-- Контент на странице -->
   {% block content %}
 
   {% endblock %}
-  <!-- нижняя часть страницы -->
   <footer>
     <div class="footer-grid">
       {% if user.is_subscribe == 0 or not request.user.is_authenticated %}

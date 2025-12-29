@@ -47,6 +47,18 @@ class Order(models.Model):
         null=True, 
         verbose_name='Delivery Address'
     )
+    zip_code = models.CharField(
+        blank=True,
+        null=True,
+        max_length=20,
+        verbose_name='Zip Code'
+    )
+    house_number = models.CharField(
+        blank=True,
+        null=True,
+        max_length=50,
+        verbose_name='House Number'
+    )
     payment_on_get = models.BooleanField(
         default=False, 
         verbose_name='Payment on Delivery'

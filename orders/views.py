@@ -30,12 +30,14 @@ def create_order(request):
                             phone_number=form.cleaned_data["phone_number"],
                             requires_delivery=form.cleaned_data["requires_delivery"],
                             delivery_address=form.cleaned_data["delivery_address"],
+                            zip_code=form.cleaned_data["zip_code"],
+                            house_number=form.cleaned_data["house_number"],
                             payment_on_get=form.cleaned_data["payment_on_get"],
                         )
 
                         for cart_item in cart_items:
                             product = cart_item.product
-                            name = cart_item.product.name
+                            name = cart_item.product.name_en
                             price = cart_item.product.sell_price()
                             quantity = cart_item.quantity
 

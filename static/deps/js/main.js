@@ -64,14 +64,16 @@ function updateNavSticky() {
 
 window.addEventListener('scroll', updateNavSticky);
 
-window.addEventListener('load', () => {
-  const nav = document.querySelector('nav');
-  if (nav) {
-    const navTop = nav.offsetTop;
-    const navPadding = parseInt(window.getComputedStyle(nav).paddingTop);
-    window.scrollTo(0, navTop - navPadding);
-  }
-});
+function scrollToPageTop() {
+  window.scrollTo({ top: 0, behavior: 'auto' });
+}
+
+window.addEventListener('load', scrollToPageTop);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', scrollToPageTop);
+} else {
+  scrollToPageTop();
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   const categoryForm = document.getElementById('categoryForm');
@@ -289,29 +291,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  function toggleDeliveryAddress() {
-    const requiresDelivery = document.querySelector('input[name="requires_delivery"]:checked');
-    if (requiresDelivery) {
-      const deliveryField = document.getElementById('deliveryAddressField');
-      
+  function attachDeliveryAddressListeners() {
+    const deliveryRadios = document.querySelectorAll('input[name="requires_delivery"]');
+    if (deliveryRadios.length === 0) return;
+
+    function toggleDeliveryAddress() {
+      const requiresDelivery = document.querySelector('input[name="requires_delivery"]:checked');
+      if (!requiresDelivery) return;
+
+      const deliveryAddressField = document.getElementById('deliveryAddressField');
+      const zipCodeField = document.getElementById('zipCodeField');
+      const deliveryAddressInput = document.getElementById('id_delivery_address');
+      const zipCodeInput = document.getElementById('id_zip_code');
+      const houseNumberInput = document.getElementById('id_house_number');
+
       if (requiresDelivery.value === '1') {
-        deliveryField.classList.remove('hidden');
-        document.getElementById('id_delivery_address').required = true;
+        if (deliveryAddressField) deliveryAddressField.style.display = 'block';
+        if (zipCodeField) zipCodeField.style.display = 'grid';
+        if (deliveryAddressInput) deliveryAddressInput.required = true;
+        if (zipCodeInput) zipCodeInput.required = true;
+        if (houseNumberInput) houseNumberInput.required = true;
       } else {
-        deliveryField.classList.add('hidden');
-        document.getElementById('id_delivery_address').required = false;
+        if (deliveryAddressField) deliveryAddressField.style.display = 'none';
+        if (zipCodeField) zipCodeField.style.display = 'none';
+        if (deliveryAddressInput) deliveryAddressInput.required = false;
+        if (zipCodeInput) zipCodeInput.required = false;
+        if (houseNumberInput) houseNumberInput.required = false;
       }
     }
+
+    window.toggleDeliveryAddress = toggleDeliveryAddress;
+
+    deliveryRadios.forEach(radio => {
+      radio.addEventListener('change', toggleDeliveryAddress);
+    });
+
+    toggleDeliveryAddress();
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    toggleDeliveryAddress();
-  });
-
-  const deliveryRadios = document.querySelectorAll('input[name="requires_delivery"]');
-  deliveryRadios.forEach(radio => {
-    radio.addEventListener('change', toggleDeliveryAddress);
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachDeliveryAddressListeners);
+  } else {
+    attachDeliveryAddressListeners();
+  }
 
   function attachCartEventListeners() {
     document.querySelectorAll('.quantity-btn.increment, .quantity-btn.decrement').forEach(button => {
