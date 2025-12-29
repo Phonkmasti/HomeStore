@@ -137,6 +137,8 @@ header {
                 display: flex;
                 padding: 0 0.75rem;
                 align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
                 font-weight: 400;
                 cursor: pointer;
                 font-family: $global-text-family;
@@ -144,9 +146,9 @@ header {
                 transition: background-color $transition-duration $transition-timing;
                 white-space: nowrap;
                 flex-shrink: 0;
+                min-width: 12rem;
                 
                 img {
-                    margin: 0 0.5rem;
                     width: clamp(0.5rem, 1vw, 0.75rem);
                     height: auto;
                 }
@@ -169,11 +171,15 @@ header {
                 max-height: 20rem;
                 overflow-y: auto;
                 box-sizing: border-box;
+                width: 12rem;
+                top: 100%;
+                left: 0;
                 
                 li {
                     list-style: none;
                     
-                    a {
+                    a,
+                    .category-btn {
                         color: $primary-text-color;
                         width: 100%;
                         text-decoration: none;
@@ -182,6 +188,11 @@ header {
                         transition: background-color $transition-duration $transition-timing;
                         white-space: nowrap;
                         font-size: clamp(0.75rem, 1vw, 0.875rem);
+                        border: none;
+                        background: none;
+                        cursor: pointer;
+                        font-family: $global-text-family;
+                        text-align: left;
 
                         &:hover {
                             background-color: $hover-bg-color;
@@ -666,7 +677,12 @@ footer {
                 border: 1px solid $border-color;
                 font-family: $global-text-family;
                 font-size: 0.875rem;
-                transition: border-color $transition-duration $transition-timing;
+                transition: border-color $transition-duration $transition-timing, box-shadow $transition-duration $transition-timing;
+
+                &:focus {
+                    border-color: $header-global-bg-color;
+                    box-shadow: 0 0 0 3px rgba($header-global-bg-color, 0.1);
+                }
             }
             
             button {

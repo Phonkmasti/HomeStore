@@ -123,11 +123,16 @@
               </div>
 
               <div class="form-field form-field-full optional-field" id="deliveryAddressField">
-                <label for="id_delivery_address" data-translate="delivery_address">Delivery Address*</label>
+                <label for="id_delivery_address" data-translate="delivery_address">Адрес доставки*</label>
                 <textarea 
                   id="id_delivery_address" 
                   name="delivery_address" 
-                  placeholder="Street address, city, state">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
+                  placeholder="Улица, город, штат"
+                  rows="4"
+                  maxlength="500">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
+                <div class="field-counter">
+                  <span id="charCount">0</span> / 500
+                </div>
                 {% if form.delivery_address.errors %}
                   <div class="field-error">{{ form.delivery_address.errors.0 }}</div>
                 {% endif %}

@@ -92,6 +92,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  const categoryButtons = document.querySelectorAll('.category-btn');
+  const selectedCategoryInput = document.getElementById('selectedCategory');
+  const selectedCategoryName = document.getElementById('selectedCategoryName');
+
+  console.log('Category buttons found:', categoryButtons.length);
+  console.log('Selected input:', selectedCategoryInput);
+  console.log('Selected name span:', selectedCategoryName);
+
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const categorySlug = this.getAttribute('data-category-slug');
+      const categoryNameSpan = this.querySelector('span');
+      const categoryName = categoryNameSpan ? categoryNameSpan.textContent.trim() : this.textContent.trim();
+
+      console.log('Clicked category:', categorySlug, categoryName);
+
+      selectedCategoryInput.value = categorySlug;
+      selectedCategoryName.textContent = categoryName;
+
+      document.getElementById('dropdowncontent').classList.remove('show');
+    });
+  });
+
   document.querySelectorAll('.product-image').forEach(imageContainer => {
     const images = imageContainer.querySelectorAll('.product-img');
     let currentImageIndex = 0;
@@ -289,6 +315,15 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsDataURL(file);
       }
     });
+  }
+
+  const deliveryAddressInput = document.getElementById('id_delivery_address');
+  const charCountDisplay = document.getElementById('charCount');
+  if (deliveryAddressInput && charCountDisplay) {
+    deliveryAddressInput.addEventListener('input', function() {
+      charCountDisplay.textContent = this.value.length;
+    });
+    charCountDisplay.textContent = deliveryAddressInput.value.length;
   }
 
   function attachDeliveryAddressListeners() {

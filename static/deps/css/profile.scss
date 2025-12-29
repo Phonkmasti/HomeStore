@@ -203,6 +203,7 @@ $desktop: 1200px;
                         gap: 1rem;
                     }
 
+                    .form-field,
                     .form-group {
                         display: flex;
                         flex-direction: column;
@@ -222,6 +223,7 @@ $desktop: 1200px;
                             font-size: 0.95rem;
                             color: $primary-text-color;
                             transition: border-color 0.3s ease;
+                            border-radius: 0;
 
                             &::placeholder {
                                 color: $search-bar-placeholder-color;
@@ -234,6 +236,15 @@ $desktop: 1200px;
                             }
                         }
                     }
+                }
+
+                .field-error {
+                    font-size: 0.85rem;
+                    color: $status-error-red;
+                    padding: 0.5rem;
+                    background-color: $status-error-bg-alt;
+                    border-left: 3px solid $status-error-red;
+                    margin-top: 0.25rem;
                 }
 
                 .error-message {

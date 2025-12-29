@@ -45,24 +45,29 @@
         
         <div class="dropdown-section">
           <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search">
-            <span data-translate="all_categories">All Categories</span> 
+            <span id="selectedCategoryName" data-translate="all_categories">All Categories</span> 
             <img src="{% static 'deps/svg/chevron-down.svg' %}" alt="">
           </button>
           <ul id='dropdowncontent' class="dropdown-content">
+            <li>
+              <button type="button" class="category-btn category-all-btn" data-category-slug="" data-name-en="All Categories" data-name-ru="Все категории">
+                <span class="category-name product-name" data-name-en="All Categories" data-name-ru="Все категории">All Categories</span>
+              </button>
+            </li>
             {% tag_categories as categories %}
             {% for category in categories %}
             <li>
-              <a href="{% url 'catalog:index' category.slug %}" data-name-ru="{{ category.name_ru }}" data-name-en="{{ category.name_en }}"><span class="category-name product-name" data-name-ru="{{ category.name_ru }}" data-name-en="{{ category.name_en }}">{{ category.name_en }}</span></a>
+              <button type="button" class="category-btn" data-category-slug="{{ category.slug }}" data-name-ru="{{ category.name_ru }}" data-name-en="{{ category.name_en }}">
+                <span class="category-name product-name" data-name-ru="{{ category.name_ru }}" data-name-en="{{ category.name_en }}">{{ category.name_en }}</span>
+              </button>
             </li>
             {% endfor %}
           </ul>
         </div>
-
-          <form role="search" action="{% url 'catalog:search' %}">
-            <input class="search-input-field" type="search" name="q" data-translate="search_placeholder"
-              placeholder="Search product..." aria-label="Search" /><button class="search-submit-button"
-              type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
-          </form>
+        <form role="search" action="{% url 'catalog:search' %}" method="get">
+          <input type="hidden" id="selectedCategory" name="category" value="">
+          <input class="search-input-field" type="search" name="q" data-translate="search_placeholder" placeholder="Search product..." aria-label="Search"/><button class="search-submit-button" type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
+        </form>
       </div>
       <p class="phone"><img src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
     </div>
@@ -137,8 +142,13 @@
       <form action="{% url 'main:subscribe' %}" method="post" class="newsletter-footer-form"
         data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}">
         {% csrf_token %}
-        <input name='email' class="newsletter-footer-input" type="email" data-translate="newsletter_placeholder"
-          placeholder="Enter your email" required />
+        <input 
+          name='email' 
+          class="newsletter-footer-input" 
+          type="email" 
+          data-translate="newsletter_placeholder"
+          placeholder="Enter your email" 
+          required />
         <button type='submit' name="subscribe" value='1' data-translate="newsletter_subscribe">Subscribe</button>
       </form>
       {% else %}

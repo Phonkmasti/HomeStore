@@ -194,16 +194,17 @@ $desktop: 1200px;
                             .form-field {
                                 display: flex;
                                 flex-direction: column;
-                                gap: 0.5rem;
+                                gap: 0.75rem;
 
                                 label {
                                     font-size: 0.95rem;
                                     font-weight: 600;
                                     color: $primary-text-color;
+                                    display: block;
+                                    margin-bottom: 0.25rem;
                                 }
 
-                                input,
-                                textarea {
+                                input {
                                     padding: 0.75rem 1rem;
                                     border: 1px solid $search-bar-border-color;
                                     background-color: $color-white;
@@ -225,8 +226,37 @@ $desktop: 1200px;
                                 }
 
                                 textarea {
+                                    padding: 0.75rem 1rem;
+                                    border: 1px solid $search-bar-border-color;
+                                    background-color: $color-white;
+                                    font-family: $global-text-family;
+                                    font-size: 0.95rem;
+                                    color: $primary-text-color;
+                                    transition: border-color 0.3s ease;
+                                    border-radius: 0;
                                     resize: vertical;
                                     min-height: 100px;
+                                    max-height: 300px;
+                                    line-height: 1.5;
+                                    display: block;
+                                    width: 100%;
+
+                                    &::placeholder {
+                                        color: $search-bar-placeholder-color;
+                                    }
+
+                                    &:focus {
+                                        outline: none;
+                                        border-color: $bg-description-button-color;
+                                        box-shadow: 0 0 0 3px rgba($bg-description-button-color, 0.1);
+                                    }
+                                }
+
+                                .field-counter {
+                                    font-size: 0.8rem;
+                                    color: $secondary-text-color;
+                                    margin-top: 0.25rem;
+                                    text-align: right;
                                 }
 
                                 &.form-field-full {
