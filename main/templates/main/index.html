@@ -168,34 +168,74 @@
         </div>
       </div>
       {% endfor %}
+    </div>
   </div>
+
   <div class="reviews-section">
-    <div class="reviews-container">
-      <div class="reviews-text">
-        <div class="reviews-content-wrapper">
-          <h2 data-translate="reviews_heading">Customer Reviews</h2>
-          <div class="reviews-rating">
-            <img class="reviews-stars-image" src="{% static 'deps/svg/reviews-stars.svg' %}" alt="5 stars rating">
-          </div>
-          <p class="reviews-text-body">
-            "Absolutely stunning furniture! The quality is exceptional and the pieces transformed my living room
-            completely.
-            The attention to detail is remarkable, and everything arrived in perfect condition. Customer service was
-            incredibly
-            helpful throughout the entire process. I couldn't be happier with my purchase and would definitely recommend
-            Furniture
-            Store to anyone looking for premium, stylish pieces for their home."
-          </p>
-          <div class="reviews-customer-container">
-            <img class="reviews-customer-avatar" src="{% static 'deps/images/baseavatar.jpg' %}" alt="Customer avatar">
-            <div class="reviews-customer-info">
-              <p class="customer-name">Devon Simpson</p>
-              <span class="customer-title">Customer</span>
+    <div class="reviews-header-wrapper">
+      <h2 data-translate="reviews_heading">Customer Reviews</h2>
+    </div>
+    <div class="reviews-slider-container">
+      <div class="reviews-carousel">
+        <div class="reviews-item">
+          <div class="reviews-content-wrapper">
+            <div class="reviews-rating">
+              <img class="reviews-stars-image" src="{% static 'deps/svg/reviews-stars.svg' %}" alt="5 stars rating">
             </div>
+            <p class="reviews-text-body" data-text-en="&quot;Absolutely stunning furniture! The quality is exceptional and the pieces transformed my living room completely. The attention to detail is remarkable, and everything arrived in perfect condition. Customer service was incredibly helpful throughout the entire process. I couldn't be happier with my purchase and would definitely recommend Furniture Store to anyone looking for premium, stylish pieces for their home.&quot;" data-text-ru="&quot;Потрясающая мебель! Качество исключительное, а предметы полностью преобразили мою гостиную. Внимание к деталям поражает, и всё прибыло в идеальном состоянии. Обслуживание клиентов было невероятно отзывчивым на протяжении всего процесса. Я не мог бы быть счастливее с моей покупкой и определенно рекомендую Furniture Store всем, кто ищет премиум качество и стильные предметы для своего дома.&quot;">Absolutely stunning furniture! The quality is exceptional and the pieces transformed my living room completely. The attention to detail is remarkable, and everything arrived in perfect condition. Customer service was incredibly helpful throughout the entire process. I couldn't be happier with my purchase and would definitely recommend Furniture Store to anyone looking for premium, stylish pieces for their home.</p>
+            <div class="reviews-customer-container">
+              <img class="reviews-customer-avatar" src="{% static 'deps/images/baseavatar.jpg' %}" alt="Customer avatar">
+              <div class="reviews-customer-info">
+                <p class="customer-name">Sarah Mitchell</p>
+                <span class="customer-title">Customer</span>
+              </div>
+            </div>
+            <a href="#" class="review-translate-link" data-text-index="0" data-translate="review_translate">Translate</a>
+          </div>
+        </div>
+
+        <div class="reviews-item">
+          <div class="reviews-content-wrapper">
+            <div class="reviews-rating">
+              <img class="reviews-stars-image" src="{% static 'deps/svg/reviews-stars.svg' %}" alt="5 stars rating">
+            </div>
+            <p class="reviews-text-body" data-text-en="&quot;Five stars is not enough! The sofa I purchased is not only gorgeous but incredibly comfortable. The craftsmanship is outstanding, and I can tell every stitch was done with care. The delivery team was professional and friendly. This is truly an investment in quality and beauty that will last for years.&quot;" data-text-ru="&quot;Пяти звёзд недостаточно! Купленный мной диван не только прекрасен, но и невероятно удобен. Качество исполнения великолепно, и видно, что каждый шов сделан с заботой. Команда доставки была профессиональной и дружелюбной. Это действительно инвестиция в качество и красоту, которая будет служить долгие годы.&quot;">Five stars is not enough! The sofa I purchased is not only gorgeous but incredibly comfortable. The craftsmanship is outstanding, and I can tell every stitch was done with care. The delivery team was professional and friendly. This is truly an investment in quality and beauty that will last for years.</p>
+            <div class="reviews-customer-container">
+              <img class="reviews-customer-avatar" src="{% static 'deps/images/baseavatar.jpg' %}" alt="Customer avatar">
+              <div class="reviews-customer-info">
+                <p class="customer-name">Marcus Thompson</p>
+                <span class="customer-title">Customer</span>
+              </div>
+            </div>
+            <a href="#" class="review-translate-link" data-text-index="1" data-translate="review_translate">Translate</a>
+          </div>
+        </div>
+
+        <div class="reviews-item">
+          <div class="reviews-content-wrapper">
+            <div class="reviews-rating">
+              <img class="reviews-stars-image" src="{% static 'deps/svg/reviews-stars.svg' %}" alt="5 stars rating">
+            </div>
+            <p class="reviews-text-body" data-text-en="&quot;I've been furnishing my home for years, and I've never experienced such a delightful shopping experience. The selection is incredible, the prices are competitive, and the quality speaks for itself. Every piece I ordered arrived exactly as pictured. I'm already planning my next purchase!&quot;" data-text-ru="&quot;Я много лет обставляю свой дом, но никогда не испытывал такого восхитительного опыта покупок. Выбор невероятный, цены конкурентоспособны, а качество очевидно. Каждая вещь, которую я заказал, пришла ровно такой, как на фото. Я уже планирую следующую покупку!&quot;">I've been furnishing my home for years, and I've never experienced such a delightful shopping experience. The selection is incredible, the prices are competitive, and the quality speaks for itself. Every piece I ordered arrived exactly as pictured. I'm already planning my next purchase!</p>
+            <div class="reviews-customer-container">
+              <img class="reviews-customer-avatar" src="{% static 'deps/images/baseavatar.jpg' %}" alt="Customer avatar">
+              <div class="reviews-customer-info">
+                <p class="customer-name">Alexandra Chen</p>
+                <span class="customer-title">Customer</span>
+              </div>
+            </div>
+            <a href="#" class="review-translate-link" data-text-index="2" data-translate="review_translate">Translate</a>
           </div>
         </div>
       </div>
-      <div class="reviews-image">
+      <div class="reviews-navigation">
+        <button class="review-nav-btn review-nav-prev" aria-label="Previous review">‹</button>
+        <div class="reviews-dots">
+          <span class="review-dot active" data-index="0"></span>
+          <span class="review-dot" data-index="1"></span>
+          <span class="review-dot" data-index="2"></span>
+        </div>
+        <button class="review-nav-btn review-nav-next" aria-label="Next review">›</button>
       </div>
     </div>
   </div>

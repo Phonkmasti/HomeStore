@@ -370,7 +370,29 @@ document.addEventListener('DOMContentLoaded', function() {
     attachDeliveryAddressListeners();
   }
 
+  function updateQuantityButtonState() {
+    document.querySelectorAll('.quantity-control').forEach(control => {
+      const quantityInput = control.querySelector('.quantity-input');
+      const decrementBtn = control.querySelector('.quantity-btn.decrement');
+      const quantity = parseInt(quantityInput.value) || 1;
+      
+      if (decrementBtn) {
+        if (quantity === 1) {
+          decrementBtn.disabled = true;
+          decrementBtn.style.opacity = '0.5';
+          decrementBtn.style.cursor = 'not-allowed';
+        } else {
+          decrementBtn.disabled = false;
+          decrementBtn.style.opacity = '1';
+          decrementBtn.style.cursor = 'pointer';
+        }
+      }
+    });
+  }
+
   function attachCartEventListeners() {
+    updateQuantityButtonState();
+    
     document.querySelectorAll('.quantity-btn.increment, .quantity-btn.decrement').forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -482,4 +504,105 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   attachCartEventListeners();
+
+  const reviewCarousel = document.querySelector('.reviews-carousel');
+  if (reviewCarousel) {
+    const reviewItems = document.querySelectorAll('.reviews-item');
+    const reviewDots = document.querySelectorAll('.review-dot');
+    const reviewPrevBtn = document.querySelector('.review-nav-prev');
+    const reviewNextBtn = document.querySelector('.review-nav-next');
+    const translateLinks = document.querySelectorAll('.review-translate-link');
+    
+    let currentReviewIndex = 0;
+    const translatedStates = [false, false, false];
+
+    function showReview(index) {
+      reviewItems.forEach((item, i) => {
+        if (i === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      reviewDots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      currentReviewIndex = index;
+    }
+
+    if (reviewItems.length > 0) {
+      showReview(0);
+    }
+
+    reviewPrevBtn.addEventListener('click', () => {
+      const newIndex = (currentReviewIndex - 1 + reviewItems.length) % reviewItems.length;
+      showReview(newIndex);
+      translatedStates[newIndex] = false;
+      updateTranslateLink(newIndex);
+    });
+
+    reviewNextBtn.addEventListener('click', () => {
+      const newIndex = (currentReviewIndex + 1) % reviewItems.length;
+      showReview(newIndex);
+      translatedStates[newIndex] = false;
+      updateTranslateLink(newIndex);
+    });
+
+    reviewDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index'));
+        showReview(index);
+        translatedStates[index] = false;
+        updateTranslateLink(index);
+      });
+    });
+
+    function updateTranslateLink(index) {
+      const link = translateLinks[index];
+      if (link) {
+        const lang = document.documentElement.lang || 'en';
+        const translations = window.translations;
+        const isTranslated = translatedStates[index];
+        
+        if (translations && translations[lang]) {
+          const key = isTranslated ? 'review_show_original' : 'review_translate';
+          link.textContent = translations[lang][key] || (isTranslated ? 'Show Original' : 'Translate');
+        } else {
+          link.textContent = isTranslated ? 'Show Original' : 'Translate';
+        }
+      }
+    }
+
+    window.updateReviewTranslateText = function() {
+      translateLinks.forEach((_, index) => {
+        updateTranslateLink(index);
+      });
+    };
+
+    translateLinks.forEach((link, index) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const textBody = reviewItems[index].querySelector('.reviews-text-body');
+        if (!textBody) return;
+
+        const isEnglish = document.documentElement.lang === 'en' || !document.documentElement.lang;
+        
+        if (translatedStates[index]) {
+          textBody.textContent = textBody.getAttribute('data-text-en');
+          link.textContent = 'Translate';
+          translatedStates[index] = false;
+        } else {
+          textBody.textContent = textBody.getAttribute('data-text-ru');
+          link.textContent = 'Show Original';
+          translatedStates[index] = true;
+        }
+      });
+    });
+  }
 });

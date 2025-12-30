@@ -19,7 +19,7 @@ def catalog(request, category_slug=None):
             goods = q_search(query, category)
         else:
             goods = q_search(query)
-    elif category:
+    elif category is not None and category != "":
         goods = Products.objects.filter(category__slug=category)
     elif category_slug == "all":
         goods = Products.objects.all().order_by('random_order')

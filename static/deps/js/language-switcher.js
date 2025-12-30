@@ -71,6 +71,11 @@ function setLanguage(lang) {
   }
   
   translateMessages(lang);
+  
+  if (window.updateReviewTranslateText) {
+    window.updateReviewTranslateText();
+  }
+  
   closeLanguageDropdown();
 }
 

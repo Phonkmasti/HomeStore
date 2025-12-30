@@ -205,6 +205,34 @@
   }
 }
 
+.captcha-field {
+  grid-column: 1 / -1;
+  
+  &.full {
+    grid-column: 1 / -1;
+  }
+}
+
+.captcha-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  transition: border-color 0.3s ease;
+
+  &:focus-within {
+    border-color: #947458;
+    box-shadow: 0 0 0 3px rgba(148, 116, 88, 0.1);
+  }
+}
+
+.captcha {
+  transform: scale(0.95);
+  transform-origin: left center;
+}
+
 @media (max-width: 768px) {
   .form-grid {
     grid-template-columns: 1fr;

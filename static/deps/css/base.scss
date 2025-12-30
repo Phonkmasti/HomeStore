@@ -172,7 +172,7 @@ header {
                 overflow-y: auto;
                 box-sizing: border-box;
                 width: 12rem;
-                top: 100%;
+                top: calc(100% - 1px);
                 left: 0;
                 
                 li {
@@ -470,7 +470,7 @@ nav {
                 position: relative;
                 display: inline-block;
                 
-                &.nav-home {
+                &.active {
                     font-weight: bold;
                 }
 
@@ -556,6 +556,11 @@ nav {
             transition: color $transition-duration $transition-timing;
             
             &:hover {
+                color: $header-global-bg-color;
+            }
+
+            &.active {
+                font-weight: bold;
                 color: $header-global-bg-color;
             }
         }

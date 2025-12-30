@@ -325,100 +325,7 @@ $desktop: 1200px;
                             border-left: 3px solid $status-error-red;
                         }
 
-                        .captcha-field {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 1rem;
-                            padding: 1.5rem;
-                            background-color: $bg-neutral-50;
-                            border: 1px solid $divider-color;
-                            border-radius: 4px;
 
-                            .captcha-label {
-                                font-size: 0.95rem;
-                                font-weight: 600;
-                                color: $primary-text-color;
-                            }
-
-                            .captcha-error {
-                                font-size: 0.85rem;
-                                color: $status-error-red;
-                                padding: 0.5rem;
-                                background-color: $status-error-bg-alt;
-                                border-left: 3px solid $status-error-red;
-                                margin: 0;
-                            }
-
-                            .captcha-wrapper {
-                                width: 100%;
-                                display: flex;
-
-                                .captcha-container {
-                                    width: 100%;
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: 0.75rem;
-
-                                    :global(.captcha) {
-                                        display: flex;
-                                        gap: 1rem;
-                                        align-items: flex-start;
-
-                                        img {
-                                            max-width: 150px;
-                                            height: auto;
-                                            border: 1px solid $search-bar-border-color;
-                                            padding: 0.5rem;
-                                            background-color: $color-white;
-                                        }
-
-                                        input {
-                                            flex: 1;
-                                            min-width: 100px;
-                                            padding: 0.75rem 1rem;
-                                            border: 1px solid $search-bar-border-color;
-                                            background-color: $color-white;
-                                            font-family: $global-text-family;
-                                            font-size: 0.95rem;
-                                            color: $primary-text-color;
-                                            transition: border-color 0.3s ease;
-                                            border-radius: 4px;
-
-                                            &::placeholder {
-                                                color: $search-bar-placeholder-color;
-                                            }
-
-                                            &:focus {
-                                                outline: none;
-                                                border-color: $bg-description-button-color;
-                                                box-shadow: 0 0 0 3px rgba($bg-description-button-color, 0.1);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            @media (max-width: $tablet) {
-                                padding: 1rem;
-
-                                .captcha-wrapper {
-                                    .captcha-container {
-                                        :global(.captcha) {
-                                            flex-direction: column;
-                                            gap: 0.5rem;
-
-                                            img {
-                                                max-width: 100%;
-                                            }
-
-                                            input {
-                                                width: 100%;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
 
                     .checkout-button {
@@ -455,6 +362,25 @@ $desktop: 1200px;
                             align-self: stretch;
                         }
                     }
+                }
+            }
+
+            .form-section {
+                margin-bottom: 2rem;
+
+                .section-label {
+                    font-size: 1.125rem;
+                    font-weight: 600;
+                    color: $primary-text-color;
+                    margin-bottom: 1.5rem;
+                    display: block;
+                }
+
+                .field-counter {
+                    font-size: 0.85rem;
+                    color: #999;
+                    margin-top: 0.5rem;
+                    text-align: right;
                 }
             }
         }

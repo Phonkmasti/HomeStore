@@ -251,7 +251,12 @@
     "faq_subscribe": "How do I subscribe to the newsletter?",
     "faq_subscribe_answer": "You can subscribe using the newsletter form in the footer. We'll send you updates on new products and promotions.",
     "faq_unsubscribe": "How do I unsubscribe?",
-    "faq_unsubscribe_answer": "Click the unsubscribe link in any newsletter email or update your preferences in your account settings."
+    "faq_unsubscribe_answer": "Click the unsubscribe link in any newsletter email or update your preferences in your account settings.",
+    "review_translate": "Translate",
+    "review_show_original": "Show Original",
+    "captcha_label": "Verify you're human",
+    "captcha_error": "Please verify the captcha",
+    "base_price": "Base:"
   },
   "ru": {
     "discount_banner": "Выходной день Распродажа 20% на все товары",
@@ -526,6 +531,11 @@
     "complete_order": "Завершить заказ",
     "your_cart_empty": "Ваша корзина пуста",
     "whats_wrong": "Что-то не так?",
-    "change_it_here": "Вы можете изменить это здесь"
+    "change_it_here": "Вы можете изменить это здесь",
+    "review_translate": "Перевести",
+    "review_show_original": "Показать оригинал",
+    "captcha_label": "Подтвердите, что вы человек",
+    "captcha_error": "Пожалуйста, пройдите проверку капчи",
+    "base_price": "Базовая:"
   }
 }

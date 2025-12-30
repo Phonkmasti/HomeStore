@@ -28,7 +28,11 @@
             value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
             required />
           {% if form.first_name.errors %}
-            <div class="field-error">{{ form.first_name.errors.0 }}</div>
+            <div class="field-error">
+              {% for error in form.first_name.errors %}
+                {{ error }}<br>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
 
@@ -42,7 +46,11 @@
             value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
             required />
           {% if form.last_name.errors %}
-            <div class="field-error">{{ form.last_name.errors.0 }}</div>
+            <div class="field-error">
+              {% for error in form.last_name.errors %}
+                {{ error }}<br>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
       </div>
@@ -58,7 +66,11 @@
             value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
             required />
           {% if form.username.errors %}
-            <div class="field-error">{{ form.username.errors.0 }}</div>
+            <div class="field-error">
+              {% for error in form.username.errors %}
+                {{ error }}<br>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
       </div>
@@ -74,7 +86,11 @@
             value="{% if form.email.value %}{{ form.email.value }}{% endif %}"
             required />
           {% if form.email.errors %}
-            <div class="field-error">{{ form.email.errors.0 }}</div>
+            <div class="field-error">
+              {% for error in form.email.errors %}
+                {{ error }}<br>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
       </div>
@@ -90,7 +106,11 @@
             value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}"
             required />
           {% if form.password1.errors %}
-            <div class="field-error">{{ form.password1.errors.0 }}</div>
+            <div class="field-error">
+              {% for error in form.password1.errors %}
+                {{ error }}<br>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
 
@@ -104,9 +124,34 @@
             value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}"
             required />
           {% if form.password2.errors %}
-            <div class="field-error">{{ form.password2.errors.0 }}</div>
+            <div class="field-error">
+              {% for error in form.password2.errors %}
+                {{ error }}<br>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
+      </div>
+
+      <div class="form-field captcha-field full">
+        <label data-translate="captcha_label">Verify you're human</label>
+        <div class="captcha-wrapper">
+          {{ form.captcha }}
+        </div>
+        {% if form.captcha.errors %}
+          <div class="field-error">
+            {% for error in form.captcha.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if form.non_field_errors %}
+          <div class="field-error">
+            {% for error in form.non_field_errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
 
       <button type="submit" class="auth-button" data-translate="reg_button">Create Account</button>

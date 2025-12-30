@@ -14,14 +14,14 @@
 
           <div class="cart-item-controls">
             <div class="quantity-control">
-              <button type="button" class="quantity-btn decrement" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">
+              <button type="button" class="quantity-btn decrement" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}" data-quantity="{{ cart.quantity }}">
                 {% csrf_token %}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
               </button>
               <input type="text" class="quantity-input number" value="{{ cart.quantity }}" readonly />
-              <button type="button" class="quantity-btn increment" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}">
+              <button type="button" class="quantity-btn increment" data-cart-id="{{ cart.id }}" data-cart-change-url="{% url 'cart:cart_change' %}" data-quantity="{{ cart.quantity }}">
                 {% csrf_token %}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="cart-item-price">
-              <span class="price-label">@ ${{ cart.product.sell_price }}</span>
+              <span class="price-label">{% if cart.product.discount %}<span data-translate="base_price">Base:</span> ${{ cart.product.price }}{% endif %}</span>
               <span class="price-total">${{ cart.product_price }}</span>
             </div>
 

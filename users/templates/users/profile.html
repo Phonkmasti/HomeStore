@@ -7,6 +7,56 @@
 <link rel="stylesheet" href="{% sass_src 'deps/css/profile.scss' %}" />
 {% endblock %}
 
+{% block js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const imageInput = document.getElementById('id_image');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+    const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+    if (imageInput) {
+      imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          if (file.size > MAX_FILE_SIZE) {
+            alert('Image size must not exceed 5MB');
+            imageInput.value = '';
+            return;
+          }
+
+          if (!file.type.startsWith('image/')) {
+            alert('Please select a valid image file');
+            imageInput.value = '';
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            if (avatarPlaceholder) {
+              avatarPlaceholder.style.display = 'none';
+            }
+            if (avatarPreview) {
+              avatarPreview.src = event.target.result;
+              avatarPreview.style.display = 'block';
+            } else {
+              const wrapper = document.querySelector('.avatar-wrapper');
+              const img = document.createElement('img');
+              img.id = 'avatarPreview';
+              img.src = event.target.result;
+              img.alt = 'Profile Photo';
+              img.className = 'profile-avatar';
+              wrapper.appendChild(img);
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}
+
 {% block content %}
 <main class="profile-main">
   <div class="profile-container">
@@ -29,9 +79,9 @@
             <div class="profile-avatar-section">
               <div class="avatar-wrapper">
                 {% if user.image %}
-                <img src="{{ user.image.url }}" alt="Profile Photo" class="profile-avatar">
+                <img id="avatarPreview" src="{{ user.image.url }}" alt="Profile Photo" class="profile-avatar">
                 {% else %}
-                <div class="avatar-placeholder">
+                <div id="avatarPlaceholder" class="avatar-placeholder">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path
                       d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
@@ -50,7 +100,11 @@
                 {% endif %}
               </div>
               {% if form.image.errors %}
-              <div class="error-message">{{ form.image.errors }}</div>
+              <div class="error-message">
+                {% for error in form.image.errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
               {% endif %}
             </div>
 
@@ -65,7 +119,11 @@
                   value="{{ form.first_name.value }}"
                   required>
                 {% if form.first_name.errors %}
-                <div class="field-error">{{ form.first_name.errors.0 }}</div>
+                <div class="field-error">
+                  {% for error in form.first_name.errors %}
+                    {{ error }}<br>
+                  {% endfor %}
+                </div>
                 {% endif %}
               </div>
 
@@ -79,7 +137,11 @@
                   value="{{ form.last_name.value }}"
                   required>
                 {% if form.last_name.errors %}
-                <div class="field-error">{{ form.last_name.errors.0 }}</div>
+                <div class="field-error">
+                  {% for error in form.last_name.errors %}
+                    {{ error }}<br>
+                  {% endfor %}
+                </div>
                 {% endif %}
               </div>
 
@@ -93,7 +155,11 @@
                   value="{{ form.username.value }}"
                   required>
                 {% if form.username.errors %}
-                <div class="field-error">{{ form.username.errors.0 }}</div>
+                <div class="field-error">
+                  {% for error in form.username.errors %}
+                    {{ error }}<br>
+                  {% endfor %}
+                </div>
                 {% endif %}
               </div>
 
@@ -107,7 +173,11 @@
                   value="{{ form.email.value }}"
                   required>
                 {% if form.email.errors %}
-                <div class="field-error">{{ form.email.errors.0 }}</div>
+                <div class="field-error">
+                  {% for error in form.email.errors %}
+                    {{ error }}<br>
+                  {% endfor %}
+                </div>
                 {% endif %}
               </div>
             </div>

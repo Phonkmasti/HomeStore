@@ -1,6 +1,5 @@
 import re
 from django import forms
-from captcha.fields import CaptchaField
 
 
 class CreateOrderForm(forms.Form):
@@ -83,7 +82,6 @@ class CreateOrderForm(forms.Form):
         widget=forms.RadioSelect(),
     )
 
-    captcha = CaptchaField()
 
     def clean_phone_number(self):
         data = self.cleaned_data['phone_number']

@@ -30,7 +30,11 @@
           value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
           required />
         {% if form.username.errors %}
-          <div class="field-error">{{ form.username.errors.0 }}</div>
+          <div class="field-error">
+            {% for error in form.username.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
         {% endif %}
       </div>
 
@@ -43,7 +47,32 @@
           placeholder="Enter your password"
           required />
         {% if form.password.errors %}
-          <div class="field-error">{{ form.password.errors.0 }}</div>
+          <div class="field-error">
+            {% for error in form.password.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="form-field captcha-field">
+        <label data-translate="captcha_label">Verify you're human</label>
+        <div class="captcha-wrapper">
+          {{ form.captcha }}
+        </div>
+        {% if form.captcha.errors %}
+          <div class="field-error">
+            {% for error in form.captcha.errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if form.non_field_errors %}
+          <div class="field-error">
+            {% for error in form.non_field_errors %}
+              {{ error }}<br>
+            {% endfor %}
+          </div>
         {% endif %}
       </div>
 

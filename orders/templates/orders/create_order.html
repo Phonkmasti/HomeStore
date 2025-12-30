@@ -7,6 +7,42 @@
   <link rel="stylesheet" href="{% sass_src 'deps/css/orders.scss' %}" />
 {% endblock %}
 
+{% block js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const deliveryRadios = document.querySelectorAll('input[name="requires_delivery"]');
+    const deliveryAddressField = document.getElementById('deliveryAddressField');
+    const zipCodeField = document.getElementById('zipCodeField');
+    const deliveryAddressInput = document.getElementById('id_delivery_address');
+    const zipCodeInput = document.getElementById('id_zip_code');
+    const houseNumberInput = document.getElementById('id_house_number');
+
+    function toggleDeliveryFields() {
+      const requiresDelivery = document.querySelector('input[name="requires_delivery"]:checked')?.value === '1';
+      
+      if (deliveryAddressField) {
+        deliveryAddressField.style.display = requiresDelivery ? 'block' : 'none';
+      }
+      if (zipCodeField) {
+        zipCodeField.style.display = requiresDelivery ? 'grid' : 'none';
+      }
+      
+      if (!requiresDelivery) {
+        if (deliveryAddressInput) deliveryAddressInput.value = '';
+        if (zipCodeInput) zipCodeInput.value = '';
+        if (houseNumberInput) houseNumberInput.value = '';
+      }
+    }
+
+    deliveryRadios.forEach(radio => {
+      radio.addEventListener('change', toggleDeliveryFields);
+    });
+
+    toggleDeliveryFields();
+  });
+</script>
+{% endblock %}
+
 {% block content %}
   <main class="checkout-main">
     <div class="checkout-container">
@@ -66,7 +102,11 @@
                     value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
                     required>
                   {% if form.first_name.errors %}
-                    <div class="field-error">{{ form.first_name.errors.0 }}</div>
+                    <div class="field-error">
+                      {% for error in form.first_name.errors %}
+                        {{ error }}<br>
+                      {% endfor %}
+                    </div>
                   {% endif %}
                 </div>
 
@@ -80,7 +120,11 @@
                     value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
                     required>
                   {% if form.last_name.errors %}
-                    <div class="field-error">{{ form.last_name.errors.0 }}</div>
+                    <div class="field-error">
+                      {% for error in form.last_name.errors %}
+                        {{ error }}<br>
+                      {% endfor %}
+                    </div>
                   {% endif %}
                 </div>
 
@@ -94,7 +138,11 @@
                     value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
                     required>
                   {% if form.phone_number.errors %}
-                    <div class="field-error">{{ form.phone_number.errors.0 }}</div>
+                    <div class="field-error">
+                      {% for error in form.phone_number.errors %}
+                        {{ error }}<br>
+                      {% endfor %}
+                    </div>
                   {% endif %}
                 </div>
               </div>
@@ -134,7 +182,11 @@
                   <span id="charCount">0</span> / 500
                 </div>
                 {% if form.delivery_address.errors %}
-                  <div class="field-error">{{ form.delivery_address.errors.0 }}</div>
+                  <div class="field-error">
+                    {% for error in form.delivery_address.errors %}
+                      {{ error }}<br>
+                    {% endfor %}
+                  </div>
                 {% endif %}
               </div>
 
@@ -148,7 +200,11 @@
                     placeholder="12345"
                     value="{% if form.zip_code.value %}{{ form.zip_code.value }}{% endif %}">
                   {% if form.zip_code.errors %}
-                    <div class="field-error">{{ form.zip_code.errors.0 }}</div>
+                    <div class="field-error">
+                      {% for error in form.zip_code.errors %}
+                        {{ error }}<br>
+                      {% endfor %}
+                    </div>
                   {% endif %}
                 </div>
 
@@ -161,7 +217,11 @@
                     placeholder="Apt 101, Suite A"
                     value="{% if form.house_number.value %}{{ form.house_number.value }}{% endif %}">
                   {% if form.house_number.errors %}
-                    <div class="field-error">{{ form.house_number.errors.0 }}</div>
+                    <div class="field-error">
+                      {% for error in form.house_number.errors %}
+                        {{ error }}<br>
+                      {% endfor %}
+                    </div>
                   {% endif %}
                 </div>
               </div>
@@ -189,9 +249,24 @@
                 </label>
               </div>
               {% if form.payment_on_get.errors %}
-                <div class="field-error">{{ form.payment_on_get.errors.0 }}</div>
+                <div class="field-error">
+                  {% for error in form.payment_on_get.errors %}
+                    {{ error }}<br>
+                  {% endfor %}
+                </div>
               {% endif %}
             </div>
+
+            {% if form.non_field_errors %}
+              <div class="form-section">
+                <div class="field-error">
+                  {% for error in form.non_field_errors %}
+                    {{ error }}<br>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+
             <button type="submit" class="checkout-button" data-translate="complete_order">Complete Order</button>
           </form>
         </div>
