@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="photocollage-header-div">
-        {% for product in products %}
+        {% for product in photocollage %}
         <a href="{% url "catalog:product" product.slug %}" class="product-card product-image-link">
           <div class="product-image" data-product-id="{{ product.id }}">
             {% with main_image=product.get_main_image %}
@@ -72,7 +72,7 @@
         </div>
         <div class="category-info">
           <h3 class="category-name" data-translate="category_tables">Tables</h3>
-          <p class="product-count"><span>24</span> <span data-translate="products">products</span></p>
+          <p class="product-count"><span>{{ products.tables }}</span> <span data-translate="products">products</span></p>
         </div>
       </a>
       <a href="{% url "catalog:index" "chairs" %}" class="category-card">
@@ -81,7 +81,7 @@
         </div>
         <div class="category-info">
           <h3 class="category-name" data-translate="category_chairs">Chairs</h3>
-          <p class="product-count"><span>28</span> <span data-translate="products">products</span></p>
+          <p class="product-count"><span>{{ products.chairs }}</span> <span data-translate="products">products</span></p>
         </div>
       </a>
       <a href="{% url "catalog:index" "armchairs" %}" class="category-card">
@@ -90,7 +90,7 @@
         </div>
         <div class="category-info">
           <h3 class="category-name" data-translate="category_armchairs">Armchairs</h3>
-          <p class="product-count"><span>16</span> <span data-translate="products">products</span></p>
+          <p class="product-count"><span>{{ products.armchairs }}</span> <span data-translate="products">products</span></p>
         </div>
       </a>
       <a href="{% url "catalog:index" "sofas" %}" class="category-card">
@@ -99,7 +99,7 @@
         </div>
         <div class="category-info">
           <h3 class="category-name" data-translate="category_sofas">Sofas</h3>
-          <p class="product-count"><span>42</span> <span data-translate="products">products</span></p>
+          <p class="product-count"><span>{{ products.sofas }}</span> <span data-translate="products">products</span></p>
         </div>
       </a>
     </div>
@@ -144,26 +144,28 @@
 
         <div class="product-body">
           <a href="{% url "catalog:product" product.slug %}" class="product-link">
-            <h5 class="product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h5>
-          </a>
+          <h5 class="product-name" data-name-ru="{{ product.name_ru }}" data-name-en="{{ product.name_en }}">{{ product.name_en }}</h5>
+        </a>
+        
+        <p class="product-color" data-color-ru="{{ product.primary_color_ru }}" data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
+        
+        <p class="product-description" data-desc-ru="{{ product.description_ru|truncatechars:50 }}" data-desc-en="{{ product.description_en|truncatechars:50 }}">{{ product.description_en|truncatechars:50 }}</p>
 
-          <p class="product-color" data-color-ru="{{ product.primary_color_ru }}" data-color-en="{{ product.primary_color_en }}">{{ product.primary_color_en }}</p>
-
-          <p class="product-description" data-desc-ru="{{ product.description_ru|truncatechars:50 }}" data-desc-en="{{ product.description_en|truncatechars:50 }}">{{ product.description_en|truncatechars:50 }}</p>
-
-          <p class="product-id">ID: {{ product.display_id }}</p>
-
-          <div class="product-footer">
-            <div class="product-price">
-              {% if product.discount %}
+        <p class="product-id">ID: {{ product.display_id }}</p>
+        
+        <div class="product-footer">
+          <div class="product-price">
+            {% if product.discount %}
               <span class="price-original">${{ product.price }}</span>
               <span class="price-sale">${{ product.sell_price }}</span>
-              {% else %}
+            {% else %}
               <span class="price">${{ product.price }}</span>
-              {% endif %}
-            </div>
-
-            <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}" data-translate="add_to_cart" {% if product.quantity <= 0 %}disabled{% endif %}>Add to Cart</button>
+            {% endif %}
+          </div>
+          
+          <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}" {% if product.quantity <= 0 %}disabled{% endif %}>
+            Add to Cart
+          </button>
           </div>
         </div>
       </div>

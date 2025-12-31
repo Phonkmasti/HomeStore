@@ -5,6 +5,7 @@
 
 {% block css %}
   <link rel="stylesheet" href="{% sass_src 'deps/css/orders.scss' %}" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 {% endblock %}
 
 {% block js %}
@@ -41,6 +42,8 @@
     toggleDeliveryFields();
   });
 </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'deps/js/order-delivery-map.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -171,16 +174,33 @@
               </div>
 
               <div class="form-field form-field-full optional-field" id="deliveryAddressField">
-                <label for="id_delivery_address" data-translate="delivery_address">Адрес доставки*</label>
-                <textarea 
+                <label for="id_delivery_address" class='section-label' data-translate="delivery_address">Адрес доставки*</label>
+                
+                <div class="delivery-map-container">
+                  <div class="map-controls">
+                    <input 
+                      type="text" 
+                      id="addressSearchInput" 
+                      class="address-search-input" 
+                      placeholder="Enter address or coordinates"
+                      data-translate="search_placeholder_map">
+                    <button type="button" id="searchAddressBtn" class="search-address-btn" data-translate="search_address">Search</button>
+                  </div>
+                  
+                  <div id="deliveryMap" class="delivery-map"></div>
+                  
+                  <div class="map-hint" data-translate="click_on_map">Search address or click on map to select location</div>
+                </div>
+                
+                <input 
+                  type="text" 
                   id="id_delivery_address" 
                   name="delivery_address" 
-                  placeholder="Улица, город, штат"
-                  rows="4"
-                  maxlength="500">{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}</textarea>
-                <div class="field-counter">
-                  <span id="charCount">0</span> / 500
-                </div>
+                  placeholder="Your selected address will appear here"
+                  class="address-display-input"
+                  data-translate="address_placeholder"
+                  value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
+                  readonly>
                 {% if form.delivery_address.errors %}
                   <div class="field-error">
                     {% for error in form.delivery_address.errors %}
@@ -267,7 +287,7 @@
               </div>
             {% endif %}
 
-            <button type="submit" class="checkout-button" data-translate="complete_order">Complete Order</button>
+            <button type="submit" class="checkout-button" data-translate="complete_order" {% if not carts %}disabled{% endif %}>Complete Order</button>
           </form>
         </div>
       </div>

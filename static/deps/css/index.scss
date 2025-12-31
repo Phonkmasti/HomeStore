@@ -756,202 +756,295 @@ main {
             }
 
             .product-card {
+              display: flex;
+              flex-direction: column;
+              padding: 0;
+              background-color: #ffffff;
+              border: none;
+              border-radius: 4px;
+              transition: all $transition-duration $transition-timing;
+              cursor: pointer;
+              height: 100%;
+              overflow: hidden;
+              width: 100%;
+
+              @media (max-width: $mobile) {
+                padding: 0;
+              }
+
+              @media (max-width: $small-mobile) {
+                .product-body {
+                  padding: 0.75rem;
+                }
+              }
+
+              .product-image-link {
+                display: block;
+                text-decoration: none;
+                color: inherit;
+                flex-shrink: 0;
+                border-radius: 4px 4px 0 0;
+                overflow: hidden;
+
+                .product-image {
+                  position: relative;
+                  width: 100%;
+                  aspect-ratio: 1;
+                  overflow: hidden;
+                  background-color: transparent;
+                  flex-shrink: 0;
+
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                    transition: opacity $transition-duration $transition-timing;
+                  }
+
+                  img:first-child {
+                    position: static;
+                    opacity: 1;
+                  }
+
+                  @media (max-width: $mobile) {
+                    aspect-ratio: auto;
+                    height: 200px;
+                  }
+
+                  .discount-badge,
+                  .new-badge,
+                  .bestseller-badge {
+                    position: absolute;
+                    display: inline-block;
+                    color: white;
+                    padding: clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.2vw, 0.9rem);
+                    border-radius: 3px;
+                    font-weight: 700;
+                    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+                    font-family: $global-text-family;
+                    white-space: nowrap;
+                    text-align: center;
+                    z-index: 10;
+
+                    @media (max-width: $mobile) {
+                      font-size: clamp(0.65rem, 1vw, 0.75rem);
+                      padding: clamp(0.3rem, 0.8vw, 0.4rem) clamp(0.5rem, 1vw, 0.7rem);
+                    }
+                  }
+
+                  .discount-badge {
+                    background-color: $header-global-bg-color;
+                    top: clamp(0.5rem, 1.2vw, 0.8rem);
+                    right: clamp(0.5rem, 1.2vw, 0.8rem);
+                  }
+
+                  .new-badge {
+                    background-color: #000;
+                    top: clamp(0.5rem, 1.2vw, 0.8rem);
+                    right: clamp(0.5rem, 1.2vw, 0.8rem);
+                  }
+
+                  .bestseller-badge {
+                    background-color: $header-global-bg-color;
+                    top: clamp(0.5rem, 1.2vw, 0.8rem);
+                    left: clamp(0.5rem, 1.2vw, 0.8rem);
+                  }
+
+                  .out-of-stock {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.85);
+                    padding: clamp(0.6rem, 1.2vw, 1rem) clamp(1.2rem, 2.5vw, 1.5rem);
+                    border-radius: 3px;
+                    z-index: 10;
+                    color: white;
+                    font-weight: 700;
+                    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+                    font-family: $global-text-family;
+                    text-align: center;
+
+                    @media (max-width: $mobile) {
+                      padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.2rem);
+                      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+                    }
+                  }
+                }
+              }
+
+              .product-body {
                 display: flex;
                 flex-direction: column;
-                padding: 0;
-                background-color: #ffffff;
-                border: none;
-                border-radius: 4px;
-                transition: all $transition-duration $transition-timing;
-                cursor: pointer;
-                height: 100%;
-                overflow: hidden;
-                width: 100%;
+                flex: 1;
+                padding: clamp(1rem, 2vw, 1.5rem);
 
-                .product-image-link {
-                    display: block;
-                    text-decoration: none;
-                    color: inherit;
-                    flex-shrink: 0;
-                    border-radius: 4px 4px 0 0;
-                    overflow: hidden;
+                .product-link {
+                  text-decoration: none;
+                  color: inherit;
 
-                    .product-image {
-                        position: relative;
-                        width: 100%;
-                        aspect-ratio: 1;
-                        overflow: hidden;
-                        background-color: transparent;
-                        flex-shrink: 0;
+                  &:hover .product-name {
+                    color: $header-global-bg-color;
+                  }
 
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: contain;
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            opacity: 0;
-                            transition: opacity $transition-duration $transition-timing;
-                        }
+                  .product-name {
+                    margin: 0 0 clamp(0.4rem, 1vw, 0.7rem) 0;
+                    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+                    font-weight: 400;
+                    color: $primary-text-color;
+                    font-family: $global-text-family;
+                    line-height: 1.35;
+                    transition: color $transition-duration $transition-timing;
 
-                        img:first-child {
-                            position: static;
-                            opacity: 1;
-                        }
-
-                        @media (max-width: $mobile) {
-                            aspect-ratio: auto;
-                            height: 200px;
-                        }
-
-                        .discount-badge,
-                        .new-badge,
-                        .bestseller-badge {
-                            position: absolute;
-                            display: inline-block;
-                            color: white;
-                            padding: clamp(0.35rem, 1vw, 0.5rem) clamp(0.6rem, 1.2vw, 0.9rem);
-                            border-radius: 3px;
-                            font-weight: 700;
-                            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-                            font-family: $global-text-family;
-                            white-space: nowrap;
-                            text-align: center;
-                            z-index: 10;
-
-                            @media (max-width: $mobile) {
-                                font-size: clamp(0.65rem, 1vw, 0.75rem);
-                                padding: clamp(0.3rem, 0.8vw, 0.4rem) clamp(0.5rem, 1vw, 0.7rem);
-                            }
-                        }
-
-                        .discount-badge {
-                            background-color: $header-global-bg-color;
-                            top: clamp(0.5rem, 1.2vw, 0.8rem);
-                            right: clamp(0.5rem, 1.2vw, 0.8rem);
-                        }
-
-                        .new-badge {
-                            background-color: #000;
-                            top: clamp(0.5rem, 1.2vw, 0.8rem);
-                            right: clamp(0.5rem, 1.2vw, 0.8rem);
-                        }
-
-                        .bestseller-badge {
-                            background-color: $header-global-bg-color;
-                            top: clamp(0.5rem, 1.2vw, 0.8rem);
-                            left: clamp(0.5rem, 1.2vw, 0.8rem);
-                        }
-
-                        .out-of-stock {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            background: rgba(0, 0, 0, 0.85);
-                            padding: clamp(0.6rem, 1.2vw, 1rem) clamp(1.2rem, 2.5vw, 1.5rem);
-                            border-radius: 3px;
-                            z-index: 10;
-                            color: white;
-                            font-weight: 700;
-                            font-size: clamp(0.85rem, 1.4vw, 1.05rem);
-                            font-family: $global-text-family;
-                            text-align: center;
-
-                            @media (max-width: $mobile) {
-                                padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.2rem);
-                                font-size: clamp(0.75rem, 1.2vw, 0.9rem);
-                            }
-                        }
+                    @media (max-width: $mobile) {
+                      font-size: clamp(0.85rem, 1.5vw, 1rem);
                     }
+                  }
                 }
 
-                .product-body {
+                .product-color {
+                  color: $secondary-text-color;
+                  font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+                  margin: 0 0 clamp(0.3rem, 0.7vw, 0.4rem) 0;
+                  font-family: $global-text-family;
+
+                  @media (max-width: $mobile) {
+                    font-size: clamp(0.7rem, 1vw, 0.8rem);
+                  }
+                }
+
+                .product-description {
+                  color: $secondary-text-color;
+                  font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+                  margin: 0 0 clamp(0.4rem, 1vw, 0.6rem) 0;
+                  line-height: 1.45;
+                  font-family: $global-text-family;
+                  flex-grow: 1;
+
+                  @media (max-width: $mobile) {
+                    font-size: clamp(0.7rem, 1vw, 0.8rem);
+                  }
+                }
+
+                .product-id {
+                  color: $secondary-text-color;
+                  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+                  margin: 0 0 clamp(0.6rem, 1.2vw, 0.9rem) 0;
+                  font-family: $global-text-family;
+
+                  @media (max-width: $mobile) {
+                    font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+                  }
+                }
+
+                .product-footer {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: auto;
+                  gap: clamp(0.6rem, 1.2vw, 1rem);
+                  padding-top: clamp(0.6rem, 1.2vw, 1rem);
+                  border-top: 1px solid $divider-color;
+
+                  @media (max-width: $mobile) {
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                  }
+
+                  .product-price {
                     display: flex;
                     flex-direction: column;
-                    flex: 1;
-                    padding: clamp(1rem, 2vw, 1.5rem);
+                    gap: clamp(0.25rem, 0.8vw, 0.4rem);
+                    min-width: fit-content;
 
-                    .product-link {
-                        text-decoration: none;
-                        color: inherit;
-
-                        &:hover .product-name {
-                            color: $header-global-bg-color;
-                        }
-
-                        .product-name {
-                            margin: 0 0 clamp(0.4rem, 1vw, 0.7rem) 0;
-                            font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-                            font-weight: 400;
-                            color: $primary-text-color;
-                            font-family: $global-text-family;
-                            line-height: 1.35;
-                            transition: color $transition-duration $transition-timing;
-
-                            @media (max-width: $mobile) {
-                                font-size: clamp(0.85rem, 1.5vw, 1rem);
-                            }
-                        }
+                    .price-original {
+                      color: #999;
+                      font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+                      text-decoration: line-through;
+                      text-decoration-thickness: 2px;
+                      text-decoration-color: #d32f2f;
+                      font-family: $global-text-family;
+                      opacity: 0.7;
                     }
 
-                    .product-color {
-                        color: $secondary-text-color;
-                        font-size: clamp(0.8rem, 1.3vw, 0.95rem);
-                        margin: 0 0 clamp(0.3rem, 0.7vw, 0.4rem) 0;
-                        font-family: $global-text-family;
+                    .price-sale {
+                      color: #d32f2f;
+                      font-size: clamp(1.1rem, 2vw, 1.4rem);
+                      font-weight: 700;
+                      font-family: $global-text-family;
+                      display: flex;
+                      align-items: baseline;
+                      gap: 0.5rem;
 
-                        @media (max-width: $mobile) {
-                            font-size: clamp(0.7rem, 1vw, 0.8rem);
+                      &::before {
+                        content: 'Sale Price:';
+                        font-size: clamp(0.7rem, 1rem, 0.85rem);
+                        font-weight: 500;
+                        color: #666;
+                      }
+
+                      @media (max-width: $mobile) {
+                        font-size: clamp(1rem, 1.6vw, 1.1rem);
+                        
+                        &::before {
+                          display: none;
                         }
+                      }
                     }
 
-                    .product-description {
-                        color: $secondary-text-color;
-                        font-size: clamp(0.8rem, 1.3vw, 0.95rem);
-                        margin: 0 0 clamp(0.4rem, 1vw, 0.6rem) 0;
-                        line-height: 1.45;
-                        font-family: $global-text-family;
-                        flex-grow: 1;
+                    .price {
+                      color: $primary-text-color;
+                      font-size: clamp(1.1rem, 2vw, 1.4rem);
+                      font-weight: 700;
+                      font-family: $global-text-family;
+
+                      @media (max-width: $mobile) {
+                        font-size: clamp(0.9rem, 1.5vw, 1rem);
+                      }
+                    }
+                  }
+
+                  .add-to-cart {
+                    padding: clamp(0.5rem, 1.2vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
+                    background-color: $header-global-bg-color;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-family: $global-text-family;
+                    font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+                    font-weight: 600;
+                    transition: all $transition-duration $transition-timing;
+                    white-space: nowrap;
+
+                    &:hover:not(:disabled) {
+                      background-color: darken($header-global-bg-color, 10%);
+                      transform: translateY(-2px);
+                      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
                     }
 
-                    .add-to-cart {
-                        padding: clamp(0.5rem, 1.2vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
-                        background-color: $header-global-bg-color;
-                        color: white;
-                        border: none;
-                        border-radius: 6px;
-                        cursor: pointer;
-                        font-family: $global-text-family;
-                        font-size: clamp(0.8rem, 1.3vw, 0.95rem);
-                        font-weight: 600;
-                        transition: all $transition-duration $transition-timing;
-                        white-space: nowrap;
-
-                        &:hover:not(:disabled) {
-                            background-color: darken($header-global-bg-color, 10%);
-                            transform: translateY(-2px);
-                            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-                        }
-
-                        &:active:not(:disabled) {
-                            transform: translateY(0);
-                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-                        }
-
-                        &:disabled {
-                            opacity: 0.6;
-                            cursor: not-allowed;
-                        }
-
-                        @media (max-width: $mobile) {
-                            padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 1.5vw, 1rem);
-                            font-size: clamp(0.75rem, 1.1vw, 0.85rem);
-                            width: 100%;
-                        }
+                    &:active:not(:disabled) {
+                      transform: translateY(0);
+                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
                     }
+
+                    &:disabled {
+                      opacity: 0.6;
+                      cursor: not-allowed;
+                    }
+
+                    @media (max-width: $mobile) {
+                      padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 1.5vw, 1rem);
+                      font-size: clamp(0.75rem, 1.1vw, 0.85rem);
+                      width: 100%;
+                    }
+                  }
                 }
+              }
             }
         }
 

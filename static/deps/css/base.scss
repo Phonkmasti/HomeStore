@@ -641,10 +641,111 @@ nav {
     transition: height $transition-duration $transition-timing;
 }
 
+.separator-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    padding: clamp(3rem, 4vw, 5rem) clamp(1rem, 3%, 3rem);
+    background-color: $bg-neutral-50;
+    margin: 0;
+    box-sizing: border-box;
+    min-height: auto !important;
+
+    @media (max-width: $tablet) {
+        flex-direction: column;
+        gap: clamp(1.2rem, 2vw, 1.5rem);
+        padding: clamp(2.5rem, 3.5vw, 4rem) clamp(1rem, 3%, 2rem);
+    }
+
+    @media (max-width: $mobile) {
+        flex-direction: column;
+        gap: clamp(1rem, 1.5vw, 1.2rem);
+        padding: clamp(2rem, 3vw, 3rem) clamp(1rem, 3%, 1.5rem);
+    }
+
+    .separator-item {
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(0.75rem, 1.5vw, 1.2rem);
+        height: fit-content;
+        max-width: 280px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+
+        @media (max-width: $tablet) {
+            max-width: 100%;
+            gap: clamp(0.6rem, 1.2vw, 0.9rem);
+        }
+
+        @media (max-width: $mobile) {
+            gap: clamp(0.5rem, 1vw, 0.75rem);
+        }
+
+        .separator-icon {
+            flex-shrink: 0;
+            width: clamp(35px, 5vw, 50px);
+            height: clamp(35px, 5vw, 50px);
+            object-fit: contain;
+
+            @media (max-width: $tablet) {
+                width: clamp(32px, 4.5vw, 45px);
+                height: clamp(32px, 4.5vw, 45px);
+            }
+
+            @media (max-width: $mobile) {
+                width: clamp(30px, 4vw, 40px);
+                height: clamp(30px, 4vw, 40px);
+            }
+        }
+
+        .separator-content {
+            flex: 1;
+            min-width: 0;
+
+            .separator-title {
+                margin: 0 0 clamp(0.3rem, 0.5vw, 0.5rem) 0;
+                font-size: clamp(0.85rem, 1.2vw, 1rem);
+                font-weight: 700;
+                color: $primary-text-color;
+                font-family: $global-text-family;
+                line-height: 1.2;
+                word-wrap: break-word;
+
+                @media (max-width: $tablet) {
+                    font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+                }
+
+                @media (max-width: $mobile) {
+                    font-size: clamp(0.75rem, 1vw, 0.9rem);
+                }
+            }
+
+            .separator-desc {
+                margin: 0;
+                font-size: clamp(0.7rem, 1vw, 0.85rem);
+                color: $secondary-text-color;
+                font-family: $global-text-family;
+                line-height: 1.4;
+                word-wrap: break-word;
+
+                @media (max-width: $tablet) {
+                    font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+                }
+
+                @media (max-width: $mobile) {
+                    font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+                }
+            }
+        }
+    }
+}
+
 footer {
     width: 100%;
     background-color: $header-search-bg-color;
-    padding: 3rem 2%;
+    padding: clamp(1.5rem, 2vw, 2rem) 2%;
     font-family: $global-text-family;
     
     .footer-grid {

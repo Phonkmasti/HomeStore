@@ -606,3 +606,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const imageInput = document.getElementById('id_image');
+  const avatarPreview = document.getElementById('avatarPreview');
+  const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+  if (imageInput) {
+    imageInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > MAX_FILE_SIZE) {
+          alert('Image size must not exceed 5MB');
+          imageInput.value = '';
+          return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+          alert('Please select a valid image file');
+          imageInput.value = '';
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          if (avatarPlaceholder) {
+            avatarPlaceholder.style.display = 'none';
+          }
+          if (avatarPreview) {
+            avatarPreview.src = event.target.result;
+            avatarPreview.style.display = 'block';
+          } else {
+            const wrapper = document.querySelector('.avatar-wrapper');
+            const img = document.createElement('img');
+            img.id = 'avatarPreview';
+            img.src = event.target.result;
+            img.alt = 'Profile Photo';
+            img.className = 'profile-avatar';
+            wrapper.appendChild(img);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+});

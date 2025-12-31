@@ -133,6 +133,8 @@ class Products(models.Model):
         if self.discount:
             return round(self.price - self.price * self.discount / 100, 2)
         return self.price
+    
+    
 
     def get_main_image(self):
         image = self.images.filter(is_main=True).first()

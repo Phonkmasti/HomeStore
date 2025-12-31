@@ -5,11 +5,19 @@ from django.contrib.auth.decorators import login_required
 from goods.models import Products
 def index(request):
     goods = Products.objects.filter(bestseller=True).order_by('random_order')[:8]
-    products = Products.objects.order_by('random_order')[:4]
+    photocollage = Products.objects.order_by('random_order')[:4]
+
+    products_count = {
+        "tables": Products.objects.filter(category__slug='tables').count(),
+        "chairs": Products.objects.filter(category__slug='chairs').count(),
+        "sofas": Products.objects.filter(category__slug='sofas').count(),
+        "armchairs": Products.objects.filter(category__slug='armchairs').count(),
+    }
 
     context = {
         'goods': goods,
-        'products': products,
+        'photocollage': photocollage,
+        "products": products_count,
     }
     return render(request, 'main/index.html', context)
 

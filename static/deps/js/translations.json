@@ -256,7 +256,21 @@
     "review_show_original": "Show Original",
     "captcha_label": "Verify you're human",
     "captcha_error": "Please verify the captcha",
-    "base_price": "Base:"
+    "base_price": "Base:",
+    "select_on_map": "Select on Map",
+    "search_address": "Search Address",
+    "search_placeholder_map": "Enter address or coordinates",
+    "click_on_map": "Search address or click on map to select location",
+    "address_selected": "Address selected",
+    "invalid_address": "Invalid address. Please try again",
+    "map_loading": "Loading map...",
+    "address_placeholder": "Your selected address will appear here",
+    "separator_secure_payments": "Secure Payments",
+    "separator_secure_desc": "Your transactions are protected with industry-standard encryption",
+    "separator_returns": "Return Within 14 Days",
+    "separator_returns_desc": "Hassle-free returns within 14 days of purchase",
+    "separator_support": "24/7 Support",
+    "separator_support_desc": "Our customer service team is available around the clock"
   },
   "ru": {
     "discount_banner": "Выходной день Распродажа 20% на все товары",
@@ -536,6 +550,20 @@
     "review_show_original": "Показать оригинал",
     "captcha_label": "Подтвердите, что вы человек",
     "captcha_error": "Пожалуйста, пройдите проверку капчи",
-    "base_price": "Базовая:"
+    "base_price": "Базовая:",
+    "select_on_map": "Выбрать на карте",
+    "search_address": "Поиск адреса",
+    "search_placeholder_map": "Введите адрес или координаты",
+    "click_on_map": "Поищите адрес или кликните на карте чтобы выбрать место",
+    "address_selected": "Адрес выбран",
+    "invalid_address": "Неправильный адрес. Пожалуйста, попробуйте снова",
+    "map_loading": "Загрузка карты...",
+    "address_placeholder": "Ваш выбранный адрес появится здесь",
+    "separator_secure_payments": "Безопасные платежи",
+    "separator_secure_desc": "Ваши транзакции защищены промышленным стандартом шифрования",
+    "separator_returns": "Возврат в течение 14 дней",
+    "separator_returns_desc": "Простой возврат в течение 14 дней с момента покупки",
+    "separator_support": "Поддержка 24/7",
+    "separator_support_desc": "Наша служба поддержки доступна круглосуточно"
   }
 }

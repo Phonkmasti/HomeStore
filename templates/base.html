@@ -132,6 +132,33 @@
   {% block content %}
 
   {% endblock %}
+
+  <section class="separator-bar">
+    <div class="separator-item">
+      <img src="{% static 'deps/svg/payment-bar.svg' %}" alt="" class="separator-icon" />
+      <div class="separator-content">
+        <h3 class="separator-title" data-translate="separator_secure_payments">Secure Payments</h3>
+        <p class="separator-desc" data-translate="separator_secure_desc">Your transactions are protected with industry-standard encryption</p>
+      </div>
+    </div>
+
+    <div class="separator-item">
+      <img src="{% static 'deps/svg/product-return-1.svg' %}" alt="" class="separator-icon" />
+      <div class="separator-content">
+        <h3 class="separator-title" data-translate="separator_returns">Return Within 14 Days</h3>
+        <p class="separator-desc" data-translate="separator_returns_desc">Hassle-free returns within 14 days of purchase</p>
+      </div>
+    </div>
+
+    <div class="separator-item">
+      <img src="{% static 'deps/svg/24-7.svg' %}" alt="" class="separator-icon" />
+      <div class="separator-content">
+        <h3 class="separator-title" data-translate="separator_support">24/7 Support</h3>
+        <p class="separator-desc" data-translate="separator_support_desc">Our customer service team is available around the clock</p>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-grid">
       {% if user.is_subscribe == 0 or not request.user.is_authenticated %}
@@ -180,17 +207,10 @@
       </ul>
       <ul class="footer-grid-text-3">
         <h3 data-translate="footer_service">Customer service</h3>
-        <li><a href="" data-translate="footer_orders">Orders</a></li>
-        <li><a href="" data-translate="footer_addresses">Addresses</a></li>
+        <li><a href="{% url 'users:profile' %}#my-orders" data-translate="footer_orders">Orders</a></li>
         <li><a href="{% url 'main:returns' %}" data-translate="footer_returns">Returns</a></li>
         <li><a href="{% url 'main:account_details' %}" data-translate="footer_account">Account details</a></li>
         <li><a href="{% url 'main:faq' %}" data-translate="footer_faq">F.A.Q</a></li>
-      </ul>
-      <ul class="footer-grid-text-4">
-        <h3 data-translate="footer_delivery">Delivery</h3>
-        <li><a href="" data-translate="footer_orders">Orders</a></li>
-        <li><a href="" data-translate="footer_return">Return</a></li>
-        <li><a href="" data-translate="footer_free_delivery">Free Delivery</a></li>
       </ul>
       <p class="footer-grid-copyright" data-translate="footer_copyright"> © Copyright f Store 2025. Website crated by
         Nikita</p>
