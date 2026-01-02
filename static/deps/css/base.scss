@@ -665,6 +665,10 @@ nav {
         padding: clamp(2rem, 3vw, 3rem) clamp(1rem, 3%, 1.5rem);
     }
 
+    @media (max-width: $small-mobile) {
+        display: none;
+    }
+
     .separator-item {
         display: flex;
         align-items: flex-start;

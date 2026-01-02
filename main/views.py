@@ -39,7 +39,7 @@ def contact(request):
         'content': 'Contact Information',
         'text_on_page': 'Get in touch with our customer service team',
     }
-    return render(request, 'main/contact-information.html', context)
+    return render(request, 'main/contact-us.html', context)
 
 
 def returns(request):

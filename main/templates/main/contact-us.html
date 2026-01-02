@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load sass_tags %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="{% sass_src 'deps/css/contact-us.scss' %}" />
+{% endblock %}
+
+{% block content %}
+  <main class="contact-us-main">
+    <div class="contact-us-container">
+      <div class="contact-us-header">
+        <h1 data-translate="contact_us_title">Свяжитесь с нами</h1>
+        <p data-translate="contact_us_subtitle">Мы готовы ответить на все ваши вопросы и помочь с выбором идеальной мебели для вашего дома</p>
+      </div>
+
+      <div class="contact-us-content">
+        <div class="contact-info-section">
+          <div class="info-card">
+            <div class="info-icon">
+              <img src="{% static 'deps/svg/phone-call.svg' %}" alt="phone">
+            </div>
+            <h3 data-translate="contact_phone_title">Телефон</h3>
+            <p><strong data-translate="contact_phone_label">Главный офис:</strong></p>
+            <p>(928) 630-9272</p>
+            <p data-translate="contact_phone_hours">Пн - Пт: 9:00 - 18:00</p>
+            <p data-translate="contact_phone_hours_weekend">Сб - Вс: 10:00 - 16:00</p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <img src="{% static 'deps/svg/mail.svg' %}" alt="email">
+            </div>
+            <h3 data-translate="contact_email_title">Электронная почта</h3>
+            <p><strong data-translate="contact_email_label">Основной контакт:</strong></p>
+            <p><a href="mailto:fStore@email.com" style="color: inherit; text-decoration: none;">furniturestorecompany@gmail.com</a></p>
+            <p data-translate="contact_email_response">Ответ в течение 24 часов</p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <img src="{% static 'deps/svg/location.svg' %}" alt="location">
+            </div>
+            <h3 data-translate="contact_address_title">Адрес главного офиса</h3>
+            <p data-translate="contact_address_line1">60 Fremont Ave. Hamden,</p>
+            <p data-translate="contact_address_line2">CT 06514, США</p>
+            <p data-translate="contact_address_note">Пн - Пт: 9:00 - 18:00</p>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <h2 data-translate="contact_form_title">Форма обратной связи</h2>
+          <form class="contact-form" method="post" action="#">
+            {% csrf_token %}
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name" data-translate="contact_form_name">Имя</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  data-translate="contact_form_name_placeholder"
+                  placeholder="Ваше имя..." 
+                  required />
+              </div>
+
+              <div class="form-group">
+                <label for="phone" data-translate="contact_form_phone">Телефон</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  data-translate="contact_form_phone_placeholder"
+                  placeholder="Номер телефона..." 
+                  required />
+              </div>
+            </div>
+
+            <div class="form-row full-width">
+              <div class="form-group">
+                <label for="email" data-translate="contact_form_email">Электронная почта</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  data-translate="contact_form_email_placeholder"
+                  placeholder="Адрес электронной почты..." 
+                  required />
+              </div>
+            </div>
+
+            <div class="form-row full-width">
+              <div class="form-group">
+                <label for="subject" data-translate="contact_form_subject">Тема сообщения</label>
+                <input 
+                  type="text" 
+                  id="subject" 
+                  name="subject" 
+                  data-translate="contact_form_subject_placeholder"
+                  placeholder="Тема вашего сообщения..." 
+                  required />
+              </div>
+            </div>
+
+            <div class="form-row full-width">
+              <div class="form-group">
+                <label for="message" data-translate="contact_form_message">Сообщение</label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  data-translate="contact_form_message_placeholder"
+                  placeholder="Ваше сообщение..."></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-button" data-translate="contact_form_submit">Отправить сообщение</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="contact-map-container">
+        <h2 data-translate="contact_map_title">Найдите нас на карте</h2>
+        <div id="contact-map" class="contact-map"></div>
+      </div>
+
+      <div class="contact-cta-section">
+        <h2 data-translate="contact_visit_all_title">Посетите все наши филиалы</h2>
+        <p data-translate="contact_visit_all_desc">Откройте для себя все наши выставочные залы и склады по всему Соединенным Штатам</p>
+        <a href="{% url 'main:addresses' %}" class="visit-all-btn" data-translate="contact_visit_all_btn">Перейти к филиалам</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="{% static 'deps/js/contact-map.js' %}"></script>
+{% endblock %}
