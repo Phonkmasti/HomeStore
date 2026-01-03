@@ -25,6 +25,7 @@ A furniture e-commerce shop built with Django. Started as a learning project, bu
 - 🌍 English & Russian support
 - 📱 Mobile-friendly design
 - ✉️ Sending email (partially done)
+- 🤖 CAPTCHA — Protection against bots
 
 ---
 
@@ -134,9 +135,7 @@ FurnitureStore/
 
 Planned features:
 
-- 📧 **Email Notifications** — Django emails for newsletters & confirmation ( partially done )
 - ☎️ **Phone Verification** — SMS confirmation on signup
-- 🤖 **CAPTCHA** — Protection against bots
 - ⚡ **Redis Caching** — Speed things up
 - 🐳 **Docker & AWS** — Containerized, ready for production with Nginx
 - 🔑 **Social Login** — Sign in with Google, GitHub, Facebook
