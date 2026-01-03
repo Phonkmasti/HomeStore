@@ -1,29 +1,95 @@
 @import 'variables.scss';
 
+$small-mobile: 320px;
 $mobile: 480px;
 $tablet: 768px;
 $desktop: 1200px;
 
 .contact-us-main {
     width: 100%;
-    min-height: 100vh;
-    padding: 3rem 2%;
-    background-color: $bg-light-color;
     font-family: $global-text-family;
+    position: relative;
+    padding-top: clamp(360px, 50vh, 700px);
+
+    @media (max-width: $tablet) {
+        padding-top: clamp(300px, 44vh, 560px);
+    }
+
+    @media (max-width: $mobile) {
+        padding-top: clamp(240px, 40vh, 400px);
+    }
+
+    @media (max-width: $small-mobile) {
+        padding-top: clamp(200px, 36vh, 320px);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: clamp(360px, 50vh, 700px);
+        background-image: url('/static/deps/images/contact-us-bg-image.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        z-index: 0;
+
+        @media (max-width: $tablet) {
+            height: clamp(300px, 44vh, 560px);
+        }
+
+        @media (max-width: $mobile) {
+            height: clamp(240px, 40vh, 400px);
+        }
+
+        @media (max-width: $small-mobile) {
+            height: clamp(200px, 36vh, 320px);
+        }
+    }
 
     .contact-us-container {
         max-width: 1400px;
-        margin: 0 auto;
+        margin: clamp(-180px, -25vh, -350px) auto 0 auto;
+        position: relative;
+        z-index: 1;
+        padding: 3rem 2%;
+        background-color: $bg-light-color;
+
+        @media (max-width: $tablet) {
+            margin: clamp(-150px, -22vh, -280px) auto 0 auto;
+        }
+
+        @media (max-width: $mobile) {
+            margin: clamp(-120px, -20vh, -200px) auto 0 auto;
+        }
+
+        @media (max-width: $small-mobile) {
+            margin: clamp(-100px, -18vh, -160px) auto 0 auto;
+            padding: 2rem 1.5%;
+        }
 
         .contact-us-header {
             text-align: center;
             margin-bottom: 3rem;
+
+            @media (max-width: $small-mobile) {
+                margin-bottom: 2rem;
+            }
 
             h1 {
                 font-size: clamp(2rem, 5vw, 3.5rem);
                 font-weight: 700;
                 margin: 0 0 1rem 0;
                 color: $primary-text-color;
+
+                @media (max-width: $small-mobile) {
+                    font-size: 1.5rem;
+                    margin-bottom: 0.75rem;
+                }
             }
 
             p {
@@ -31,6 +97,11 @@ $desktop: 1200px;
                 color: $secondary-text-color;
                 margin: 0;
                 line-height: 1.6;
+
+                @media (max-width: $small-mobile) {
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                }
             }
         }
 
@@ -49,10 +120,18 @@ $desktop: 1200px;
                 gap: 1rem;
             }
 
+            @media (max-width: $small-mobile) {
+                gap: 0.75rem;
+            }
+
             .contact-info-section {
                 display: flex;
                 flex-direction: column;
                 gap: 2rem;
+
+                @media (max-width: $small-mobile) {
+                    gap: 1rem;
+                }
 
                 .info-card {
                     background-color: $color-white;
@@ -128,6 +207,31 @@ $desktop: 1200px;
                             }
                         }
                     }
+
+                    @media (max-width: $small-mobile) {
+                        padding: 0.75rem;
+
+                        h3 {
+                            font-size: 1rem;
+                            margin-bottom: 0.25rem;
+                        }
+
+                        p {
+                            font-size: 0.75rem;
+                            margin: 0.25rem 0;
+                        }
+
+                        .info-icon {
+                            width: 32px;
+                            height: 32px;
+                            margin-bottom: 0.5rem;
+
+                            img {
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -146,6 +250,10 @@ $desktop: 1200px;
                     padding: 1.25rem;
                 }
 
+                @media (max-width: $small-mobile) {
+                    padding: 1rem;
+                }
+
                 h2 {
                     font-size: clamp(1.5rem, 3vw, 2rem);
                     font-weight: 700;
@@ -155,6 +263,11 @@ $desktop: 1200px;
 
                     @media (max-width: $mobile) {
                         font-size: 1.3rem;
+                    }
+
+                    @media (max-width: $small-mobile) {
+                        font-size: 1.1rem;
+                        margin-bottom: 1rem;
                     }
                 }
 
@@ -187,6 +300,10 @@ $desktop: 1200px;
                             font-size: 0.95rem;
                             font-weight: 600;
                             color: $primary-text-color;
+
+                            @media (max-width: $small-mobile) {
+                                font-size: 0.85rem;
+                            }
                         }
 
                         input,
@@ -209,6 +326,11 @@ $desktop: 1200px;
                             &::placeholder {
                                 color: $search-bar-placeholder-color;
                             }
+
+                            @media (max-width: $small-mobile) {
+                                padding: 0.75rem;
+                                font-size: 0.85rem;
+                            }
                         }
 
                         textarea {
@@ -218,6 +340,10 @@ $desktop: 1200px;
 
                             @media (max-width: $mobile) {
                                 min-height: 100px;
+                            }
+
+                            @media (max-width: $small-mobile) {
+                                min-height: 80px;
                             }
                         }
                     }
@@ -255,6 +381,12 @@ $desktop: 1200px;
                             font-size: 0.95rem;
                             padding: 0.875rem;
                         }
+
+                        @media (max-width: $small-mobile) {
+                            font-size: 0.85rem;
+                            padding: 0.75rem 1.5rem;
+                            letter-spacing: 0.3px;
+                        }
                     }
                 }
             }
@@ -274,6 +406,10 @@ $desktop: 1200px;
                 margin-top: 1.5rem;
             }
 
+            @media (max-width: $small-mobile) {
+                margin-top: 1rem;
+            }
+
             h2 {
                 font-size: clamp(1.5rem, 3vw, 2rem);
                 font-weight: 700;
@@ -283,6 +419,11 @@ $desktop: 1200px;
 
                 @media (max-width: $mobile) {
                     font-size: 1.3rem;
+                }
+
+                @media (max-width: $small-mobile) {
+                    font-size: 1.1rem;
+                    margin-bottom: 0.75rem;
                 }
             }
 
@@ -300,6 +441,11 @@ $desktop: 1200px;
 
                 @media (max-width: $mobile) {
                     height: 350px;
+                }
+
+                @media (max-width: $small-mobile) {
+                    height: 280px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
                 }
             }
 
@@ -377,6 +523,11 @@ $desktop: 1200px;
                 padding: 2rem 1rem;
             }
 
+            @media (max-width: $small-mobile) {
+                margin-top: 1.5rem;
+                padding: 1.5rem 0.75rem;
+            }
+
             h2 {
                 font-size: clamp(1.5rem, 3vw, 2rem);
                 font-weight: 700;
@@ -385,6 +536,11 @@ $desktop: 1200px;
 
                 @media (max-width: $mobile) {
                     font-size: 1.3rem;
+                }
+
+                @media (max-width: $small-mobile) {
+                    font-size: 1.1rem;
+                    margin-bottom: 0.75rem;
                 }
             }
 
@@ -400,6 +556,12 @@ $desktop: 1200px;
                 @media (max-width: $mobile) {
                     font-size: 0.95rem;
                     margin-bottom: 1.5rem;
+                }
+
+                @media (max-width: $small-mobile) {
+                    font-size: 0.85rem;
+                    margin-bottom: 1rem;
+                    line-height: 1.5;
                 }
             }
 
@@ -432,6 +594,12 @@ $desktop: 1200px;
                 @media (max-width: $mobile) {
                     padding: 0.875rem 2rem;
                     font-size: 0.95rem;
+                }
+
+                @media (max-width: $small-mobile) {
+                    padding: 0.75rem 1.5rem;
+                    font-size: 0.8rem;
+                    letter-spacing: 0.2px;
                 }
             }
         }

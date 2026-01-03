@@ -65,8 +65,8 @@
     </div>
   {% else %}
     <div class="empty-cart">
-      <p>Your cart is empty</p>
-      <a href="{% url "catalog:index" 'all' %}" class="continue-shopping-btn">Continue Shopping</a>
+      <p data-translate="cart_is_empty" >Your cart is empty</p>
+      <a data-translate="buy_now" href="{% url "catalog:index" 'all' %}" class="continue-shopping-btn">Buy now</a>
     </div>
   {% endif %}
 </div>

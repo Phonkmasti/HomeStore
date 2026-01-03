@@ -636,16 +636,16 @@ nav {
 }
 
 #navPlaceholder {
-    height: 0;
     display: block;
-    transition: height $transition-duration $transition-timing;
+    height: 0;
+    overflow: hidden;
 }
 
 .separator-bar {
     width: 100%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
     gap: clamp(1.5rem, 3vw, 2.5rem);
     padding: clamp(3rem, 4vw, 5rem) clamp(1rem, 3%, 3rem);
     background-color: $bg-neutral-50;
@@ -653,19 +653,13 @@ nav {
     box-sizing: border-box;
     min-height: auto !important;
 
-    @media (max-width: $tablet) {
+    @media (max-width: 800px) {
         flex-direction: column;
-        gap: clamp(1.2rem, 2vw, 1.5rem);
+        gap: clamp(1.5rem, 2.5vw, 2rem);
         padding: clamp(2.5rem, 3.5vw, 4rem) clamp(1rem, 3%, 2rem);
     }
 
-    @media (max-width: $mobile) {
-        flex-direction: column;
-        gap: clamp(1rem, 1.5vw, 1.2rem);
-        padding: clamp(2rem, 3vw, 3rem) clamp(1rem, 3%, 1.5rem);
-    }
-
-    @media (max-width: $small-mobile) {
+    @media (max-width: $tablet) {
         display: none;
     }
 
@@ -674,34 +668,16 @@ nav {
         align-items: flex-start;
         gap: clamp(0.75rem, 1.5vw, 1.2rem);
         height: fit-content;
-        max-width: 280px;
+        width: 280px;
         word-wrap: break-word;
         overflow-wrap: break-word;
-
-        @media (max-width: $tablet) {
-            max-width: 100%;
-            gap: clamp(0.6rem, 1.2vw, 0.9rem);
-        }
-
-        @media (max-width: $mobile) {
-            gap: clamp(0.5rem, 1vw, 0.75rem);
-        }
+        flex-shrink: 0;
 
         .separator-icon {
             flex-shrink: 0;
             width: clamp(35px, 5vw, 50px);
             height: clamp(35px, 5vw, 50px);
             object-fit: contain;
-
-            @media (max-width: $tablet) {
-                width: clamp(32px, 4.5vw, 45px);
-                height: clamp(32px, 4.5vw, 45px);
-            }
-
-            @media (max-width: $mobile) {
-                width: clamp(30px, 4vw, 40px);
-                height: clamp(30px, 4vw, 40px);
-            }
         }
 
         .separator-content {
@@ -716,14 +692,6 @@ nav {
                 font-family: $global-text-family;
                 line-height: 1.2;
                 word-wrap: break-word;
-
-                @media (max-width: $tablet) {
-                    font-size: clamp(0.8rem, 1.1vw, 0.95rem);
-                }
-
-                @media (max-width: $mobile) {
-                    font-size: clamp(0.75rem, 1vw, 0.9rem);
-                }
             }
 
             .separator-desc {
@@ -733,14 +701,6 @@ nav {
                 font-family: $global-text-family;
                 line-height: 1.4;
                 word-wrap: break-word;
-
-                @media (max-width: $tablet) {
-                    font-size: clamp(0.65rem, 0.9vw, 0.8rem);
-                }
-
-                @media (max-width: $mobile) {
-                    font-size: clamp(0.6rem, 0.8vw, 0.75rem);
-                }
             }
         }
     }
@@ -755,9 +715,8 @@ footer {
     .footer-grid {
         max-width: 1400px;
         margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: auto auto auto;
+        display: flex;
+        flex-direction: column;
         gap: 2rem;
         
         h2, h3 {
@@ -767,13 +726,11 @@ footer {
         }
         
         .newsletter-footer-text {
-            grid-area: 1 / 1 / 2 / 2;
             font-size: clamp(1rem, 2.5vw, 1.75rem);
             line-height: 1.4;
         }
         
         .newsletter-footer-form {
-            grid-area: 1 / 3 / 2 / 5;
             display: flex;
             gap: 0.2rem;
             align-items: center;
@@ -810,16 +767,35 @@ footer {
             }
         }
         
+        .footer-grid-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 3rem;
+            align-items: flex-start;
+
+            @media (max-width: $mobile) {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                align-items: start;
+            }
+        }
+
         .footer-grid-text-1 {
-            grid-area: 2 / 1 / 3 / 2;
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            padding: 0;
+
+            @media (max-width: $mobile) {
+                grid-column: 1 / 2;
+            }
             
             h3 {
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
+                margin: 0;
                 
                 img {
                     width: clamp(1rem, 2vw, 1.5rem);
@@ -829,6 +805,7 @@ footer {
             
             li {
                 margin: 0;
+                list-style-type: none;
                 font-weight: 300;
                 color: $primary-text-color;
                 font-size: 0.875rem;
@@ -853,8 +830,7 @@ footer {
         }
         
         .footer-grid-text-2,
-        .footer-grid-text-3,
-        .footer-grid-text-4 {
+        .footer-grid-text-3 {
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -886,28 +862,28 @@ footer {
                 }
             }
         }
-        
-        .footer-grid-text-2 {
-            grid-area: 2 / 2 / 3 / 3;
-        }
-        
+
         .footer-grid-text-3 {
-            grid-area: 2 / 3 / 3 / 4;
+            @media (max-width: $mobile) {
+                grid-column: 2 / 3;
+                grid-row: 1 / 2;
+            }
         }
         
-        .footer-grid-text-4 {
-            grid-area: 2 / 4 / 3 / 5;
+        .footer-grid-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
         }
-        
+
         .footer-grid-copyright {
-            grid-area: 3 / 1 / 4 / 2;
             font-size: 0.75rem;
             color: $secondary-text-color;
             text-align: left;
         }
         
         .footer-grid-payment {
-            grid-area: 3 / 4 / 4 / 5;
             display: flex;
             justify-content: flex-end;
             align-items: center;
@@ -919,49 +895,24 @@ footer {
         }
         
         @media (max-width: $tablet) {
-            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             
             .newsletter-footer-text {
-                grid-area: 1 / 1 / 2 / 3;
                 font-size: 1.25rem;
             }
             
             .newsletter-footer-form {
-                grid-area: 2 / 1 / 3 / 3;
                 justify-content: center;
                 flex-wrap: wrap;
             }
             
-            .footer-grid-text-1 {
-                grid-area: 3 / 1 / 4 / 2;
-            }
-            
-            .footer-grid-text-2 {
-                grid-area: 3 / 2 / 4 / 3;
-            }
-            
-            .footer-grid-text-3 {
-                grid-area: 4 / 1 / 5 / 2;
-            }
-            
-            .footer-grid-text-4 {
-                grid-area: 4 / 2 / 5 / 3;
-            }
-            
-            .footer-grid-copyright {
-                grid-area: 5 / 1 / 6 / 2;
-                text-align: left;
-            }
-            
-            .footer-grid-payment {
-                grid-area: 5 / 2 / 6 / 3;
-                justify-content: flex-end;
+            .footer-grid-content {
+                flex-direction: column;
+                gap: 2rem;
             }
         }
         
         @media (max-width: $mobile) {
-            grid-template-columns: 1fr;
             gap: 1rem;
             
             h2, h3 {
@@ -969,12 +920,10 @@ footer {
             }
             
             .newsletter-footer-text {
-                grid-area: auto;
                 font-size: 1rem;
             }
             
             .newsletter-footer-form {
-                grid-area: auto;
                 flex-direction: column;
                 width: 100%;
                 gap: 0.5rem;
@@ -988,22 +937,23 @@ footer {
                 }
             }
             
-            .footer-grid-text-1,
-            .footer-grid-text-2,
-            .footer-grid-text-3,
-            .footer-grid-text-4,
-            .footer-grid-copyright,
-            .footer-grid-payment {
-                grid-area: auto;
+
+            
+            .footer-grid-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
             }
             
             .footer-grid-payment {
-                justify-content: center;
+                justify-content: flex-start;
+                width: 100%;
             }
             
             .footer-grid-copyright {
-                text-align: center;
+                text-align: left;
                 font-size: 0.7rem;
+                width: 100%;
             }
         }
     }

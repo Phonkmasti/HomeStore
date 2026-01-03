@@ -64,11 +64,13 @@
         </div>
         <form role="search" action="{% url 'catalog:search' %}" method="get">
           <input type="hidden" id="selectedCategory" name="category" value="">
-          <input class="search-input-field" type="search" name="q" data-translate="search_placeholder" placeholder="Search product..." aria-label="Search"/><button class="search-submit-button" type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
+          <input class="search-input-field" type="search" name="q" data-translate="search_placeholder" placeholder="Search product..." aria-label="Search"/>
+          <button class="search-submit-button" type="submit"><img src="{% static 'deps/svg/search.svg' %}" alt=""></button>
         </form>
       </div>
       <p class="phone"><img src="{% static 'deps/svg/phone-call.svg' %}" alt="">(928) 630-9272</p>
     </div>
+    <div id="navAnchor"></div>
     <nav>
       <ul class="home-ul">
         <li><img src="{% static 'deps/svg/Cabinet.svg' %}" alt=""><a href="{% url 'main:index' %}">
@@ -185,37 +187,42 @@
       </form>
       {% endif %}
 
-      <ul class="footer-grid-text-1">
-        <h3><img src="{% static 'deps/svg/Cabinet.svg' %}" alt="">Furniture Store</h3>
-        <li>60 Fremont Ave. Hamden, CT 06514</li>
-        <li><strong>Email:</strong>fStore@email.com</li>
-        <li><strong>Phone:</strong>(928) 630-9272</li>
-        <li class="footer-social-media-icons">
-          <a href="https://www.facebook.com" target="_blank"><img src="{% static 'deps/svg/facebook.svg' %}" alt=""></a>
-          <a href="https://www.x.com" target="_blank"><img src="{% static 'deps/svg/X.svg' %}" alt=""></a>
-          <a href="https://www.instagram.com" target="_blank"><img src="{% static 'deps/svg/instagram.svg' %}" alt="">
-          <a href="https://www.youtube.com" target="_blank"><img src="{% static 'deps/svg/youtube.svg' %}" alt=""></a>
-        </li>
-      </ul>
-      <ul class="footer-grid-text-2">
-        <h3 data-translate="footer_locations">Locations</h3>
-        <li><a href="{% url 'main:addresses' %}#showrooms" data-translate="footer_store_locations">Store Locations</a>
-        </li>
-        <li><a href="{% url 'main:addresses' %}#warehouses" data-translate="footer_warehouses">Warehouses</a></li>
-        <li><a href="{% url 'main:contact' %}" data-translate="footer_find_us">Find Us</a></li>
-        <li><a href="{% url 'main:addresses' %}" data-translate="footer_visit_us">Visit Us</a></li>
-      </ul>
-      <ul class="footer-grid-text-3">
-        <h3 data-translate="footer_service">Customer service</h3>
-        <li><a href="{% url 'users:profile' %}#my-orders" data-translate="footer_orders">Orders</a></li>
-        <li><a href="{% url 'main:returns' %}" data-translate="footer_returns">Returns</a></li>
-        <li><a href="{% url 'main:account_details' %}" data-translate="footer_account">Account details</a></li>
-        <li><a href="{% url 'main:faq' %}" data-translate="footer_faq">F.A.Q</a></li>
-      </ul>
-      <p class="footer-grid-copyright" data-translate="footer_copyright"> © Copyright f Store 2025. Website crated by
-        Nikita</p>
-      <div class="footer-grid-payment">
-        <img src="{% static 'deps/svg/payment.svg' %}" alt="">
+      <div class="footer-grid-content">
+        <ul class="footer-grid-text-1">
+          <h3><img src="{% static 'deps/svg/Cabinet.svg' %}" alt="">Furniture Store</h3>
+          <li>60 Fremont Ave. Hamden, CT 06514</li>
+          <li><strong>Email:</strong>fStore@email.com</li>
+          <li><strong>Phone:</strong>(928) 630-9272</li>
+          <li class="footer-social-media-icons">
+            <a href="https://www.facebook.com" target="_blank"><img src="{% static 'deps/svg/facebook.svg' %}" alt=""></a>
+            <a href="https://www.x.com" target="_blank"><img src="{% static 'deps/svg/X.svg' %}" alt=""></a>
+            <a href="https://www.instagram.com" target="_blank"><img src="{% static 'deps/svg/instagram.svg' %}" alt="">
+            <a href="https://www.youtube.com" target="_blank"><img src="{% static 'deps/svg/youtube.svg' %}" alt=""></a>
+          </li>
+        </ul>
+        <ul class="footer-grid-text-2">
+          <h3 data-translate="footer_locations">Locations</h3>
+          <li><a href="{% url 'main:addresses' %}#showrooms" data-translate="footer_store_locations">Store Locations</a>
+          </li>
+          <li><a href="{% url 'main:addresses' %}#warehouses" data-translate="footer_warehouses">Warehouses</a></li>
+          <li><a href="{% url 'main:contact' %}" data-translate="footer_find_us">Find Us</a></li>
+          <li><a href="{% url 'main:addresses' %}" data-translate="footer_visit_us">Visit Us</a></li>
+        </ul>
+        <ul class="footer-grid-text-3">
+          <h3 data-translate="footer_service">Customer service</h3>
+          <li><a href="{% url 'users:profile' %}#my-orders" data-translate="footer_orders">Orders</a></li>
+          <li><a href="{% url 'main:returns' %}" data-translate="footer_returns">Returns</a></li>
+          <li><a href="{% url 'main:account_details' %}" data-translate="footer_account">Account details</a></li>
+          <li><a href="{% url 'main:faq' %}" data-translate="footer_faq">F.A.Q</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-grid-footer">
+        <p class="footer-grid-copyright" data-translate="footer_copyright"> © Copyright f Store 2025. Website crated by
+          Nikita</p>
+        <div class="footer-grid-payment">
+          <img src="{% static 'deps/svg/payment.svg' %}" alt="">
+        </div>
       </div>
     </div>
   </footer>

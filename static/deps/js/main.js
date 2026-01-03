@@ -51,7 +51,7 @@ function updateNavSticky() {
   
   if (scrollPosition >= navTop) {
     nav.classList.add('nav-sticky');
-    if (navPlaceholder) {
+    if (navPlaceholder && nav) {
       navPlaceholder.style.height = nav.offsetHeight + 'px';
     }
   } else {
@@ -63,16 +63,34 @@ function updateNavSticky() {
 }
 
 window.addEventListener('scroll', updateNavSticky);
+document.addEventListener('DOMContentLoaded', updateNavSticky);
+window.addEventListener('load', updateNavSticky);
+window.addEventListener('resize', updateNavSticky);
 
-function scrollToPageTop() {
-  window.scrollTo({ top: 0, behavior: 'auto' });
+function scrollToNavAnchor() {
+  const isIndexPage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
+  if (!isIndexPage) return;
+  
+  const navAnchor = document.getElementById('navAnchor');
+  const nav = document.querySelector('nav');
+  
+  if (navAnchor && nav) {
+    const navStyles = window.getComputedStyle(nav);
+    const navPaddingTop = parseFloat(navStyles.paddingTop);
+    const scrollTarget = navAnchor.offsetTop + navPaddingTop;
+    
+    window.scrollTo({
+      top: scrollTarget,
+      behavior: 'smooth'
+    });
+  }
 }
 
-window.addEventListener('load', scrollToPageTop);
+window.addEventListener('load', scrollToNavAnchor);
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', scrollToPageTop);
+  document.addEventListener('DOMContentLoaded', scrollToNavAnchor);
 } else {
-  scrollToPageTop();
+  setTimeout(scrollToNavAnchor, 100);
 }
 
 document.addEventListener('DOMContentLoaded', function() {

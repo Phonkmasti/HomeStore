@@ -226,10 +226,7 @@
     "faq_categories": "How do I browse products?",
     "faq_categories_answer": "You can browse by categories (Tables, Chairs, Armchairs, Sofas) from the homepage or use the search bar to find specific items. We also display bestsellers and new arrivals.",
     "faq_filters": "Can I filter products?",
-    "faq_filters_answer": "Yes, in our catalog you can filter by price range and view bestsellers. Use the search function to find products by name or specifications.",
-    "faq_reviews": "Are there customer reviews?",
-    "faq_reviews_answer": "Yes, each product page displays customer reviews with ratings to help you make informed decisions.",
-    "faq_shopping": "Shopping & Cart",
+    "faq_filters_answer": "Yes, in our catalog you can filter by price range and view bestsellers. Use the search function to find products by name or specifications.",    "faq_shopping": "Shopping & Cart",
     "faq_addcart": "How do I add items to my cart?",
     "faq_addcart_answer": "Click the \"Add to Cart\" button on any product. You'll need to be logged in. Your cart is saved with your account.",
     "faq_modifycart": "Can I modify items in my cart?",
@@ -527,8 +524,6 @@
     "faq_categories_answer": "Вы можете просматривать по категориям (Столы, Стулья, Кресла, Диваны) на главной странице или использовать панель поиска для поиска определенных товаров. Мы также отображаем бестселлеры и новые поступления.",
     "faq_filters": "Могу ли я фильтровать товары?",
     "faq_filters_answer": "Да, в нашем каталоге вы можете фильтровать по диапазону цен и просматривать бестселлеры. Используйте функцию поиска для поиска товаров по названию или спецификациям.",
-    "faq_reviews": "Есть ли отзывы клиентов?",
-    "faq_reviews_answer": "Да, на каждой странице товара отображаются отзывы клиентов с рейтингами, которые помогут вам принять правильное решение.",
     "faq_shopping": "Покупки и корзина",
     "faq_addcart": "Как добавить товар в корзину?",
     "faq_addcart_answer": "Нажмите кнопку \"Добавить в корзину\" на любом товаре. Вам нужно быть авторизованным. Ваша корзина сохраняется в вашем аккаунте.",
@@ -620,8 +615,10 @@
     "contact_form_message_placeholder": "Ваше сообщение...",
     "contact_form_submit": "Отправить сообщение",
     "contact_map_title": "Найдите нас на карте",
-    "contact_visit_all_title": "Посетите все наши филиалы",
-    "contact_visit_all_desc": "Откройте для себя все наши выставочные залы и склады по всему Соединенным Штатам",
-    "contact_visit_all_btn": "Перейти к филиалам"
+    "contact_visit_all_title": "Посетите наши филиалы в США",
+    "contact_visit_all_desc": "Откройте для себя все наши выставочные залы и склады",
+    "contact_visit_all_btn": "Перейти",
+    "cart_is_empty": "Твоя корзина пуста",  
+    "buy_now": "Купить товары"
   }
 }
