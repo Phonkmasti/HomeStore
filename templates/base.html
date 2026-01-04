@@ -135,6 +135,7 @@
 
   {% endblock %}
 
+  {% block separator %}
   <section class="separator-bar">
     <div class="separator-item">
       <img src="{% static 'deps/svg/payment-bar.svg' %}" alt="" class="separator-icon" />
@@ -160,7 +161,9 @@
       </div>
     </div>
   </section>
+  {% endblock %}
 
+  {% block footer %}
   <footer>
     <div class="footer-grid">
       {% if user.is_subscribe == 0 or not request.user.is_authenticated %}
@@ -226,6 +229,7 @@
       </div>
     </div>
   </footer>
+  {% endblock %}
   <script src="{% static 'deps/js/main.js' %}"></script>
 </body>
 

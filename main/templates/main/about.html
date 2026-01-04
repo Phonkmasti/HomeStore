@@ -1,24 +1,52 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load sass_tags %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}" />
+  <link rel="stylesheet" href="{% sass_src 'deps/css/about.scss' %}" />
 {% endblock %}
 
-{% block modal_cart %}
-{% include "includes/cart_button.html" %}
-{% endblock modal_cart %}
-
 {% block content %}
-  <div class="mt-5 pt-5 bg-white custom-shadow rounded d-flex flex-column justify-content-center align-items-center">
-    <h2 class="mt-2" data-translate="about_title"><strong>{{ content }}</strong></h2>
-    <p class="mt-2">{{ text_on_page }}</p>
-  </div>
+<section class="about-section">
+    <div class="about-image top">
+        <img src="{% static 'deps/images/bg-index-image.jpg' %}" alt="Furniture Store Interior">
+    </div>
+
+    <div class="about-content">
+        <h2 class="about-title">
+            Crafting Comfort and Style for Your Home Since 1995. 
+            Quality furniture for every room.
+        </h2>
+        
+        <div class="about-text-wrapper">
+            <div class="about-column">
+                <p>
+                    At Furniture Store, we believe that every home deserves to be a sanctuary. Our journey began over two decades ago with a simple mission: to provide high-quality, handcrafted furniture that combines timeless elegance with modern functionality.
+                </p>
+                <p>
+                    Every piece in our collection is carefully selected for its durability, design, and comfort, ensuring that your living space reflects your unique personality and lifestyle.
+                </p>
+            </div>
+            <div class="about-column">
+                <p>
+                    We work closely with skilled artisans and sustainable suppliers to bring you furniture that is not only beautiful but also built to last for generations.
+                </p>
+                <p>
+                    From luxurious sofas to ergonomic dining sets, our commitment to excellence is evident in every detail. Thank you for choosing us to be a part of your home's story and your family's comfort.
+                </p>
+                <a href="{% url 'catalog:index' 'all' %}" class="read-more">READ MORE</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-image bottom">
+        <img src="{% static 'deps/images/contact-us-bg-image.jpg' %}" alt="Furniture Detail">
+    </div>
+</section>
+{% endblock %}
+
+{% block separator %}
 {% endblock %}
 
 {% block footer %}
-  <footer class="py-4 bg-dark">
-    
-  </footer>
 {% endblock %}
