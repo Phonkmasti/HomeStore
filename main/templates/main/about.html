@@ -9,44 +9,89 @@
 {% block content %}
 <section class="about-section">
     <div class="about-image top">
-        <img src="{% static 'deps/images/bg-index-image.jpg' %}" alt="Furniture Store Interior">
+        <img src="{% static 'deps/images/about-us-header-top-bg-image.jpg' %}" alt="Furniture Store Interior">
     </div>
 
     <div class="about-content">
-        <h2 class="about-title">
+        <h2 class="about-title" data-translate="about_main_title">
             Crafting Comfort and Style for Your Home Since 1995. 
             Quality furniture for every room.
         </h2>
         
         <div class="about-text-wrapper">
             <div class="about-column">
-                <p>
+                <p data-translate="about_para1">
                     At Furniture Store, we believe that every home deserves to be a sanctuary. Our journey began over two decades ago with a simple mission: to provide high-quality, handcrafted furniture that combines timeless elegance with modern functionality.
                 </p>
-                <p>
+                <p data-translate="about_para2">
                     Every piece in our collection is carefully selected for its durability, design, and comfort, ensuring that your living space reflects your unique personality and lifestyle.
                 </p>
             </div>
             <div class="about-column">
-                <p>
+                <p data-translate="about_para3">
                     We work closely with skilled artisans and sustainable suppliers to bring you furniture that is not only beautiful but also built to last for generations.
                 </p>
-                <p>
+                <p data-translate="about_para4">
                     From luxurious sofas to ergonomic dining sets, our commitment to excellence is evident in every detail. Thank you for choosing us to be a part of your home's story and your family's comfort.
                 </p>
-                <a href="{% url 'catalog:index' 'all' %}" class="read-more">READ MORE</a>
             </div>
         </div>
     </div>
 
     <div class="about-image bottom">
-        <img src="{% static 'deps/images/contact-us-bg-image.jpg' %}" alt="Furniture Detail">
+        <img src="{% static 'deps/images/about-us-header-bottom-bg-image.jpg' %}" alt="Furniture Detail">
+    </div>
+
+    <div class="about-banner-bar">
+        <div class="banner-text">
+            <h3 data-translate="about_banner_title">Live comfortably inside your home</h3>
+            <p data-translate="about_banner_subtitle">Quality furniture that brings comfort and style to your living space.</p>
+        </div>
+        <a href="{% url 'catalog:index' 'all' %}" class="banner-btn" data-translate="about_banner_button">Shop now</a>
+    </div>
+
+    <div class="about-grid">
+        <div class="grid-item image-item tall">
+            <img src="{% static 'deps/images/about-us-grid-item-top-bg-image.jpg' %}" alt="Furniture 1">
+        </div>
+        <div class="grid-item text-item">
+            <h3 data-translate="about_grid_title1">Live Comfortably Inside Your Home</h3>
+            <p data-translate="about_grid_text1">Our furniture is designed with both style and comfort in mind, ensuring that your home is a place where you can truly relax and unwind. Each piece is crafted with care using high-quality materials.</p>
+        </div>
+        <div class="grid-item text-item">
+            <h3 data-translate="about_grid_title2">Furniture That Will Last A Lifetime</h3>
+            <p data-translate="about_grid_text2">We take pride in the durability of our products. Our timeless designs and superior craftsmanship mean that your furniture will remain a cherished part of your home for many years to come.</p>
+        </div>
+        <div class="grid-item image-item tall">
+            <img src="{% static 'deps/images/about-us-grid-item-bottom-bg-image.jpg' %}" alt="Furniture 2">
+        </div>
+    </div>
+
+    <div class="about-team">
+        <h2 class="team-title" data-translate="about_team_title">Our Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'deps/images/about-us-team-consultant-1.jpg' %}" alt="Ian Dyer">
+                </div>
+                <h4 class="member-name" data-translate="about_team_member1_name">Ian Dyer</h4>
+                <p class="member-role" data-translate="about_team_member1_role">Consultant</p>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'deps/images/about-us-team-manager.jpg' %}" alt="Brianna Fitzgerald">
+                </div>
+                <h4 class="member-name" data-translate="about_team_member2_name">Brianna Fitzgerald</h4>
+                <p class="member-role" data-translate="about_team_member2_role">Manager</p>
+            </div>
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'deps/images/about-us-team-consultant-2.jpg' %}" alt="Olivia Smith">
+                </div>
+                <h4 class="member-name" data-translate="about_team_member3_name">Olivia Smith</h4>
+                <p class="member-role" data-translate="about_team_member3_role">Consultant</p>
+            </div>
+        </div>
     </div>
 </section>
-{% endblock %}
-
-{% block separator %}
-{% endblock %}
-
-{% block footer %}
 {% endblock %}

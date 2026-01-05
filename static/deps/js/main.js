@@ -68,9 +68,6 @@ window.addEventListener('load', updateNavSticky);
 window.addEventListener('resize', updateNavSticky);
 
 function scrollToNavAnchor() {
-  const isIndexPage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html');
-  if (!isIndexPage) return;
-  
   const navAnchor = document.getElementById('navAnchor');
   const nav = document.querySelector('nav');
   
@@ -83,6 +80,20 @@ function scrollToNavAnchor() {
       top: scrollTarget,
       behavior: 'smooth'
     });
+
+    if (window.location.pathname.includes('about-us')) {
+      setTimeout(() => {
+        const aboutContent = document.querySelector('.about-content');
+        if (aboutContent) {
+          const navHeight = nav.offsetHeight;
+          const targetPos = aboutContent.offsetTop - navHeight;
+          window.scrollTo({
+            top: targetPos,
+            behavior: 'smooth'
+          });
+        }
+      }, 500);
+    }
   }
 }
 
