@@ -681,3 +681,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const collageGroups = document.querySelectorAll('.photocollage-group');
+  const collageDots = document.querySelectorAll('.pagination-dot');
+  const collageFills = document.querySelectorAll('.pagination-fill');
+  let currentGroup = 0;
+  let collageInterval = null;
+  const intervalTime = 3000;
+  let isManual = false;
+
+  if (collageGroups.length === 0) return;
+
+  function showGroup(index) {
+    collageGroups.forEach(g => g.classList.remove('active'));
+    collageDots.forEach(d => d.classList.remove('active'));
+    collageFills.forEach(f => {
+      f.style.transition = 'none';
+      f.style.width = '0%';
+    });
+
+    collageGroups[index].classList.add('active');
+    collageDots[index].classList.add('active');
+    currentGroup = index;
+  }
+
+  function startCollageTimer() {
+    if (collageInterval) clearInterval(collageInterval);
+    if (isManual) return;
+
+    let startTime = Date.now();
+    collageInterval = setInterval(() => {
+      let elapsed = Date.now() - startTime;
+      let progress = (elapsed / intervalTime) * 100;
+
+      if (progress >= 100) {
+        progress = 100;
+        let next = (currentGroup + 1) % collageGroups.length;
+        showGroup(next);
+        startTime = Date.now();
+      }
+
+      if (currentGroup < collageFills.length) {
+        collageFills[currentGroup].style.width = progress + '%';
+      }
+    }, 50);
+  }
+
+  collageDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      isManual = true;
+      if (collageInterval) clearInterval(collageInterval);
+      showGroup(index);
+    });
+  });
+
+  showGroup(0);
+  startCollageTimer();
+});

@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function geocodeAddress(address) {
-        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`;
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1&addressdetails=1`;
 
         fetch(url)
             .then(response => response.json())

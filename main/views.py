@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from goods.models import Products
 def index(request):
     goods = Products.objects.filter(bestseller=True).order_by('random_order')[:8]
-    photocollage = Products.objects.order_by('random_order')[:4]
+    photocollage = Products.objects.order_by('random_order')[:12]
 
     products_count = {
         "tables": Products.objects.filter(category__slug='tables').count(),

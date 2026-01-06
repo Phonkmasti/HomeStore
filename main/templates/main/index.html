@@ -26,36 +26,109 @@
           <button class="button-learnmore"><a href="{% url "main:about" %}" data-translate="index_learn_more">Learn more</a></button>
         </div>
       </div>
-      <div class="photocollage-header-div">
-        {% for product in photocollage %}
-        <a href="{% url "catalog:product" product.slug %}" class="product-card product-image-link">
-          <div class="product-image" data-product-id="{{ product.id }}">
-            {% with main_image=product.get_main_image %}
-            {% if main_image %}
-            <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
-            {% else %}
-            <img src="{% static 'deps/images/Not found image.png' %}" alt="No image" class="product-img" />
-            {% endif %}
-            {% endwith %}
-            {% for image in product.images.all %}
-            {% if not image.is_main %}
-            <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
-            {% endif %}
+      <div class="photocollage-container">
+        <div class="photocollage-header-div">
+          <div class="photocollage-group active" data-group="0">
+            {% for product in photocollage|slice:":4" %}
+            <a href="{% url "catalog:product" product.slug %}" class="product-card product-image-link">
+              <div class="product-image" data-product-id="{{ product.id }}">
+                {% with main_image=product.get_main_image %}
+                {% if main_image %}
+                <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+                {% else %}
+                <img src="{% static 'deps/images/Not found image.png' %}" alt="No image" class="product-img" />
+                {% endif %}
+                {% endwith %}
+                {% for image in product.images.all %}
+                {% if not image.is_main %}
+                <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+                {% endif %}
+                {% endfor %}
+                {% if product.discount %}
+                <span class="discount-badge">-{{ product.discount }}%</span>
+                {% elif product.is_new %}
+                <span class="new-badge" data-translate="badge_new">NEW</span>
+                {% endif %}
+                {% if product.bestseller %}
+                <span class="bestseller-badge" data-translate="badge_bestseller">BESTSELLER</span>
+                {% endif %}
+                {% if product.quantity <= 0 %}
+                <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
+                {% endif %}
+              </div>
+            </a>
             {% endfor %}
-            {% if product.discount %}
-            <span class="discount-badge">-{{ product.discount }}%</span>
-            {% elif product.is_new %}
-            <span class="new-badge" data-translate="badge_new">NEW</span>
-            {% endif %}
-            {% if product.bestseller %}
-            <span class="bestseller-badge" data-translate="badge_bestseller">BESTSELLER</span>
-            {% endif %}
-            {% if product.quantity <= 0 %}
-            <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
-            {% endif %}
           </div>
-        </a>
-        {% endfor %}
+          <div class="photocollage-group" data-group="1">
+            {% for product in photocollage|slice:"4:8" %}
+            <a href="{% url "catalog:product" product.slug %}" class="product-card product-image-link">
+              <div class="product-image" data-product-id="{{ product.id }}">
+                {% with main_image=product.get_main_image %}
+                {% if main_image %}
+                <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+                {% else %}
+                <img src="{% static 'deps/images/Not found image.png' %}" alt="No image" class="product-img" />
+                {% endif %}
+                {% endwith %}
+                {% for image in product.images.all %}
+                {% if not image.is_main %}
+                <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+                {% endif %}
+                {% endfor %}
+                {% if product.discount %}
+                <span class="discount-badge">-{{ product.discount }}%</span>
+                {% elif product.is_new %}
+                <span class="new-badge" data-translate="badge_new">NEW</span>
+                {% endif %}
+                {% if product.bestseller %}
+                <span class="bestseller-badge" data-translate="badge_bestseller">BESTSELLER</span>
+                {% endif %}
+                {% if product.quantity <= 0 %}
+                <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
+                {% endif %}
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+          <div class="photocollage-group" data-group="2">
+            {% for product in photocollage|slice:"8:12" %}
+            <a href="{% url "catalog:product" product.slug %}" class="product-card product-image-link">
+              <div class="product-image" data-product-id="{{ product.id }}">
+                {% with main_image=product.get_main_image %}
+                {% if main_image %}
+                <img src="{{ main_image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+                {% else %}
+                <img src="{% static 'deps/images/Not found image.png' %}" alt="No image" class="product-img" />
+                {% endif %}
+                {% endwith %}
+                {% for image in product.images.all %}
+                {% if not image.is_main %}
+                <img src="{{ image.image.url }}" alt="{{ product.name_en }}" class="product-img" />
+                {% endif %}
+                {% endfor %}
+                {% if product.discount %}
+                <span class="discount-badge">-{{ product.discount }}%</span>
+                {% elif product.is_new %}
+                <span class="new-badge" data-translate="badge_new">NEW</span>
+                {% endif %}
+                {% if product.bestseller %}
+                <span class="bestseller-badge" data-translate="badge_bestseller">BESTSELLER</span>
+                {% endif %}
+                {% if product.quantity <= 0 %}
+                <div class="out-of-stock" data-translate="out_of_stock">Out of Stock</div>
+                {% endif %}
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="photocollage-pagination">
+          <div class="pagination-dot active" data-index="0"></div>
+          <div class="pagination-track"><div class="pagination-fill" id="collageProgress0"></div></div>
+          <div class="pagination-dot" data-index="1"></div>
+          <div class="pagination-track"><div class="pagination-fill" id="collageProgress1"></div></div>
+          <div class="pagination-dot" data-index="2"></div>
+        </div>
       </div>
     </div>
   </div>
