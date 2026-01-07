@@ -234,8 +234,8 @@
             {% else %}
               <span class="price">${{ product.price }}</span>
             {% endif %}
+
           </div>
-          
           <button type="button" class="add-to-cart" data-product-id="{{ product.id }}" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}" {% if product.quantity <= 0 %}disabled{% endif %}>
             Add to Cart
           </button>

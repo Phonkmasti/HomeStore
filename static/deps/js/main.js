@@ -739,3 +739,30 @@ document.addEventListener('DOMContentLoaded', function() {
   showGroup(0);
   startCollageTimer();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const backToFiltersBtn = document.getElementById('backToFilters');
+  const sidebar = document.getElementById('catalogSidebar');
+
+  if (backToFiltersBtn && sidebar) {
+    backToFiltersBtn.addEventListener('click', function() {
+      const nav = document.querySelector('nav');
+      const navHeight = nav ? nav.offsetHeight : 0;
+      const targetPos = sidebar.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+
+      window.scrollTo({
+        top: targetPos,
+        behavior: 'smooth'
+      });
+    });
+
+    window.addEventListener('scroll', function() {
+      const sidebarTop = sidebar.getBoundingClientRect().top;
+      if (sidebarTop < -50) {
+        backToFiltersBtn.classList.add('visible');
+      } else {
+        backToFiltersBtn.classList.remove('visible');
+      }
+    });
+  }
+});

@@ -83,7 +83,6 @@ main {
                 gap: 1rem;
                 flex-wrap: wrap;
                 margin-top: 1rem;
-                justify-content: center;
 
                 button {
                     font-size: clamp(0.85rem, 1.2vw, 1.1rem);
@@ -314,26 +313,19 @@ main {
 
             .description-header-div {
                 width: 90%;
-                max-width: 700px;
                 justify-content: flex-start;
                 min-height: auto;
             }
 
-            .photocollage-container {
-                display: none;
-            }
+            
         }
 
         @media (max-width: $tablet) {
-            .photocollage-container {
-                display: none;
-            }
+            
         }
 
         @media (max-width: $mobile) {
-            .photocollage-container {
-                display: none;
-            }
+            
         }
 
         @media (max-width: $small-mobile) {

@@ -916,36 +916,36 @@ footer {
             }
             
             .footer-grid-content {
-                flex-direction: column;
-                gap: 3rem;
-                align-items: center;
-                text-align: center;
                 width: 100%;
+                display: block;
             }
 
             .footer-grid-text-1,
             .footer-grid-text-2,
             .footer-grid-text-3 {
                 width: 100%;
-                align-items: center;
-                gap: 1.25rem;
+                align-items: left;
+                padding: 0;
+                border-bottom: 1px $header-global-bg-color solid;
 
                 h3 {
                     font-size: 1.4rem;
-                    justify-content: center;
                 }
 
                 li {
                     font-size: 1.1rem;
+                    letter-spacing: 1px;
                     
                     a {
                         font-size: 1.1rem;
                     }
                 }
 
+                li:last-child {
+                    margin-bottom: 10px;
+                }
+
                 .footer-social-media-icons {
-                    justify-content: center;
-                    gap: 1.5rem;
 
                     img {
                         width: 2rem;
@@ -977,7 +977,6 @@ footer {
     }
     
     @media (max-width: $tablet) {
-        padding: 2rem 1.5%;
     }
     
     @media (max-width: $mobile) {

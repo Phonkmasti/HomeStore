@@ -588,3 +588,38 @@ html {
 
   }
 }
+
+.back-to-filters-btn {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  z-index: 1000;
+  background-color: $header-global-bg-color;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: $global-text-family;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all $transition-duration $transition-timing;
+
+  &:hover {
+    background-color: darken($header-global-bg-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: $tablet) {
+    &.visible {
+      display: block;
+    }
+  }
+}

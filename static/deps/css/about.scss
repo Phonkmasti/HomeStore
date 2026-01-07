@@ -253,7 +253,7 @@ $tablet: 768px;
 @media (max-width: $tablet) {
     .about-section {
         .about-content {
-            height: auto;
+            height: 100vh;
             padding: 6rem 10%;
             
             .about-text-wrapper {
@@ -302,14 +302,12 @@ $tablet: 768px;
 @media (max-width: $mobile) {
     .about-section {
         .about-image {
-            height: 80vh;
+            height: 100vh;
         }
 
         .about-content {
-            padding: 4rem 5%;
-            .about-title {
-                margin-bottom: 2rem;
-            }
+            height: 100vh;
+            
         }
 
         .about-banner-bar {
