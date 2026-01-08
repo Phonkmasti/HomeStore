@@ -1,0 +1,244 @@
+@import "variables";
+
+.payment-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+    padding: 40px 20px;
+    background-color: $bg-neutral-50;
+    font-family: $global-text-family;
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    h1 {
+        font-size: 2.5rem;
+        color: $primary-text-color;
+        margin-bottom: 10px;
+    }
+
+    .payment-amount {
+        font-size: 1.2rem;
+        color: $secondary-text-color;
+        strong {
+            color: $header-global-bg-color;
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.payment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    background: $color-white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    max-width: 1000px;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Card Visualization Section */
+.card-section {
+    flex: 1;
+    min-width: 320px;
+    max-width: 400px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    perspective: 1000px;
+}
+
+.creditcard {
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+    position: relative;
+    aspect-ratio: 750 / 471;
+}
+
+.creditcard.flipped {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+/* SVG Text styles inside the card */
+#cardfront, #cardback {
+    width: 100%;
+    height: 100%;
+}
+
+.st2 { fill: #FFFFFF; }
+.st3 { font-family: 'Source Code Pro', monospace; font-weight: 600; }
+.st4 { font-size: 54.7817px; }
+.st5 { font-family: 'Source Code Pro', monospace; font-weight: 400; }
+.st6 { font-size: 33.1112px; }
+.st7 { opacity: 0.6; fill: #FFFFFF; }
+.st8 { font-size: 24px; }
+.st9 { font-size: 36.5498px; }
+.st10 { font-family: 'Source Code Pro', monospace; font-weight: 300; }
+.st11 { font-size: 16.1716px; }
+.st12 { fill: #4C4C4C; }
+
+/* Font for cardholder name on the back */
+.st12.st13 {
+    font-family: 'Rock Salt', cursive !important;
+    font-size: 37.769px;
+}
+
+/* Form Section */
+.form-section {
+    flex: 1;
+    min-width: 320px;
+    max-width: 450px;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .row {
+        display: flex;
+        gap: 20px;
+        .field-container {
+            flex: 1;
+        }
+    }
+
+    .field-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: $primary-text-color;
+        }
+
+        input {
+            padding: 12px 15px;
+            border: 1px solid $divider-color;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            outline: none;
+
+            &:focus {
+                border-color: $header-global-bg-color;
+            }
+
+            &::placeholder {
+                color: $search-bar-placeholder-color;
+            }
+        }
+    }
+
+    .ccicon {
+        position: absolute;
+        right: 12px;
+        top: 38px;
+        width: 40px;
+        height: auto;
+    }
+}
+
+.btn-pay {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: $header-global-bg-color;
+    color: $global-text-color;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+        background-color: darken($header-global-bg-color, 10%);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Card color transitions */
+.creditcard .lightcolor, .creditcard .darkcolor {
+    transition: fill .5s;
+}
+
+/* FRONT: Default Brown */
+.front {
+    background-color: #947458; /* Твой коричневый */
+    transition: background-color 0.5s;
+}
+
+/* Стили для маленьких логотипов в углу */
+#ccsingle {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 80px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+/* Убираем старую логику закрашивания всего SVG */
+#cardfront .lightcolor.grey { fill: transparent !important; }
+#cardfront .darkcolor.greydark { fill: rgba(0,0,0,0.1) !important; }
+
+
+/* BACK: Grey */
+#cardback .darkcolor.greydark { fill: #bdbdbd; }
+#cardback .st2 { fill: #333333; } /* Magnetic stripe */
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .payment-container {
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .payment-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .card-section {
+        max-width: 100%;
+    }
+}

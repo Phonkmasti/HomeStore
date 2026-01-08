@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.db import transaction
 from django.forms import ValidationError
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from carts.models import Cart
+from carts.utils import get_user_carts
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
 from users.views import login
@@ -53,13 +54,13 @@ def create_order(request):
                                 price=price,
                                 quantity=quantity,
                             )
+                        if form.cleaned_data["payment_on_get"] == "0":
+                            return redirect("orders:payment", order_id=order.id)
+                        else:
                             product.quantity -= quantity
-                            product.save()
-
-                        cart_items.delete()
-
-                        messages.success(request, "msg_order_created")
-                        return redirect("users:profile")
+                            cart_items.delete()
+                            messages.success(request, "msg_order_created")
+                            return redirect("users:profile")
             except ValidationError as e:
                 messages.error(request, str(e))
                 context = {
@@ -86,3 +87,37 @@ def create_order(request):
         "total_price": total_price,
     }
     return render(request, "orders/create_order.html", context=context)
+
+
+@login_required
+def payment_check(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    
+    if order.is_paid or order.payment_on_get:
+        return redirect("users:profile")
+
+    if request.method == "POST":
+        # Имитируем успешную оплату
+        with transaction.atomic():
+            order.is_paid = True
+            order.status = 'processing'
+            order.save()
+            
+            # Удаляем корзину только после оплаты
+            Cart.objects.filter(user=request.user).delete()
+            
+            # Уменьшаем количество товара на складе
+            for item in order.orderitem_set.all():
+                product = item.product
+                if product:
+                    product.quantity -= item.quantity
+                    product.save()
+
+        messages.success(request, "Заказ успешно оплачен!")
+        return redirect("users:profile")
+
+    context = {
+        "title": "Оплата заказа",
+        "order": order,
+    }
+    return render(request, "orders/payment.html", context)
