@@ -15,10 +15,24 @@
     text-align: center;
     margin-bottom: 40px;
 
-    h1 {
-        font-size: 2.5rem;
-        color: $primary-text-color;
-        margin-bottom: 10px;
+    .order-title {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 5em;
+
+        h1 {
+            font-size: 2.5rem;
+            color: $primary-text-color;
+            margin: 0;
+        }
+
+        span {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: $header-global-bg-color;
+        }
     }
 
     .payment-amount {
@@ -45,7 +59,6 @@
     align-items: flex-start;
 }
 
-/* Card Visualization Section */
 .card-section {
     flex: 1;
     min-width: 320px;
@@ -85,7 +98,6 @@
     transform: rotateY(180deg);
 }
 
-/* SVG Text styles inside the card */
 #cardfront, #cardback {
     width: 100%;
     height: 100%;
@@ -189,18 +201,15 @@
     }
 }
 
-/* Card color transitions */
 .creditcard .lightcolor, .creditcard .darkcolor {
     transition: fill .5s;
 }
 
-/* FRONT: Default Brown */
 .front {
-    background-color: #947458; /* Твой коричневый */
+    background-color: #947458;
     transition: background-color 0.5s;
 }
 
-/* Стили для маленьких логотипов в углу */
 #ccsingle {
     position: absolute;
     right: 30px;
@@ -218,24 +227,25 @@
     }
 }
 
-/* Убираем старую логику закрашивания всего SVG */
 #cardfront .lightcolor.grey { fill: transparent !important; }
 #cardfront .darkcolor.greydark { fill: rgba(0,0,0,0.1) !important; }
 
 
-/* BACK: Grey */
 #cardback .darkcolor.greydark { fill: #bdbdbd; }
 #cardback .st2 { fill: #333333; } /* Magnetic stripe */
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .payment-container {
         padding: 20px;
         gap: 30px;
     }
 
-    .payment-header h1 {
-        font-size: 1.8rem;
+    .payment-header {
+        .order-title {
+            h1, span {
+                font-size: 1.8rem;
+            }
+        }
     }
 
     .card-section {

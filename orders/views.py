@@ -97,8 +97,9 @@ def payment_check(request, order_id):
         return redirect("users:profile")
 
     if request.method == "POST":
-        # Имитируем успешную оплату
-        with transaction.atomic():
+
+        with transaction.atomic():\
+
             order.is_paid = True
             order.status = 'processing'
             order.save()
