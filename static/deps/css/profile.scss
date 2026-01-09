@@ -326,6 +326,27 @@ $desktop: 1200px;
                                 font-size: 0.9rem;
                                 min-width: 100px;
                             }
+
+                            .btn-pay-order {
+                                padding: 0.6rem 1.2rem;
+                                background-color: $bg-description-button-color;
+                                color: $color-white;
+                                text-decoration: none;
+                                font-size: 0.9rem;
+                                font-weight: 700;
+                                transition: all 0.3s ease;
+                                border: 2px solid $bg-description-button-color;
+                                display: inline-block;
+                                text-align: center;
+                                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                
+                                &:hover {
+                                    background-color: transparent;
+                                    color: $bg-description-button-color;
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                                }
+                            }
                         }
 
                         .order-status {
@@ -466,7 +487,108 @@ $desktop: 1200px;
         }
     }
 
-    .empty-state {
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    font-family: $global-text-family;
+
+    &.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background-color: $color-white;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid $divider-color;
+
+            h2 {
+                margin: 0;
+                font-size: 1.5rem;
+                color: $primary-text-color;
+            }
+
+            .modal-close {
+                background: none;
+                border: none;
+                font-size: 2rem;
+                line-height: 1;
+                cursor: pointer;
+                color: $secondary-text-color;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: $primary-text-color;
+                }
+            }
+        }
+
+        .modal-body {
+            margin-bottom: 2rem;
+
+            p {
+                margin: 0;
+                color: $secondary-text-color;
+                line-height: 1.6;
+            }
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+
+            button {
+                padding: 0.75rem 1.5rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+                border-radius: 0;
+                font-family: $global-text-family;
+
+                &.btn-confirm {
+                    background-color: $status-error-red;
+                    color: $color-white;
+                    border: none;
+
+                    &:hover {
+                        background-color: darken($status-error-red, 10%);
+                    }
+                }
+
+                &.btn-cancel {
+                    background-color: $bg-neutral-200;
+                    color: $primary-text-color;
+                    border: 1px solid $divider-color;
+
+                    &:hover {
+                        background-color: $bg-neutral-300;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.empty-state {
         text-align: center;
         padding: 3rem 1rem;
 
@@ -493,5 +615,135 @@ $desktop: 1200px;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
+    }
+}
+
+// Cancel Order Modal styles
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+
+    &.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background-color: $color-white;
+        width: 90%;
+        max-width: 500px;
+        padding: 0;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        position: relative;
+        animation: modalSlideIn 0.3s ease;
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid $divider-color;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h2 {
+                margin: 0;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: $primary-text-color;
+            }
+
+            .modal-close {
+                background: none;
+                border: none;
+                font-size: 2rem;
+                cursor: pointer;
+                color: $secondary-text-color;
+                line-height: 1;
+                padding: 0;
+
+                &:hover {
+                    color: $primary-text-color;
+                }
+            }
+        }
+
+        .modal-body {
+            padding: 2rem;
+            
+            p {
+                margin: 0;
+                font-size: 1.1rem;
+                color: $primary-text-color;
+                line-height: 1.5;
+            }
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid $divider-color;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+
+            button {
+                padding: 0.75rem 1.5rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: none;
+                font-family: $global-text-family;
+            }
+
+            .btn-confirm {
+                background-color: $status-error-red;
+                color: white;
+
+                &:hover {
+                    background-color: darken($status-error-red, 10%);
+                }
+            }
+
+            .btn-cancel {
+                background-color: $bg-neutral-200;
+                color: $primary-text-color;
+
+                &:hover {
+                    background-color: $bg-neutral-300;
+                }
+            }
+        }
+    }
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.btn-cancel-order {
+    padding: 0.6rem 1.2rem;
+    background-color: transparent;
+    color: $status-error-red;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: 2px solid $status-error-red;
+    display: inline-block;
+    text-align: center;
+    margin-left: 0.5rem;
+    
+    &:hover {
+        background-color: $status-error-red;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(211, 47, 47, 0.15);
     }
 }

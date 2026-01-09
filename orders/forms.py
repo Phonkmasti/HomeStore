@@ -86,14 +86,13 @@ class CreateOrderForm(forms.Form):
     def clean_phone_number(self):
         data = self.cleaned_data['phone_number']
 
-        if not data.isdigit():
-            raise forms.ValidationError('Phone number must contain only digits')
+        # Remove common phone number formatting characters
+        clean_data = re.sub(r'[^\d+]', '', data)
 
-        pattern = re.compile(r'^\d{10}$')
-        if not pattern.match(data):
-            raise forms.ValidationError('Phone number must be exactly 10 digits')
+        if not clean_data:
+            raise forms.ValidationError('Phone number cannot be empty')
 
-        return data
+        return clean_data
 
     def clean(self):
         cleaned_data = super().clean()
@@ -111,3 +110,44 @@ class CreateOrderForm(forms.Form):
                 self.add_error('house_number', 'House number is required')
 
         return cleaned_data
+
+
+class PaymentForm(forms.Form):
+    card_name = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(attrs={
+            'id': 'name',
+            'placeholder': 'JOHN DOE',
+            'required': True
+        })
+    )
+    card_number = forms.CharField(
+        max_length=19,
+        widget=forms.TextInput(attrs={
+            'id': 'cardnumber',
+            'placeholder': '0000 0000 0000 0000',
+            'required': True,
+            'pattern': '[0-9 ]*',
+            'inputmode': 'numeric'
+        })
+    )
+    expiration_date = forms.CharField(
+        max_length=5,
+        widget=forms.TextInput(attrs={
+            'id': 'expirationdate',
+            'placeholder': '01/23',
+            'required': True,
+            'pattern': '[0-9/]*',
+            'inputmode': 'numeric'
+        })
+    )
+    cvv = forms.CharField(
+        max_length=3,
+        widget=forms.TextInput(attrs={
+            'id': 'securitycode',
+            'placeholder': '000',
+            'required': True,
+            'pattern': '[0-9]*',
+            'inputmode': 'numeric'
+        })
+    )

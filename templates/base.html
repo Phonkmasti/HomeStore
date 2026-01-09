@@ -46,7 +46,7 @@
       <div class="search-div">
         
         <div class="dropdown-section">
-          <button onclick="dropDownFunction()" id="dropdownbutton" class="drop-down-button-search">
+          <button id="dropdownbutton" class="drop-down-button-search">
             <span id="selectedCategoryName" data-translate="all_categories">All Categories</span> 
             <img src="{% static 'deps/svg/chevron-down.svg' %}" alt="">
           </button>
@@ -94,24 +94,24 @@
         <li class="placeholder"></li>
         {% endif %}
         <li class="language-switcher-container">
-          <button id="language-switcher-btn" onclick="toggleLanguageDropdown()">EN</button>
+          <button id="language-switcher-btn">EN</button>
           <div id="language-dropdown">
-            <button onclick="setLanguageFromDropdown('en')">English</button>
-            <button onclick="setLanguageFromDropdown('ru')">Русский</button>
+            <button class="lang-select-btn" data-lang="en">English</button>
+            <button class="lang-select-btn" data-lang="ru">Русский</button>
           </div>
         </li>
       </ul>
-      <div class="burger" onclick="toggleMobileMenu()">
+      <div class="burger">
         <span></span>
         <span></span>
         <span></span>
       </div>
       <div id="mobileMenu" class="mobile-menu">
         <div class="mobile-menu-language-section">
-          <button id="language-switcher-btn-mobile" onclick="toggleLanguageDropdown()">EN</button>
+          <button id="language-switcher-btn-mobile">EN</button>
           <div id="language-dropdown-mobile">
-            <button onclick="setLanguageFromDropdown('en')">English</button>
-            <button onclick="setLanguageFromDropdown('ru')">Русский</button>
+            <button class="lang-select-btn" data-lang="en">English</button>
+            <button class="lang-select-btn" data-lang="ru">Русский</button>
           </div>
         </div>
         <a {% if request.resolver_match.url_name == 'index' and request.resolver_match.namespace == 'main' %}class="active"{% endif %} href="{% url 'main:index' %}" data-translate="nav_home">Home</a>

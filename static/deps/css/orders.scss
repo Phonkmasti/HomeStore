@@ -95,6 +95,12 @@ $desktop: 1200px;
                     flex-direction: column;
                     gap: 1rem;
 
+                    .empty-cart-message {
+                        color: #999;
+                        text-align: center;
+                        padding: 2rem;
+                    }
+
                     .order-item {
                         display: flex;
                         justify-content: space-between;
@@ -296,6 +302,13 @@ $desktop: 1200px;
                                     width: 18px;
                                     height: 18px;
                                     accent-color: $bg-description-button-color;
+                                }
+
+                                .radio-label {
+                                    margin: 0;
+                                    cursor: pointer;
+                                    font-weight: 500;
+                                    color: $primary-text-color;
                                 }
 
                                 label {
@@ -561,4 +574,25 @@ $desktop: 1200px;
             }
         }
     }
+}
+
+// International Telephone Input styles
+.iti { 
+    width: 100%; 
+}
+.iti__country-list { 
+    background-color: #fff; 
+    border: 1px solid #947458; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.iti__selected-flag { 
+    background-color: #f8f9fa; 
+    border-right: 1px solid #ccc;
+}
+.iti__country.iti__highlight {
+    background-color: #947458;
+    color: #fff;
+}
+#id_phone_number {
+    padding-left: 95px !important;
 }

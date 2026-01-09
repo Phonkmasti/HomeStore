@@ -12,12 +12,19 @@ function setLanguage(lang) {
     const translations = window.translations;
     
     if (translations && translations[lang] && translations[lang][key]) {
+      let translation = translations[lang][key];
+      
+      // Handle dynamic order number
+      if (key === 'order_number' && element.hasAttribute('data-order-id')) {
+        translation = translation.replace('#', '#' + element.getAttribute('data-order-id'));
+      }
+
       if (element.tagName === 'INPUT') {
         if (element.type === 'email' || element.type === 'text' || element.type === 'password' || element.type === 'search') {
-          element.placeholder = translations[lang][key];
+          element.placeholder = translation;
         }
       } else {
-        element.innerHTML = translations[lang][key];
+        element.innerHTML = translation;
       }
     }
   });
@@ -77,6 +84,34 @@ function setLanguage(lang) {
   }
   
   closeLanguageDropdown();
+}
+
+function attachLanguageSwitcherListeners() {
+  const langBtn = document.getElementById('language-switcher-btn');
+  const mobileLangBtn = document.getElementById('language-switcher-btn-mobile');
+  
+  if (langBtn) {
+    langBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleLanguageDropdown();
+    });
+  }
+  
+  if (mobileLangBtn) {
+    mobileLangBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleLanguageDropdown();
+    });
+  }
+  
+  document.querySelectorAll('.lang-select-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const lang = this.getAttribute('data-lang');
+      if (lang) {
+        setLanguage(lang);
+      }
+    });
+  });
 }
 
 function toggleLanguageDropdown() {
@@ -145,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
       window.translations = data;
       setLanguage(currentLanguage);
       translateMessages(currentLanguage);
+      attachLanguageSwitcherListeners();
     })
     .catch(error => console.error('Error loading translations:', error));
 });

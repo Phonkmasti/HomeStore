@@ -180,6 +180,11 @@ $desktop: 1200px;
                             color: $bg-description-button-color;
                             font-weight: 600;
                         }
+
+                        .contact-email-link {
+                            color: inherit;
+                            text-decoration: none;
+                        }
                     }
 
                     @media (max-width: $tablet) {

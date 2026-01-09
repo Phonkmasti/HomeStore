@@ -106,27 +106,38 @@
             </div>
         </div>
 
-        <!-- Form Section -->
         <div class="form-section">
-            <form method="post" class="payment-form">
+            <form action="{% url 'orders:payment' order.id %}" method="post" class="payment-form">
                 {% csrf_token %}
                 <div class="field-container">
                     <label for="name" data-translate="card_owner">Card Owner</label>
-                    <input id="name" maxlength="20" type="text" placeholder="JOHN DOE" required>
+                    {{ form.card_name }}
+                    {% if form.card_name.errors %}
+                        <div class="error">{{ form.card_name.errors }}</div>
+                    {% endif %}
                 </div>
                 <div class="field-container">
                     <label for="cardnumber" data-translate="card_number">Card Number</label>
-                    <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric" placeholder="0000 0000 0000 0000" required>
+                    {{ form.card_number }}
                     <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471"></svg>
+                    {% if form.card_number.errors %}
+                        <div class="error">{{ form.card_number.errors }}</div>
+                    {% endif %}
                 </div>
                 <div class="row">
                     <div class="field-container">
                         <label for="expirationdate" data-translate="expiration_date">Expiration Date (MM/YY)</label>
-                        <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric" placeholder="01/23" required>
+                        {{ form.expiration_date }}
+                        {% if form.expiration_date.errors %}
+                            <div class="error">{{ form.expiration_date.errors }}</div>
+                        {% endif %}
                     </div>
                     <div class="field-container">
                         <label for="securitycode" data-translate="security_code">CVV/CVC</label>
-                        <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" placeholder="000" required>
+                        {{ form.cvv }}
+                        {% if form.cvv.errors %}
+                            <div class="error">{{ form.cvv.errors }}</div>
+                        {% endif %}
                     </div>
                 </div>
                 <button type="submit" class="btn-pay"><span data-translate="pay_button">Pay</span> {{ order.orderitem_set.total_price }} $</button>

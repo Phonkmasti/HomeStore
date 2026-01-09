@@ -7,6 +7,10 @@
 <link rel="stylesheet" href="{% sass_src 'deps/css/profile.scss' %}" />
 {% endblock %}
 
+{% block js %}
+<script src="{% static 'deps/js/profile.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 <main class="profile-main">
   <div class="profile-container">
@@ -162,9 +166,15 @@
             <div class="accordion-item">
               <button class="accordion-header" data-toggle="order-{{ order.id }}">
                 <div class="order-info">
-                  <span class="order-number">Заказ #{{ order.id }}</span>
+                  <span class="order-number" data-translate="order_number" data-order-id="{{ order.id }}">Order #{{ order.id }}</span>
                   <span class="order-date">{{ order.created_timestamp|date:"d M, Y" }}</span>
                   <span class="order-status" data-status="{{ order.status|lower }}">{{ order.status }}</span>
+                  {% if not order.is_paid and not order.payment_on_get and not order.status == 'cancelled' %}
+                    <a href="{% url 'orders:payment' order.id %}" class="btn-pay-order" data-translate="profile_pay_now">Pay Now</a>
+                    {% if order.status == 'pending' %}
+                      <button class="btn-cancel-order open-cancel-modal" data-order-id="{{ order.id }}" data-translate="profile_cancel_order">Cancel Order</button>
+                    {% endif %}
+                  {% endif %}
                 </div>
               
               </button>
@@ -209,4 +219,6 @@
     </div>
   </div>
 </main>
+
+{% include "orders/includes/confirm_cancel_modal.html" %}
 {% endblock %}

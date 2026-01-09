@@ -21,6 +21,7 @@ ORDER_STATUS_CHOICES = (
 
 
 class Order(models.Model):
+
     user = models.ForeignKey(
         to=User,
         on_delete=models.SET_NULL,

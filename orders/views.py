@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from carts.models import Cart
 from carts.utils import get_user_carts
-from orders.forms import CreateOrderForm
+from orders.forms import CreateOrderForm, PaymentForm
 from orders.models import Order, OrderItem
 from users.views import login
 
@@ -97,28 +97,42 @@ def payment_check(request, order_id):
         return redirect("users:profile")
 
     if request.method == "POST":
+        form = PaymentForm(data=request.POST)
+        if form.is_valid():
+            with transaction.atomic():
+                order.is_paid = True
+                order.status = 'completed'
+                order.save()
+                
+                
+                Cart.objects.filter(user=request.user).delete()
+                
+                for item in order.orderitem_set.all():
+                    product = item.product
+                    if product:
+                        product.quantity -= item.quantity
+                        product.save()
 
-        with transaction.atomic():\
-
-            order.is_paid = True
-            order.status = 'processing'
-            order.save()
-            
-            # Удаляем корзину только после оплаты
-            Cart.objects.filter(user=request.user).delete()
-            
-            # Уменьшаем количество товара на складе
-            for item in order.orderitem_set.all():
-                product = item.product
-                if product:
-                    product.quantity -= item.quantity
-                    product.save()
-
-        messages.success(request, "Заказ успешно оплачен!")
-        return redirect("users:profile")
+            messages.success(request, "Заказ успешно оплачен!")
+            return redirect("users:profile")
+    else:
+        form = PaymentForm()
 
     context = {
         "title": "Оплата заказа",
         "order": order,
+        "form": form,
     }
     return render(request, "orders/payment.html", context)
+
+
+@login_required
+def cancel_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    if order.status == 'pending':
+        order.status = 'cancelled'
+        order.save()
+        messages.success(request, "msg_order_cancelled")
+    else:
+        messages.error(request, "msg_order_cannot_be_cancelled")
+    return redirect("users:profile")

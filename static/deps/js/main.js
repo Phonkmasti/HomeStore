@@ -147,6 +147,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  const dropdownButton = document.getElementById('dropdownbutton');
+  if (dropdownButton) {
+    dropdownButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropDownFunction();
+    });
+  }
+
+  const burger = document.querySelector('.burger');
+  if (burger) {
+    burger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
+  }
+
   document.querySelectorAll('.product-image').forEach(imageContainer => {
     const images = imageContainer.querySelectorAll('.product-img');
     let currentImageIndex = 0;

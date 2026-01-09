@@ -74,6 +74,10 @@
   }
 }
 
+.hidden-notification {
+  display: none;
+}
+
 .notification-content {
   display: flex;
   align-items: center;

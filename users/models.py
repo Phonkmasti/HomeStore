@@ -10,7 +10,7 @@ class User(AbstractUser):
         verbose_name='Avatar'
     )
     phone_number = models.CharField(
-        max_length=10, 
+        max_length=20, 
         blank=True, 
         null=True
     )
